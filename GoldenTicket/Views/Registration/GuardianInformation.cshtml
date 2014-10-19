@@ -1,0 +1,110 @@
+﻿
+@{
+    ViewBag.BodyId = "";
+    ViewBag.BodyClass = "no-js guardian-information";
+    Layout = "~/Views/Shared/_RegistrationLayout.cshtml";
+}
+<div id="signpost">
+    <div class="site-width">
+        <h2>You&rsquo;re on step 2 of 4: Guardian information</h2>
+        <a href="page-2.php">Go back</a>
+    </div>
+</div>
+<main>
+    <div class="site-width">
+        <form action="page-4.php">
+            <section id="guardian-information">
+                <h1>Guardian information</h1>
+                <p>Please provide some basic information about {{student name}}&rsquo;s primary guardian.</p>
+                <fieldset id="guardian-name" class="fieldset-name">
+                    <legend>Full name</legend>
+                    <div class="field">
+                        <label for="guardian-name-first">First</label>
+                        <input type="text" placeholder="Andrew" id="guardian-name-first"></input>
+                    </div>
+                    <div class="field">
+                        <label for="guardian-name-middle">Middle</label>
+                        <input type="text" placeholder="Nicholas" id="guardian-name-middle"></input>
+                    </div>
+                    <div class="field">
+                        <label for="guardian-name-last">Last</label>
+                        <input type="text" placeholder="last" id="guardian-name-last"></input>
+                    </div>
+                </fieldset>
+                <div class="field field-phone-number">
+                    <label for="guardian-phone-number">Phone number</label>
+                    <input type="text" id="guardian-phone-number"></input>
+                </div>
+                <div class="field field-email-address">
+                    <label for="guardian-email-address">Email address</label>
+                    <input type="text" id="guardian-email"></input>
+                </div>
+                <fieldset id="guardian-relationship">
+                    <legend>Relationship to {{student name}}</legend>
+                    <div class="field field-radiobutton">
+                        <label for="guardian-relationship-father">
+                            <input type="radio" id="guardian-relationship-father" name="guardian-relationship" value="father"></input>
+                            Father
+                        </label>
+                    </div>
+                    <div class="field field-radiobutton">
+                        <label for="guardian-relationship-mother">
+                            <input type="radio" id="guardian-relationship-mother" name="guardian-relationship" value="mother"></input>
+                            Mother
+                        </label>
+                    </div>
+                    <div class="field field-radiobutton">
+                        <label for="guardian-relationship-stepfather">
+                            <input type="radio" id="guardian-relationship-stepfather" name="guardian-relationship" value="stepfather"></input>
+                            Stepfather
+                        </label>
+                    </div>
+                    <div class="field field-radiobutton">
+                        <label for="guardian-relationship-stepmother">
+                            <input type="radio" id="guardian-relationship-stepmother" name="guardian-relationship" value="stepmother"></input>
+                            Stepmother
+                        </label>
+                    </div>
+                    <div class="field field-radiobutton">
+                        <label for="guardian-relationship-guardian">
+                            <input type="radio" id="guardian-relationship-guardian" name="guardian-relationship" placeholder="Specify" value="guardian"></input>
+                            Guardian
+                        </label>
+                    </div>
+                    <div class="field field-radiobutton">
+                        <label for="guardian-relationship-other">
+                            <input type="radio" id="guardian-relationship-other" name="guardian-relationship" value="other"></input>
+                            Other
+                        </label>
+                    </div>
+                </fieldset>
+                <div class="field field-select field-size">
+                    <label for="guardian-household-size">Number of people in your household</label>
+                    <select id="guardian-household-size">
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                        <option>6</option>
+                        <option>7</option>
+                        <option>8</option>
+                        <option>9</option>
+                        <option>10+</option>
+                    </select>
+                </div>
+                <div class="field field-select field-width-medium" id="field-annual-income">
+                    <label for="guardian-household-income">Annual income</label>
+                    <select id="guardian-household-income">
+                        <option>Low</option>
+                        <option>Medium</option>
+                        <option>Hi</option>
+                    </select>
+                </div>
+            </section>
+            <footer>
+                <button class="button" type="submit" value="continue">Proceed to school selection</button>
+            </footer>
+        </form>
+    </div>
+</main>
+
