@@ -1,4 +1,4 @@
-﻿using GoldenTicket.Model;
+﻿using GoldenTicket.Domain;
 using System;
 using System.Collections.Generic;
 
