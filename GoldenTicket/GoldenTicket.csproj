@@ -164,14 +164,12 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
-    <Compile Include="Controllers\StudentViewController.cs" />
     <Compile Include="DAL\GoldenTicketDbContext.cs" />
     <Compile Include="DAL\Seeds.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Program.cs" />
     <Compile Include="Models\Applied.cs" />
@@ -240,8 +238,6 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\StudentView\Index.cshtml" />
-    <Content Include="Views\StudentView\Applied.cshtml" />
     <Content Include="Views\Registration\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Registration\StudentInformation.cshtml" />

@@ -11,8 +11,8 @@ namespace GoldenTicket.Models
         public int Rank { get; set; }
 
         // Foreign items
-        public int StudentID { get; set; }
-        public virtual Student Student { get; set; }
+        public int ApplicantID { get; set; }
+        public virtual Applicant Applicant { get; set; }
 
         public int ProgramID { get; set; }
         public virtual Program Program { get; set; }

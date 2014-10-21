@@ -7,25 +7,37 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GoldenTicket.Models
 {
-    public class Student
+    public class Applicant
     {
-        public Student()
+        public Applicant()
         {
-            Contacts = new List<Contact>();
         }
+
         public int ID { get; set; }
-        public string FirstName { get; set; }
-        public string MiddleName { get; set; }
-        public string LastName { get; set; }
-        public string City { get; set; }
-        public string State { get; set; }
-        public string ZipCode { get; set; }
-        public Gender? Gender { get; set; }
+        public string StudentFirstName { get; set; }
+        public string StudentMiddleName { get; set; }
+        public string StudentLastName { get; set; }
+        public string StudentCity { get; set; }
+        public string StudentState { get; set; }
+        public string StudentZipCode { get; set; }
+        public Gender? StudentGender { get; set; }
         public int HouseholdMembers { get; set; }
         public int HouseholdMonthlyIncome { get; set; }
-        
-        // Foreign items
-        public virtual ICollection<Contact> Contacts { get; set; }
+
+        // Contact person 1
+        public string Contact1FirstName { get; set; }
+        public string Contact1LastName { get; set; }
+        public string Contact1Phone { get; set; }
+        public string Contact1Email { get; set; }
+        public string Contact1Relationship { get; set; }
+
+        // Contact person 2
+        public string Contact2FirstName { get; set; }
+        public string Contact2LastName { get; set; }
+        public string Contact2Phone { get; set; }
+        public string Contact2Email { get; set; }
+        public string Contact2Relationship { get; set; }
+
     }
 
     // ---- Enums ----
