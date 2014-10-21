@@ -23,6 +23,9 @@ namespace GoldenTicket.Models
         public string StudentState { get; set; }
         public string StudentZipCode { get; set; }
         public Gender? StudentGender { get; set; }
+        public DateTime StudentBirthday { get; set; }
+        
+        // Household information
         public int HouseholdMembers { get; set; }
         public int HouseholdMonthlyIncome { get; set; }
 
