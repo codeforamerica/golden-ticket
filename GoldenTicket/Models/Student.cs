@@ -17,6 +17,8 @@ namespace GoldenTicket.Models
         public string StudentFirstName { get; set; }
         public string StudentMiddleName { get; set; }
         public string StudentLastName { get; set; }
+        public string StudentStreetAddress1 { get; set; }
+        public string StudentStreetAddress2 { get; set; }
         public string StudentCity { get; set; }
         public string StudentState { get; set; }
         public string StudentZipCode { get; set; }

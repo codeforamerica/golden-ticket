@@ -44,6 +44,7 @@ namespace GoldenTicket.DAL
                 StudentFirstName = "Charlie", 
                 StudentMiddleName = "C", 
                 StudentLastName = "Bucket", 
+                StudentStreetAddress1 = "1234 Flower St.",
                 StudentCity = "Providence", 
                 StudentState = "RI", 
                 StudentZipCode="02903", 
