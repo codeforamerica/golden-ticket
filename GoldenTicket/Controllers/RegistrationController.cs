@@ -19,34 +19,50 @@ namespace GoldenTicket.Controllers
             return View();
         }
 
-        private void StudentInformationViewSetup()
-        {
-            ViewBag.DistrictNames = GetDistrictNames();
-        }
-
         public ActionResult StudentInformation()
         {
-            // If this is an application in progress, get the applicant. Otherwise, make a new one
-            Applicant applicant = (Applicant) Session["applicant_id"];
-            if (applicant == null)
-            {
-                applicant = new Applicant();
-                database.Applicants.Add(applicant);
-                database.SaveChanges();
-
-                Session["applicant_id"] = applicant.ID;
-            }
-
-            // Options for display
             StudentInformationViewSetup();
-
-            return View(applicant);
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult StudentInformation(Applicant applicant)
         {
+            // Check for required fields
+            if(string.IsNullOrEmpty(applicant.StudentFirstName))
+            {
+                ModelState.AddModelError("StudentFirstName", "Student first name must be entered");
+            }
+            if (string.IsNullOrEmpty(applicant.StudentLastName))
+            {
+                ModelState.AddModelError("StudentLastName", "Student last name must be entered");
+            }
+            if (string.IsNullOrEmpty(applicant.StudentStreetAddress1))
+            {
+                ModelState.AddModelError("StudentStreetAddress1", "Student street address (line 1) must be entered");
+            }
+            if (string.IsNullOrEmpty(applicant.StudentCity))
+            {
+                ModelState.AddModelError("StudentCity", "Student city must be entered");
+            }
+            if (string.IsNullOrEmpty(applicant.StudentState))
+            {
+                ModelState.AddModelError("StudentState", "Student state must be entered");
+            }
+            if (string.IsNullOrEmpty(applicant.StudentZipCode))
+            {
+                ModelState.AddModelError("StudentZipCode", "Student ZIP code must be entered");
+            }
+            if (applicant.StudentBirthday == null)
+            {
+                ModelState.AddModelError("StudentBirthday", "Student birthday must be entered");
+            }
+            if (applicant.StudentGender == null)
+            {
+                ModelState.AddModelError("StudentGender", "Student gender must be entered");
+            }
+
             // Valid fields
             if(ModelState.IsValid)
             {
@@ -61,6 +77,22 @@ namespace GoldenTicket.Controllers
 
         public ActionResult GuardianInformation()
         {
+            Applicant applicant = database.Applicants.Find(Session["applicantID"]);
+            return View(applicant);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult GuardianInformation(Applicant applicant)
+        {
+            // Valid model
+            if(ModelState.IsValid)
+            {
+                Save(applicant);
+                return RedirectToAction("SchoolSelection");
+            }
+
+            // Invalid model
             return View();
         }
 
@@ -68,9 +100,10 @@ namespace GoldenTicket.Controllers
         {
             return View();
         }
+
         public ActionResult Review()
         {
-            return View();
+            return View(); 
         }
 
         public ActionResult Confirmation()
@@ -79,9 +112,15 @@ namespace GoldenTicket.Controllers
         }
 
         // ---- Helper Fields ----
+        private void StudentInformationViewSetup()
+        {
+            ViewBag.DistrictNames = GetDistrictNames();   
+        }
+
         private string[] GetDistrictNames()
         {
             ISet<string> districtNames = new HashSet<string>();
+            districtNames.Add("");
 
             foreach(Program program in database.Programs)
             {
@@ -93,8 +132,19 @@ namespace GoldenTicket.Controllers
 
         private void Save(Applicant applicant)
         {
-            database.Entry(applicant).State = EntityState.Modified;
+            // Add a new applicant
+            if(applicant.ID == 0)
+            {
+                database.Applicants.Add(applicant);
+            }
+            // Modify an existing applicant
+            else
+            {
+                database.Entry(applicant).State = EntityState.Modified;
+            }
+
             database.SaveChanges();
+            Session["applicantID"] = applicant.ID;
         }
     }
 }

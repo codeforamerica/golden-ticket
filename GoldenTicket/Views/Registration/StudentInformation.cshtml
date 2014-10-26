@@ -19,7 +19,6 @@
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
-            @Html.HiddenFor(model => model.ID)
             
             <section id="student-information">
                 <h1>Student information</h1>
@@ -52,11 +51,11 @@
                     <div class="field field-city">
                         <!-- TODO Add a note that if a city isn't available, then there are no programs that the applicant is eligible for -->
                         @Html.LabelFor(model => model.StudentCity, "City")
-                        @Html.DropDownListFor(model => model.StudentCity, new SelectList(ViewBag.DistrictNames, Model.StudentCity))
+                        @Html.DropDownListFor(model => model.StudentCity, new SelectList(ViewBag.DistrictNames))
                     </div>
                     <div class="field field-state field-select is-disabled">
                         @Html.LabelFor(model => model.StudentState, "State")
-                        @Html.TextBoxFor(model => model.StudentState, new { @id = "student-residence-state", @value="RI", @readonly=true })
+                        @Html.TextBoxFor(model => model.StudentState, new { @id = "student-residence-state" })
                     </div>
                     <div class="field field-zip">
                         @Html.LabelFor(model => model.StudentZipCode, "Zip")

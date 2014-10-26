@@ -10,10 +10,15 @@ namespace GoldenTicket.Models
 {
     public class Applicant
     {
-        private const string LETTERS_SPACES_DASHES_REGEX = @"\A(\p{L}|\s|-)+\z";
-        private const string STREET_ADDRESS_REGEX = @"/\A[\p{L}#\d\s\.-]+\z/";
-        private const string ZIP_CODE_REGEX = @"\A\d{5}(-\d{4})?\z";
-        private const string STATE_REGEX = @"\A[a-z]{2}\z";
+        private const string LETTERS_SPACES_DASHES_REGEX = @"^(\p{L}|\s|-)+$";
+        private const string STREET_ADDRESS_REGEX = @"^[ \p{L}0-9.#-]+$"; //      (\s|\p{L}|\d|\.|-)+
+        private const string ZIP_CODE_REGEX = @"^\d{5}(-\d{4})?$";
+        private const string STATE_REGEX = @"^[A-Za-z]{2}$";
+
+        public Applicant()
+        {
+            HouseholdMembers = 1; // default value, to get past minimum validation value
+        }
 
         public int ID { get; set; }
 
@@ -38,7 +43,7 @@ namespace GoldenTicket.Models
         [RegularExpression(STATE_REGEX)]
         public string StudentState { get; set; }
 
-        [RegularExpression(ZIP_CODE_REGEX)
+        [RegularExpression(ZIP_CODE_REGEX)]
         public string StudentZipCode { get; set; }
         public Gender? StudentGender { get; set; }
         public DateTime? StudentBirthday { get; set; }
