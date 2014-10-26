@@ -1,4 +1,6 @@
-﻿
+﻿@using GoldenTicket.Models
+@model GoldenTicket.Models.Applicant
+
 @{
     ViewBag.BodyId = "";
     ViewBag.BodyClass = "no-js student-information";
@@ -11,89 +13,78 @@
 </div>
 <main>
     <div class="site-width">
-        <form action="page-3.php">
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(model => model.ID)
+            
             <section id="student-information">
                 <h1>Student information</h1>
                 <p>Please provide some basic information about the student you wish to enter into the lottery.</p>
                 <fieldset id="student-name" class="fieldset-name">
                     <legend>Full name</legend>
                     <div class="field">
-                        <label for="student-name-first">First</label>
-                        <input type="text" placeholder="John" id="student-name-first"></input>
+                        @Html.LabelFor(model => model.StudentFirstName, "First")
+                        @Html.TextBoxFor(model => model.StudentFirstName, new { @id = "student-name-first", @placeholder = "John"})
                     </div>
                     <div class="field">
-                        <label for="student-name-middle">Middle</label>
-                        <input type="text" placeholder="Paul" id="student-name-middle"></input>
+                        @Html.LabelFor(model => model.StudentMiddleName, "Middle")
+                        @Html.TextBoxFor(model => model.StudentMiddleName, new { @id = "student-name-middle", @placeholder = "Paul"})
                     </div>
                     <div class="field">
-                        <label for="student-name-last">Last</label>
-                        <input type="text" placeholder="Doe" id="student-name-last"></input>
+                        @Html.LabelFor(model => model.StudentLastName, "Last")
+                        @Html.TextBoxFor(model => model.StudentLastName, new { @id = "student-name-last", @placeholder = "Doe" })
                     </div>
                 </fieldset>
                 <fieldset class="fieldset-address">
                     <legend>Address</legend>
                     <div class="field field-street">
-                        <label for="student-residence-street">Street</label>
-                        <input type="text" id="student-residence-street"></input>
+                        @Html.LabelFor(model => model.StudentStreetAddress1, "Street address (line 1)")
+                        @Html.TextBoxFor(model => model.StudentStreetAddress1, new { @id = "student-residence-street-1" })
+                    </div>
+                    <div class="field field-street">
+                        @Html.LabelFor(model => model.StudentStreetAddress2, "Street address (line 2)")
+                        @Html.TextBoxFor(model => model.StudentStreetAddress2, new { @id = "student-residence-street-2" })
                     </div>
                     <div class="field field-city">
-                        <label for="student-residence-city">City</label>
-                        <input type="text" id="student-residence-city"></input>
+                        <!-- TODO Add a note that if a city isn't available, then there are no programs that the applicant is eligible for -->
+                        @Html.LabelFor(model => model.StudentCity, "City")
+                        @Html.DropDownListFor(model => model.StudentCity, new SelectList(ViewBag.DistrictNames, Model.StudentCity))
                     </div>
                     <div class="field field-state field-select is-disabled">
-                        <label for="student-residence-state">State</label>
-                        <select id="student-residence-state" disabled>
-                            <option selected>RI</option>
-                        </select>
+                        @Html.LabelFor(model => model.StudentState, "State")
+                        @Html.TextBoxFor(model => model.StudentState, new { @id = "student-residence-state", @value="RI", @readonly=true })
                     </div>
                     <div class="field field-zip">
-                        <label for="student-residence-zip">Zip</label>
-                        <input type="text" id="student-residence-zip"></input>
+                        @Html.LabelFor(model => model.StudentZipCode, "Zip")
+                        @Html.TextBoxFor(model => model.StudentZipCode, new { @id = "student-residence-zip" })
                     </div>
                 </fieldset>
-                <div class="field field-select field-width-medium">
-                    <label for="student-residence-district">District of residency</label>
-                    <select id="student-residence-district">
-                        <option>Central Falls</option>
-                        <option>Cranston</option>
-                        <option>Newport</option>
-                        <option>Pawtucket</option>
-                        <option>Providence</option>
-                        <option>Warwick</option>
-                        <option>West Warwick</option>
-                        <option>Woonsocket</option>
-                    </select>
-                </div>
                 <div class="field field-date">
-                    <label for="student-birthdate">Date of birth</label>
-                    <input type="date" id="student-birthdate"></input>
+                    @Html.LabelFor(model => model.StudentBirthday, "Birthday")
+                    @Html.TextBoxFor(model => model.StudentBirthday, new { @id = "student-birthdate", @type="date" })
                 </div>
                 <fieldset id="student-gender">
                     <legend>Gender</legend>
                     <div class="field field-radiobutton">
                         <label for="student-gender-male">
-                            <input type="radio" id="student-gender-male" name="student-gender" value="Male"></input>
+                            @Html.RadioButtonFor(model => model.StudentGender, Gender.Male, new { @id = "student-gender-male" })
                             Male
                         </label>
                     </div>
                     <div class="field field-radiobutton">
                         <label for="student-gender-female">
-                            <input type="radio" id="student-gender-female" name="student-gender" value="Female"></input>
+                            @Html.RadioButtonFor(model => model.StudentGender, Gender.Female, new { @id = "student-gender-female" })
                             Female
-                        </label>
-                    </div>
-                    <div class="field field-radiobutton">
-                        <label for="student-gender-other">
-                            <input type="radio" id="student-gender-other" name="student-gender" value="Other"></input>
-                            Prefer not to say
                         </label>
                     </div>
                 </fieldset>
             </section>
             <footer>
-                <button class="button" type="submit" value="continue">Continue</button>
+                <input class="button" type="submit" value="Continue"/>
             </footer>
-        </form>
+        }
     </div>
 </main>
 

@@ -7,12 +7,13 @@
 <div id="signpost">
     <div class="site-width">
         <h2>You&rsquo;re on step 2 of 4: Guardian information</h2>
-        <a href="page-2.php">Go back</a>
+        @Html.ActionLink("Go back", "Index")
     </div>
 </div>
 <main>
     <div class="site-width">
-        <form action="page-4.php">
+        @using (Html.BeginForm())
+        {
             <section id="guardian-information">
                 <h1>Guardian information</h1>
                 <p>Please provide some basic information about {{student name}}&rsquo;s primary guardian.</p>
@@ -104,7 +105,7 @@
             <footer>
                 <button class="button" type="submit" value="continue">Proceed to school selection</button>
             </footer>
-        </form>
+        }
     </div>
 </main>
 

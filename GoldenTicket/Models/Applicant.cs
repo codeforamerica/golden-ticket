@@ -23,7 +23,7 @@ namespace GoldenTicket.Models
         public string StudentState { get; set; }
         public string StudentZipCode { get; set; }
         public Gender? StudentGender { get; set; }
-        public DateTime StudentBirthday { get; set; }
+        public DateTime? StudentBirthday { get; set; }
         
         // Household information
         public int HouseholdMembers { get; set; }
@@ -42,6 +42,9 @@ namespace GoldenTicket.Models
         public string Contact2Phone { get; set; }
         public string Contact2Email { get; set; }
         public string Contact2Relationship { get; set; }
+
+        // Application information
+        public string ConfirmationCode { get; set; }
 
     }
 

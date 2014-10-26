@@ -48,6 +48,7 @@ namespace GoldenTicket.DAL
                 StudentCity = "Providence", 
                 StudentState = "RI", 
                 StudentZipCode="02903", 
+                StudentBirthday= new DateTime(2005, 5, 5),
                 StudentGender = Gender.Male, 
                 HouseholdMembers=4, 
                 HouseholdMonthlyIncome=30000,

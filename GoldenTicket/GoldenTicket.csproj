@@ -175,7 +175,7 @@
     <Compile Include="Models\Applied.cs" />
     <Compile Include="Models\Shuffled.cs" />
     <Compile Include="Models\Selected.cs" />
-    <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\Applicant.cs" />
     <Compile Include="Models\Waitlisted.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GoldenTicket\Calc\IncomeCalculator.cs" />
