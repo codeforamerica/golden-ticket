@@ -19,6 +19,11 @@ namespace GoldenTicket.Controllers
             return View();
         }
 
+        private void StudentInformationViewSetup()
+        {
+            ViewBag.DistrictNames = GetDistrictNames();
+        }
+
         public ActionResult StudentInformation()
         {
             // If this is an application in progress, get the applicant. Otherwise, make a new one
@@ -33,32 +38,24 @@ namespace GoldenTicket.Controllers
             }
 
             // Options for display
-            ViewBag.DistrictNames = GetDistrictNames();
+            StudentInformationViewSetup();
 
             return View(applicant);
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult StudentInformation(Applicant applicant)
         {
-            /**
-             *  Required Fields:
-             *  
-             *  StudentFirstName
-             *  StudentLastName
-             *  StudentStreetAddress1
-             *  StudentStreetCity
-             *  StudentState
-             *  StudentZipCode
-             *  StudentBirthday
-             *  StudentGender
-             *  
-             * TODO Use Model level validation
-             * TODO Learn how to do partial model level validation
-             */
+            // Valid fields
+            if(ModelState.IsValid)
+            {
+                Save(applicant);
+                return RedirectToAction("GuardianInformation");
+            }
 
-
-
+            // Invalid fields
+            StudentInformationViewSetup();
             return View(applicant);
         }
 
@@ -92,6 +89,12 @@ namespace GoldenTicket.Controllers
             }
 
             return districtNames.OrderBy(s=>s).ToArray();
+        }
+
+        private void Save(Applicant applicant)
+        {
+            database.Entry(applicant).State = EntityState.Modified;
+            database.SaveChanges();
         }
     }
 }

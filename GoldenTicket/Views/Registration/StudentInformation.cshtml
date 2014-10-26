@@ -13,10 +13,12 @@
 </div>
 <main>
     <div class="site-width">
+        <!-- CSS class of DIV if errors will be "validation-summary-errors" (Structure: div > ul > li) -->
+        @Html.ValidationSummary()
+
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true)
             @Html.HiddenFor(model => model.ID)
             
             <section id="student-information">
@@ -26,15 +28,15 @@
                     <legend>Full name</legend>
                     <div class="field">
                         @Html.LabelFor(model => model.StudentFirstName, "First")
-                        @Html.TextBoxFor(model => model.StudentFirstName, new { @id = "student-name-first", @placeholder = "John"})
+                        @Html.TextBoxFor(model => model.StudentFirstName, new { @id = "student-name-first"})
                     </div>
                     <div class="field">
                         @Html.LabelFor(model => model.StudentMiddleName, "Middle")
-                        @Html.TextBoxFor(model => model.StudentMiddleName, new { @id = "student-name-middle", @placeholder = "Paul"})
+                        @Html.TextBoxFor(model => model.StudentMiddleName, new { @id = "student-name-middle"})
                     </div>
                     <div class="field">
                         @Html.LabelFor(model => model.StudentLastName, "Last")
-                        @Html.TextBoxFor(model => model.StudentLastName, new { @id = "student-name-last", @placeholder = "Doe" })
+                        @Html.TextBoxFor(model => model.StudentLastName, new { @id = "student-name-last"})
                     </div>
                 </fieldset>
                 <fieldset class="fieldset-address">
