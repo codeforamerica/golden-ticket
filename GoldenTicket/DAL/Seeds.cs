@@ -12,59 +12,71 @@ namespace GoldenTicket.DAL
     {
         protected override void Seed(GoldenTicketDbContext context)
         {
+            // Configurations
+            var globalConfig = new GlobalConfig
+            {
+                ID = 1,
+                OpenDate = new DateTime(2014, 10, 20),
+                CloseDate = new DateTime(2014, 12, 31),
+                MinimumIncomeMultiplier = 625
+            };
+            context.GlobalConfigs.Add(globalConfig);
+
+            var povertyConfigs = new List<PovertyConfig> {
+                new PovertyConfig{ HouseholdMembers = 2, MinimumIncome = 2425 },
+                new PovertyConfig{ HouseholdMembers = 3, MinimumIncome = 3051 },
+                new PovertyConfig{ HouseholdMembers = 4, MinimumIncome = 3676 },
+                new PovertyConfig{ HouseholdMembers = 5, MinimumIncome = 4302 },
+                new PovertyConfig{ HouseholdMembers = 6, MinimumIncome = 4928 },
+                new PovertyConfig{ HouseholdMembers = 7, MinimumIncome = 5554 },
+                new PovertyConfig{ HouseholdMembers = 8, MinimumIncome = 6180 },
+                new PovertyConfig{ HouseholdMembers = 9, MinimumIncome = 6806 },
+                new PovertyConfig{ HouseholdMembers = 10, MinimumIncome = 7432 },
+            };
+            povertyConfigs.ForEach(pc => context.PovertyConfigs.Add(pc));
+
+
             // Programs
-            Program willysSchool = new Program { 
-                Name = "Willy's School", 
-                StreetAddress1 = "1000 Chocolate Factory Rd", 
-                City = "Providence", 
-                State = "RI", 
-                ZipCode = "02904", 
-                Email = "willy@wonka.org", 
-                Phone = "401-000-0000", 
-                Seats = 18, 
-                PovertyRate = 0.87 
+            var willysSchool = new Program
+            {
+                Name = "Willy Wonka School",
+                StreetAddress1 = "1000 Chocolate Factory Rd",
+                StreetAddress2 = "Blah",
+                City = "Providence",
+                ZipCode = "02904",
+                Phone = "401-000-0000",
+                Email = "willy@wonka.org",
+                Seats = 18,
+                PovertyRate = 0.87,
+                GenderBalance = 0.5
             };
             context.Programs.Add(willysSchool);
+                
+            //Program arthurAcademy = new Program 
+            //{ 
+            //    Name = "Arthur Academy", 
+            //    StreetAddress1 = "999 Gobstopper Blvd", 
+            //    City = "Providence", 
+            //    ZipCode = "02904", 
+            //    Email = "art@slugworth.com", 
+            //    Phone = "401-555-1234", 
+            //    Seats = 36, 
+            //    PovertyRate = 0.87 
+            //};
+            //context.Programs.Add(arthurAcademy);
 
-            Program arthurAcademy = new Program { 
-                Name = "Arthur Academy", 
-                StreetAddress1 = "999 Gobstopper Blvd", 
-                City = "Providence", 
-                State = "RI", 
-                ZipCode = "02904", 
-                Email = "art@slugworth.com", 
-                Phone = "401-555-1234", 
-                Seats = 36, 
-                PovertyRate = 0.87 
-            };
-            context.Programs.Add(arthurAcademy);
-
-            // Student with 1 contact, applied to 1 program
-            Applicant charlieBucket = new Applicant { 
-                StudentFirstName = "Charlie", 
-                StudentMiddleName = "C", 
-                StudentLastName = "Bucket", 
-                StudentStreetAddress1 = "1234 Flower St.",
-                StudentCity = "Providence", 
-                StudentState = "RI", 
-                StudentZipCode="02903", 
-                StudentBirthday= new DateTime(2005, 5, 5),
-                StudentGender = Gender.Male, 
-                HouseholdMembers=4, 
-                HouseholdMonthlyIncome=30000,
-                Contact1FirstName= "Joe",
-                Contact1LastName= "Bucket",
-                Contact1Phone="401-111-1111",
-                Contact1Email="grandpajoe@dahl.net"
-            };
-
-            Applied charlieBucketApplied = new Applied();
-            charlieBucketApplied.Applicant = charlieBucket;
-            charlieBucketApplied.Program = willysSchool;
-            willysSchool.Applieds.Add(charlieBucketApplied);
-            context.Applieds.Add(charlieBucketApplied);
-            
-            context.Applicants.Add(charlieBucket);
+            //Program giantPeach = new Program
+            //{
+            //    Name = "Giant Peach",
+            //    StreetAddress1 = "1 Humongous Tree",
+            //    StreetAddress2 = "Branch 8",
+            //    City = "West Warwick",
+            //    Email = "james@giantpeach.edu",
+            //    Phone = "401-232-1231",
+            //    Seats = 46,
+            //    PovertyRate = 0.5
+            //};
+            //context.Programs.Add(giantPeach);
             
             context.SaveChanges();
         }

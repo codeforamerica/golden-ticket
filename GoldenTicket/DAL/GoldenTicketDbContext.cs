@@ -13,5 +13,9 @@ namespace GoldenTicket.DAL
         public DbSet<Shuffled> Shuffleds { get; set; }
         public DbSet<Selected> Selecteds { get; set; }
         public DbSet<Waitlisted> Waitlisteds { get; set; }
+
+        public DbSet<GlobalConfig> GlobalConfigs { get; set; }
+
+        public DbSet<PovertyConfig> PovertyConfigs { get; set; }
     }
 }
