@@ -53,10 +53,6 @@
                         @Html.LabelFor(model => model.StudentCity, "City")
                         @Html.DropDownListFor(model => model.StudentCity, new SelectList(ViewBag.DistrictNames))
                     </div>
-                    <div class="field field-state field-select is-disabled">
-                        @Html.LabelFor(model => model.StudentState, "State")
-                        @Html.TextBoxFor(model => model.StudentState, new { @id = "student-residence-state" })
-                    </div>
                     <div class="field field-zip">
                         @Html.LabelFor(model => model.StudentZipCode, "Zip")
                         @Html.TextBoxFor(model => model.StudentZipCode, new { @id = "student-residence-zip" })
