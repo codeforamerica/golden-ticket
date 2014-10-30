@@ -46,10 +46,6 @@ namespace GoldenTicket.Controllers
             {
                 ModelState.AddModelError("StudentCity", "Student city must be entered");
             }
-            if (string.IsNullOrEmpty(applicant.StudentState))
-            {
-                ModelState.AddModelError("StudentState", "Student state must be entered");
-            }
             if (string.IsNullOrEmpty(applicant.StudentZipCode))
             {
                 ModelState.AddModelError("StudentZipCode", "Student ZIP code must be entered");
@@ -77,7 +73,11 @@ namespace GoldenTicket.Controllers
 
         public ActionResult GuardianInformation()
         {
+            GuardianInformationViewSetup();
+
             Applicant applicant = database.Applicants.Find(Session["applicantID"]);
+
+            
             return View(applicant);
         }
 
@@ -117,6 +117,11 @@ namespace GoldenTicket.Controllers
             ViewBag.DistrictNames = GetDistrictNames();   
         }
 
+        private void GuardianInformationViewSetup()
+        {
+            ViewBag.IncomeRanges = GetIncomeRanges();
+        }
+
         private string[] GetDistrictNames()
         {
             ISet<string> districtNames = new HashSet<string>();
@@ -128,6 +133,26 @@ namespace GoldenTicket.Controllers
             }
 
             return districtNames.OrderBy(s=>s).ToArray();
+        }
+
+        private IEnumerable<SelectListItem> GetIncomeRanges()
+        {
+            List<SelectListItem> incomeRanges = new List<SelectListItem>();
+
+            int previousIncomeLine = 0;
+            foreach( int householdMembers in Enumerable.Range(2,10))
+            {
+                PovertyConfig povertyConfig = database.PovertyConfigs.Where(p => p.HouseholdMembers == householdMembers).First();
+                SelectListItem item = new SelectListItem
+                {
+                    Text = previousIncomeLine + " to " + povertyConfig.MinimumIncome,
+                    Value = povertyConfig.MinimumIncome.ToString()
+                };
+                
+                incomeRanges.Add(item);
+            }
+
+            return incomeRanges;
         }
 
         private void Save(Applicant applicant)

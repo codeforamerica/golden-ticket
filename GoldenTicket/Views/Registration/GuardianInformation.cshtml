@@ -1,4 +1,5 @@
-﻿
+﻿@model GoldenTicket.Models.Applicant
+
 @{
     ViewBag.BodyId = "";
     ViewBag.BodyClass = "no-js guardian-information";
@@ -12,94 +13,82 @@
 </div>
 <main>
     <div class="site-width">
+        <!-- CSS class of DIV if errors will be "validation-summary-errors" (Structure: div > ul > li) -->
+        @Html.ValidationSummary()
+
         @using (Html.BeginForm())
         {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.ID)
+            
             <section id="guardian-information">
                 <h1>Guardian information</h1>
-                <p>Please provide some basic information about {{student name}}&rsquo;s primary guardian.</p>
+                <p>Please provide some basic information about @Model.StudentFirstName&rsquo;s primary guardian.</p>
                 <fieldset id="guardian-name" class="fieldset-name">
                     <legend>Full name</legend>
                     <div class="field">
-                        <label for="guardian-name-first">First</label>
-                        <input type="text" placeholder="Andrew" id="guardian-name-first"></input>
+                        @Html.LabelFor(model => model.Contact1FirstName, "First")
+                        @Html.TextBoxFor(model => model.Contact1FirstName)
                     </div>
                     <div class="field">
-                        <label for="guardian-name-middle">Middle</label>
-                        <input type="text" placeholder="Nicholas" id="guardian-name-middle"></input>
-                    </div>
-                    <div class="field">
-                        <label for="guardian-name-last">Last</label>
-                        <input type="text" placeholder="last" id="guardian-name-last"></input>
+                        @Html.LabelFor(model => model.Contact1LastName, "Last")
+                        @Html.TextBoxFor(model => model.Contact1LastName)
                     </div>
                 </fieldset>
                 <div class="field field-phone-number">
-                    <label for="guardian-phone-number">Phone number</label>
-                    <input type="text" id="guardian-phone-number"></input>
+                    @Html.LabelFor(model => model.Contact1Phone, "Phone")
+                    @Html.TextBoxFor(model => model.Contact1Phone)
                 </div>
                 <div class="field field-email-address">
-                    <label for="guardian-email-address">Email address</label>
-                    <input type="text" id="guardian-email"></input>
+                    @Html.LabelFor(model => model.Contact1Email, "Email address")
+                    @Html.TextBoxFor(model => model.Contact1Email)
                 </div>
                 <fieldset id="guardian-relationship">
-                    <legend>Relationship to {{student name}}</legend>
+                    <legend>Relationship to @Model.StudentFirstName</legend>
                     <div class="field field-radiobutton">
                         <label for="guardian-relationship-father">
-                            <input type="radio" id="guardian-relationship-father" name="guardian-relationship" value="father"></input>
+                            @Html.RadioButtonFor(model => model.Contact1Relationship, "father")
                             Father
                         </label>
                     </div>
                     <div class="field field-radiobutton">
                         <label for="guardian-relationship-mother">
-                            <input type="radio" id="guardian-relationship-mother" name="guardian-relationship" value="mother"></input>
+                            @Html.RadioButtonFor(model => model.Contact1Relationship, "mother")
                             Mother
                         </label>
                     </div>
                     <div class="field field-radiobutton">
                         <label for="guardian-relationship-stepfather">
-                            <input type="radio" id="guardian-relationship-stepfather" name="guardian-relationship" value="stepfather"></input>
+                            @Html.RadioButtonFor(model => model.Contact1Relationship, "stepfather")
                             Stepfather
                         </label>
                     </div>
                     <div class="field field-radiobutton">
                         <label for="guardian-relationship-stepmother">
-                            <input type="radio" id="guardian-relationship-stepmother" name="guardian-relationship" value="stepmother"></input>
+                            @Html.RadioButtonFor(model => model.Contact1Relationship, "stepmother")
                             Stepmother
                         </label>
                     </div>
                     <div class="field field-radiobutton">
                         <label for="guardian-relationship-guardian">
-                            <input type="radio" id="guardian-relationship-guardian" name="guardian-relationship" placeholder="Specify" value="guardian"></input>
+                            @Html.RadioButtonFor(model => model.Contact1Relationship, "guardian")
                             Guardian
                         </label>
                     </div>
                     <div class="field field-radiobutton">
                         <label for="guardian-relationship-other">
-                            <input type="radio" id="guardian-relationship-other" name="guardian-relationship" value="other"></input>
+                            @Html.RadioButtonFor(model => model.Contact1Relationship, "other")
                             Other
                         </label>
                     </div>
                 </fieldset>
                 <div class="field field-select field-size">
                     <label for="guardian-household-size">Number of people in your household</label>
-                    <select id="guardian-household-size">
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
-                        <option>6</option>
-                        <option>7</option>
-                        <option>8</option>
-                        <option>9</option>
-                        <option>10+</option>
-                    </select>
+                    @Html.TextBoxFor(model => model.HouseholdMembers)
                 </div>
                 <div class="field field-select field-width-medium" id="field-annual-income">
-                    <label for="guardian-household-income">Annual income</label>
-                    <select id="guardian-household-income">
-                        <option>Low</option>
-                        <option>Medium</option>
-                        <option>Hi</option>
-                    </select>
+                    @Html.LabelFor(model => model.HouseholdMonthlyIncome, "Average monthly income")
+                    @Html.DropDownListFor(model => model.HouseholdMonthlyIncome, new SelectList(ViewBag.IncomeRanges))
                 </div>
             </section>
             <footer>
@@ -108,4 +97,3 @@
         }
     </div>
 </main>
-
