@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.BodyId = "";
+    ViewBag.BodyClass = "no-js review";
+    Layout = "~/Views/Shared/_RegistrationLayout.cshtml";
+}
+<div id="signpost">
+    <div class="site-width">
+        <h2>You&rsquo;re on step 4 of 4.</h2>
+        <a href="page-4.php">Go back</a>
+    </div>
+</div>
+<main>
+    <div class="site-width">
+        <form action="page-6.php">
+            <h1>Review</h1>
+            <p>Please take a moment to review the information you&rsquo;ve entered, below, before submitting your application.</p>
+            <section id="student-information">
+                <h1>Student information</h1>
+                <a href="page-2.php">Edit</a>
+                <dl class="vcard">
+                    <dt>Full name</dt>
+                    <dd class="fn">Andrew Nicholas Maier</dd>
+                    <dt>Address</dt>
+                    <dd class="adr">
+                        <div class="street-address">123 Anywhere Street</div>
+                        <span class="locality">Providence</span>,<span class="region">Rhode Island</span> <span class="postal-code">02907</span>
+                    </dd>
+                    <dt>District</dt>
+                    <dd>Providence</dd>
+                    <dt>Date of birth</dt>
+                    <dd>09/29/2010</dd>
+                    <dt>Gender</dt>
+                    <dd>Male</dd>
+                    <dt>Primary language</dt>
+                    <dd>English</dd>
+                </dl>
+            </section>
+            <section id="guardian-information">
+                <h1>Guardian information</h1>
+                <a href="page-3.php">Edit</a>
+                <dl class="vcard">
+                    <dt>Full name</dt>
+                    <dd class="fn">David Sitges Maier</dd>
+                    <dt>Phone</dt>
+                    <dd class="tel">678-595-5803</dd>
+                    <dt>Email address</dt>
+                    <dd class="email">david.s.maier&amp;mindspring.com</dd>
+                    <dt>Relationship</dt>
+                    <dd>Father</dd>
+                    <dt>Household size</dt>
+                    <dd>4</dd>
+                    <dt>Income</dt>
+                    <dd>$50,000</dd>
+                </dl>
+            </section>
+            <section id="school-selection">
+                <h1>School selection</h1>
+                <a href="page-4.php">Edit</a>
+                <dl>
+                    <dt>Applied to</dt>
+                    <dd>
+                        <ul>
+                            <li>Beautiful beginnings</li>
+                            <li>Ready to Learn Providence &amp; CCRI</li>
+                            <li>The Mariposa Highlander PreK at the Wanskuck Boys and Girls Club</li>
+                        </ul>
+                    </dd>
+                </dl>
+            </section>
+            <footer>
+                <button class="button" type="submit" value="continue">Submit application</button>
+            </footer>
+        </form>
+    </div>
+</main>
+

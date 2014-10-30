@@ -163,20 +163,22 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\StudentViewController.cs" />
+    <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="DAL\GoldenTicketDbContext.cs" />
     <Compile Include="DAL\Seeds.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Contact.cs" />
+    <Compile Include="Models\GlobalConfig.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\PovertyConfig.cs" />
     <Compile Include="Models\Program.cs" />
     <Compile Include="Models\Applied.cs" />
     <Compile Include="Models\Shuffled.cs" />
     <Compile Include="Models\Selected.cs" />
-    <Compile Include="Models\Student.cs" />
+    <Compile Include="Models\Applicant.cs" />
+    <Compile Include="Models\ValidationConstants.cs" />
     <Compile Include="Models\Waitlisted.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GoldenTicket\Calc\IncomeCalculator.cs" />
@@ -197,7 +199,7 @@
   <ItemGroup>
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
+    <Content Include="Content\styles.css" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -219,7 +221,7 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
-    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_RegistrationLayout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
@@ -239,11 +241,13 @@
     <Content Include="Views\Account\ResetPassword.cshtml" />
     <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\StudentView\Index.cshtml" />
-    <Content Include="Views\StudentView\Applied.cshtml" />
+    <Content Include="Views\Registration\Index.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Registration\StudentInformation.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

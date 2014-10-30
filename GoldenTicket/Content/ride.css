@@ -1,0 +1,826 @@
+/* @override http://preklottery.local/stylesheets/ride.css */
+
+/* @override http://preklottery.local/stylesheets/ride.css */
+
+/* @override http://preklottery.local/stylesheets/ride.css */
+
+/* @group bootstrap */
+
+body{
+	color: #555;
+	font-family: "Noto sans", "Lucida Grande", Lucida, Verdana, sans-serif;
+	font-size: 18px;
+}
+
+@media screen and (min-width: 48em){ html, body{ font-size: 24px; } }
+
+a{
+	color: #1f7ab8;
+	text-decoration: none;
+}
+
+a:hover{
+	color: #00b3e3;
+}
+
+p{
+	line-height: 1.4em;
+	margin-bottom: 1em;
+}
+
+strong{ font-weight: 600; }
+ul li{ list-style-type: disc; }
+
+div.site-width{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	position: relative;
+	margin: 0 auto;
+	max-width: 40rem;
+	padding: 0 0.7rem;
+}
+
+@media screen & (min-width: 24em){
+	div.site-width{ padding: 0 1.4rem; }
+}
+
+
+div.site-width::after{
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* @end */
+
+/* @group header */
+
+header#header{ 
+	font-family: "Titillium Web", Trebuchet MS;
+	font-size: 0.9rem;
+	margin-bottom: 0.35rem;
+	height: 2.4rem;
+	line-height: 2.4rem;
+	position: relative;
+	color: #c1b6c2;
+	background: #442b49;
+	overflow: hidden;
+}
+
+header#header h1,
+header#header nav,
+header#header nav a{
+	float: left;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+body[class^="applications-"] header a.applications,
+body[class^="people-"] header a.people,
+body[class^="schools-"] header a.schools,
+body[class="settings"] header a.settings{
+	color: #fff !important;
+}
+
+header#header a{
+	float: left;
+	color: inherit;
+	text-align: center;
+	white-space: nowrap;
+	line-height: 2.4rem;
+}
+
+header#header a:hover{color: #fff;}
+
+header#header nav.nav-secondary{
+	position: absolute;
+	top: 0;
+	right: 0.7em;
+}
+
+
+
+header#header nav.nav-secondary a.people,
+header#header nav.nav-secondary a.schools,
+header#header nav.nav-secondary a.settings,
+header#header nav.nav-secondary a.sign-out{ 
+	text-decoration: none;
+	width: 2.4rem;
+	float: left;
+}
+
+header#header nav a.people span,
+header#header nav a.schools span,
+header#header nav a.settings span,
+header#header nav a.sign-out span{ display: none;  }
+
+header#header nav a.people::before,
+header#header nav a.schools::before,
+header#header nav a.settings::before,
+header#header nav a.sign-out::before{ 
+	text-decoration: none;
+	content: "signout";
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 0.8rem;
+	/* Enable Ligatures ================ */
+	-webkit-font-feature-settings: "liga";
+	-moz-font-feature-settings: "liga=1";
+	-moz-font-feature-settings: "liga";
+	-ms-font-feature-settings: "liga" 1;
+	-o-font-feature-settings: "liga";
+	font-feature-settings: "liga";
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	position: relative;
+	top: 0.2em;
+}
+
+header#header nav.nav-secondary a.people::before{ content: "people"; }
+header#header nav.nav-secondary a.schools::before{ content: "schools"; }
+header#header nav.nav-secondary a.settings::before{ content: "settings"; }
+@media screen and (min-width: 28em){
+	header#header{ 
+		margin-bottom: 1.8rem;
+	}
+	
+	header#header nav.nav-secondary{
+		margin-right: -0.2em;
+	}
+	
+	header#header nav.nav-secondary a.people,
+	header#header nav.nav-secondary a.schools,
+	header#header nav.nav-secondary a.settings,
+	header#header nav.nav-secondary a.sign-out{ 
+		width: auto;
+		padding: 0 1em;
+	}
+	
+	header#header nav a.people span,
+	header#header nav a.schools span,
+	header#header nav a.settings span,
+	header#header nav a.sign-out span{ display: inline;  }
+	
+	header#header nav a.people::before,
+	header#header nav a.schools::before,
+	header#header nav a.settings::before,
+	header#header nav a.sign-out::before{ display: none; }
+
+}
+
+/* @end */
+
+/* @group main */
+
+body main header{
+	font-family: "Titillium Web", Trebuchet MS;
+	font-size: 1.6rem;
+	font-weight: 100;
+	line-height: 1.33em;
+	color: #333;
+	margin-bottom: 1em;
+}
+
+body main header h1{
+	display: inline-block;
+	vertical-align: middle;
+	width: auto;
+	margin-right: 0.2rem;
+	color: #206180;
+}
+
+body main header h1+.button-forward{
+	vertical-align: middle;
+	margin-top: 0.125em;
+}
+
+
+main header .custom-select,
+main header select,
+main header span{
+	font-family: "Titillium Web", Trebuchet MS !important;
+	font-size: 1.6rem;
+	font-weight: 100;
+	line-height: 1.33em;
+	color: #333;
+	margin-bottom: 1.2em;
+}
+
+@media screen & (min-width: 40em){
+	body[class^=applications-index] main header h1,
+	body[class^=people] main header h1,
+	body[class^=schools] main header h1,
+	body[class^=settings] main header h1{ 
+			font-size: 2rem;
+			font-weight: 100;
+	}
+	
+	body[class^=applications-index] main header h1{
+			font-size: 1.8rem;	
+	}
+}
+
+
+
+/* @end */
+
+
+/* @group footer */
+
+footer a{ 
+	color: #888; 
+	font-size: 0.9rem;
+	text-decoration: underline;
+}
+
+
+/* @end */
+
+
+/* @group tables */
+
+table{
+	width: 100%;
+	background: white;
+	border-radius: 0.2rem;
+	overflow: hidden;
+	table-layout: fixed;
+	font-size: 0.8rem;
+	margin-bottom: 1.4em;
+}
+
+table thead,
+table td{ border-bottom: 0.1em solid #eee; }
+
+table.table-applications td.table-applications-col-poverty{
+	width: 3.6em;
+}
+
+table thead td{
+	color: #888;
+}
+
+table thead td span{ display: none; }
+@media screen and (min-width: 24em){ table thead td span{ display: inline; } }
+
+table td.table-applications-col-submitted{ display: none; }
+table tr:last-of-type td{ border-bottom: none; }
+
+table a,
+table thead td{
+	padding: 0.5rem 0.4rem 0.5rem 0;
+}
+
+table tr td.table-applications-col-poverty,
+table tr td.table-applications-col-poverty a{
+	padding-right: 0 !important;
+}
+
+
+table a,
+table a:hover{
+	display: block;
+	color: inherit;
+}
+
+table .sort-desc a{ 
+	padding-left: 1.2rem; 
+	position: relative;
+}
+
+table .sort-desc a::after{
+  position: absolute;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  border-width: 0.33rem;
+  border-style: solid;
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  top: 50%;
+  left: 0.4rem;
+  margin-top: -0.12rem;
+}
+
+table .table-people-col-actions a{ display: inline-block; }
+table .table-people-col-actions a:hover{ text-decoration: underline; }
+table.table-applications tbody tr:hover a{ background: #fff2c0; }
+
+
+/* @end */
+
+/* @group views */
+
+/* @group Delete, New */
+
+.schools-delete,
+.schools-new,
+.applications-delete,
+.people-new{ background: #eee; }
+
+.schools-delete main .site-width,
+.schools-new main .site-width,
+.applications-delete main .site-width,
+.people-new main .site-width{ padding: 0; }
+
+.schools-delete main,
+.schools-new main,
+.applications-delete main,
+.people-new main{
+	border-bottom: none;
+	border: 0.2rem solid #ff514d;
+	max-width: 24rem;
+	padding: 0.7rem;
+	margin: 0 auto;
+	background: white;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+
+@media screen && (min-width: 24em){	
+	.schools-delete main,
+	.schools-new main,
+	.applications-delete main,
+	.people-new main{
+	padding: 1.4rem;
+	}
+}
+
+.schools-new main h1,
+.schools-delete main h1,
+.applications-delete main h1{
+	margin-bottom: 0;
+}
+
+.people-new main,
+.schools-new main{
+	border-color: #009253;
+}
+
+@media screen && (min-width: 24em){
+	
+	.schools-delete main,
+	.schools-new main,
+	.applications-delete main,
+	.people-new main{
+		padding: 1.4em;
+		max-width: 28em;
+	}
+}
+
+.schools-new .field-small span.percentage{ color: #888;	}
+
+.schools-delete main div.page div.site-width{
+	border-top: none;
+	-moz-border-radius: 0 0 0.2rem 0.2rem;
+	border-radius: 0 0 0.2rem 0.2rem;
+}
+
+/* @end */
+
+/* @group schools-index */
+
+.school{
+	border: 0.125em solid #e3e3e3;
+	-moz-border-radius: 0.2rem;
+	border-radius: 0.2rem;
+	width: 48%;
+	float: left;
+		-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 0.7rem;
+	line-height: 1.2rem;
+	font-size: 0.8rem;
+	margin-right: 0.7em;
+	margin-bottom: 0.7em;
+	position: relative;
+	min-width: 21em;
+	padding-right: 4em;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.school:nth-child(2n){
+	margin-right: 0;
+}
+
+.school .fn{
+	font-weight: 600;
+	margin-bottom: 0.2em;
+	display: block;
+}
+
+.school .adr{
+	margin-bottom: 0.2em;
+}
+
+.school span.classroom-count,
+.school span.poverty-threshold{ font-size: 0.7rem; }
+
+.school span.classroom-count::after{
+	content: "";
+	width: 0.4em;
+	height: 0.4em;
+	background: #555;
+	display: inline-block;
+	vertical-align: middle;
+	-moz-border-radius: 100%;
+	border-radius: 100%;
+	margin: -0.3em 0.2em 0;	
+}
+
+.school a,
+.school button{
+	position: absolute;
+	right: 0.7em;
+	top: 0.7em;
+}
+
+.school button{
+	top: 2rem;
+	color: #fd5050;
+	font-size: 0.8em;
+	cursor: pointer;
+}
+
+.school button:hover{
+	text-decoration: underline;
+}
+
+/* @end */
+
+/* @group people-index */
+
+body[class^=people] main header{ margin-bottom: 1rem; }
+	
+.people-index table.table-people td{
+	padding: 0.5em 0;
+	
+}
+.people-index td.table-people-col-actions{ text-align: right; }
+.people-index td.table-people-col-actions a,
+.people-index td.table-people-col-actions form,
+.people-index td.table-people-col-actions button{
+	color: #1f7ab8;
+	text-decoration: none;
+	display: inline;
+	padding: 0;
+}
+
+.people-index td.table-people-col-actions button{
+	padding: 0;
+	border: 0;
+	height: auto;
+	line-height: 1;
+	display: inline;
+	min-height: 0;
+	background: none;	
+}
+
+.people-index td.table-people-col-actions a:hover,
+.people-index td.table-people-col-actions button:hover{
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.people-index td.table-people-col-actions .button-delete{
+	color: #ff4823;
+	margin-left: 0.4rem;	
+}
+
+/* @end */
+
+/* @group Applications index, Results */
+
+.applications-index main,
+.results main{
+	padding: 0;
+	margin-top: 0;
+	margin-bottom: 2.1rem;
+	overflow: hidden;
+	border: none;
+}
+
+body[class^=applications] main header form,
+body[class^=applications] main header form .field{
+	display: inline-block;
+	vertical-align: middle;
+}
+
+body[class^=applications] main header form label,
+body[class^=applications] main header form button{
+	position: absolute;
+	left: -9999em;
+	top: -9999em;
+}
+
+body[class^=applications] main header form .field-select select,
+body[class^=applications] main header form .field-select span{
+	width: 18rem;
+	font-size: 1.1rem;
+	font-family: inherit;
+	font-weight: 600;
+}
+
+.applications-index main h1 span.school,
+.results main h1 span.school{
+	display: none;
+}
+
+.no-js.applications-index main form button,
+.no-js.results main form button,
+.no-js.settings main form footer{
+	position: absolute;
+	left: -999rem;
+	top: -9999rem;
+}
+
+body[class^=applications] main header div.field-select{
+	width: 100%;
+	max-width: 100%;
+	margin: 0;
+	top: 0.1rem;
+}
+
+body[class^=settings] main .page legend,
+body[class^=applications] main .page h1{
+	font-size: 1.2em;
+	font-family: "Titillium Web", Trebuchet MS;
+	font-weight: 700;
+	margin-bottom: 0.8em;
+	color: #3f7e73;
+}
+
+/* @end */
+
+/* @group Application show, Application edit */
+
+.applications-show header#header,
+.applications-edit header#header{ margin-bottom: 0; }
+
+.applications-show main header,
+.applications-edit main header{
+	font-size: 0.9rem;
+	line-height: 1.4em;
+	font-weight: 600;
+	color: #b5c6eb;
+	background: #545da9;
+	position: relative;
+	margin-bottom: 1.4rem;
+}
+
+.applications-show main header h1,
+.applications-edit main header h1{
+	font-weight: normal;
+	line-height: 2.4rem;
+	color: white;
+}
+
+.applications-show main .page section h1,
+.applications-edit main .page section h1{
+	font-size: inherit;
+	margin-top: 1.4rem;
+}
+
+.applications-show main header a,
+.applications-edit main header a,
+.applications-show main header button,
+.applications-edit main header button{
+	position: absolute;
+	left: auto;
+	right: 0.5rem;
+	top: 0;
+	bottom: 0;
+	padding: 0 1em;
+	border: none;
+	font-size: 0.9rem;
+	font-weight: normal;
+	-moz-border-radius: 0;
+	border-radius: 0;
+	cursor: pointer;
+	line-height: 2.4rem;
+	color: inherit;
+}
+
+.applications-show main header a:hover,
+.applications-edit main header a:hover,
+.applications-show main header button:hover,
+.applications-edit main header button:hover{
+	color: white;
+}
+
+main form header button:active{
+	color: #9daace;
+	background: #162649;
+}
+
+main form header button.button-edit{
+	right: 5rem;
+}
+
+main form header button.button-save{
+	right: 5rem;
+}
+
+fieldset#guardian-relationship{ max-width: 26rem;}
+fieldset#guardian-relationship legend{ font-weight: normal; }
+
+
+
+/* @end */
+
+/* @group Sign in */
+#sign-in{ background: #eee; }
+#sign-in h1{ display: none; }
+
+@media screen and (min-width: 36em) { 
+	#sign-in main{
+		margin-top: 5rem;
+		max-width: 14rem;
+	}
+}
+
+#sign-in main{
+	padding: 1.4rem;
+	background: white;
+	border: 0.1em solid #ccc;
+	-moz-border-radius: 0.2rem;
+	border-radius: 0.2rem;
+}
+
+
+
+/* @end */
+
+/* @group Settings */
+
+body[class^=settings] main .page legend{
+	font-size: 1em;
+	margin-bottom: 0.4em;
+}
+
+.settings fieldset{ margin-bottom: 2.4rem; }
+
+.settings main table{
+	table-layout: fixed;
+	max-width: 32em;
+	font-size: 0.8rem;
+}
+
+.settings main table td{ padding: 0.4rem 0;
+}
+.settings main table td.table-poverty-criteria-col-members{ width: 8em; }
+
+.settings main table tbody td input{
+	font-size: 0.8rem;
+}
+
+.settings main section::after{
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.settings .application-period fieldset{
+	margin-bottom: 0.7em;
+}
+
+.settings .application-period fieldset legend{ display: none; }
+
+.settings .reset{
+	border-top: 0.1rem solid #eee;
+	padding-top: 1rem;
+	margin-top: 1.4rem;
+	margin-bottom: 1.4rem;
+		color: #fd5050;
+		line-height: 1.33;
+}
+
+.settings .reset span{
+	color: #888;
+	font-style: italic;
+	font-size: 0.7rem;
+}
+
+
+.settings .reset::before{
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 0.8rem;
+	/* Enable Ligatures ================ */
+	-webkit-font-feature-settings: "liga";
+	-moz-font-feature-settings: "liga=1";
+	-moz-font-feature-settings: "liga";
+	-ms-font-feature-settings: "liga" 1;
+	-o-font-feature-settings: "liga";
+	font-feature-settings: "liga";
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	content: "trash";
+	float: left;
+	margin-right: 0.4em;
+	font-size: 0.9rem;
+	margin-top: 0.2rem;
+}
+
+
+/* @end */
+
+/* @end */
+
+/* @group shared */
+
+.notice {
+	background: #ffeead;
+	color: #4b2d06;
+	line-height: 1.4rem;
+	padding: 0.4em 1em 0.4em;
+	font-size: 0.8em;
+	-moz-border-radius: 0.2rem;
+	border-radius: 0.2rem;
+	margin: 0.7rem -0.08rem 1.4rem;
+	border: 0.08em solid #ffd880;
+	position: relative;
+}
+
+.notice h1{
+	color: #b2400c !important;
+	font-size: 1em;
+	font-weight: 600;
+	margin-top: 0.2em;
+}
+
+.notice form{
+	margin-bottom: 0.4em;
+}
+
+nav{ clear: both; }
+
+nav ul{
+	border-top: 0.2rem solid #eee;	
+	padding-top: 1.4rem;
+}
+
+nav ul li{
+	margin-bottom: 0.7rem;
+	list-style-type: none;
+}
+
+a.export,
+a.import{
+	display: inline-block;
+	vertical-align: middle;
+	position: relative;
+	padding-left: 1.4em;
+	margin-bottom: 0.4em;
+	font-size: 0.8rem;
+}
+
+
+a.export::before,
+a.import::before{
+	text-decoration: none;
+	content: "excel";
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 0.8rem;
+	/* Enable Ligatures ================ */
+	-webkit-font-feature-settings: "liga";
+	-moz-font-feature-settings: "liga=1";
+	-moz-font-feature-settings: "liga";
+	-ms-font-feature-settings: "liga" 1;
+	-o-font-feature-settings: "liga";
+	font-feature-settings: "liga";
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-size: 1em;
+}
+
+/* @end */

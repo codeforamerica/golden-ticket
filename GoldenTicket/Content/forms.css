@@ -1,0 +1,864 @@
+/* @override http://ticket2ride.local/stylesheets/forms.css */
+
+/* @override http://preklottery.local/stylesheets/forms.css */
+
+@font-face {
+	font-family: 'icomoon';
+	src:url('fonts/icomoon.eot?-paa2pl');
+	src:url('fonts/icomoon.eot?#iefix-paa2pl') format('embedded-opentype'),
+		url('fonts/icomoon.woff?-paa2pl') format('woff'),
+		url('fonts/icomoon.ttf?-paa2pl') format('truetype'),
+		url('fonts/icomoon.svg?-paa2pl#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+/* @group Forms */
+
+/* @group footer */
+
+form footer{ padding-top: 1.4rem; }
+
+form footer a{
+	float: right;
+	font-size: 0.8rem;
+	margin-top: 0.67rem;
+}
+
+form footer a:hover{
+	color: #555;
+}
+
+/* @end */
+
+::-webkit-input-placeholder{ line-height: 1.2em; color: #ccc; }
+
+.field::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+input[type=text],
+input[type=tel],
+input[type=email],
+input[type=number],
+input[type=password],
+input[type=date],
+select,
+textarea{
+	font-size: 1em;
+  border: 0.08em solid #ccc;
+  border-top-color: #c3c3c3;
+  border-left-color: #c3c3c3;
+  font: inherit;  
+  padding: 0.4rem 0.33rem 0.33rem;
+  margin: 0;
+  outline: none;
+  height: 2rem;
+  line-height: 1;
+    -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-border-radius: 0.2rem;
+  border-radius: 0.2rem;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  width: 100%;
+  background: #fafafa;
+  box-shadow: inset 0.08em 0.08em 0 rgba(0,0,0,0.05);
+  -webkit-appearance: none;
+}
+
+@media screen and (min-width: 24em) {
+
+	input[type=text],
+	input[type=tel],
+	input[type=email],
+	input[type=password],
+	input[type=date],
+	select,
+	textarea{
+		font-size: 0.9rem;
+	}
+}
+
+input[type=text]:focus,
+input[type=tel]:focus,
+input[type=email]:focus,
+input[type=password]:focus,
+input[type=date]:focus,
+select:focus,
+textarea:focus{
+	border-color: #00a1c2;
+}
+
+input[type=checkbox],
+input[type=radio]{
+	vertical-align: middle;
+	display: inline-block;
+	position: relative;
+	top: -0.15rem;
+}
+
+
+div.field.field-checkbox,
+div.field.field-radiobutton{
+  margin-right: 0.4rem;
+  margin-bottom: 0.4rem;
+  position: relative;
+  float: left;
+  width: auto;
+}
+
+div.field.field-checkbox label,
+div.field.field-radiobutton label{
+  display: inline-block;
+  padding: 0.4em 0.6em;
+  min-height: 2em;
+  line-height: 1.2rem;
+  position: relative;
+  border: 0.08em solid #ccc;
+  font-weight: normal;
+  color: #777;
+  margin-bottom: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+	cursor: pointer;
+
+}
+
+input[type=text][disabled],
+input[type=tel][disabled],
+input[type=email][disabled],
+input[type=password][disabled],
+input[type=date][disabled],
+select[disabled],
+textarea[disabled]{
+	background: #f3f3f3;
+	color: #555;
+}
+
+select{ 
+	position: relative; 
+	line-height: 1.2em;
+	padding-top: 0.2rem;
+	padding-bottom: 0.3rem;
+	z-index: 1;
+	background: none;
+	color: inherit;
+	width: 100%;
+}
+
+.field-select.is-disabled select:disabled{
+	border-color: #ddd;
+	-moz-box-shadow: none;
+	box-shadow: none;
+	cursor: default;
+}
+
+div.field.field-select:hover select{ cursor: pointer; }
+
+.field-select.is-disabled div::after,
+.field-select.is-disabled:hover div::after{
+	border-top-color: #ccc;
+	opacity: 1;
+}
+
+/* @group Custom selects */
+
+.custom-select { position: relative; }
+.custom-select select {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	padding: 0;
+	opacity: 0.001;	
+}
+
+.fieldset-address .custom-select select {
+	bottom: auto;
+	top: 0;
+	right: 0.4rem;
+	left: 0.4rem;
+	width: auto;
+}
+
+.custom-select select,
+.custom-select .btn-select {
+  border: 0.08rem solid #ccc;
+  border-top-color: #c3c3c3;
+  border-left-color: #c3c3c3;
+  font: inherit;  
+  font-size: 0.9rem;
+  padding: 0.4rem 0.33rem 0.33rem;
+  padding-right: 1rem;
+  margin: 0;
+  outline: none;
+  height: 2rem;
+  line-height: 1.1rem;
+    -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -moz-border-radius: 0.2rem;
+  border-radius: 0.2rem;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  width: 100%;
+	background: #fafafa;
+	box-shadow: inset 0.08rem 0.08rem 0 rgba(0,0,0,0.05);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-family: inherit;
+}
+
+.custom-select .btn-select {
+	position: relative;
+	display: inline-block;
+}
+
+.btn-select.btn-focus{ border-color: #00a1c2; }
+.custom-select .btn-select.btn-focus:after { border-top-color: #00a1c2; }
+
+.custom-select .btn-select:after {
+  position: absolute;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+  border-top-color: #555;
+  border-width: 0.33rem;
+  border-style: solid;
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  bottom: 0.5rem;
+  right: 0.7rem;
+  z-index: 1;
+}
+
+/* @end */
+
+/* @group Custom checkbox / radio */
+
+.custom-input div.field-checkbox input,
+.custom-input div.field-radiobutton input {
+	position: absolute;
+	z-index: -1;
+	opacity: 0;
+	outline: none;
+}
+
+.custom-input div.field-checkbox label,
+.custom-input div.field-radiobutton label{
+	padding-left: 2rem;
+	position: relative;
+}
+
+.custom-input div.field.field-checkbox label::before,
+.custom-input div.field.field-checkbox label::after,
+.custom-input div.field.field-radiobutton label::before,
+.custom-input div.field.field-radiobutton label::after{
+  content: "";
+  position: absolute;
+  margin: 0;
+  left: 0.6rem;
+  top: 50%;
+  margin-top: -0.4rem;
+  z-index: 1;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 0.8rem;
+  height: 0.8rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  outline: none;
+  border: 0.08rem solid #aaa;
+  border-top-color: #a3a3a3;
+  border-left-color: #a3a3a3; 
+  -moz-border-radius: 0.1rem;
+  border-radius: 0.1rem;
+  background: rgba(0,0,0,0.025);
+  -moz-box-shadow:  inset 0.08em 0.08em 0 rgba(0,0,0,0.05);
+box-shadow: inset 0.08em 0.08em 0 rgba(0,0,0,0.05);
+
+}
+
+.custom-input div.field.field-radiobutton label::before,
+.custom-input div.field.field-radiobutton label::after { border-radius: 100%; }
+
+.custom-input div.field.field-radiobutton label::before{
+	border: none;
+	background: #555;
+	border: 0.125em double #fff;
+	opacity: 0;
+}
+.custom-input div.field.field-checkbox label.checked::before{
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 0.8rem;
+	/* Enable Ligatures ================ */
+	-webkit-font-feature-settings: "liga";
+	-moz-font-feature-settings: "liga=1";
+	-moz-font-feature-settings: "liga";
+	-ms-font-feature-settings: "liga" 1;
+	-o-font-feature-settings: "liga";
+	font-feature-settings: "liga";
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	content: "tick";
+	font-size: 0.6rem;
+	width: 0.8rem;
+	text-align: center;
+	height: 0.8rem;
+	position: absolute;
+	left: 1rem;
+	margin-left: -0.45rem;
+	bottom: 50%;
+	margin-bottom: -0.45rem;
+	border: none;
+	color: #333;
+}
+
+
+.custom-input div.field.field-checkbox label.focus,
+.custom-input div.field.field-checkbox label.focus::before,
+.custom-input div.field.field-checkbox label.focus::after,
+.custom-input div.field.field-checkbox label.checkedFocus,
+.custom-input div.field.field-checkbox label.checkedFocus::after,
+.custom-input div.field.field-radiobutton label.focus,
+.custom-input div.field.field-radiobutton label.focus::before,
+.custom-input div.field.field-radiobutton label.focus::after,
+.custom-input div.field.field-radiobutton label.checkedFocus,
+.custom-input div.field.field-radiobutton label.checkedFocus::before,
+.custom-input div.field.field-radiobutton label.checkedFocus::after{
+	border-color: #00a1c2;
+	color: #00a1c2;
+}
+
+.custom-input div.field.field-radiobutton label.focus::before{
+	background: #00a1c2;
+}
+
+.custom-input div.field.field-radiobutton .checked::before{ opacity: 1;	}
+
+/* @end */
+
+
+
+textarea{
+  width: 100%;
+  min-height: 6rem;
+}
+
+div.field{ 
+	margin-bottom: 1.4rem; 
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	position: relative;
+}
+
+fieldset.fieldset-checkbox,
+fieldset.fieldset-radiobutton{ margin-bottom: 1rem; }
+
+fieldset p.note{
+	font-size: 0.7rem; 
+	font-style: italic;
+	margin-top: -0.3rem;
+	margin-bottom: 1rem;
+}
+
+div.field.field-other{
+  float: left;
+  width: 4.7rem;
+  margin-left: -0.45em;
+}
+
+div.field label,
+fieldset legend{
+  font-size: 0.9rem;
+  line-height: 1.4em;
+  display: block;
+  margin-bottom: 0.7em;
+  color: #333;
+  -moz-border-radius: 0.2rem;
+  border-radius: 0.2rem;
+  width: 100%;
+  -webkit-appearance: none;
+}
+
+fieldset{ 
+	-webkit-appearance: none;
+	padding-top: 1.4rem;
+	margin-top: -0.5rem;
+	margin-bottom: 1.4rem; 
+}
+
+fieldset legend{
+	position: relative;
+	top: 0.8rem;
+	margin-bottom: 0;
+}
+
+div.field-size{ width: 4em; }
+div.field-size label{ white-space: nowrap; }
+
+fieldset.fieldset-schools legend{ display: none; }
+fieldset.fieldset-address div.field.field-city input{ width: 8rem; }
+fieldset.fieldset-address div.field.field-state{ width: 2.6rem;}
+
+div.field.field-width-small input{ width: 4rem; }
+
+div.field-select input,
+div.field-phone-number input,
+div.field-width-medium input[type=text],
+div.field-width-medium input[type=text],
+div.field-width-medium select,
+div.field-width-medium.custom-select .btn-select{ 
+	width: 8rem; 
+	white-space: nowrap;
+}
+
+div.field-date input{
+	max-width: 12rem;
+}
+
+
+div.field.field-select div,
+div.field.field-street input,
+div.field-email-address input,
+div.field-width-large input,
+div.field-width-large select,
+div.field-width-large.custom-select .btn-select{
+	max-width: 16.4rem;
+}
+	
+fieldset.fieldset-date-range div.field,
+fieldset.fieldset-address div.field.field-city,
+fieldset.fieldset-address div.field.field-state,
+fieldset.fieldset-address div.field.field-zip{
+		float: left;
+		overflow: hidden;
+		padding-right: 0.4rem;
+		position: relative;
+		padding-bottom: 1.2rem;
+}
+
+fieldset.fieldset-address div.field.field-street{
+	padding-bottom: 1.2rem;
+	margin-bottom: 1rem;
+}
+
+fieldset.fieldset-address div.field.field-street label,
+fieldset.fieldset-address div.field.field-city label,
+fieldset.fieldset-address div.field.field-state label,
+fieldset.fieldset-address div.field.field-zip label,
+fieldset.fieldset-date-range div.field label{
+	position: absolute;
+	bottom: 0;
+	margin: 0;
+	font-size: 0.7rem;
+	color: #888;
+}
+
+fieldset.fieldset-address div.field.field-city,
+fieldset.fieldset-address div.field.field-state,
+fieldset.fieldset-address div.field.field-zip{ margin-bottom: 0; }
+
+fieldset.fieldset-address div.field.field-checkbox{ clear: left; }
+
+fieldset.fieldset-address div.field.field-checkbox label{
+	margin-top: 1rem;
+	margin-left: 1.4em;
+	font-size: 0.9rem;	
+}
+
+fieldset.fieldset-address div.field.field-checkbox::before{
+		font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 0.8rem;
+	/* Enable Ligatures ================ */
+	-webkit-font-feature-settings: "liga";
+	-moz-font-feature-settings: "liga=1";
+	-moz-font-feature-settings: "liga";
+	-ms-font-feature-settings: "liga" 1;
+	-o-font-feature-settings: "liga";
+	font-feature-settings: "liga";
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	content: "cornerarrow";
+	font-size: 1rem;
+	position: absolute;
+	right: 100%;
+	margin-right: -1rem;
+	bottom: 50%;
+	margin-bottom: -0.9rem;
+	-moz-transform:  scaleY(-1) rotate(90deg);
+	transform: scaleY(-1) rotate(90deg);
+    -moz-transform: scaleY(-1) rotate(90deg);
+    -webkit-transform: scaleY(-1) rotate(90deg);
+    -o-transform: scaleY(-1) rotate(90deg);
+    color: #aaa;
+}
+
+fieldset.fieldset-address div.field.field-city{
+	width: 8.4rem;
+	clear: left;
+}
+
+fieldset.fieldset-address div.field.field-state,
+fieldset.fieldset-address div.field.field-zip{ width: 4.2rem; }
+fieldset.fieldset-address div.field.field-zip{ padding-left: 0; }
+
+fieldset.fieldset-address div.field.field-state.field-select div::after{
+	right: 0.6rem;
+	z-index: 1;
+}
+
+
+@media screen and (min-width: 28em) {	
+	fieldset { padding-left: 0; }
+	fieldset .field{ padding-left: 0; }
+
+	fieldset.fieldset-name div.field,
+	fieldset.fieldset-date-range div.field.field-date{
+		width: 8rem; 
+		float: left;
+		overflow: hidden;
+		padding-right: 0.4rem;
+		position: relative;
+		padding-bottom: 1.2rem;
+		margin-bottom: 0;
+
+	}
+	
+	fieldset.fieldset-name div.field label,
+	fieldset.fieldset-date-range div.field label{
+		position: absolute;
+		bottom: 0;
+		margin: 0;
+		font-size: 0.7rem;
+		color: #888;
+	}
+	
+	fieldset.fieldset-date-range .field.field-date:first-of-type{ 
+		padding-right: 1rem; 
+		position: relative;
+	}
+	
+	fieldset.fieldset-date-range .field.field-date:first-of-type::after{
+		content: "";
+		width: 0.6em;
+		border-top: 0.1em solid #aaa;
+		position: absolute;
+		right: 0.2em;
+		top: 30%;
+	}
+	
+	div.field.field-school.field-checkbox{
+		float: left;
+		width: 48%;
+	}
+
+
+}
+
+fieldset.fieldset-schools{ margin-top: -1rem; }
+
+div.field.field-school.field-checkbox label{
+	padding: 0.4em 0.6em 0.4em 3.2em;
+	font-size: 0.8rem;
+	line-height: 1.4em;
+	margin-left: 0;
+}
+
+div.field.field-school.field-checkbox::before{
+	content: "";
+	display: block;
+	position: absolute;
+	background: #eee;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 2em;
+	-moz-border-radius: 0.3em 0 0 0.3em;
+	border-radius: 0.3em 0 0 0.3em;
+	
+}
+
+div.field.field-school.field-checkbox input{
+	position: absolute;
+	top: 0.5rem;
+	left: 0.5rem;
+	font-size: 1.2rem;
+	margin: 0;
+}
+
+div.field.field-school.field-checkbox label span.fn{ font-weight: 600; }
+
+span.region{ margin-left: 0.3em; }
+
+
+/* @group button */
+
+button{
+	border: none;
+	background: none;
+	font: inherit;
+	display: inline;
+	padding: 0;
+	margin: 0;
+	cursor: pointer;
+}
+
+.button{
+  background: white;
+  border: 1px solid #aaa;
+  color: inherit;
+  font: inherit;
+  line-height: 1rem;
+  padding: 0.37rem 1.2rem 0.4rem;
+  min-height: 2rem;
+  border-radius: 0.2rem;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: 0.8rem;
+  -webkit-appearance: none;
+  background-color: #fff;
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#eee));
+	background: -moz-linear-gradient(#fff, #eee);
+	position: relative;
+	left: -0.1em;
+}
+
+.button:hover{ 
+	-moz-box-shadow:  0 1px 0 rgba(0,0,0,0.1);
+	box-shadow: 0 1px 0 rgba(0,0,0,0.1);
+}
+
+.button-action,
+.button-forward{ 
+  color: #009253;
+  font-weight: 600;
+  line-height: 1.4rem;
+  padding: 0 0.7rem 0;
+  display: inline-block;
+  vertical-align: middle;
+  min-height: 1.4rem;
+  border-radius: 0.2rem;
+  text-decoration: none;
+  font-size: 0.7rem;
+  border: 0.125rem solid #009253;
+	box-shadow: none !important;
+	cursor: pointer;
+	margin: 0 0.2rem;
+}
+
+.button-action:hover,
+.button-forward:hover{
+	background: #009253;
+	color: white;
+}
+
+.button:active{
+	-moz-box-shadow:  0 1px 0 rgba(0,0,0,0);
+	box-shadow: inset 0 1px 0 rgba(0,0,0,0.08);
+	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#ddd), to(#eee));
+	background: -moz-linear-gradient(#fff, #eee);
+	color: #888;
+}
+
+button.backward{
+  background: #829fab;
+  border: none;
+}
+
+button.backward{
+	background: #829fab;
+	border: none;
+}
+
+
+
+/* @end */
+
+
+
+/* @end */
+
+/* @group shared */
+
+/* @group dl */
+
+dl dt,
+dl dd{
+	font-size: 0.8rem;
+	line-height: 1.4em;
+	padding-top: 0.35rem;
+}
+
+dl dt{ color: #888; }
+
+dl dd{
+	margin-bottom: 0.35em;
+	padding-left: 0.7rem;
+}
+
+@media screen and (min-width: 30em) { 
+
+	dl{ 
+		padding-left: 12rem; 
+		margin-bottom: 1.4rem;
+	}
+	
+	dl::after {
+	  content: "";
+	  display: table;
+	  clear: both;
+	}
+
+	dl dt,
+	dl dd{
+		float: left;
+		width: 100%;
+		margin-bottom: 0.35rem;
+		border-top: 0.125rem solid #f8f8f8;
+	}
+	
+	dl dt{
+		width: 12rem;
+		clear: left;
+		margin-left: -12rem;
+	}
+	
+	dl dd{
+		padding-left: 0;
+	}
+
+
+}
+
+
+/* @end */
+
+/* @group badges */
+
+span.badge-poverty{
+	background: #333;
+	color: white;
+	-moz-border-radius: 0.1rem;
+	border-radius: 0.1rem;
+	font-size: 0.7rem;
+	height: 1.2em;
+	line-height: 1.2em;
+	padding: 0.4em;
+	margin: -1.2em 0.2rem;
+	display: inline-block;
+	vertical-align: middle;
+	position: relative;
+	top: -0.2em;
+}
+
+span.badge-poverty.badge-poverty-above{
+	background: #3d8000;
+}
+
+span.badge-poverty.badge-poverty-below{
+	background: #b34100;
+}
+
+
+/* @end */
+
+/* @group pagination */
+
+nav.pagination{
+	font-size: 0.8rem;
+	margin-bottom: 1.4em;
+	clear: both;
+}
+
+nav.pagination a{
+	display: inline-block;
+	padding: 0 0.7rem;
+	height: 1.4rem;
+	line-height: 1.4rem;
+	text-align: center;
+	background: white;	
+	text-decoration: none;
+	-moz-border-radius: 0.1rem;
+	border-radius: 0.1rem;
+	border: 0.1rem solid #eee;
+	-moz-border-radius: 0.2rem;
+	border-radius: 0.2rem;
+}
+
+nav.pagination a:hover{
+	color: #007fab;
+	border-color: #00c3e2;
+}
+
+nav.pagination a.is-active{
+	background: #2b82b7;
+	border-color: #2b82b7;
+	color: white;
+}
+
+@media screen and (min-width: 24em){ 
+	nav.pagination{ float: left; }
+	nav.pagination a{ 
+	padding: 0 0.6rem;
+	
+	}
+}
+
+/* @end */
+
+/* @group signpost */
+
+div.signpost{
+	font-size: 0.9rem;
+	margin-top: 1.4rem;
+	color: #888;
+}
+
+div.signpost a{ color: inherit; }
+div.signpost a:hover{
+	text-decoration: none;
+	color: #333;
+}
+
+@media screen and (min-width: 24em){ 
+	div.signpost{ 
+		float: right; 
+		margin-top: 0.7em;
+	}
+}
+
+
+/* @end */
+
+/* @end */

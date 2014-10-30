@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.BodyId = "";
+    ViewBag.BodyClass = "no-js welcome";
+    Layout = "~/Views/Shared/_RegistrationLayout.cshtml";
+}
+
+<main>
+    <div class="site-width">
+        <p>Thanks for your interest in enrolling your student in one of the state's pre-kindergarten classes. Due to demand, students must be selected for enrollment through a state-supervised lottery.</p>
+        <h1>What you need to know</h1>
+        <p>To be eligible for enrollment, you child must turn 4 years of age by September 1 and live in the community in which their pre-k program is located. A copy of the child's birth certificate and proof of residency <em>will</em> be required upon enrollment.</p>
+        <h1>What happens next?</h1>
+        <p>Applications to the statewide lottery are accepted until August 15th. Selected applicants will be notified via phone on August 16th.</p>
+        <p>For further assistance, email <a href="">Franklin Brito</a> or call him at 401-222-8184.</p>
+        <footer>
+            @Html.ActionLink("Apply to the lottery", "StudentInformation", null, new { @class = "button" })
+        </footer>
+    </div>
+</main>
+
