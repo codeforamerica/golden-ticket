@@ -51,32 +51,35 @@ namespace GoldenTicket.DAL
                 GenderBalance = 0.5
             };
             context.Programs.Add(willysSchool);
-                
-            //Program arthurAcademy = new Program 
-            //{ 
-            //    Name = "Arthur Academy", 
-            //    StreetAddress1 = "999 Gobstopper Blvd", 
-            //    City = "Providence", 
-            //    ZipCode = "02904", 
-            //    Email = "art@slugworth.com", 
-            //    Phone = "401-555-1234", 
-            //    Seats = 36, 
-            //    PovertyRate = 0.87 
-            //};
-            //context.Programs.Add(arthurAcademy);
 
-            //Program giantPeach = new Program
-            //{
-            //    Name = "Giant Peach",
-            //    StreetAddress1 = "1 Humongous Tree",
-            //    StreetAddress2 = "Branch 8",
-            //    City = "West Warwick",
-            //    Email = "james@giantpeach.edu",
-            //    Phone = "401-232-1231",
-            //    Seats = 46,
-            //    PovertyRate = 0.5
-            //};
-            //context.Programs.Add(giantPeach);
+            var arthurAcademy = new Program
+            {
+                Name = "Arthur Academy",
+                StreetAddress1 = "999 Gobstopper Blvd",
+                City = "Providence",
+                ZipCode = "02904",
+                Phone = "401-555-1234",
+                Email = "art@slugworth.com",
+                Seats = 36,
+                PovertyRate = 0.87,
+                GenderBalance = 0.5
+            };
+            context.Programs.Add(arthurAcademy);
+
+            var giantPeach = new Program
+            {
+                Name = "Giant Peach",
+                StreetAddress1 = "1 Humongous Fruit Blvd",
+                StreetAddress2 = "Pit Suite",
+                City = "West Warwick",
+                ZipCode = "02911",
+                Phone = "401-333-3333",
+                Email = "james@giantpeach.edu",
+                Seats = 46,
+                PovertyRate = 0.35,
+                GenderBalance = 0.5
+            };
+            context.Programs.Add(giantPeach);
             
             context.SaveChanges();
         }
