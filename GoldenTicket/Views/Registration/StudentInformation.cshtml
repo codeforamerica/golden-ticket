@@ -18,6 +18,7 @@
 
         @using (Html.BeginForm())
         {
+            @Html.HiddenFor(model => model.ID)
             @Html.AntiForgeryToken()
             
             <section id="student-information">
