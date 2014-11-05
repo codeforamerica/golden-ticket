@@ -2,6 +2,7 @@
 using System.Data.Entity;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using GoldenTicket.Models;
@@ -11,24 +12,34 @@ namespace GoldenTicket.Controllers
 {
     public class RegistrationController : Controller
     {
-        private GoldenTicketDbContext database = new GoldenTicketDbContext();
+        private readonly GoldenTicketDbContext database = new GoldenTicketDbContext();
 
         // GET: Registration
         public ActionResult Index()
         {
+            Session.Clear();
+
             return View();
         }
 
         public ActionResult StudentInformation()
         {
             StudentInformationViewSetup();
-            return View();
+
+            var applicant = GetSessionApplicant();
+
+            return applicant != null ? View(applicant) : View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult StudentInformation(Applicant applicant)
         {
+            if (!IsAuthorizedApplicant(applicant))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+
             // Check for required fields
             if(string.IsNullOrEmpty(applicant.StudentFirstName))
             {
@@ -75,16 +86,29 @@ namespace GoldenTicket.Controllers
         {
             GuardianInformationViewSetup();
 
-            Applicant applicant = database.Applicants.Find(Session["applicantID"]);
+            var applicant = GetSessionApplicant();
 
-            
-            return View(applicant);
+            if (applicant != null)
+            {
+                return View(applicant);
+            }
+
+            // TODO check to make sure the user isn't too far in the process
+
+            return new HttpStatusCodeResult(HttpStatusCode.Conflict); 
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult GuardianInformation(Applicant applicant)
         {
+            if (!IsAuthorizedApplicant(applicant))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+            }
+
+            // Change for required fields
+
             // Valid model
             if(ModelState.IsValid)
             {
@@ -93,7 +117,7 @@ namespace GoldenTicket.Controllers
             }
 
             // Invalid model
-            return View();
+            return View(applicant);
         }
 
         public ActionResult SchoolSelection()
@@ -137,18 +161,19 @@ namespace GoldenTicket.Controllers
 
         private IEnumerable<SelectListItem> GetIncomeRanges()
         {
-            List<SelectListItem> incomeRanges = new List<SelectListItem>();
+            var incomeRanges = new List<SelectListItem>();
 
             int previousIncomeLine = 0;
-            foreach( int householdMembers in Enumerable.Range(2,10))
+            foreach( int householdMembers in Enumerable.Range(2,9))
             {
-                PovertyConfig povertyConfig = database.PovertyConfigs.Where(p => p.HouseholdMembers == householdMembers).First();
-                SelectListItem item = new SelectListItem
+                var povertyConfig = database.PovertyConfigs.First(p => p.HouseholdMembers == householdMembers);
+                var item = new SelectListItem
                 {
-                    Text = previousIncomeLine + " to " + povertyConfig.MinimumIncome,
+                    Text = previousIncomeLine.ToString("C") + " to " + povertyConfig.MinimumIncome.ToString("C"),
                     Value = povertyConfig.MinimumIncome.ToString()
                 };
-                
+
+                previousIncomeLine = povertyConfig.MinimumIncome;
                 incomeRanges.Add(item);
             }
 
@@ -170,6 +195,23 @@ namespace GoldenTicket.Controllers
 
             database.SaveChanges();
             Session["applicantID"] = applicant.ID;
+        }
+
+        private Applicant GetSessionApplicant()
+        {
+            Applicant applicant = null;
+            if (Session["applicantID"] != null)
+            {
+                applicant = database.Applicants.First(a => a.ID.Equals(Session["applicantID"]));
+            }
+
+            return applicant;
+        }
+
+        private bool IsAuthorizedApplicant(Applicant applicant)
+        {
+            // Make sure that the student is the one the user is authorized to make (i.e. if an ID is given, it should be the same one in the session)
+            return applicant.ID != 0 && Session["applicantID"] != null && !applicant.ID.Equals(Session["applicantID"]);
         }
     }
 }
