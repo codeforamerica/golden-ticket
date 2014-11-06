@@ -81,7 +81,7 @@ namespace GoldenTicket.Controllers
             // Valid fields
             if(ModelState.IsValid)
             {
-                Save(applicant);
+                SaveStudentInformation(applicant);
                 return RedirectToAction("GuardianInformation");
             }
 
@@ -103,17 +103,51 @@ namespace GoldenTicket.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult GuardianInformation(Applicant applicant)
         {
+            // Make sure someone isn't playing with the ID from the form
+            if (!IsAuthorizedApplicant(applicant))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Conflict, "Applicant submitted is not in the session");
+            }
+
             // Check required fields
+            if( string.IsNullOrEmpty(applicant.Contact1FirstName) )
+            {
+                ModelState.AddModelError("Contact1FirstName", "Guardian first name must be entered");
+            }
+            if( string.IsNullOrEmpty(applicant.Contact1LastName) )
+            {
+                ModelState.AddModelError("Contact1FirstName", "Guardian last name must be entered");
+            }
+            if( string.IsNullOrEmpty(applicant.Contact1Phone) )
+            {
+                ModelState.AddModelError("Contact1Phone", "Guardian phone number must be entered");
+            }
+            if( string.IsNullOrEmpty(applicant.Contact1Email) )
+            {
+                ModelState.AddModelError("Contact1Phone", "Guardian email address must be entered");
+            }
+            if( string.IsNullOrEmpty(applicant.Contact1Relationship) )
+            {
+                ModelState.AddModelError("Contact1Relationship", "Guardian relationship must be entered");
+            }          
+            if( applicant.HouseholdMembers == null )
+            {
+                ModelState.AddModelError("HouseholdMembers", "The number of household members must be entered");
+            }
+            if( applicant.HouseholdMonthlyIncome == null)
+            {
+                ModelState.AddModelError("HouseholdMonthlyIncome", "The average monthly income must be entered or selected");
+            }
 
-
-            // Valid model
+            // Validate model
             if(ModelState.IsValid)
             {
-                Save(applicant);
+                SaveGuardianInformation(applicant);
                 return RedirectToAction("SchoolSelection");
             }
 
             // Invalid model
+            GuardianInformationViewSetup();
             return View(applicant);
         }
 
@@ -177,7 +211,7 @@ namespace GoldenTicket.Controllers
             return incomeRanges;
         }
 
-        private void Save(Applicant applicant)
+        private void SaveStudentInformation(Applicant applicant)
         {
             // Add a new applicant
             if(applicant.ID == 0)
@@ -187,7 +221,18 @@ namespace GoldenTicket.Controllers
             // Modify an existing applicant
             else
             {
-                database.Entry(applicant).State = EntityState.Modified;
+                database.Applicants.Attach(applicant);
+                var applicantEntry = database.Entry(applicant);
+
+                applicantEntry.Property(a => a.StudentFirstName).IsModified = true;
+                applicantEntry.Property(a => a.StudentMiddleName).IsModified = true;
+                applicantEntry.Property(a => a.StudentLastName).IsModified = true;
+                applicantEntry.Property(a => a.StudentStreetAddress1).IsModified = true;
+                applicantEntry.Property(a => a.StudentStreetAddress2).IsModified = true;
+                applicantEntry.Property(a => a.StudentCity).IsModified = true;
+                applicantEntry.Property(a => a.StudentZipCode).IsModified = true;
+                applicantEntry.Property(a => a.StudentBirthday).IsModified = true;
+                applicantEntry.Property(a => a.StudentGender).IsModified = true;
             }
 
             database.SaveChanges();
@@ -204,7 +249,7 @@ namespace GoldenTicket.Controllers
             else
             {
                 applicant = new Applicant();
-                Save(applicant);
+                SaveStudentInformation(applicant);
             }
 
             return applicant;
@@ -237,6 +282,32 @@ namespace GoldenTicket.Controllers
             }
 
             return (ageByCutoff == 4);
+        }
+
+        private void SaveGuardianInformation(Applicant applicant)
+        {
+            database.Applicants.Attach(applicant);
+            var applicantEntry = database.Entry(applicant);
+
+            applicantEntry.Property(a => a.Contact1FirstName).IsModified = true;
+            applicantEntry.Property(a => a.Contact1LastName).IsModified = true;
+            applicantEntry.Property(a => a.Contact1Phone).IsModified = true;
+            applicantEntry.Property(a => a.Contact1Email).IsModified = true;
+            applicantEntry.Property(a => a.Contact1Relationship).IsModified = true;
+            applicantEntry.Property(a => a.Contact2FirstName).IsModified = true;
+            applicantEntry.Property(a => a.Contact2LastName).IsModified = true;
+            applicantEntry.Property(a => a.Contact2Phone).IsModified = true;
+            applicantEntry.Property(a => a.Contact2Email).IsModified = true;
+            applicantEntry.Property(a => a.Contact2Relationship).IsModified = true;
+            applicantEntry.Property(a => a.HouseholdMembers).IsModified = true;
+            applicantEntry.Property(a => a.HouseholdMonthlyIncome).IsModified = true;
+
+            database.SaveChanges();
+        }
+
+        private void SchoolInformationViewSetup(Applicant applicant)
+        {
+
         }
     }
 }
