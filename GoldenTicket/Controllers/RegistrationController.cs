@@ -82,6 +82,12 @@ namespace GoldenTicket.Controllers
             if(ModelState.IsValid)
             {
                 SaveStudentInformation(applicant);
+
+                if (Session["isAtReview"] != null)
+                {
+                    return RedirectToAction("Review");
+                }
+
                 return RedirectToAction("GuardianInformation");
             }
 
@@ -143,6 +149,12 @@ namespace GoldenTicket.Controllers
             if(ModelState.IsValid)
             {
                 SaveGuardianInformation(applicant);
+
+                if (Session["isAtReview"] != null)
+                {
+                    return RedirectToAction("Review");
+                }
+
                 return RedirectToAction("SchoolSelection");
             }
 
@@ -209,12 +221,38 @@ namespace GoldenTicket.Controllers
 
         public ActionResult Review()
         {
-            return View(); 
+            Session["isAtReview"] = true;
+
+            var applicant = GetSessionApplicant();
+            
+            ReviewViewSetup(applicant);
+
+            return View(applicant); 
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Review(Applicant applicant)
+        {
+            // Make sure someone isn't playing with the ID from the form
+            if (!IsAuthorizedApplicant(applicant))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Conflict, "Applicant submitted is not in the session");
+            }
+
+            applicant.ConfirmationCode = Guid.NewGuid().ToString();
+            SaveReview(applicant);
+
+            return RedirectToAction("Confirmation");
         }
 
         public ActionResult Confirmation()
         {
-            return View();
+            var applicant = GetSessionApplicant();
+
+            Session.Clear();
+
+            return View(applicant);
         }
 
         // ---- Helper Fields ----
@@ -363,6 +401,26 @@ namespace GoldenTicket.Controllers
 
             var applieds = database.Applieds.Where(a => a.ApplicantID == applicant.ID).ToList();
             ViewBag.Applieds = applieds;
+        }
+
+        private void ReviewViewSetup(Applicant applicant)
+        {
+            var applieds = database.Applieds.Where(a => a.ApplicantID == applicant.ID).ToList();
+            var programs = new List<Program>();
+
+            applieds.ForEach(a => programs.Add(a.Program));
+
+            ViewBag.Programs = programs;
+        }
+
+        private void SaveReview(Applicant applicant)
+        {
+            database.Applicants.Attach(applicant);
+            var applicantEntry = database.Entry(applicant);
+
+            applicantEntry.Property(a => a.ConfirmationCode).IsModified = true;
+
+            database.SaveChanges();
         }
     }
 }
