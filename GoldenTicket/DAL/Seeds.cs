@@ -17,7 +17,8 @@ namespace GoldenTicket.DAL
             {
                 ID = 1,
                 OpenDate = new DateTime(2014, 10, 20),
-                CloseDate = new DateTime(2014, 12, 31),
+                CloseDate = new DateTime(2014, 12, 25),
+                NotificationDate = new DateTime(2014, 12, 31),
                 MinimumIncomeMultiplier = 625
             };
             context.GlobalConfigs.Add(globalConfig);

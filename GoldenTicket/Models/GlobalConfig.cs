@@ -10,6 +10,7 @@ namespace GoldenTicket.Models
         public int ID { get; set; }
         public DateTime OpenDate {get; set;}
         public DateTime CloseDate {get;set;}
+        public DateTime NotificationDate { get; set; }
         public double MinimumIncomeMultiplier { get; set; }
     }
 }
