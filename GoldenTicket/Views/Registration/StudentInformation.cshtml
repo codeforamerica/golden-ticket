@@ -60,8 +60,7 @@
                     </div>
                 </fieldset>
                 <div class="field field-date">
-                    @Html.LabelFor(model => model.StudentBirthday, "Birthday")
-                    @*@Html.TextBoxFor(model => model.StudentBirthday, new { @id = "student-birthdate", @type="date", @Value = "2005-03-03"})*@
+                    @Html.LabelFor(model => model.StudentBirthday, "Birthday (mm/dd/yyyy format)")
                     @Html.EditorFor(model => model.StudentBirthday)
                 </div>
                 <fieldset id="student-gender">
