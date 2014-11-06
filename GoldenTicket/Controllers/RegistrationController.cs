@@ -174,7 +174,7 @@ namespace GoldenTicket.Controllers
             if(formCollection["programs"] == null || formCollection["programs"].Count() <= 0)
             {
                 ModelState.AddModelError("programs", "At least one program must be chosen");
-                SchoolInformationViewSetup();
+                SchoolInformationViewSetup(applicant);
                 return View(applicant);
             }
             else
