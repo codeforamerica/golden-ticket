@@ -1,4 +1,6 @@
-﻿
+﻿@model GoldenTicket.Models.Applicant
+
+
 @{
     ViewBag.BodyId = "";
     ViewBag.BodyClass = "no-js success";
@@ -7,8 +9,12 @@
 <main>
     <div class="site-width">
         <h1>Success!</h1>
-        <p>You&rsquo;ve successfully entered {{First_name}} {{Last_name}} into the state-wide lottery for pre-kindergarten enrollment. If selected, you will be notified via phone  on <strong>August 16th.</strong></p>
-        <a href="page-2.php">Enroll another family member</a>
+
+        <p>You&rsquo;ve successfully entered @Model.StudentFirstName @Model.StudentLastName into the state-wide lottery for pre-kindergarten enrollment. If selected, you will be notified via phone  on <strong>@ViewBag.NotificationDate</strong></p>
+
+        <p>Your confirmation number is @Model.ConfirmationCode. If you have any questions, please contact Franklin Brito at 401-222-8184.</p>
+
+        @Html.ActionLink("Enroll another family member", "StudentInformation")
     </div>
 </main>
 
