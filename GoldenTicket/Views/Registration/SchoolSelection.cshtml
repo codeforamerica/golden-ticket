@@ -12,17 +12,6 @@
 
 @helper DisplayProgramCheckbox(List<Applied> applieds, Program program, Applicant applicant)
 {
-    @*
-        Didn't work with DbQuery for applieds object, kept getting compilation errors --- trying with a simple loop and applieds list instead
-        if (applieds.Contains(((Applied) applied) => applied.ProgramID == program.ID))
-    {
-        <input type="checkbox" id="program-@(program.ID)" value="@program.ID" name="programs" checked>
-    }
-    else
-    {
-        <input type="checkbox" id="program-@(program.ID)" value="@program.ID" name="programs">
-    }*@
-
     var programChecked = false;
     foreach (Applied applied in applieds)
     {
