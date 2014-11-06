@@ -153,7 +153,58 @@ namespace GoldenTicket.Controllers
 
         public ActionResult SchoolSelection()
         {
-            return View();
+            var applicant = GetSessionApplicant();
+            SchoolInformationViewSetup(applicant);
+
+            return View(applicant); 
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult SchoolSelection(Applicant applicant, FormCollection formCollection)
+        {
+            // Make sure someone isn't playing with the ID from the form
+            if (!IsAuthorizedApplicant(applicant))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.Conflict, "Applicant submitted is not in the session");
+            }
+
+            // At least one program needs to be selected
+            var programIds = new List<int>();
+            if(formCollection["programs"] == null || formCollection["programs"].Count() <= 0)
+            {
+                ModelState.AddModelError("programs", "At least one program must be chosen");
+                SchoolInformationViewSetup();
+                return View(applicant);
+            }
+            else
+            {
+                var programIdStrs = formCollection["programs"].Split(',').ToList();
+                programIdStrs.ForEach(idStr => programIds.Add(int.Parse(idStr)));
+            }
+
+            // Remove existing applications for this user
+            var applieds = database.Applieds.Where(applied => applied.ApplicantID == applicant.ID).ToList();
+            applieds.ForEach(a => database.Applieds.Remove(a));
+
+            // Add new Applied associations (between program and program)
+            var populatedApplicant = database.Applicants.Find(applicant.ID);
+            foreach( var programId in programIds )
+            {
+                var applied = new Applied();
+                applied.ApplicantID = applicant.ID;
+                applied.ProgramID = programId;
+
+                // Confirm that the program ID is within the city lived in (no sneakers into other districts)
+                var program = database.Programs.Find(programId);
+                if(program != null && program.City.Equals(populatedApplicant.StudentCity, StringComparison.CurrentCultureIgnoreCase))
+                {
+                    database.Applieds.Add(applied);
+                }
+            }
+
+            database.SaveChanges();
+            return RedirectToAction("Review");
         }
 
         public ActionResult Review()
@@ -307,7 +358,11 @@ namespace GoldenTicket.Controllers
 
         private void SchoolInformationViewSetup(Applicant applicant)
         {
+            var eligiblePrograms = database.Programs.Where(p => p.City == applicant.StudentCity).OrderBy(p => p.Name).ToList();
+            ViewBag.Programs = eligiblePrograms;
 
+            var applieds = database.Applieds.Where(a => a.ApplicantID == applicant.ID).ToList();
+            ViewBag.Applieds = applieds;
         }
     }
 }
