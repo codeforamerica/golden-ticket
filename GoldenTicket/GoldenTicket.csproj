@@ -244,6 +244,10 @@
     <Content Include="Views\Registration\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Registration\StudentInformation.cshtml" />
+    <Content Include="Views\Registration\Confirmation.cshtml" />
+    <Content Include="Views\Registration\GuardianInformation.cshtml" />
+    <Content Include="Views\Registration\Review.cshtml" />
+    <Content Include="Views\Registration\SchoolSelection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -14,6 +14,8 @@ namespace GoldenTicket.Controllers
     {
         private readonly GoldenTicketDbContext database = new GoldenTicketDbContext();
 
+        private static readonly DateTime AGE_4_BY_DATE = new DateTime(DateTime.Today.Year, 9, 1);
+
         // GET: Registration
         public ActionResult Index()
         {
@@ -28,16 +30,17 @@ namespace GoldenTicket.Controllers
 
             var applicant = GetSessionApplicant();
 
-            return applicant != null ? View(applicant) : View();
+            return View(applicant);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult StudentInformation(Applicant applicant)
         {
-            if (!IsAuthorizedApplicant(applicant))
+            // Make sure someone isn't playing with the ID from the form
+            if(!IsAuthorizedApplicant(applicant))
             {
-                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
+                return new HttpStatusCodeResult(HttpStatusCode.Conflict, "Applicant submitted is not in the session");
             }
 
             // Check for required fields
@@ -70,6 +73,11 @@ namespace GoldenTicket.Controllers
                 ModelState.AddModelError("StudentGender", "Student gender must be entered");
             }
 
+            if (applicant.StudentBirthday != null && !IsAgeEligible(applicant.StudentBirthday.Value))
+            {
+                ModelState.AddModelError("StudentBirthday", "Student is not old enough for pre-kindergarten. Try again next year or fix the birthday if it was entered wrong.");
+            }
+
             // Valid fields
             if(ModelState.IsValid)
             {
@@ -88,26 +96,15 @@ namespace GoldenTicket.Controllers
 
             var applicant = GetSessionApplicant();
 
-            if (applicant != null)
-            {
-                return View(applicant);
-            }
-
-            // TODO check to make sure the user isn't too far in the process
-
-            return new HttpStatusCodeResult(HttpStatusCode.Conflict); 
+            return View(applicant); 
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult GuardianInformation(Applicant applicant)
         {
-            if (!IsAuthorizedApplicant(applicant))
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.Unauthorized);
-            }
+            // Check required fields
 
-            // Change for required fields
 
             // Valid model
             if(ModelState.IsValid)
@@ -202,7 +199,12 @@ namespace GoldenTicket.Controllers
             Applicant applicant = null;
             if (Session["applicantID"] != null)
             {
-                applicant = database.Applicants.First(a => a.ID.Equals(Session["applicantID"]));
+                applicant = database.Applicants.Find((int) Session["applicantID"]);
+            }
+            else
+            {
+                applicant = new Applicant();
+                Save(applicant);
             }
 
             return applicant;
@@ -211,7 +213,30 @@ namespace GoldenTicket.Controllers
         private bool IsAuthorizedApplicant(Applicant applicant)
         {
             // Make sure that the student is the one the user is authorized to make (i.e. if an ID is given, it should be the same one in the session)
-            return applicant.ID != 0 && Session["applicantID"] != null && !applicant.ID.Equals(Session["applicantID"]);
+            bool isApplicantNew = applicant.ID == 0;
+            bool isActiveSession = Session["applicantID"] != null;
+
+            // If a new sessions
+            if (isApplicantNew && !isActiveSession)
+            {
+                return true;
+            }
+
+            // If existing session, check to make sure session applicant ID matches the one submitted
+            bool isActiveApplicantSameAsSubmitted = applicant.ID.Equals(Session["applicantID"]);
+            return !isApplicantNew && isActiveSession && isActiveApplicantSameAsSubmitted;
+        }
+
+        private static bool IsAgeEligible(DateTime birthday)
+        {
+            int ageByCutoff = AGE_4_BY_DATE.Year - birthday.Year;
+            DateTime adjustedDate = AGE_4_BY_DATE.AddYears(-ageByCutoff);
+            if(birthday > adjustedDate)
+            {
+                ageByCutoff--;
+            }
+
+            return (ageByCutoff == 4);
         }
     }
 }
