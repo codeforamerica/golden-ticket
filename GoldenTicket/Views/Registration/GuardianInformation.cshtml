@@ -8,7 +8,7 @@
 <div id="signpost">
     <div class="site-width">
         <h2>You&rsquo;re on step 2 of 4: Guardian information</h2>
-        @Html.ActionLink("Go back", "Index")
+        @Html.ActionLink("Go back", "StudentInformation")
     </div>
 </div>
 <main>
@@ -18,10 +18,11 @@
 
         @using (Html.BeginForm())
         {
+
             @Html.AntiForgeryToken()
             @Html.HiddenFor(model => model.ID)
             
-            <section>
+            <section id="guardian-information">
                 <h1>Guardian information</h1>
                 <p>Please provide some basic information about @Model.StudentFirstName&rsquo;s primary guardian.</p>
                 <fieldset class="fieldset-name">
@@ -82,83 +83,126 @@
                         </label>
                     </div>
                 </fieldset>
-                <section>
-                    <h1>Alternate contact information</h1>
-                    <p>These fields are optional, but provide backup contact information in the event the guardian (above) can't be reached.</p>
-                    <fieldset class="fieldset-name">
-                        <legend>Full name</legend>
-                        <div class="field">
-                            @Html.LabelFor(model => model.Contact2FirstName, "First")
-                            @Html.TextBoxFor(model => model.Contact2FirstName)
-                        </div>
-                        <div class="field">
-                            @Html.LabelFor(model => model.Contact2LastName, "Last")
-                            @Html.TextBoxFor(model => model.Contact2LastName)
-                        </div>
-                    </fieldset>
-                    <div class="field field-phone-number">
-                        @Html.LabelFor(model => model.Contact2Phone, "Phone")
-                        @Html.TextBoxFor(model => model.Contact2Phone)
+
+                <h1>Alternate contact information</h1>
+                <p>These fields are optional, but provide backup contact information in the event the guardian (above) can't be reached.</p>
+                <fieldset class="fieldset-name">
+                    <legend>Full name</legend>
+                    <div class="field">
+                        @Html.LabelFor(model => model.Contact2FirstName, "First")
+                        @Html.TextBoxFor(model => model.Contact2FirstName)
                     </div>
-                    <div class="field field-email-address">
-                        @Html.LabelFor(model => model.Contact2Email, "Email address")
-                        @Html.TextBoxFor(model => model.Contact2Email)
+                    <div class="field">
+                        @Html.LabelFor(model => model.Contact2LastName, "Last")
+                        @Html.TextBoxFor(model => model.Contact2LastName)
                     </div>
-                    <fieldset id="guardian-relationship">
-                        <legend>Relationship to @Model.StudentFirstName</legend>
-                        <div class="field field-radiobutton">
-                            <label>
-                                @Html.RadioButtonFor(model => model.Contact2Relationship, "father")
-                                Father
-                            </label>
-                        </div>
-                        <div class="field field-radiobutton">
-                            <label>
-                                @Html.RadioButtonFor(model => model.Contact2Relationship, "mother")
-                                Mother
-                            </label>
-                        </div>
-                        <div class="field field-radiobutton">
-                            <label>
-                                @Html.RadioButtonFor(model => model.Contact2Relationship, "stepfather")
-                                Stepfather
-                            </label>
-                        </div>
-                        <div class="field field-radiobutton">
-                            <label>
-                                @Html.RadioButtonFor(model => model.Contact2Relationship, "stepmother")
-                                Stepmother
-                            </label>
-                        </div>
-                        <div class="field field-radiobutton">
-                            <label>
-                                @Html.RadioButtonFor(model => model.Contact2Relationship, "guardian")
-                                Guardian
-                            </label>
-                        </div>
-                        <div class="field field-radiobutton">
-                            <label>
-                                @Html.RadioButtonFor(model => model.Contact2Relationship, "other")
-                                Other
-                            </label>
-                        </div>
-                    </fieldset>
-                    <div class="field field-select field-size">
-                        @Html.LabelFor(model => model.HouseholdMembers, "Number of people in your household")
-                        @Html.TextBoxFor(model => model.HouseholdMembers)
+                </fieldset>
+                <div class="field field-phone-number">
+                    @Html.LabelFor(model => model.Contact2Phone, "Phone")
+                    @Html.TextBoxFor(model => model.Contact2Phone)
+                </div>
+                <div class="field field-email-address">
+                    @Html.LabelFor(model => model.Contact2Email, "Email address")
+                    @Html.TextBoxFor(model => model.Contact2Email)
+                </div>
+                <fieldset>
+                    <legend>Relationship to @Model.StudentFirstName</legend>
+                    <div class="field field-radiobutton">
+                        <label>
+                            @Html.RadioButtonFor(model => model.Contact2Relationship, "father")
+                            Father
+                        </label>
                     </div>
-                    <div class="field field-select field-width-medium" id="field-annual-income">
-                        @Html.LabelFor(model => model.HouseholdMonthlyIncome, "Average monthly income")
-                        @Html.DropDownListFor(model => model.HouseholdMonthlyIncome, new SelectList(ViewBag.IncomeRanges, "Value", "Text"))
+                    <div class="field field-radiobutton">
+                        <label>
+                            @Html.RadioButtonFor(model => model.Contact2Relationship, "mother")
+                            Mother
+                        </label>
                     </div>
-                    <div class="field field-select field-width-medium">
-                        @Html.LabelFor(model => model.Hou, "Average monthly income")
-                        @Html.DropDownListFor(model => model.HouseholdMonthlyIncome, new SelectList(ViewBag.IncomeRanges, "Value", "Text"))
+                    <div class="field field-radiobutton">
+                        <label>
+                            @Html.RadioButtonFor(model => model.Contact2Relationship, "stepfather")
+                            Stepfather
+                        </label>
                     </div>
-                </section>
+                    <div class="field field-radiobutton">
+                        <label>
+                            @Html.RadioButtonFor(model => model.Contact2Relationship, "stepmother")
+                            Stepmother
+                        </label>
+                    </div>
+                    <div class="field field-radiobutton">
+                        <label>
+                            @Html.RadioButtonFor(model => model.Contact2Relationship, "guardian")
+                            Guardian
+                        </label>
+                    </div>
+                    <div class="field field-radiobutton">
+                        <label>
+                            @Html.RadioButtonFor(model => model.Contact2Relationship, "other")
+                            Other
+                        </label>
+                    </div>
+                </fieldset>
+
+
+                <h1>Household information</h1>
+                <p>Please provide information about the number of people in your household and the combined income of all household members.</p>
+                <div class="field field-select field-size">
+                    @Html.LabelFor(model => model.HouseholdMembers, "Number of people in your household")
+                    @Html.TextBoxFor(model => model.HouseholdMembers, new { @onchange = "swapIncomeEntry()"})
+                </div>
+                <div class="field field-select field-width-medium" id="guardian-income-select">
+                    <label>
+                        Average monthly income (combined total of all income earning household members)
+                        @Html.DropDownList("household-monthly-income-select", new SelectList(ViewBag.IncomeRanges, "Value", "Text"), new { @onchange = "fillIncomeTextFromSelect()" })
+                    </label>
+                </div>
+                <div class="field field-select field-width-medium" id="guardian-income-text" hidden>
+                    <label>
+                        Average monthly income
+                        @Html.TextBoxFor(model => model.HouseholdMonthlyIncome)
+                    </label>
+                </div>
+            </section>
             <footer>
                 <input class="button" type="submit" value="Continue" />
             </footer>
         }
     </div>
 </main>
+
+<script type="text/javascript">
+    function swapIncomeEntry() {
+        var householdMembers = $("#HouseholdMembers").val();
+        var guardianIncomeSelectDiv = $("#guardian-income-select");
+        var guardianIncomeTextDiv = $("#guardian-income-text");
+
+        if (householdMembers > 10) {
+            guardianIncomeSelectDiv.hide();
+            guardianIncomeTextDiv.show();
+        }
+        else {
+            guardianIncomeSelectDiv.show();
+            guardianIncomeTextDiv.hide();
+        }
+    }
+
+    function fillIncomeTextFromSelect() {
+        var incomeSelected = $("#household-monthly-income-select").val();
+        $("#HouseholdMonthlyIncome").val(incomeSelected);
+    }
+
+    function loadIncomeDivs() {
+        var incomeEntered = $("#HouseholdMonthlyIncome").val();
+
+        if (incomeEntered) {
+            $("#household-monthly-income-select").val(incomeEntered);
+        }
+
+        swapIncomeEntry();
+    }
+
+    $(document).ready(loadIncomeDivs());
+
+</script>
