@@ -19,6 +19,7 @@
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.ID)
             
             <section id="student-information">
                 <h1>Student information</h1>
@@ -59,8 +60,8 @@
                     </div>
                 </fieldset>
                 <div class="field field-date">
-                    @Html.LabelFor(model => model.StudentBirthday, "Birthday")
-                    @Html.TextBoxFor(model => model.StudentBirthday, new { @id = "student-birthdate", @type="date" })
+                    @Html.LabelFor(model => model.StudentBirthday, "Birthday (mm/dd/yyyy format)")
+                    @Html.EditorFor(model => model.StudentBirthday)
                 </div>
                 <fieldset id="student-gender">
                     <legend>Gender</legend>

@@ -12,7 +12,7 @@ namespace GoldenTicket.Models
     {
         public Applicant()
         {
-            HouseholdMembers = 1; // default value, to get past minimum validation value
+            HouseholdMembers = 2; // default value, to get past minimum validation value
         }
 
         public int ID { get; set; }
@@ -40,13 +40,15 @@ namespace GoldenTicket.Models
 
         public Gender? StudentGender { get; set; }
 
+        [DataType(DataType.Date)]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime? StudentBirthday { get; set; }
         
         // Household information
-        [Range(1,Int32.MaxValue)]
+        [Range(2, int.MaxValue)]
         public int HouseholdMembers { get; set; }
         
-        [Range(0, Int32.MaxValue)]
+        [Range(0, int.MaxValue)]
         public int HouseholdMonthlyIncome { get; set; }
 
         // Contact person 1

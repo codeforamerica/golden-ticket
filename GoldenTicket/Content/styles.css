@@ -136,15 +136,6 @@ main h2{
 	color: #423d4f;
 }
 
-.review main section{
-	margin-bottom: 1rem;
-}
-
-.review main section h1{
-	color: inherit;
-	font-size: 0.9em;
-	letter-spacing: 0.08em !important;
-}
 
 /* @end */
 
@@ -202,18 +193,46 @@ footer{
 
 /* @group 4. review */
 
-.review main section{ position: relative; }
+.review main section{ 
+    position: relative;
+	margin-bottom: 1rem;
+}
+
 .review main section h1{
 	text-transform: none;
 	letter-spacing: normal;
 	display: inline-block;
 	vertical-align: middle;
+    font-size: 1.2rem;
+	color: inherit;
+    margin-bottom: 0.4em;
 }
 .review main section h1+a{ 
 	font-size: 0.8em; 
 	top: -1px;
 	position: relative;
 }
+
+.review main section h1+a+h2{
+    margin-top: 1em;
+}
+
+.review main section h2{
+    font-size: 0.8rem;
+	color: inherit;
+    text-transform: uppercase;
+	letter-spacing: 0.125em;}
+
+.review main section li p{
+    border: none;
+    margin-bottom: 0;
+}
+
+.review dd.gender,
+.review dd.relationship{
+    text-transform: capitalize;
+}
+
 
 /* @end */
 

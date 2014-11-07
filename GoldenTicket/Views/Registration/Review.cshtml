@@ -1,4 +1,7 @@
-﻿
+﻿@using System.Globalization
+
+@model GoldenTicket.Models.Applicant
+
 @{
     ViewBag.BodyId = "";
     ViewBag.BodyClass = "no-js review";
@@ -7,71 +10,109 @@
 <div id="signpost">
     <div class="site-width">
         <h2>You&rsquo;re on step 4 of 4.</h2>
-        <a href="page-4.php">Go back</a>
+        @Html.ActionLink("Go back", "SchoolSelection")
     </div>
 </div>
 <main>
     <div class="site-width">
-        <form action="page-6.php">
+        @using(Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.ID)
+            
             <h1>Review</h1>
             <p>Please take a moment to review the information you&rsquo;ve entered, below, before submitting your application.</p>
             <section id="student-information">
                 <h1>Student information</h1>
-                <a href="page-2.php">Edit</a>
+                @Html.ActionLink("Edit", "StudentInformation")
                 <dl class="vcard">
                     <dt>Full name</dt>
-                    <dd class="fn">Andrew Nicholas Maier</dd>
+                    <dd class="fn">@Model.StudentFirstName @Model.StudentMiddleName @Model.StudentLastName</dd>
                     <dt>Address</dt>
                     <dd class="adr">
-                        <div class="street-address">123 Anywhere Street</div>
-                        <span class="locality">Providence</span>,<span class="region">Rhode Island</span> <span class="postal-code">02907</span>
+                        <div class="street-address">@Model.StudentStreetAddress1</div>
+                        <div class="street-address">@Model.StudentStreetAddress2</div>
+                        <span class="locality">@Model.StudentCity</span>,<span class="region">RI</span> <span class="postal-code">@Model.StudentZipCode</span>
                     </dd>
-                    <dt>District</dt>
-                    <dd>Providence</dd>
                     <dt>Date of birth</dt>
-                    <dd>09/29/2010</dd>
-                    <dt>Gender</dt>
-                    <dd>Male</dd>
-                    <dt>Primary language</dt>
-                    <dd>English</dd>
+                    <dd>@Model.StudentBirthday.Value.ToString("MM/dd/yyyy")</dd>
+                    <dt class="gender">Gender</dt>
+                    <dd class="gender">@Model.StudentGender</dd>
                 </dl>
             </section>
             <section id="guardian-information">
                 <h1>Guardian information</h1>
-                <a href="page-3.php">Edit</a>
+                @Html.ActionLink("Edit", "GuardianInformation")
+                <h2>Guardian</h2>
                 <dl class="vcard">
                     <dt>Full name</dt>
-                    <dd class="fn">David Sitges Maier</dd>
+                    <dd class="fn">@Model.Contact1FirstName @Model.Contact1LastName</dd>
                     <dt>Phone</dt>
-                    <dd class="tel">678-595-5803</dd>
+                    <dd class="tel">@Model.Contact1Phone</dd>
                     <dt>Email address</dt>
-                    <dd class="email">david.s.maier&amp;mindspring.com</dd>
-                    <dt>Relationship</dt>
-                    <dd>Father</dd>
+                    <dd class="email">@Model.Contact1Email</dd>
+                    <dt class="relationship">Relationship</dt>
+                    <dd class="relationship">@Model.Contact1Relationship</dd>
+                </dl>
+                @if(!string.IsNullOrEmpty(@Model.Contact2FirstName))
+                {
+                    <h2>Alternate contact</h2>
+                    <dl class="vcard">
+                        <dt>Full name</dt>
+                        <dd class="fn">@Model.Contact2FirstName @Model.Contact2LastName</dd>
+                        <dt>Phone</dt>
+                        <dd class="tel">@Model.Contact2Phone</dd>
+                        <dt>Email address</dt>
+                        <dd class="email">@Model.Contact2Email</dd>
+                        <dt class="relationship">Relationship</dt>
+                        <dd class="relationship">@Model.Contact2Relationship</dd>
+                    </dl>
+                }
+                <h2>Household information</h2>
+                <dl>
                     <dt>Household size</dt>
-                    <dd>4</dd>
+                    <dd>@Model.HouseholdMembers</dd>
                     <dt>Income</dt>
-                    <dd>$50,000</dd>
+                    <dd>@Model.HouseholdMonthlyIncome.ToString("C")</dd>
                 </dl>
             </section>
+
+
             <section id="school-selection">
                 <h1>School selection</h1>
-                <a href="page-4.php">Edit</a>
+                @Html.ActionLink("Edit", "SchoolSelection")
                 <dl>
                     <dt>Applied to</dt>
                     <dd>
                         <ul>
-                            <li>Beautiful beginnings</li>
-                            <li>Ready to Learn Providence &amp; CCRI</li>
-                            <li>The Mariposa Highlander PreK at the Wanskuck Boys and Girls Club</li>
+                            @foreach(var program in ViewBag.Programs)
+                            {
+                                <li>@program.Name</li>
+                            }
                         </ul>
                     </dd>
                 </dl>
             </section>
+            
+            <section>
+                <h1>By submitting this form, I attest</h1>
+                <ul>
+                    <li>
+                        <p>The information provided above is correct and I understand that filing documents containing false information with the government is illegal. (RIGL 11-18-1).</p>
+                    </li>
+                    <li>
+                        <p>I understand that if my child is chosen for the state Pre-K program, I am responsible for providing regular transportation to and from the program which ensures my child&rsquo;s attendance each day. If my child is absent for unexcused reasons (including family vacations) for 20 or more school days, I understand that my child will likely lose their slot in the state Pre-K program and it will be given to the next child on the state Pre-K enrollment list.</p>
+                    </li>
+                    <li>
+                        <p>I confirm that I can be reached at the phone numbers listed in this application on @ViewBag. if my child is chosen in the state lottery to participate in the state Pre-K program. </p>
+                    </li>
+                </ul>
+            </section>
+            
             <footer>
                 <button class="button" type="submit" value="continue">Submit application</button>
             </footer>
-        </form>
+        }
     </div>
 </main>
 

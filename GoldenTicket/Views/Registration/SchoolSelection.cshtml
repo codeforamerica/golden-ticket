@@ -1,41 +1,70 @@
-﻿
+﻿@using GoldenTicket.Models
+
+@model GoldenTicket.Models.Applicant
+
+
 @{
     ViewBag.BodyId = "";
     ViewBag.BodyClass = "no-js school-selection";
     Layout = "~/Views/Shared/_RegistrationLayout.cshtml";
 }
+
+
+@helper DisplayProgramCheckbox(List<Applied> applieds, Program program, Applicant applicant)
+{
+    var programChecked = false;
+    foreach (Applied applied in applieds)
+    {
+        if (applied.ProgramID == program.ID)
+        {
+            programChecked = true;
+            break;
+        }
+    }
+
+    <input type="checkbox" id="program-@(program.ID)" value="@program.ID" name="programs" checked="@programChecked">
+}
+
 <div id="signpost">
     <div class="site-width">
         <h2>You&rsquo;re on step 3 of 4: School selection</h2>
-        <a href="page-3.php">Go back</a>
+        @Html.ActionLink("Go back", "GuardianInformation")
     </div>
 </div>
 <main>
     <div class="site-width">
-        <form action="page-5.php">
+        @Html.ValidationSummary()
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.ID)
+            
             <section id="school-selection">
                 <h1>School selection</h1>
-                <p>Choose one or more schools for which you wish {{student name}} to be considered for enrollment.</p>
+                <p>Choose one or more schools that @Model.StudentFirstName will be considered for enrollment.</p>
                 <fieldset class="fieldset-schools" id="fieldset-schools">
                     <legend>Schools</legend>
-                    <? for ($i=0; $i < 4; $i++) : ?>
-                    <div class="field field-checkbox field-school">
-                        <label class="vcard" for="beautiful-beginnings-<?=$i?>">
-                            <input type="checkbox" id="beautiful-beginnings-<?=$i?>" name="beautiful-beginnings-<?=$i?>">
-                            <span class="fn">Beautiful Beginnings</span>
-                            <div class="adr">
-                                <div class="street-address">700 Elmwood Avenue</div>
-                                <span class="locality">Providence</span>,<span class="region">RI</span> <span class="postal-code">02907</span>
-                            </div>
-                        </label>
-                    </div>
-                    <? endfor; ?>
+                    @foreach(Program program in ViewBag.Programs)
+                    {
+                        <div class="field field-checkbox field-school">
+                            <label class="vcard">
+                                @DisplayProgramCheckbox(ViewBag.Applieds, program, Model)
+                                <span class="fn">@program.Name</span>
+                                <div class="adr">
+                                    <div class="street-address">@program.StreetAddress1</div>
+                                    <div class="street-address">@program.StreetAddress2</div>
+                                    <span class="locality">@program.City</span>,<span class="region">RI</span> <span class="postal-code">@program.ZipCode</span>
+                                </div>
+                            </label>
+                        </div>
+                    }
                 </fieldset>
             </section>
             <footer>
                 <button class="button" type="submit" value="continue">Review application</button>
             </footer>
-        </form>
+        }
     </div>
 </main>
 

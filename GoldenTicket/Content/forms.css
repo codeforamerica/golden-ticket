@@ -15,6 +15,25 @@
 
 /* @group Forms */
 
+
+/* @group shared*/
+
+.validation-summary-errors{
+    border: 1px solid goldenrodyellow;
+    background: #fff3c6;
+    padding: 1em 2em;
+    border-radius: 0.5em;
+    margin-bottom: 1.4em;
+}
+
+.validation-summary-errors ul li{
+    list-style-type: disc;
+    line-height: 1.3;
+    margin-bottom: 0.4em;
+}
+
+/* @end */
+
 /* @group footer */
 
 form footer{ padding-top: 1.4rem; }
@@ -67,7 +86,6 @@ textarea{
   width: 100%;
   background: #fafafa;
   box-shadow: inset 0.08em 0.08em 0 rgba(0,0,0,0.05);
-  -webkit-appearance: none;
 }
 
 @media screen and (min-width: 24em) {
@@ -128,6 +146,7 @@ div.field.field-radiobutton label{
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-moz-user-select: none;
+    -ie-user-select: none;
 	user-select: none;
 	cursor: pointer;
 

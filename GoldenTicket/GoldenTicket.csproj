@@ -164,6 +164,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
+    <Compile Include="Controllers\TesterController.cs" />
     <Compile Include="DAL\GoldenTicketDbContext.cs" />
     <Compile Include="DAL\Seeds.cs" />
     <Compile Include="Global.asax.cs">
@@ -197,10 +198,17 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\forms.css" />
+    <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Images\logo_small.png" />
+    <Content Include="Content\reset.css" />
+    <Content Include="Content\ride.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\styles.css" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\custominput.jquery.js" />
+    <Content Include="Scripts\golden_ticket.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -208,8 +216,10 @@
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr.custom.78865.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\select.jquery.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -244,10 +254,14 @@
     <Content Include="Views\Registration\Index.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Registration\StudentInformation.cshtml" />
+    <Content Include="Views\Registration\Confirmation.cshtml" />
+    <Content Include="Views\Registration\GuardianInformation.cshtml" />
+    <Content Include="Views\Registration\Review.cshtml" />
+    <Content Include="Views\Registration\SchoolSelection.cshtml" />
+    <Content Include="Views\Tester\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
