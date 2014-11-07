@@ -1,0 +1,88 @@
+﻿@using GoldenTicket.Models
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+
+    <style>
+        table, th, td {
+           border: 1px solid black;
+        }
+    </style>
+
+</head>
+<body>
+
+    <table>
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>St First</td>
+                <td>St Middle</td>
+                <td>St Last</td>
+                <td>St Birth</td>
+                <td>Street 1</td>
+                <td>Street 2</td>
+                <td>City</td>
+                <td>Zip</td>
+                <td>Gender</td>
+                <td>C1 First</td>
+                <td>C1 Last</td>
+                <td>C1 Phone</td>
+                <td>C1 Email</td>
+                <td>C1 Rel</td>
+                <td>C2 First</td>
+                <td>C2 Last</td>
+                <td>C2 Phone</td>
+                <td>C2 Email</td>
+                <td>C2 Rel</td>
+                <td>HH Members</td>
+                <td>HH Income</td>
+                <td>Conf</td>
+            </tr>
+        </thead>
+        <tr>
+        @foreach(Applicant a in ViewBag.Applicants)
+        {
+            <tr>
+                <td>@a.ID</td>
+                <td>@a.StudentFirstName</td>
+                <td>@a.StudentMiddleName</td>
+                <td>@a.StudentLastName</td>
+                <td>@a.StudentBirthday</td>
+                <td>@a.StudentStreetAddress1</td>
+                <td>@a.StudentStreetAddress2</td>
+                <td>@a.StudentCity</td>
+                <td>@a.StudentZipCode</td>
+                <td>@a.StudentGender</td>
+                <td>@a.Contact1FirstName</td>
+                <td>@a.Contact1LastName</td>
+                <td>@a.Contact1Phone</td>
+                <td>@a.Contact1Email</td>
+                <td>@a.Contact1Relationship</td>
+                <td>@a.Contact2FirstName</td>
+                <td>@a.Contact2LastName</td>
+                <td>@a.Contact2Phone</td>
+                <td>@a.Contact2Email</td>
+                <td>@a.Contact2Relationship</td>
+                <td>@a.HouseholdMembers</td>
+                <td>@a.HouseholdMonthlyIncome</td>
+                <td>@a.ConfirmationCode</td>
+            </tr>
+        }
+
+
+    </table>
+
+    <div>
+    
+    </div>
+</body>
+</html>

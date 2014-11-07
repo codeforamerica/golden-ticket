@@ -164,6 +164,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
+    <Compile Include="Controllers\TesterController.cs" />
     <Compile Include="DAL\GoldenTicketDbContext.cs" />
     <Compile Include="DAL\Seeds.cs" />
     <Compile Include="Global.asax.cs">
@@ -257,6 +258,7 @@
     <Content Include="Views\Registration\GuardianInformation.cshtml" />
     <Content Include="Views\Registration\Review.cshtml" />
     <Content Include="Views\Registration\SchoolSelection.cshtml" />
+    <Content Include="Views\Tester\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
