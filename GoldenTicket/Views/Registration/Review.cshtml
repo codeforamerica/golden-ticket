@@ -1,4 +1,6 @@
-﻿@model GoldenTicket.Models.Applicant
+﻿@using System.Globalization
+
+@model GoldenTicket.Models.Applicant
 
 @{
     ViewBag.BodyId = "";
@@ -33,14 +35,15 @@
                         <span class="locality">@Model.StudentCity</span>,<span class="region">RI</span> <span class="postal-code">@Model.StudentZipCode</span>
                     </dd>
                     <dt>Date of birth</dt>
-                    <dd>@Model.StudentBirthday</dd>
-                    <dt>Gender</dt>
-                    <dd>@Model.StudentGender</dd>
+                    <dd>@Model.StudentBirthday.Value.ToString("MM/dd/yyyy")</dd>
+                    <dt class="gender">Gender</dt>
+                    <dd class="gender">@Model.StudentGender</dd>
                 </dl>
             </section>
             <section id="guardian-information">
                 <h1>Guardian information</h1>
                 @Html.ActionLink("Edit", "GuardianInformation")
+                <h2>Guardian</h2>
                 <dl class="vcard">
                     <dt>Full name</dt>
                     <dd class="fn">@Model.Contact1FirstName @Model.Contact1LastName</dd>
@@ -48,20 +51,12 @@
                     <dd class="tel">@Model.Contact1Phone</dd>
                     <dt>Email address</dt>
                     <dd class="email">@Model.Contact1Email</dd>
-                    <dt>Relationship</dt>
-                    <dd>@Model.Contact1Relationship</dd>
-                    <dt>Household size</dt>
-                    <dd>4</dd>
-                    <dt>Income</dt>
-                    <dd>$50,000</dd>
+                    <dt class="relationship">Relationship</dt>
+                    <dd class="relationship">@Model.Contact1Relationship</dd>
                 </dl>
-            </section>
-
-            if(!string.IsNullOrEmpty(@Model.Contact2FirstName))
-            {
-                <section>
-                    <h1>Alternate contact information</h1>
-                    @Html.ActionLink("Edit", "GuardianInformation")
+                @if(!string.IsNullOrEmpty(@Model.Contact2FirstName))
+                {
+                    <h2>Alternate contact</h2>
                     <dl class="vcard">
                         <dt>Full name</dt>
                         <dd class="fn">@Model.Contact2FirstName @Model.Contact2LastName</dd>
@@ -69,11 +64,19 @@
                         <dd class="tel">@Model.Contact2Phone</dd>
                         <dt>Email address</dt>
                         <dd class="email">@Model.Contact2Email</dd>
-                        <dt>Relationship</dt>
-                        <dd>@Model.Contact2Relationship</dd>
+                        <dt class="relationship">Relationship</dt>
+                        <dd class="relationship">@Model.Contact2Relationship</dd>
                     </dl>
-                </section>
-            }
+                }
+                <h2>Household information</h2>
+                <dl>
+                    <dt>Household size</dt>
+                    <dd>@Model.HouseholdMembers</dd>
+                    <dt>Income</dt>
+                    <dd>@Model.HouseholdMonthlyIncome.ToString("C")</dd>
+                </dl>
+            </section>
+
 
             <section id="school-selection">
                 <h1>School selection</h1>
@@ -92,8 +95,18 @@
             </section>
             
             <section>
-                Agreement checkboxes go here!
-
+                <h1>By submitting this form, I attest</h1>
+                <ul>
+                    <li>
+                        <p>The information provided above is correct and I understand that filing documents containing false information with the government is illegal. (RIGL 11-18-1).</p>
+                    </li>
+                    <li>
+                        <p>I understand that if my child is chosen for the state Pre-K program, I am responsible for providing regular transportation to and from the program which ensures my child&rsquo;s attendance each day. If my child is absent for unexcused reasons (including family vacations) for 20 or more school days, I understand that my child will likely lose their slot in the state Pre-K program and it will be given to the next child on the state Pre-K enrollment list.</p>
+                    </li>
+                    <li>
+                        <p>I confirm that I can be reached at the phone numbers listed in this application from <strong>August 7 – 8, 2014</strong> if my child is chosen in the state lottery to participate in the state Pre-K program. </p>
+                    </li>
+                </ul>
             </section>
             
             <footer>

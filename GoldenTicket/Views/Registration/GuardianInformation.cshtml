@@ -152,17 +152,17 @@
                     @Html.LabelFor(model => model.HouseholdMembers, "Number of people in your household")
                     @Html.TextBoxFor(model => model.HouseholdMembers, new { @onchange = "swapIncomeEntry()"})
                 </div>
-                <div class="field field-select field-width-medium" id="guardian-income-select">
+                <div class="field field-select field-width-large" id="guardian-income-select">
                     <label>
                         Average monthly income (combined total of all income earning household members)
-                        @Html.DropDownList("household-monthly-income-select", new SelectList(ViewBag.IncomeRanges, "Value", "Text"), new { @onchange = "fillIncomeTextFromSelect()" })
                     </label>
+                    @Html.DropDownList("household-monthly-income-select", new SelectList(ViewBag.IncomeRanges, "Value", "Text"), new { @onchange = "fillIncomeTextFromSelect()" })
                 </div>
-                <div class="field field-select field-width-medium" id="guardian-income-text" hidden>
+                <div class="field field-select field-width-large" id="guardian-income-text" hidden>
                     <label>
                         Average monthly income
-                        @Html.TextBoxFor(model => model.HouseholdMonthlyIncome)
                     </label>
+                    @Html.TextBoxFor(model => model.HouseholdMonthlyIncome)
                 </div>
             </section>
             <footer>
