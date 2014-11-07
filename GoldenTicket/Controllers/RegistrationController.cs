@@ -13,8 +13,14 @@ namespace GoldenTicket.Controllers
     public class RegistrationController : Controller
     {
         private readonly GoldenTicketDbContext database = new GoldenTicketDbContext();
+        private GlobalConfig config;
 
         private static readonly DateTime AGE_4_BY_DATE = new DateTime(DateTime.Today.Year, 9, 1);
+
+        public RegistrationController()
+        {
+            config = database.GlobalConfigs.First();
+        }
 
         // GET: Registration
         public ActionResult Index()
@@ -38,9 +44,9 @@ namespace GoldenTicket.Controllers
         public ActionResult StudentInformation(Applicant applicant)
         {
             // Make sure someone isn't playing with the ID from the form
-            if(!IsAuthorizedApplicant(applicant))
+            if(!IsAuthorizedApplicant(applicant) || !IsActiveSession()) // TODO Use AOP/Annotations to do this instead
             {
-                return new HttpStatusCodeResult(HttpStatusCode.Conflict, "Applicant submitted is not in the session");
+                return RedirectToAction("Index");
             }
 
             // Check for required fields
@@ -83,11 +89,6 @@ namespace GoldenTicket.Controllers
             {
                 SaveStudentInformation(applicant);
 
-                if (Session["isAtReview"] != null)
-                {
-                    return RedirectToAction("Review");
-                }
-
                 return RedirectToAction("GuardianInformation");
             }
 
@@ -98,6 +99,11 @@ namespace GoldenTicket.Controllers
 
         public ActionResult GuardianInformation()
         {
+            if (!IsActiveSession()) //TODO Do this with AOP/Annotations instead
+            {
+                return RedirectToAction("Index");
+            }
+
             GuardianInformationViewSetup();
 
             var applicant = GetSessionApplicant();
@@ -110,9 +116,9 @@ namespace GoldenTicket.Controllers
         public ActionResult GuardianInformation(Applicant applicant)
         {
             // Make sure someone isn't playing with the ID from the form
-            if (!IsAuthorizedApplicant(applicant))
+            if (!IsAuthorizedApplicant(applicant) || !IsActiveSession()) // TODO Use AOP/Annotations to do this instead
             {
-                return new HttpStatusCodeResult(HttpStatusCode.Conflict, "Applicant submitted is not in the session");
+                return RedirectToAction("Index");
             }
 
             // Check required fields
@@ -150,11 +156,6 @@ namespace GoldenTicket.Controllers
             {
                 SaveGuardianInformation(applicant);
 
-                if (Session["isAtReview"] != null)
-                {
-                    return RedirectToAction("Review");
-                }
-
                 return RedirectToAction("SchoolSelection");
             }
 
@@ -165,6 +166,11 @@ namespace GoldenTicket.Controllers
 
         public ActionResult SchoolSelection()
         {
+            if (!IsActiveSession()) //TODO Do this with AOP/Annotations instead
+            {
+                return RedirectToAction("Index");
+            }
+
             var applicant = GetSessionApplicant();
             SchoolInformationViewSetup(applicant);
 
@@ -176,9 +182,9 @@ namespace GoldenTicket.Controllers
         public ActionResult SchoolSelection(Applicant applicant, FormCollection formCollection)
         {
             // Make sure someone isn't playing with the ID from the form
-            if (!IsAuthorizedApplicant(applicant))
+            if (!IsAuthorizedApplicant(applicant) || !IsActiveSession()) // TODO Use AOP/Annotations to do this instead
             {
-                return new HttpStatusCodeResult(HttpStatusCode.Conflict, "Applicant submitted is not in the session");
+                return RedirectToAction("Index");
             }
 
             // At least one program needs to be selected
@@ -221,13 +227,16 @@ namespace GoldenTicket.Controllers
 
         public ActionResult Review()
         {
-            Session["isAtReview"] = true;
+            if(!IsActiveSession()) //TODO Do this with AOP/Annotations instead
+            {
+                return RedirectToAction("Index");
+            }
 
             var applicant = GetSessionApplicant();
             
             ReviewViewSetup(applicant);
 
-            return View(applicant); 
+            return View(applicant);
         }
 
         [HttpPost]
@@ -235,9 +244,9 @@ namespace GoldenTicket.Controllers
         public ActionResult Review(Applicant applicant)
         {
             // Make sure someone isn't playing with the ID from the form
-            if (!IsAuthorizedApplicant(applicant))
+            if (!IsAuthorizedApplicant(applicant) || !IsActiveSession()) // TODO Use AOP/Annotations to do this instead
             {
-                return new HttpStatusCodeResult(HttpStatusCode.Conflict, "Applicant submitted is not in the session");
+                return RedirectToAction("Index");
             }
 
             applicant.ConfirmationCode = Guid.NewGuid().ToString();
@@ -248,6 +257,11 @@ namespace GoldenTicket.Controllers
 
         public ActionResult Confirmation()
         {
+            if (!IsActiveSession()) //TODO Do this with AOP/Annotations instead
+            {
+                return RedirectToAction("Index");
+            }
+
             var applicant = GetSessionApplicant();
 
             Session.Clear();
@@ -411,6 +425,8 @@ namespace GoldenTicket.Controllers
             applieds.ForEach(a => programs.Add(a.Program));
 
             ViewBag.Programs = programs;
+
+            ViewBag.NotificationDate = config.NotificationDate;
         }
 
         private void SaveReview(Applicant applicant)
@@ -421,6 +437,11 @@ namespace GoldenTicket.Controllers
             applicantEntry.Property(a => a.ConfirmationCode).IsModified = true;
 
             database.SaveChanges();
+        }
+
+        private bool IsActiveSession()
+        {
+            return Session["applicantID"] != null;
         }
     }
 }
