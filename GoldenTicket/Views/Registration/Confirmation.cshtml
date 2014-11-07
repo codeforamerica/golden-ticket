@@ -12,7 +12,9 @@
 
         <p>You&rsquo;ve successfully entered @Model.StudentFirstName @Model.StudentLastName into the state-wide lottery for pre-kindergarten enrollment. If selected, you will be notified via phone  on <strong>@ViewBag.NotificationDate</strong></p>
 
-        <p>Your confirmation number is @Model.ConfirmationCode. If you have any questions, please contact Franklin Brito at 401-222-8184.</p>
+        <p>Your confirmation number is @Model.ConfirmationCode.<p> 
+        
+        <p>If you have any questions, please contact Franklin Brito at 401-222-8184.</p>
 
         @Html.ActionLink("Enroll another family member", "StudentInformation")
     </div>
