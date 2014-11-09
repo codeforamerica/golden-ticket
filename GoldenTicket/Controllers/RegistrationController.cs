@@ -410,6 +410,8 @@ namespace GoldenTicket.Controllers
 
         private void SchoolInformationViewSetup(Applicant applicant)
         {
+            applicant = database.Applicants.Single(a => a.ID == applicant.ID);
+
             var eligiblePrograms = database.Programs.Where(p => p.City == applicant.StudentCity).OrderBy(p => p.Name).ToList();
             ViewBag.Programs = eligiblePrograms;
 
