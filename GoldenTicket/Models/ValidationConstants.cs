@@ -10,5 +10,6 @@ namespace GoldenTicket.Models
         public const string LETTERS_SPACES_DASHES_COMMAS_REGEX = @"^(\p{L}|\s|-|')+$";
         public const string STREET_ADDRESS_REGEX = @"^[ \p{L}0-9.#-]+$"; //      (\s|\p{L}|\d|\.|-)+
         public const string ZIP_CODE_REGEX = @"^\d{5}(-\d{4})?$";
+        public const string PHONE_REGEX = @"^\d{3}-?\d{3}-?\d{4}$";
     }
 }

@@ -36,8 +36,8 @@ namespace GoldenTicket.Models
         [RegularExpression(ValidationConstants.ZIP_CODE_REGEX)]
         [Required]
         public string ZipCode { get; set; }
-        
-        [Phone]
+
+        [RegularExpression(ValidationConstants.PHONE_REGEX)] //Phone annotation accepted internal numbers, using regex instead
         [Required]
         public string Phone { get; set; }
 

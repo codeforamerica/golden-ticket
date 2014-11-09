@@ -58,7 +58,7 @@ namespace GoldenTicket.Models
         [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_COMMAS_REGEX)]
         public string Contact1LastName { get; set; }
         
-        [Phone]
+        [RegularExpression(ValidationConstants.PHONE_REGEX)] //Phone annotation accepted internal numbers, using regex instead
         public string Contact1Phone { get; set; }
         
         [EmailAddress]
@@ -73,8 +73,8 @@ namespace GoldenTicket.Models
 
         [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_COMMAS_REGEX)]
         public string Contact2LastName { get; set; }
-        
-        [Phone]
+
+        [RegularExpression(ValidationConstants.PHONE_REGEX)] //Phone annotation accepted internal numbers, using regex instead
         public string Contact2Phone { get; set; }
         
         [EmailAddress]
