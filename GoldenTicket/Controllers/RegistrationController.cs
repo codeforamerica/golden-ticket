@@ -172,7 +172,7 @@ namespace GoldenTicket.Controllers
             }
 
             var applicant = GetSessionApplicant();
-            SchoolInformationViewSetup(applicant);
+            SchoolSelectionViewSetup(applicant);
 
             return View(applicant); 
         }
@@ -188,11 +188,12 @@ namespace GoldenTicket.Controllers
             }
 
             // At least one program needs to be selected
+            applicant = GetSessionApplicant(); // fills in the other properties, other than just Applicant ID
             var programIds = new List<int>();
             if(formCollection["programs"] == null || formCollection["programs"].Count() <= 0)
             {
                 ModelState.AddModelError("programs", "At least one program must be chosen");
-                SchoolInformationViewSetup(applicant);
+                SchoolSelectionViewSetup(applicant);
                 return View(applicant);
             }
             else
@@ -408,10 +409,8 @@ namespace GoldenTicket.Controllers
             database.SaveChanges();
         }
 
-        private void SchoolInformationViewSetup(Applicant applicant)
+        private void SchoolSelectionViewSetup(Applicant applicant)
         {
-            applicant = database.Applicants.Single(a => a.ID == applicant.ID);
-
             var eligiblePrograms = database.Programs.Where(p => p.City == applicant.StudentCity).OrderBy(p => p.Name).ToList();
             ViewBag.Programs = eligiblePrograms;
 
