@@ -18,7 +18,7 @@ namespace GoldenTicket.Models
 
         public int ID { get; set; }
 
-        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_REGEX)]
+        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_COMMAS_REGEX)]
         [Required]
         public string Name { get; set; }
 
@@ -26,10 +26,10 @@ namespace GoldenTicket.Models
         [Required]
         public string StreetAddress1 { get; set; }
 
-        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_REGEX)]
+        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_COMMAS_REGEX)]
         public string StreetAddress2 { get; set; }
         
-        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_REGEX)]
+        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_COMMAS_REGEX)]
         [Required]
         public string City { get; set; }
 

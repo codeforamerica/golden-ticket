@@ -206,6 +206,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\styles.css" />
+    <None Include="Properties\PublishProfiles\gt-ride-test.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\custominput.jquery.js" />
     <Content Include="Scripts\golden_ticket.js" />

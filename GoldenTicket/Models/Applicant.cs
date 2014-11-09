@@ -17,13 +17,13 @@ namespace GoldenTicket.Models
 
         public int ID { get; set; }
 
-        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_REGEX)]
+        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_COMMAS_REGEX)]
         public string StudentFirstName { get; set; }
 
-        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_REGEX)]
+        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_COMMAS_REGEX)]
         public string StudentMiddleName { get; set; }
 
-        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_REGEX)]
+        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_COMMAS_REGEX)]
         public string StudentLastName { get; set; }
 
         [RegularExpression(ValidationConstants.STREET_ADDRESS_REGEX)]
@@ -32,7 +32,7 @@ namespace GoldenTicket.Models
         [RegularExpression(ValidationConstants.STREET_ADDRESS_REGEX)]
         public string StudentStreetAddress2 { get; set; }
 
-        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_REGEX)]
+        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_COMMAS_REGEX)]
         public string StudentCity { get; set; }
 
         [RegularExpression(ValidationConstants.ZIP_CODE_REGEX)]
@@ -52,10 +52,10 @@ namespace GoldenTicket.Models
         public int HouseholdMonthlyIncome { get; set; }
 
         // Contact person 1
-        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_REGEX)]
+        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_COMMAS_REGEX)]
         public string Contact1FirstName { get; set; }
 
-        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_REGEX)]
+        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_COMMAS_REGEX)]
         public string Contact1LastName { get; set; }
         
         [Phone]
@@ -64,14 +64,14 @@ namespace GoldenTicket.Models
         [EmailAddress]
         public string Contact1Email { get; set; }
 
-        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_REGEX)]
+        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_COMMAS_REGEX)]
         public string Contact1Relationship { get; set; }
 
         // Contact person 2
-        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_REGEX)]
+        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_COMMAS_REGEX)]
         public string Contact2FirstName { get; set; }
 
-        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_REGEX)]
+        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_COMMAS_REGEX)]
         public string Contact2LastName { get; set; }
         
         [Phone]
@@ -80,7 +80,7 @@ namespace GoldenTicket.Models
         [EmailAddress]
         public string Contact2Email { get; set; }
 
-        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_REGEX)]
+        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_COMMAS_REGEX)]
         public string Contact2Relationship { get; set; }
 
         // Application information
