@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Resources {
+namespace GoldenTicketResources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Resources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("GoldenTicket.App_GlobalResources.GoldenTicketText", typeof(GoldenTicketText).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("GoldenTicket.Translation.GoldenTicketText", typeof(GoldenTicketText).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -219,6 +219,78 @@ namespace Resources {
         public static string NoSchoolSelected {
             get {
                 return ResourceManager.GetString("NoSchoolSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2015 Application for Pre-Kindergarten.
+        /// </summary>
+        public static string ParentHeaderTitle {
+            get {
+                return ResourceManager.GetString("ParentHeaderTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apply to the lottery.
+        /// </summary>
+        public static string ParentIntroApplyToTheLotteryButton {
+            get {
+                return ResourceManager.GetString("ParentIntroApplyToTheLotteryButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For further assistance, email Franklin Brito or call him at 401-222-8184..
+        /// </summary>
+        public static string ParentIntroContactInfo {
+            get {
+                return ResourceManager.GetString("ParentIntroContactInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thanks for your interest in enrolling your student in one of the state&apos;s pre-kindergarten classes. Due to demand, students must be selected for enrollment through a state-supervised lottery..
+        /// </summary>
+        public static string ParentIntroPageIntro {
+            get {
+                return ResourceManager.GetString("ParentIntroPageIntro", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Applications to the statewide lottery are accepted until August 15th. Selected applicants will be notified via phone on August 16th..
+        /// </summary>
+        public static string ParentIntroWhatHappensNextBody {
+            get {
+                return ResourceManager.GetString("ParentIntroWhatHappensNextBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What happens next?.
+        /// </summary>
+        public static string ParentIntroWhatHappensNextHeader {
+            get {
+                return ResourceManager.GetString("ParentIntroWhatHappensNextHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To be eligible for enrollment, you child must turn 4 years of age by September 1 and live in the community in which their pre-k program is located. A copy of the child&apos;s birth certificate and proof of residency will be required upon enrollment..
+        /// </summary>
+        public static string ParentIntroWhatYouNeedToKnowBody {
+            get {
+                return ResourceManager.GetString("ParentIntroWhatYouNeedToKnowBody", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What you need to know.
+        /// </summary>
+        public static string ParentIntroWhatYouNeedToKnowHeader {
+            get {
+                return ResourceManager.GetString("ParentIntroWhatYouNeedToKnowHeader", resourceCulture);
             }
         }
         

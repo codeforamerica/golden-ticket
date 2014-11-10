@@ -156,7 +156,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_GlobalResources\GoldenTicketText.designer.cs">
+    <Compile Include="Translation\GoldenTicketText.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>GoldenTicketText.resx</DependentUpon>
@@ -274,10 +274,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="App_GlobalResources\GoldenTicketText.resx">
+    <EmbeddedResource Include="Translation\GoldenTicketText.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>GoldenTicketText.designer.cs</LastGenOutput>
-      <CustomToolNamespace>Resources</CustomToolNamespace>
+      <CustomToolNamespace>GoldenTicketResources</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

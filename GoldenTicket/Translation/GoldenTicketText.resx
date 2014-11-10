@@ -173,6 +173,30 @@
   <data name="NoSchoolSelected" xml:space="preserve">
     <value>At least one school must be selected.</value>
   </data>
+  <data name="ParentHeaderTitle" xml:space="preserve">
+    <value>2015 Application for Pre-Kindergarten</value>
+  </data>
+  <data name="ParentIntroApplyToTheLotteryButton" xml:space="preserve">
+    <value>Apply to the lottery</value>
+  </data>
+  <data name="ParentIntroContactInfo" xml:space="preserve">
+    <value>For further assistance, email Franklin Brito or call him at 401-222-8184.</value>
+  </data>
+  <data name="ParentIntroPageIntro" xml:space="preserve">
+    <value>Thanks for your interest in enrolling your student in one of the state's pre-kindergarten classes. Due to demand, students must be selected for enrollment through a state-supervised lottery.</value>
+  </data>
+  <data name="ParentIntroWhatHappensNextBody" xml:space="preserve">
+    <value>Applications to the statewide lottery are accepted until August 15th. Selected applicants will be notified via phone on August 16th.</value>
+  </data>
+  <data name="ParentIntroWhatHappensNextHeader" xml:space="preserve">
+    <value>What happens next?</value>
+  </data>
+  <data name="ParentIntroWhatYouNeedToKnowBody" xml:space="preserve">
+    <value>To be eligible for enrollment, you child must turn 4 years of age by September 1 and live in the community in which their pre-k program is located. A copy of the child's birth certificate and proof of residency will be required upon enrollment.</value>
+  </data>
+  <data name="ParentIntroWhatYouNeedToKnowHeader" xml:space="preserve">
+    <value>What you need to know</value>
+  </data>
   <data name="PhoneValidationError" xml:space="preserve">
     <value>{0} must be 10 numbers long (area code +phone number).</value>
     <comment>{0} is the property name (ex: Guardian phone number)</comment>

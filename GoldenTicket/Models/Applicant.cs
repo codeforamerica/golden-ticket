@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using Resources;
+using GoldenTicketResources;
 
 
 namespace GoldenTicket.Models

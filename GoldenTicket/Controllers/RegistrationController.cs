@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using GoldenTicket.Models;
 using GoldenTicket.DAL;
-using Resources;
+using GoldenTicketResources;
 
 namespace GoldenTicket.Controllers
 {
