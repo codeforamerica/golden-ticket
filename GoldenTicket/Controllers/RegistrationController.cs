@@ -142,11 +142,11 @@ namespace GoldenTicket.Controllers
             {
                 ModelState.AddModelError("Contact1Relationship", "Guardian relationship must be entered");
             }          
-            if( applicant.HouseholdMembers == null )
+            if( applicant.HouseholdMembers == null || applicant.HouseholdMembers < 2)
             {
-                ModelState.AddModelError("HouseholdMembers", "The number of household members must be entered");
+                ModelState.AddModelError("HouseholdMembers", "The number of household members must be entered and must be at least 2 people");
             }
-            if( applicant.HouseholdMonthlyIncome == null)
+            if( applicant.HouseholdMonthlyIncome == null || applicant.HouseholdMonthlyIncome == 0) // 1 is the bottom range, although to users 0 will appear as the minimum. This will help with validation checking, since an empty selection is assigned 0 by MVC framework. This does not impact income calculations for lottery selection.
             {
                 ModelState.AddModelError("HouseholdMonthlyIncome", "The average monthly income must be entered or selected");
             }
@@ -300,7 +300,7 @@ namespace GoldenTicket.Controllers
         {
             var incomeRanges = new List<SelectListItem>();
 
-            int previousIncomeLine = 0;
+            int previousIncomeLine = 1; // 1 is the bottom range, although to users 0 will appear as the minimum. This will help with validation checking.
             foreach( int householdMembers in Enumerable.Range(2,9))
             {
                 var povertyConfig = database.PovertyConfigs.First(p => p.HouseholdMembers == householdMembers);
