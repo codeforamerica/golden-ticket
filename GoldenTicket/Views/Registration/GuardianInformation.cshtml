@@ -156,13 +156,13 @@
                     <label>
                         Average monthly income (combined total of all income earning household members)
                     </label>
-                    @Html.DropDownList("household-monthly-income-select", new SelectList(ViewBag.IncomeRanges, "Value", "Text"), new { @onchange = "fillIncomeTextFromSelect()" })
+                    @Html.DropDownList("household-monthly-income-select", new SelectList(ViewBag.IncomeRanges, "Value", "Text"), new { @onchange = "fillIncomeTextFromSelect();swapIncomeEntry();" })
                 </div>
                 <div class="field field-select field-width-large" id="guardian-income-text" hidden>
                     <label>
-                        Average monthly income
+                        Please enter the dollar amount of the monthly household income (no commas)
                     </label>
-                    @Html.TextBoxFor(model => model.HouseholdMonthlyIncome)
+                    $ @Html.TextBoxFor(model => model.HouseholdMonthlyIncome) .00
                 </div>
             </section>
             <footer>
@@ -173,13 +173,16 @@
 </main>
 
 <script type="text/javascript">
+
+    var MAX_INCOME = @ViewBag.MaxIncome;
+
     function swapIncomeEntry() {
         var householdMembers = $("#HouseholdMembers").val();
         var guardianIncomeSelectDiv = $("#guardian-income-select");
+        var householdMonthlyIncomeSelectValue = $("#household-monthly-income-select").val();
         var guardianIncomeTextDiv = $("#guardian-income-text");
 
-        if (householdMembers > 10) {
-            guardianIncomeSelectDiv.hide();
+        if (householdMembers > 10 && householdMonthlyIncomeSelectValue >= MAX_INCOME) {
             guardianIncomeTextDiv.show();
         }
         else {
@@ -196,9 +199,13 @@
     function loadIncomeDivs() {
         var incomeEntered = $("#HouseholdMonthlyIncome").val();
 
-        if (incomeEntered) {
+        if (incomeEntered && incomeEntered < MAX_INCOME) {
             $("#household-monthly-income-select").val(incomeEntered);
         }
+        else if (incomeEntered && incomeEntered >= MAX_INCOME) {
+            $("#household-monthly-income-select").val(MAX_INCOME);
+        }
+
 
         swapIncomeEntry();
     }

@@ -278,7 +278,9 @@ namespace GoldenTicket.Controllers
 
         private void GuardianInformationViewSetup()
         {
-            ViewBag.IncomeRanges = GetIncomeRanges();
+            var incomeRanges = GetIncomeRanges();
+            ViewBag.IncomeRanges = incomeRanges;
+            ViewBag.MaxIncome = incomeRanges.Last().Value;
         }
 
         private string[] GetDistrictNames()
@@ -311,6 +313,14 @@ namespace GoldenTicket.Controllers
                 previousIncomeLine = povertyConfig.MinimumIncome;
                 incomeRanges.Add(item);
             }
+
+            var maxIncome = previousIncomeLine + 1;
+            var maxRange = new SelectListItem
+            {
+                Text = maxIncome.ToString("C") + " or more",
+                Value = maxIncome.ToString()
+            };
+            incomeRanges.Add(maxRange);
 
             return incomeRanges;
         }
