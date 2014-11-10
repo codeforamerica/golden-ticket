@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using GoldenTicket.Models;
 using GoldenTicket.DAL;
+using Resources;
 
 namespace GoldenTicket.Controllers
 {
@@ -52,36 +53,44 @@ namespace GoldenTicket.Controllers
             // Check for required fields
             if(string.IsNullOrEmpty(applicant.StudentFirstName))
             {
-                ModelState.AddModelError("StudentFirstName", "Student first name must be entered");
+                var message = string.Format(GoldenTicketText.PropertyMissing, GoldenTicketText.StudentFirstName);
+                ModelState.AddModelError("StudentFirstName", message);
             }
             if (string.IsNullOrEmpty(applicant.StudentLastName))
             {
-                ModelState.AddModelError("StudentLastName", "Student last name must be entered");
+                var message = string.Format(GoldenTicketText.PropertyMissing, GoldenTicketText.StudentLastName);
+                ModelState.AddModelError("StudentLastName", message);
             }
             if (string.IsNullOrEmpty(applicant.StudentStreetAddress1))
             {
-                ModelState.AddModelError("StudentStreetAddress1", "Student street address (line 1) must be entered");
+                var message = string.Format(GoldenTicketText.PropertyMissing, GoldenTicketText.StudentStreetAddress1);
+                ModelState.AddModelError("StudentStreetAddress1", message);
             }
             if (string.IsNullOrEmpty(applicant.StudentCity))
             {
-                ModelState.AddModelError("StudentCity", "Student city must be entered");
+                var message = string.Format(GoldenTicketText.PropertyMissing, GoldenTicketText.StudentCity);
+                ModelState.AddModelError("StudentCity", message);
             }
             if (string.IsNullOrEmpty(applicant.StudentZipCode))
             {
-                ModelState.AddModelError("StudentZipCode", "Student ZIP code must be entered");
+                var message = string.Format(GoldenTicketText.PropertyMissing, GoldenTicketText.StudentZipCode);
+                ModelState.AddModelError("StudentZipCode", message);
             }
             if (applicant.StudentBirthday == null)
             {
-                ModelState.AddModelError("StudentBirthday", "Student birthday must be entered");
+                var message = string.Format(GoldenTicketText.PropertyMissing, GoldenTicketText.StudentBirthday);
+                ModelState.AddModelError("StudentBirthday", message);
             }
             if (applicant.StudentGender == null)
             {
-                ModelState.AddModelError("StudentGender", "Student gender must be entered");
+                var message = string.Format(GoldenTicketText.PropertyMissing, GoldenTicketText.StudentGender);
+                ModelState.AddModelError("StudentGender", message);
             }
 
             if (applicant.StudentBirthday != null && !IsAgeEligible(applicant.StudentBirthday.Value))
             {
-                ModelState.AddModelError("StudentBirthday", "Student is not an eligible age. He/she must be 4 years old on 9/1/" + DateTime.Today.Year.ToString() + ".");
+                var message = string.Format(GoldenTicketText.IneligibleBirthday, DateTime.Today.Year.ToString());
+                ModelState.AddModelError("StudentBirthday", message);
             }
 
             // Valid fields
@@ -124,31 +133,36 @@ namespace GoldenTicket.Controllers
             // Check required fields
             if( string.IsNullOrEmpty(applicant.Contact1FirstName) )
             {
-                ModelState.AddModelError("Contact1FirstName", "Guardian first name must be entered");
+                var message = string.Format(GoldenTicketText.PropertyMissing, GoldenTicketText.Contact1FirstName);
+                ModelState.AddModelError("Contact1FirstName", message);
             }
             if( string.IsNullOrEmpty(applicant.Contact1LastName) )
             {
-                ModelState.AddModelError("Contact1FirstName", "Guardian last name must be entered");
+                var message = string.Format(GoldenTicketText.PropertyMissing, GoldenTicketText.Contact1LastName);
+                ModelState.AddModelError("Contact1FirstName", message);
             }
             if( string.IsNullOrEmpty(applicant.Contact1Phone) )
             {
-                ModelState.AddModelError("Contact1Phone", "Guardian phone number must be entered");
+                var message = string.Format(GoldenTicketText.PropertyMissing, GoldenTicketText.Contact1Phone);
+                ModelState.AddModelError("Contact1Phone", message);
             }
             if( string.IsNullOrEmpty(applicant.Contact1Email) )
             {
-                ModelState.AddModelError("Contact1Phone", "Guardian email address must be entered");
+                var message = string.Format(GoldenTicketText.PropertyMissing, GoldenTicketText.Contact1Email);
+                ModelState.AddModelError("Contact1Email", message);
             }
             if( string.IsNullOrEmpty(applicant.Contact1Relationship) )
             {
-                ModelState.AddModelError("Contact1Relationship", "Guardian relationship must be entered");
+                var message = string.Format(GoldenTicketText.PropertyMissing, GoldenTicketText.Contact1Relationship);
+                ModelState.AddModelError("Contact1Relationship", message);
             }          
             if( applicant.HouseholdMembers == null || applicant.HouseholdMembers < 2)
             {
-                ModelState.AddModelError("HouseholdMembers", "The number of household members must be entered and must be at least 2 people");
+                ModelState.AddModelError("HouseholdMembers", GoldenTicketText.HouseholdMembersMissingOrInvalid);
             }
             if( applicant.HouseholdMonthlyIncome == null || applicant.HouseholdMonthlyIncome == 0) // 1 is the bottom range, although to users 0 will appear as the minimum. This will help with validation checking, since an empty selection is assigned 0 by MVC framework. This does not impact income calculations for lottery selection.
             {
-                ModelState.AddModelError("HouseholdMonthlyIncome", "The average monthly income must be entered or selected");
+                ModelState.AddModelError("HouseholdMonthlyIncome", GoldenTicketText.HouseholdIncomeMissing);
             }
 
             // Validate model
@@ -192,7 +206,7 @@ namespace GoldenTicket.Controllers
             var programIds = new List<int>();
             if(formCollection["programs"] == null || formCollection["programs"].Count() <= 0)
             {
-                ModelState.AddModelError("programs", "At least one program must be chosen");
+                ModelState.AddModelError("programs", GoldenTicketText.NoSchoolSelected);
                 SchoolSelectionViewSetup(applicant);
                 return View(applicant);
             }
