@@ -81,7 +81,7 @@ namespace GoldenTicket.Controllers
 
             if (applicant.StudentBirthday != null && !IsAgeEligible(applicant.StudentBirthday.Value))
             {
-                ModelState.AddModelError("StudentBirthday", "Student is not old enough for pre-kindergarten. Try again next year or fix the birthday if it was entered wrong.");
+                ModelState.AddModelError("StudentBirthday", "Student is not an eligible age. He/she must be 4 years old on 9/1/" + DateTime.Today.Year.ToString() + ".");
             }
 
             // Valid fields
