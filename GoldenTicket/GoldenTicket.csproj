@@ -213,7 +213,6 @@
     <Content Include="Content\styles.css" />
     <None Include="Properties\PublishProfiles\gt-ride-test.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\custominput.jquery.js" />
     <Content Include="Scripts\golden_ticket.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -225,7 +224,6 @@
     <Content Include="Scripts\modernizr.custom.78865.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\select.jquery.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
