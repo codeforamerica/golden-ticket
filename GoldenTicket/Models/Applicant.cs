@@ -43,7 +43,7 @@ namespace GoldenTicket.Models
         public string StudentCity { get; set; }
 
         [RegularExpression(ValidationConstants.ZIP_CODE_REGEX, ErrorMessageResourceName = "ZipCodeValidationError", ErrorMessageResourceType = typeof(GoldenTicketText))]
-        [Display(Name = "StudentCity", ResourceType = typeof(GoldenTicketText))]
+        [Display(Name = "StudentZipCode", ResourceType = typeof(GoldenTicketText))]
         public string StudentZipCode { get; set; }
 
         [Display(Name = "StudentGender", ResourceType = typeof(GoldenTicketText))]
