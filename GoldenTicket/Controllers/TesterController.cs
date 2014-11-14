@@ -15,7 +15,7 @@ namespace GoldenTicket.Controllers
         // GET: Tester
         public ActionResult Index()
         {
-            ViewBag.Applicants = database.Applicants.ToList();
+            ViewBag.Applicants = database.Applicants.Where(a => a.ConfirmationCode != null).ToList();
 
             return View();
         }
