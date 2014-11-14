@@ -274,7 +274,7 @@
     <EmbeddedResource Include="Resources\GoldenTicketText.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>GoldenTicketText.designer.cs</LastGenOutput>
-      <CustomToolNamespace>GoldenTicketResources</CustomToolNamespace>
+      <CustomToolNamespace>GoldenTicket.Resources</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

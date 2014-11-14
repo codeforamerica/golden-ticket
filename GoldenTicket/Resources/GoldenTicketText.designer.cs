@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace GoldenTicketResources {
+namespace GoldenTicket.Resources {
     using System;
     
     
