@@ -156,7 +156,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Translation\GoldenTicketText.designer.cs">
+    <Compile Include="Resources\GoldenTicketText.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>GoldenTicketText.resx</DependentUpon>
@@ -213,7 +213,6 @@
     <Content Include="Content\styles.css" />
     <None Include="Properties\PublishProfiles\gt-ride-test.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <None Include="Resources\Icon1.ico" />
     <Content Include="Scripts\custominput.jquery.js" />
     <Content Include="Scripts\golden_ticket.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -274,7 +273,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Translation\GoldenTicketText.resx">
+    <EmbeddedResource Include="Resources\GoldenTicketText.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>GoldenTicketText.designer.cs</LastGenOutput>
       <CustomToolNamespace>GoldenTicketResources</CustomToolNamespace>

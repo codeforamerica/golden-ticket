@@ -39,7 +39,7 @@ namespace GoldenTicketResources {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("GoldenTicket.Translation.GoldenTicketText", typeof(GoldenTicketText).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("GoldenTicket.Resources.GoldenTicketText", typeof(GoldenTicketText).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
