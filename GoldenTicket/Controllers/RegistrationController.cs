@@ -320,7 +320,7 @@ namespace GoldenTicket.Controllers
                 var povertyConfig = database.PovertyConfigs.First(p => p.HouseholdMembers == householdMembers);
                 var item = new SelectListItem
                 {
-                    Text = previousIncomeLine.ToString("C") + " to " + povertyConfig.MinimumIncome.ToString("C"),
+                    Text = previousIncomeLine.ToString("C") + " - " + povertyConfig.MinimumIncome.ToString("C"),
                     Value = povertyConfig.MinimumIncome.ToString()
                 };
 
@@ -331,7 +331,7 @@ namespace GoldenTicket.Controllers
             var maxIncome = previousIncomeLine + 1;
             var maxRange = new SelectListItem
             {
-                Text = maxIncome.ToString("C") + " or more",
+                Text =  string.Format(GoldenTicketText.OrMore, maxIncome.ToString("C")),
                 Value = maxIncome.ToString()
             };
             incomeRanges.Add(maxRange);

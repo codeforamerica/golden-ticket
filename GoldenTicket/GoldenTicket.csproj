@@ -156,11 +156,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Resources\GoldenTicketText.designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>GoldenTicketText.resx</DependentUpon>
-    </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -200,6 +195,11 @@
     <Compile Include="GoldenTicket\Reader\ApplicantReader.cs" />
     <Compile Include="GoldenTicket\Reader\IncomeReader.cs" />
     <Compile Include="GoldenTicket\Reader\SchoolReader.cs" />
+    <Compile Include="Resources\GoldenTicketText1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GoldenTicketText.resx</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -273,8 +273,8 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\GoldenTicketText.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>GoldenTicketText.designer.cs</LastGenOutput>
       <CustomToolNamespace>GoldenTicket.Resources</CustomToolNamespace>
+      <LastGenOutput>GoldenTicketText1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

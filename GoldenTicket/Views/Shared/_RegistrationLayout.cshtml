@@ -1,4 +1,6 @@
-﻿@{
+﻿@using GoldenTicket.Resources
+
+@{
     string bodyId = "";
     if(!string.IsNullOrEmpty(ViewBag.BodyId))
     {
@@ -15,7 +17,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>@GoldenTicketResources.GoldenTicketText.ParentHeaderTitle</title>
+    <title>@GoldenTicketText.ParentHeaderTitle</title>
     @Styles.Render("~/Content/reset.css")
     @Styles.Render("~/Content/forms.css")
     @Styles.Render("~/Content/styles.css")
@@ -32,7 +34,7 @@
     <header id="header">
         <div class="site-width">
             <h1>
-               @GoldenTicket.Resources.GoldenTicketText.ParentHeaderTitle
+               @GoldenTicketText.ParentHeaderTitle
             </h1>
         </div>
     </header>

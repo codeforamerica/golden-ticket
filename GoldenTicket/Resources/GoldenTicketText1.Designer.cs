@@ -61,6 +61,42 @@ namespace GoldenTicket.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please enter the dollar amount of the monthly household income (no commas).
+        /// </summary>
+        public static string AverageHouseholdIncomeInstructions {
+            get {
+                return ResourceManager.GetString("AverageHouseholdIncomeInstructions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Average monthly income (combined total of all income earning household members).
+        /// </summary>
+        public static string AverageMonthlyIncomeAndExplanation {
+            get {
+                return ResourceManager.GetString("AverageMonthlyIncomeAndExplanation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Birthday (mm/dd/yyyy format).
+        /// </summary>
+        public static string Birthday {
+            get {
+                return ResourceManager.GetString("Birthday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to City.
+        /// </summary>
+        public static string City {
+            get {
+                return ResourceManager.GetString("City", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirmation code.
         /// </summary>
         public static string ConfirmationCode {
@@ -160,11 +196,83 @@ namespace GoldenTicket.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Email address.
+        /// </summary>
+        public static string EmailAddress {
+            get {
+                return ResourceManager.GetString("EmailAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Father.
+        /// </summary>
+        public static string Father {
+            get {
+                return ResourceManager.GetString("Father", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Female.
+        /// </summary>
+        public static string Female {
+            get {
+                return ResourceManager.GetString("Female", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to First.
+        /// </summary>
+        public static string First {
+            get {
+                return ResourceManager.GetString("First", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Full name.
+        /// </summary>
+        public static string FullName {
+            get {
+                return ResourceManager.GetString("FullName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Guardian.
+        /// </summary>
+        public static string Guardian {
+            get {
+                return ResourceManager.GetString("Guardian", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Guardian information.
+        /// </summary>
+        public static string GuardianInformation {
+            get {
+                return ResourceManager.GetString("GuardianInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The average monthly income must be entered or selected..
         /// </summary>
         public static string HouseholdIncomeMissing {
             get {
                 return ResourceManager.GetString("HouseholdIncomeMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Household information.
+        /// </summary>
+        public static string HouseholdInformation {
+            get {
+                return ResourceManager.GetString("HouseholdInformation", resourceCulture);
             }
         }
         
@@ -205,6 +313,15 @@ namespace GoldenTicket.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last.
+        /// </summary>
+        public static string Last {
+            get {
+                return ResourceManager.GetString("Last", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} can only have letters, spaces, dashes, and apostrophes..
         /// </summary>
         public static string LettersSpacesAndApostrophesOnlyError {
@@ -214,11 +331,74 @@ namespace GoldenTicket.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Male.
+        /// </summary>
+        public static string Male {
+            get {
+                return ResourceManager.GetString("Male", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Middle.
+        /// </summary>
+        public static string Middle {
+            get {
+                return ResourceManager.GetString("Middle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mother.
+        /// </summary>
+        public static string Mother {
+            get {
+                return ResourceManager.GetString("Mother", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to At least one school must be selected..
         /// </summary>
         public static string NoSchoolSelected {
             get {
                 return ResourceManager.GetString("NoSchoolSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Number of people in your household.
+        /// </summary>
+        public static string NumberOfPeopleInHousehold {
+            get {
+                return ResourceManager.GetString("NumberOfPeopleInHousehold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide information about the number of people in your household and the combined income of all household members..
+        /// </summary>
+        public static string NumberOfPeopleInHouseholdInstructions {
+            get {
+                return ResourceManager.GetString("NumberOfPeopleInHouseholdInstructions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} or more.
+        /// </summary>
+        public static string OrMore {
+            get {
+                return ResourceManager.GetString("OrMore", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Other.
+        /// </summary>
+        public static string Other {
+            get {
+                return ResourceManager.GetString("Other", resourceCulture);
             }
         }
         
@@ -295,6 +475,15 @@ namespace GoldenTicket.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Phone (###-###-####).
+        /// </summary>
+        public static string PhoneAndFormat {
+            get {
+                return ResourceManager.GetString("PhoneAndFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} must be 10 numbers long (area code +phone number)..
         /// </summary>
         public static string PhoneValidationError {
@@ -304,11 +493,83 @@ namespace GoldenTicket.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please provide some basic information about {0}&apos;s primary guardian..
+        /// </summary>
+        public static string PleaseProvideBasicInformationAbout {
+            get {
+                return ResourceManager.GetString("PleaseProvideBasicInformationAbout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} must be entered..
         /// </summary>
         public static string PropertyMissing {
             get {
                 return ResourceManager.GetString("PropertyMissing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide some basic information about the student you wish to enter into the lottery..
+        /// </summary>
+        public static string ProvideBasicStudentInformation {
+            get {
+                return ResourceManager.GetString("ProvideBasicStudentInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Relationship to {0}.
+        /// </summary>
+        public static string RelationshipToPerson {
+            get {
+                return ResourceManager.GetString("RelationshipToPerson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stepfather.
+        /// </summary>
+        public static string Stepfather {
+            get {
+                return ResourceManager.GetString("Stepfather", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stepmother.
+        /// </summary>
+        public static string Stepmother {
+            get {
+                return ResourceManager.GetString("Stepmother", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You&apos;re on step {0} of {1}:.
+        /// </summary>
+        public static string StepXOfY {
+            get {
+                return ResourceManager.GetString("StepXOfY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Street address (line 1).
+        /// </summary>
+        public static string StreetAddress1 {
+            get {
+                return ResourceManager.GetString("StreetAddress1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Street address (line 2).
+        /// </summary>
+        public static string StreetAddress2 {
+            get {
+                return ResourceManager.GetString("StreetAddress2", resourceCulture);
             }
         }
         
@@ -358,6 +619,15 @@ namespace GoldenTicket.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Student information.
+        /// </summary>
+        public static string StudentInformation {
+            get {
+                return ResourceManager.GetString("StudentInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Student last name.
         /// </summary>
         public static string StudentLastName {
@@ -399,6 +669,15 @@ namespace GoldenTicket.Resources {
         public static string StudentZipCode {
             get {
                 return ResourceManager.GetString("StudentZipCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Zip.
+        /// </summary>
+        public static string Zip {
+            get {
+                return ResourceManager.GetString("Zip", resourceCulture);
             }
         }
         
