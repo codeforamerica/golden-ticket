@@ -1,5 +1,5 @@
 ﻿@using GoldenTicket.Models
-
+@using GoldenTicket.Resources
 @model GoldenTicket.Models.Applicant
 
 
@@ -27,7 +27,7 @@
 
 <div id="signpost">
     <div class="site-width">
-        <h2>You&rsquo;re on step 3 of 4: School selection</h2>
+        <h2>@string.Format(GoldenTicketText.StepXOfY, 3, 4) @GoldenTicketText.SchoolSelection</h2>
         @Html.ActionLink("Go back", "GuardianInformation")
     </div>
 </div>
@@ -41,10 +41,10 @@
             @Html.HiddenFor(model => model.ID)
             
             <section id="school-selection">
-                <h1>School selection</h1>
-                <p>Choose one or more schools that @Model.StudentFirstName will be considered for enrollment.</p>
+                <h1>@GoldenTicketText.SchoolSelection</h1>
+                <p>@string.Format(GoldenTicketText.ChooseOneOrMoreSchools, @Model.StudentFirstName)</p>
                 <fieldset class="fieldset-schools" id="fieldset-schools">
-                    <legend>Schools</legend>
+                    <legend>@GoldenTicketText.Schools</legend>
                     @foreach(Program program in ViewBag.Programs)
                     {
                         <div class="field field-checkbox field-school">
@@ -62,7 +62,7 @@
                 </fieldset>
             </section>
             <footer>
-                <button class="button" type="submit" value="continue">Review application</button>
+                <button class="button" type="submit" value="continue">@GoldenTicketText.ReviewApplication</button>
             </footer>
         }
     </div>

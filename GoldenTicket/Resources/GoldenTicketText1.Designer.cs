@@ -88,6 +88,15 @@ namespace GoldenTicket.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Choose one or more schools that {0} will be considered for enrollment..
+        /// </summary>
+        public static string ChooseOneOrMoreSchools {
+            get {
+                return ResourceManager.GetString("ChooseOneOrMoreSchools", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to City.
         /// </summary>
         public static string City {
@@ -525,6 +534,33 @@ namespace GoldenTicket.Resources {
         public static string RelationshipToPerson {
             get {
                 return ResourceManager.GetString("RelationshipToPerson", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Review application.
+        /// </summary>
+        public static string ReviewApplication {
+            get {
+                return ResourceManager.GetString("ReviewApplication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Schools.
+        /// </summary>
+        public static string Schools {
+            get {
+                return ResourceManager.GetString("Schools", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to School selection.
+        /// </summary>
+        public static string SchoolSelection {
+            get {
+                return ResourceManager.GetString("SchoolSelection", resourceCulture);
             }
         }
         

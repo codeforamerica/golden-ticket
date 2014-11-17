@@ -337,4 +337,17 @@
     <value>{0} or more</value>
     <comment>{0} is a number. (ex: $1 or more)</comment>
   </data>
+  <data name="ChooseOneOrMoreSchools" xml:space="preserve">
+    <value>Choose one or more schools that {0} will be considered for enrollment.</value>
+    <comment>{0} is the student's name</comment>
+  </data>
+  <data name="ReviewApplication" xml:space="preserve">
+    <value>Review application</value>
+  </data>
+  <data name="Schools" xml:space="preserve">
+    <value>Schools</value>
+  </data>
+  <data name="SchoolSelection" xml:space="preserve">
+    <value>School selection</value>
+  </data>
 </root>
