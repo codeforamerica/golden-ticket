@@ -28,6 +28,8 @@ namespace GoldenTicket.Controllers
         {
             Session.Clear();
 
+            ViewBag.GlobalConfig = GetGlobalConfig();
+
             return View();
         }
 
@@ -281,6 +283,8 @@ namespace GoldenTicket.Controllers
 
             Session.Clear();
 
+            ViewBag.GlobalConfig = GetGlobalConfig();
+
             return View(applicant);
         }
 
@@ -467,6 +471,11 @@ namespace GoldenTicket.Controllers
         private bool IsActiveSession()
         {
             return Session["applicantID"] != null;
+        }
+
+        private GlobalConfig GetGlobalConfig()
+        {
+            return database.GlobalConfigs.First();
         }
     }
 }

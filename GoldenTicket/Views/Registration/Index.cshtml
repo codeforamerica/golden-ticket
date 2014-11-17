@@ -13,7 +13,7 @@
         <p>@GoldenTicketText.ParentIntroWhatYouNeedToKnowBody</p>
         <h1>@GoldenTicketText.ParentIntroWhatHappensNextHeader</h1>
         <p>@GoldenTicketText.ParentIntroWhatHappensNextBody</p>
-        <p>@GoldenTicketText.ParentIntroContactInfo</p>
+        <p>@Html.Raw(string.Format(GoldenTicketText.ParentIntroContactInfo, ViewBag.GlobalConfig.ContactEmail, ViewBag.GlobalConfig.ContactPersonName, ViewBag.GlobalConfig.ContactPhone))</p>
         <footer>
             @Html.ActionLink(@GoldenTicketText.ParentIntroApplyToTheLotteryButton, "StudentInformation", null, new { @class = "button" })
         </footer>

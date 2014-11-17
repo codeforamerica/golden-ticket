@@ -222,7 +222,8 @@
     <value>Apply to the lottery</value>
   </data>
   <data name="ParentIntroContactInfo" xml:space="preserve">
-    <value>For further assistance, email Franklin Brito or call him at 401-222-8184.</value>
+    <value>For further assistance, email &lt;a href="{0}"&gt;{1}&lt;/a&gt; or call him at &lt;a href="tel:{2}"&gt;{2}&lt;/a&gt;.</value>
+    <comment>{0} is contact person email address, {1} is contact person name, {2} is contact person phone number</comment>
   </data>
   <data name="ParentIntroPageIntro" xml:space="preserve">
     <value>Thanks for your interest in enrolling your student in one of the state's pre-kindergarten classes. Due to demand, students must be selected for enrollment through a state-supervised lottery.</value>
@@ -366,8 +367,19 @@
     <value>Choose one or more schools that {0} will be considered for enrollment.</value>
     <comment>{0} is the student's name</comment>
   </data>
+  <data name="ConfirmationNumberIs" xml:space="preserve">
+    <value>Your confirmation number is {0}</value>
+    <comment>{0] is confirmation number</comment>
+  </data>
+  <data name="EnrollAnotherFamilyMember" xml:space="preserve">
+    <value>Enroll another family member</value>
+  </data>
   <data name="Gender" xml:space="preserve">
     <value>Gender</value>
+  </data>
+  <data name="HowToContact" xml:space="preserve">
+    <value>If you have any questions, please contact {0} at {1}.</value>
+    <comment>{0} is contact person name, {1} is contact phone number.</comment>
   </data>
   <data name="Phone" xml:space="preserve">
     <value>Phone</value>
@@ -392,5 +404,12 @@
   </data>
   <data name="SubmitApplication" xml:space="preserve">
     <value>Submit application</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Success!</value>
+  </data>
+  <data name="SuccessfullyEnteredStudent" xml:space="preserve">
+    <value>You've successfully entered {0} {1} into the state-wide lottery for pre-kindergarten enrollment. If selected, you will be notified via phone on {2}.</value>
+    <comment>{0} is student first name, {1} is student last name, and {2} is notification date</comment>
   </data>
 </root>

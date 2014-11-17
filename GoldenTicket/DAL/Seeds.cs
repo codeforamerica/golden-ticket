@@ -19,7 +19,10 @@ namespace GoldenTicket.DAL
                 OpenDate = new DateTime(2014, 10, 20),
                 CloseDate = new DateTime(2014, 12, 25),
                 NotificationDate = new DateTime(2014, 12, 31),
-                MinimumIncomeMultiplier = 625
+                MinimumIncomeMultiplier = 625,
+                ContactPersonName = "Roald Dahl",
+                ContactEmail = "roald@gtridetest.org",
+                ContactPhone = "401-123-4567"
             };
             context.GlobalConfigs.Add(globalConfig);
 

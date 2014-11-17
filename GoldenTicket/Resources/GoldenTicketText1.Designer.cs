@@ -187,6 +187,15 @@ namespace GoldenTicket.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your confirmation number is {0}.
+        /// </summary>
+        public static string ConfirmationNumberIs {
+            get {
+                return ResourceManager.GetString("ConfirmationNumberIs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Guardian email address.
         /// </summary>
         public static string Contact1Email {
@@ -282,6 +291,15 @@ namespace GoldenTicket.Resources {
         public static string EmailAddress {
             get {
                 return ResourceManager.GetString("EmailAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enroll another family member.
+        /// </summary>
+        public static string EnrollAnotherFamilyMember {
+            get {
+                return ResourceManager.GetString("EnrollAnotherFamilyMember", resourceCulture);
             }
         }
         
@@ -390,6 +408,15 @@ namespace GoldenTicket.Resources {
         public static string HouseholdMonthlyIncome {
             get {
                 return ResourceManager.GetString("HouseholdMonthlyIncome", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you have any questions, please contact {0} at {1}..
+        /// </summary>
+        public static string HowToContact {
+            get {
+                return ResourceManager.GetString("HowToContact", resourceCulture);
             }
         }
         
@@ -511,7 +538,7 @@ namespace GoldenTicket.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For further assistance, email Franklin Brito or call him at 401-222-8184..
+        ///   Looks up a localized string similar to For further assistance, email &lt;a href=&quot;{0}&quot;&gt;{1}&lt;/a&gt; or call him at &lt;a href=&quot;tel:{2}&quot;&gt;{2}&lt;/a&gt;..
         /// </summary>
         public static string ParentIntroContactInfo {
             get {
@@ -831,6 +858,24 @@ namespace GoldenTicket.Resources {
         public static string SubmitApplication {
             get {
                 return ResourceManager.GetString("SubmitApplication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Success!.
+        /// </summary>
+        public static string Success {
+            get {
+                return ResourceManager.GetString("Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You&apos;ve successfully entered {0} {1} into the state-wide lottery for pre-kindergarten enrollment. If selected, you will be notified via phone on {2}..
+        /// </summary>
+        public static string SuccessfullyEnteredStudent {
+            get {
+                return ResourceManager.GetString("SuccessfullyEnteredStudent", resourceCulture);
             }
         }
         

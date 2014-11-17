@@ -1,4 +1,5 @@
-﻿@model GoldenTicket.Models.Applicant
+﻿@using GoldenTicket.Resources
+@model GoldenTicket.Models.Applicant
 
 
 @{
@@ -8,15 +9,15 @@
 }
 <main>
     <div class="site-width">
-        <h1>Success!</h1>
+        <h1>@GoldenTicketText.Success</h1>
 
-        <p>You&rsquo;ve successfully entered @Model.StudentFirstName @Model.StudentLastName into the state-wide lottery for pre-kindergarten enrollment. If selected, you will be notified via phone  on <strong>@ViewBag.NotificationDate</strong></p>
+        <p>@string.Format(GoldenTicketText.SuccessfullyEnteredStudent, Model.StudentFirstName, Model.StudentLastName, ViewBag.NotificationDate)</p>
 
-        <p>Your confirmation number is @Model.ConfirmationCode.<p> 
+        <p>@string.Format(GoldenTicketText.ConfirmationNumberIs, Model.ConfirmationCode).<p> 
         
-        <p>If you have any questions, please contact Franklin Brito at 401-222-8184.</p>
+        <p>@string.Format(GoldenTicketText.HowToContact, ViewBag.GlobalConfig.ContactPersonName, ViewBag.GlobalConfig.ContactPhone)</p>
 
-        @Html.ActionLink("Enroll another family member", "StudentInformation")
+        @Html.ActionLink(@GoldenTicketText.EnrollAnotherFamilyMember, "StudentInformation")
     </div>
 </main>
 
