@@ -117,7 +117,7 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Birthday" xml:space="preserve">
+  <data name="BirthdayAndInstructions" xml:space="preserve">
     <value>Birthday (mm/dd/yyyy format)</value>
   </data>
   <data name="City" xml:space="preserve">
@@ -337,17 +337,60 @@
     <value>{0} or more</value>
     <comment>{0} is a number. (ex: $1 or more)</comment>
   </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="AgreementInformationIsCorrect" xml:space="preserve">
+    <value>The information provided above is correct and I understand that filing documents containing false information with the government is illegal. (RIGL 11-18-1).</value>
+  </data>
+  <data name="AgreementReachableOnNotificationDate" xml:space="preserve">
+    <value>I confirm that I can be reached at the phone numbers listed in this application on {0} if my child is chosen in the state lottery to participate in the state Pre-K program.</value>
+    <comment>{0} is notification date</comment>
+  </data>
+  <data name="AgreementResponsibleForTransportation" xml:space="preserve">
+    <value>I understand that if my child is chosen for the state Pre-K program, I am responsible for providing regular transportation to and from the program which ensures my child&amp;rsquo;s attendance each day. If my child is absent for unexcused reasons (including family vacations) for 20 or more school days, I understand that my child will likely lose their slot in the state Pre-K program and it will be given to the next child on the state Pre-K enrollment list.</value>
+  </data>
+  <data name="AlternateContact" xml:space="preserve">
+    <value>Alternate contact</value>
+  </data>
+  <data name="AppliedTo" xml:space="preserve">
+    <value>Applied to</value>
+  </data>
+  <data name="Birthday" xml:space="preserve">
+    <value>Birthday</value>
+  </data>
+  <data name="BySubmittingThisForm" xml:space="preserve">
+    <value>By submitting this form, I attest that:</value>
+  </data>
   <data name="ChooseOneOrMoreSchools" xml:space="preserve">
     <value>Choose one or more schools that {0} will be considered for enrollment.</value>
     <comment>{0} is the student's name</comment>
   </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="Relationship" xml:space="preserve">
+    <value>Relationship</value>
+  </data>
+  <data name="Review" xml:space="preserve">
+    <value>Review</value>
+  </data>
   <data name="ReviewApplication" xml:space="preserve">
     <value>Review application</value>
+  </data>
+  <data name="ReviewInstructions" xml:space="preserve">
+    <value>Please take a moment to review the information you&amp;rsquo;ve entered, below, before submitting your application.</value>
   </data>
   <data name="Schools" xml:space="preserve">
     <value>Schools</value>
   </data>
   <data name="SchoolSelection" xml:space="preserve">
     <value>School selection</value>
+  </data>
+  <data name="SubmitApplication" xml:space="preserve">
+    <value>Submit application</value>
   </data>
 </root>

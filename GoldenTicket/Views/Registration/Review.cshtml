@@ -1,5 +1,5 @@
 ﻿@using System.Globalization
-
+@using GoldenTicket.Resources
 @model GoldenTicket.Models.Applicant
 
 @{
@@ -9,7 +9,7 @@
 }
 <div id="signpost">
     <div class="site-width">
-        <h2>You&rsquo;re on step 4 of 4.</h2>
+        <h2>@string.Format(GoldenTicketText.StepXOfY, 4, 4) @GoldenTicketText.ReviewApplication</h2>
         @Html.ActionLink("Go back", "SchoolSelection")
     </div>
 </div>
@@ -20,69 +20,69 @@
             @Html.AntiForgeryToken()
             @Html.HiddenFor(model => model.ID)
             
-            <h1>Review</h1>
-            <p>Please take a moment to review the information you&rsquo;ve entered, below, before submitting your application.</p>
+            <h1>@GoldenTicketText.Review</h1>
+            <p>@GoldenTicketText.Review</p>
             <section id="student-information">
-                <h1>Student information</h1>
+                <h1>@GoldenTicketText.StudentInformation</h1>
                 @Html.ActionLink("Edit", "StudentInformation")
                 <dl class="vcard">
-                    <dt>Full name</dt>
+                    <dt>@GoldenTicketText.FullName</dt>
                     <dd class="fn">@Model.StudentFirstName @Model.StudentMiddleName @Model.StudentLastName</dd>
-                    <dt>Address</dt>
+                    <dt>@GoldenTicketText.Address</dt>
                     <dd class="adr">
                         <div class="street-address">@Model.StudentStreetAddress1</div>
                         <div class="street-address">@Model.StudentStreetAddress2</div>
                         <span class="locality">@Model.StudentCity</span>,<span class="region">RI</span> <span class="postal-code">@Model.StudentZipCode</span>
                     </dd>
-                    <dt>Date of birth</dt>
+                    <dt>@GoldenTicketText.Birthday</dt>
                     <dd>@Model.StudentBirthday.Value.ToString("MM/dd/yyyy")</dd>
-                    <dt class="gender">Gender</dt>
+                    <dt class="gender">@GoldenTicketText.Gender</dt>
                     <dd class="gender">@Model.StudentGender</dd>
                 </dl>
             </section>
             <section id="guardian-information">
-                <h1>Guardian information</h1>
+                <h1>@GoldenTicketText.GuardianInformation</h1>
                 @Html.ActionLink("Edit", "GuardianInformation")
-                <h2>Guardian</h2>
+                <h2>@GoldenTicketText.Guardian</h2>
                 <dl class="vcard">
-                    <dt>Full name</dt>
+                    <dt>@GoldenTicketText.FullName</dt>
                     <dd class="fn">@Model.Contact1FirstName @Model.Contact1LastName</dd>
-                    <dt>Phone</dt>
+                    <dt>@GoldenTicketText.Phone</dt>
                     <dd class="tel">@Model.Contact1Phone</dd>
-                    <dt>Email address</dt>
+                    <dt>@GoldenTicketText.EmailAddress</dt>
                     <dd class="email">@Model.Contact1Email</dd>
-                    <dt class="relationship">Relationship</dt>
+                    <dt class="relationship">@GoldenTicketText.Relationship</dt>
                     <dd class="relationship">@Model.Contact1Relationship</dd>
                 </dl>
                 @if(!string.IsNullOrEmpty(@Model.Contact2FirstName))
                 {
-                    <h2>Alternate contact</h2>
+                    <h2>@GoldenTicketText.AlternateContact</h2>
                     <dl class="vcard">
-                        <dt>Full name</dt>
+                        <dt>@GoldenTicketText.FullName</dt>
                         <dd class="fn">@Model.Contact2FirstName @Model.Contact2LastName</dd>
-                        <dt>Phone</dt>
+                        <dt>@GoldenTicketText.Phone</dt>
                         <dd class="tel">@Model.Contact2Phone</dd>
-                        <dt>Email address</dt>
+                        <dt>@GoldenTicketText.EmailAddress</dt>
                         <dd class="email">@Model.Contact2Email</dd>
-                        <dt class="relationship">Relationship</dt>
+                        <dt class="relationship">@GoldenTicketText.Relationship</dt>
                         <dd class="relationship">@Model.Contact2Relationship</dd>
                     </dl>
                 }
-                <h2>Household information</h2>
+                <h2>@GoldenTicketText.HouseholdInformation</h2>
                 <dl>
-                    <dt>Household size</dt>
+                    <dt>@GoldenTicketText.HouseholdMembers</dt>
                     <dd>@Model.HouseholdMembers</dd>
-                    <dt>Income</dt>
+                    <dt>@GoldenTicketText.HouseholdMonthlyIncome</dt>
                     <dd>@Model.HouseholdMonthlyIncome.ToString("C")</dd>
                 </dl>
             </section>
 
 
             <section id="school-selection">
-                <h1>School selection</h1>
+                <h1>@GoldenTicketText.SchoolSelection</h1>
                 @Html.ActionLink("Edit", "SchoolSelection")
                 <dl>
-                    <dt>Applied to</dt>
+                    <dt>@GoldenTicketText.AppliedTo</dt>
                     <dd>
                         <ul>
                             @foreach(var program in ViewBag.Programs)
@@ -95,22 +95,22 @@
             </section>
             
             <section>
-                <h1>By submitting this form, I attest</h1>
+                <h1>@GoldenTicketText.BySubmittingThisForm</h1>
                 <ul>
                     <li>
-                        <p>The information provided above is correct and I understand that filing documents containing false information with the government is illegal. (RIGL 11-18-1).</p>
+                        <p>@GoldenTicketText.AgreementInformationIsCorrect</p>
                     </li>
                     <li>
-                        <p>I understand that if my child is chosen for the state Pre-K program, I am responsible for providing regular transportation to and from the program which ensures my child&rsquo;s attendance each day. If my child is absent for unexcused reasons (including family vacations) for 20 or more school days, I understand that my child will likely lose their slot in the state Pre-K program and it will be given to the next child on the state Pre-K enrollment list.</p>
+                        <p>@GoldenTicketText.AgreementResponsibleForTransportation</p>
                     </li>
                     <li>
-                        <p>I confirm that I can be reached at the phone numbers listed in this application on @ViewBag.NotificationDate.ToString("MM/dd/yyyy") if my child is chosen in the state lottery to participate in the state Pre-K program. </p>
+                        <p>@string.Format(GoldenTicketText.AgreementReachableOnNotificationDate, @ViewBag.NotificationDate.ToString("MM/dd/yyyy"))</p>
                     </li>
                 </ul>
             </section>
             
             <footer>
-                <button class="button" type="submit" value="continue">Submit application</button>
+                <button class="button" type="submit" value="continue">@GoldenTicketText.SubmitApplication</button>
             </footer>
         }
     </div>

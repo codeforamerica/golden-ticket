@@ -61,6 +61,60 @@ namespace GoldenTicket.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Address.
+        /// </summary>
+        public static string Address {
+            get {
+                return ResourceManager.GetString("Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The information provided above is correct and I understand that filing documents containing false information with the government is illegal. (RIGL 11-18-1)..
+        /// </summary>
+        public static string AgreementInformationIsCorrect {
+            get {
+                return ResourceManager.GetString("AgreementInformationIsCorrect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I confirm that I can be reached at the phone numbers listed in this application on {0} if my child is chosen in the state lottery to participate in the state Pre-K program..
+        /// </summary>
+        public static string AgreementReachableOnNotificationDate {
+            get {
+                return ResourceManager.GetString("AgreementReachableOnNotificationDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I understand that if my child is chosen for the state Pre-K program, I am responsible for providing regular transportation to and from the program which ensures my child&amp;rsquo;s attendance each day. If my child is absent for unexcused reasons (including family vacations) for 20 or more school days, I understand that my child will likely lose their slot in the state Pre-K program and it will be given to the next child on the state Pre-K enrollment list..
+        /// </summary>
+        public static string AgreementResponsibleForTransportation {
+            get {
+                return ResourceManager.GetString("AgreementResponsibleForTransportation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alternate contact.
+        /// </summary>
+        public static string AlternateContact {
+            get {
+                return ResourceManager.GetString("AlternateContact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Applied to.
+        /// </summary>
+        public static string AppliedTo {
+            get {
+                return ResourceManager.GetString("AppliedTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please enter the dollar amount of the monthly household income (no commas).
         /// </summary>
         public static string AverageHouseholdIncomeInstructions {
@@ -79,11 +133,29 @@ namespace GoldenTicket.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Birthday (mm/dd/yyyy format).
+        ///   Looks up a localized string similar to Birthday.
         /// </summary>
         public static string Birthday {
             get {
                 return ResourceManager.GetString("Birthday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Birthday (mm/dd/yyyy format).
+        /// </summary>
+        public static string BirthdayAndInstructions {
+            get {
+                return ResourceManager.GetString("BirthdayAndInstructions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to By submitting this form, I attest that:.
+        /// </summary>
+        public static string BySubmittingThisForm {
+            get {
+                return ResourceManager.GetString("BySubmittingThisForm", resourceCulture);
             }
         }
         
@@ -246,6 +318,15 @@ namespace GoldenTicket.Resources {
         public static string FullName {
             get {
                 return ResourceManager.GetString("FullName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gender.
+        /// </summary>
+        public static string Gender {
+            get {
+                return ResourceManager.GetString("Gender", resourceCulture);
             }
         }
         
@@ -484,6 +565,15 @@ namespace GoldenTicket.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Phone.
+        /// </summary>
+        public static string Phone {
+            get {
+                return ResourceManager.GetString("Phone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Phone (###-###-####).
         /// </summary>
         public static string PhoneAndFormat {
@@ -529,6 +619,15 @@ namespace GoldenTicket.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Relationship.
+        /// </summary>
+        public static string Relationship {
+            get {
+                return ResourceManager.GetString("Relationship", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Relationship to {0}.
         /// </summary>
         public static string RelationshipToPerson {
@@ -538,11 +637,29 @@ namespace GoldenTicket.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Review.
+        /// </summary>
+        public static string Review {
+            get {
+                return ResourceManager.GetString("Review", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Review application.
         /// </summary>
         public static string ReviewApplication {
             get {
                 return ResourceManager.GetString("ReviewApplication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please take a moment to review the information you&amp;rsquo;ve entered, below, before submitting your application..
+        /// </summary>
+        public static string ReviewInstructions {
+            get {
+                return ResourceManager.GetString("ReviewInstructions", resourceCulture);
             }
         }
         
@@ -705,6 +822,15 @@ namespace GoldenTicket.Resources {
         public static string StudentZipCode {
             get {
                 return ResourceManager.GetString("StudentZipCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submit application.
+        /// </summary>
+        public static string SubmitApplication {
+            get {
+                return ResourceManager.GetString("SubmitApplication", resourceCulture);
             }
         }
         
