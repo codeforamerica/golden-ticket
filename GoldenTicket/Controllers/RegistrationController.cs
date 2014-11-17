@@ -266,7 +266,7 @@ namespace GoldenTicket.Controllers
                 return RedirectToAction("Index");
             }
 
-            applicant.ConfirmationCode = Guid.NewGuid().ToString();
+            applicant.ConfirmationCode = Guid.NewGuid().ToString().Split('-')[0].ToUpper();
             SaveReview(applicant);
 
             return RedirectToAction("Confirmation");
