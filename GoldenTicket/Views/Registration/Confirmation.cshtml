@@ -15,7 +15,7 @@
 
         <p>@string.Format(GoldenTicketText.ConfirmationNumberIs, Model.ConfirmationCode).<p> 
         
-        <p>@string.Format(GoldenTicketText.HowToContact, ViewBag.GlobalConfig.ContactPersonName, ViewBag.GlobalConfig.ContactPhone)</p>
+        <p>@Html.Raw(string.Format(GoldenTicketText.HowToContact, ViewBag.GlobalConfig.ContactEmail, ViewBag.GlobalConfig.ContactPersonName, ViewBag.GlobalConfig.ContactPhone))</p>
 
         @Html.ActionLink(@GoldenTicketText.EnrollAnotherFamilyMember, "StudentInformation")
     </div>

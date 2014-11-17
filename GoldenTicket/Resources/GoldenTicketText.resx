@@ -222,7 +222,7 @@
     <value>Apply to the lottery</value>
   </data>
   <data name="ParentIntroContactInfo" xml:space="preserve">
-    <value>For further assistance, email &lt;a href="{0}"&gt;{1}&lt;/a&gt; or call him at &lt;a href="tel:{2}"&gt;{2}&lt;/a&gt;.</value>
+    <value>For further assistance, email &lt;a href="mailto:{0}"&gt;{1}&lt;/a&gt; or call him at &lt;a href="tel:{2}"&gt;{2}&lt;/a&gt;.</value>
     <comment>{0} is contact person email address, {1} is contact person name, {2} is contact person phone number</comment>
   </data>
   <data name="ParentIntroPageIntro" xml:space="preserve">
@@ -378,8 +378,8 @@
     <value>Gender</value>
   </data>
   <data name="HowToContact" xml:space="preserve">
-    <value>If you have any questions, please contact {0} at {1}.</value>
-    <comment>{0} is contact person name, {1} is contact phone number.</comment>
+    <value>If you have any questions, please contact &lt;a href="mailto:{0}"&gt;{1}&lt;/a&gt; at &lt;a href="tel:{2}"&gt;{2}&lt;/a&gt;.</value>
+    <comment>{0} is the contact email, {1} is contact person name, {2} is contact phone number.</comment>
   </data>
   <data name="Phone" xml:space="preserve">
     <value>Phone</value>

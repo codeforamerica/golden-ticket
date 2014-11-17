@@ -412,7 +412,7 @@ namespace GoldenTicket.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to If you have any questions, please contact {0} at {1}..
+        ///   Looks up a localized string similar to If you have any questions, please contact &lt;a href=&quot;mailto:{0}&quot;&gt;{1}&lt;/a&gt; at &lt;a href=&quot;tel:{2}&quot;&gt;{2}&lt;/a&gt;..
         /// </summary>
         public static string HowToContact {
             get {
@@ -538,7 +538,7 @@ namespace GoldenTicket.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For further assistance, email &lt;a href=&quot;{0}&quot;&gt;{1}&lt;/a&gt; or call him at &lt;a href=&quot;tel:{2}&quot;&gt;{2}&lt;/a&gt;..
+        ///   Looks up a localized string similar to For further assistance, email &lt;a href=&quot;mailto:{0}&quot;&gt;{1}&lt;/a&gt; or call him at &lt;a href=&quot;tel:{2}&quot;&gt;{2}&lt;/a&gt;..
         /// </summary>
         public static string ParentIntroContactInfo {
             get {
