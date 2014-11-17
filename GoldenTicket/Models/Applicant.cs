@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using Resources;
+using GoldenTicket.Resources;
 
 
 namespace GoldenTicket.Models
@@ -43,7 +43,7 @@ namespace GoldenTicket.Models
         public string StudentCity { get; set; }
 
         [RegularExpression(ValidationConstants.ZIP_CODE_REGEX, ErrorMessageResourceName = "ZipCodeValidationError", ErrorMessageResourceType = typeof(GoldenTicketText))]
-        [Display(Name = "StudentCity", ResourceType = typeof(GoldenTicketText))]
+        [Display(Name = "StudentZipCode", ResourceType = typeof(GoldenTicketText))]
         public string StudentZipCode { get; set; }
 
         [Display(Name = "StudentGender", ResourceType = typeof(GoldenTicketText))]
@@ -101,7 +101,7 @@ namespace GoldenTicket.Models
         [Display(Name = "Contact2Email", ResourceType = typeof(GoldenTicketText))]
         public string Contact2Email { get; set; }
 
-        [RegularExpression(ValidationConstants.PHONE_REGEX, ErrorMessageResourceName = "PhoneValidationError", ErrorMessageResourceType = typeof(GoldenTicketText))] //Phone annotation accepted internal numbers, using regex instead
+        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_APOSTROPHE_REGEX, ErrorMessageResourceName = "LettersSpacesAndApostrophesOnlyError", ErrorMessageResourceType = typeof(GoldenTicketText))]
         [Display(Name = "Contact2Relationship", ResourceType = typeof(GoldenTicketText))]
         public string Contact2Relationship { get; set; }
 

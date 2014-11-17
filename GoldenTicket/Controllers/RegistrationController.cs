@@ -7,7 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 using GoldenTicket.Models;
 using GoldenTicket.DAL;
-using Resources;
+using GoldenTicket.Resources;
 
 namespace GoldenTicket.Controllers
 {
@@ -27,6 +27,8 @@ namespace GoldenTicket.Controllers
         public ActionResult Index()
         {
             Session.Clear();
+
+            ViewBag.GlobalConfig = GetGlobalConfig();
 
             return View();
         }
@@ -264,7 +266,7 @@ namespace GoldenTicket.Controllers
                 return RedirectToAction("Index");
             }
 
-            applicant.ConfirmationCode = Guid.NewGuid().ToString();
+            applicant.ConfirmationCode = Guid.NewGuid().ToString().Split('-')[0].ToUpper();
             SaveReview(applicant);
 
             return RedirectToAction("Confirmation");
@@ -280,6 +282,8 @@ namespace GoldenTicket.Controllers
             var applicant = GetSessionApplicant();
 
             Session.Clear();
+
+            ViewBag.GlobalConfig = GetGlobalConfig();
 
             return View(applicant);
         }
@@ -320,7 +324,7 @@ namespace GoldenTicket.Controllers
                 var povertyConfig = database.PovertyConfigs.First(p => p.HouseholdMembers == householdMembers);
                 var item = new SelectListItem
                 {
-                    Text = previousIncomeLine.ToString("C") + " to " + povertyConfig.MinimumIncome.ToString("C"),
+                    Text = previousIncomeLine.ToString("C") + " - " + povertyConfig.MinimumIncome.ToString("C"),
                     Value = povertyConfig.MinimumIncome.ToString()
                 };
 
@@ -331,7 +335,7 @@ namespace GoldenTicket.Controllers
             var maxIncome = previousIncomeLine + 1;
             var maxRange = new SelectListItem
             {
-                Text = maxIncome.ToString("C") + " or more",
+                Text =  string.Format(GoldenTicketText.OrMore, maxIncome.ToString("C")),
                 Value = maxIncome.ToString()
             };
             incomeRanges.Add(maxRange);
@@ -467,6 +471,11 @@ namespace GoldenTicket.Controllers
         private bool IsActiveSession()
         {
             return Session["applicantID"] != null;
+        }
+
+        private GlobalConfig GetGlobalConfig()
+        {
+            return database.GlobalConfigs.First();
         }
     }
 }

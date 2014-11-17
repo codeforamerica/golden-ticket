@@ -1,4 +1,5 @@
-﻿@model GoldenTicket.Models.Applicant
+﻿@using GoldenTicket.Resources
+@model GoldenTicket.Models.Applicant
 
 @{
     ViewBag.BodyId = "";
@@ -7,7 +8,7 @@
 }
 <div id="signpost">
     <div class="site-width">
-        <h2>You&rsquo;re on step 2 of 4: Guardian information</h2>
+        <h2>@string.Format(GoldenTicketText.StepXOfY, 2, 4) @GoldenTicketText.GuardianInformation</h2>
         @Html.ActionLink("Go back", "StudentInformation")
     </div>
 </div>
@@ -23,63 +24,63 @@
             @Html.HiddenFor(model => model.ID)
             
             <section id="guardian-information">
-                <h1>Guardian information</h1>
-                <p>Please provide some basic information about @Model.StudentFirstName&rsquo;s primary guardian.</p>
+                <h1>@GoldenTicketText.GuardianInformation</h1>
+                <p>@string.Format(GoldenTicketText.PleaseProvideBasicInformationAbout, @Model.StudentFirstName)</p>
                 <fieldset class="fieldset-name">
-                    <legend>Full name</legend>
+                    <legend>@GoldenTicketText.FullName</legend>
                     <div class="field">
-                        @Html.LabelFor(model => model.Contact1FirstName, "First")
+                        @Html.LabelFor(model => model.Contact1FirstName, @GoldenTicketText.First)
                         @Html.TextBoxFor(model => model.Contact1FirstName)
                     </div>
                     <div class="field">
-                        @Html.LabelFor(model => model.Contact1LastName, "Last")
+                        @Html.LabelFor(model => model.Contact1LastName, @GoldenTicketText.Last)
                         @Html.TextBoxFor(model => model.Contact1LastName)
                     </div>
                 </fieldset>
                 <div class="field field-phone-number">
-                    @Html.LabelFor(model => model.Contact1Phone, "Phone (###-###-####)")
+                    @Html.LabelFor(model => model.Contact1Phone, @GoldenTicketText.PhoneAndFormat)
                     @Html.TextBoxFor(model => model.Contact1Phone)
                 </div>
                 <div class="field field-email-address">
-                    @Html.LabelFor(model => model.Contact1Email, "Email address")
+                    @Html.LabelFor(model => model.Contact1Email, @GoldenTicketText.EmailAddress)
                     @Html.TextBoxFor(model => model.Contact1Email)
                 </div>
                 <fieldset>
-                    <legend>Relationship to @Model.StudentFirstName</legend>
+                    <legend>@string.Format(GoldenTicketText.RelationshipToPerson, @Model.StudentFirstName)</legend>
                     <div class="field field-radiobutton">
                         <label>
                             @Html.RadioButtonFor(model => model.Contact1Relationship, "father")
-                            Father
+                            @GoldenTicketText.Father
                         </label>
                     </div>
                     <div class="field field-radiobutton">
                         <label>
                             @Html.RadioButtonFor(model => model.Contact1Relationship, "mother")
-                            Mother
+                            @GoldenTicketText.Mother
                         </label>
                     </div>
                     <div class="field field-radiobutton">
                         <label>
                             @Html.RadioButtonFor(model => model.Contact1Relationship, "stepfather")
-                            Stepfather
+                            @GoldenTicketText.Stepfather
                         </label>
                     </div>
                     <div class="field field-radiobutton">
                         <label>
                             @Html.RadioButtonFor(model => model.Contact1Relationship, "stepmother")
-                            Stepmother
+                            @GoldenTicketText.Stepmother
                         </label>
                     </div>
                     <div class="field field-radiobutton">
                         <label>
                             @Html.RadioButtonFor(model => model.Contact1Relationship, "guardian")
-                            Guardian
+                            @GoldenTicketText.Guardian
                         </label>
                     </div>
                     <div class="field field-radiobutton">
                         <label>
                             @Html.RadioButtonFor(model => model.Contact1Relationship, "other")
-                            Other
+                            @GoldenTicketText.Other
                         </label>
                     </div>
                 </fieldset>
@@ -89,20 +90,20 @@
                 <fieldset class="fieldset-name">
                     <legend>Full name</legend>
                     <div class="field">
-                        @Html.LabelFor(model => model.Contact2FirstName, "First")
+                        @Html.LabelFor(model => model.Contact2FirstName, @GoldenTicketText.First)
                         @Html.TextBoxFor(model => model.Contact2FirstName)
                     </div>
                     <div class="field">
-                        @Html.LabelFor(model => model.Contact2LastName, "Last")
+                        @Html.LabelFor(model => model.Contact2LastName, @GoldenTicketText.Last)
                         @Html.TextBoxFor(model => model.Contact2LastName)
                     </div>
                 </fieldset>
                 <div class="field field-phone-number">
-                    @Html.LabelFor(model => model.Contact2Phone, "Phone (###-###-####)")
+                    @Html.LabelFor(model => model.Contact2Phone, @GoldenTicketText.PhoneAndFormat)
                     @Html.TextBoxFor(model => model.Contact2Phone)
                 </div>
                 <div class="field field-email-address">
-                    @Html.LabelFor(model => model.Contact2Email, "Email address")
+                    @Html.LabelFor(model => model.Contact2Email, @GoldenTicketText.EmailAddress)
                     @Html.TextBoxFor(model => model.Contact2Email)
                 </div>
                 <fieldset>
@@ -110,57 +111,57 @@
                     <div class="field field-radiobutton">
                         <label>
                             @Html.RadioButtonFor(model => model.Contact2Relationship, "father")
-                            Father
+                            @GoldenTicketText.Father
                         </label>
                     </div>
                     <div class="field field-radiobutton">
                         <label>
                             @Html.RadioButtonFor(model => model.Contact2Relationship, "mother")
-                            Mother
+                            @GoldenTicketText.Mother
                         </label>
                     </div>
                     <div class="field field-radiobutton">
                         <label>
                             @Html.RadioButtonFor(model => model.Contact2Relationship, "stepfather")
-                            Stepfather
+                            @GoldenTicketText.Stepfather
                         </label>
                     </div>
                     <div class="field field-radiobutton">
                         <label>
                             @Html.RadioButtonFor(model => model.Contact2Relationship, "stepmother")
-                            Stepmother
+                            @GoldenTicketText.Stepmother
                         </label>
                     </div>
                     <div class="field field-radiobutton">
                         <label>
                             @Html.RadioButtonFor(model => model.Contact2Relationship, "guardian")
-                            Guardian
+                            @GoldenTicketText.Guardian
                         </label>
                     </div>
                     <div class="field field-radiobutton">
                         <label>
                             @Html.RadioButtonFor(model => model.Contact2Relationship, "other")
-                            Other
+                            @GoldenTicketText.Other
                         </label>
                     </div>
                 </fieldset>
 
 
-                <h1>Household information</h1>
-                <p>Please provide information about the number of people in your household and the combined income of all household members.</p>
+                <h1>@GoldenTicketText.HouseholdInformation</h1>
+                <p>@GoldenTicketText.NumberOfPeopleInHouseholdInstructions</p>
                 <div class="field field-select field-size">
-                    @Html.LabelFor(model => model.HouseholdMembers, "Number of people in your household")
+                    @Html.LabelFor(model => model.HouseholdMembers, @GoldenTicketText.NumberOfPeopleInHousehold)
                     @Html.TextBoxFor(model => model.HouseholdMembers, new { @onchange = "swapIncomeEntry()"})
                 </div>
                 <div class="field field-select field-width-large" id="guardian-income-select">
                     <label>
-                        Average monthly income (combined total of all income earning household members)
+                        @GoldenTicketText.AverageMonthlyIncomeAndExplanation
                     </label>
                     @Html.DropDownList("household-monthly-income-select", new SelectList(ViewBag.IncomeRanges, "Value", "Text"), new { @onchange = "fillIncomeTextFromSelect();swapIncomeEntry();" })
                 </div>
                 <div class="field field-select field-width-large" id="guardian-income-text" hidden>
                     <label>
-                        Please enter the dollar amount of the monthly household income (no commas)
+                        @GoldenTicketText.AverageHouseholdIncomeInstructions
                     </label>
                     $ @Html.TextBoxFor(model => model.HouseholdMonthlyIncome) .00
                 </div>

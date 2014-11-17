@@ -1,4 +1,6 @@
-﻿@{
+﻿@using GoldenTicket.Resources
+
+@{
     string bodyId = "";
     if(!string.IsNullOrEmpty(ViewBag.BodyId))
     {
@@ -15,7 +17,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Pre-K Lottery Registration for Rhode Island</title>
+    <title>@GoldenTicketText.ParentHeaderTitle</title>
     @Styles.Render("~/Content/reset.css")
     @Styles.Render("~/Content/forms.css")
     @Styles.Render("~/Content/styles.css")
@@ -23,8 +25,6 @@
     <link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Titillium+Web:300,700' rel='stylesheet' type='text/css'>
     @Scripts.Render("~/bundles/jquery")
-    @*@Scripts.Render("~/Scripts/custominput.jquery.js")
-    @Scripts.Render("~/Scripts/select.jquery.js")*@
     @Scripts.Render("~/Scripts/modernizr.custom.78865.js")
     @Scripts.Render("~/Scripts/golden_ticket.js")
     @RenderSection("scripts", required: false)
@@ -34,7 +34,7 @@
     <header id="header">
         <div class="site-width">
             <h1>
-                2015 Application <span class="preposition">for</span> Pre-Kindergarten
+               @GoldenTicketText.ParentHeaderTitle
             </h1>
         </div>
     </header>
