@@ -121,7 +121,7 @@
     <value>Birthday (mm/dd/yyyy format)</value>
   </data>
   <data name="City" xml:space="preserve">
-    <value>City</value>
+    <value>Ciudad</value>
   </data>
   <data name="ConfirmationCode" xml:space="preserve">
     <value>Confirmation code</value>
