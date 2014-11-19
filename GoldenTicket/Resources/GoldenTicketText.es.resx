@@ -118,16 +118,16 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BirthdayAndInstructions" xml:space="preserve">
-    <value>Birthday (mm/dd/yyyy format)</value>
+    <value>Fecha de Nacimiento (mm/dd/yyyy format)</value>
   </data>
   <data name="City" xml:space="preserve">
     <value>Ciudad</value>
   </data>
   <data name="ConfirmationCode" xml:space="preserve">
-    <value>Confirmation code</value>
+    <value>Codigo de Confirmación</value>
   </data>
   <data name="Contact1Email" xml:space="preserve">
-    <value>Guardian email address</value>
+    <value>Dirección de correo electrónico del Guardian</value>
   </data>
   <data name="Contact1FirstName" xml:space="preserve">
     <value>Guardian first name</value>
