@@ -331,6 +331,15 @@ namespace GoldenTicket.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to For email assistance, please contact &lt;a href=&quot;mailto:{0}&quot; tabindex=&quot;-1&quot;&gt;{1}&lt;/a&gt; at &lt;a href=&quot;tel:{2}&quot; tabindex=&quot;-1&quot;&gt;{2}&lt;/a&gt;.
+        /// </summary>
+        public static string ForEmailAssistance {
+            get {
+                return ResourceManager.GetString("ForEmailAssistance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Full name.
         /// </summary>
         public static string FullName {

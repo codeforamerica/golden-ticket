@@ -299,6 +299,8 @@ namespace GoldenTicket.Controllers
             var incomeRanges = GetIncomeRanges();
             ViewBag.IncomeRanges = incomeRanges;
             ViewBag.MaxIncome = incomeRanges.Last().Value;
+
+            ViewBag.GlobalConfig = database.GlobalConfigs.First();
         }
 
         private string[] GetDistrictNames()
