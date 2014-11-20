@@ -118,46 +118,46 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BirthdayAndInstructions" xml:space="preserve">
-    <value>Birthday (mm/dd/yyyy format)</value>
+    <value>Fecha de Nacimiento (mm/dd/yyyy format)</value>
   </data>
   <data name="City" xml:space="preserve">
-    <value>City</value>
+    <value>Ciudad</value>
   </data>
   <data name="ConfirmationCode" xml:space="preserve">
-    <value>Confirmation code</value>
+    <value>Codigo de Confirmación</value>
   </data>
   <data name="Contact1Email" xml:space="preserve">
-    <value>Guardian email address</value>
+    <value>Dirección de correo electrónico del Guardian</value>
   </data>
   <data name="Contact1FirstName" xml:space="preserve">
-    <value>Guardian first name</value>
+    <value>Primer Nombre del Guardian</value>
   </data>
   <data name="Contact1LastName" xml:space="preserve">
-    <value>Guardian last name</value>
+    <value>Apellido del Guardian</value>
   </data>
   <data name="Contact1Phone" xml:space="preserve">
-    <value>Guardian phone number</value>
+    <value>Numero de Telefono del Guardian</value>
   </data>
   <data name="Contact1Relationship" xml:space="preserve">
-    <value>Guardian relationship to child</value>
+    <value>Relación del Guardian al Niño</value>
   </data>
   <data name="Contact2Email" xml:space="preserve">
-    <value>Alternate contact email address</value>
+    <value>Dirección de Correo Electrónico Alternativo</value>
   </data>
   <data name="Contact2FirstName" xml:space="preserve">
-    <value>Alternate contact first name</value>
+    <value>Primer Nombre de Contacto Alternativo</value>
   </data>
   <data name="Contact2LastName" xml:space="preserve">
-    <value>Alternate contact last name</value>
+    <value>Apellido de Contacto Alternativo</value>
   </data>
   <data name="Contact2Phone" xml:space="preserve">
-    <value>Alternate contact phone number</value>
+    <value>Numero de Telefono de Contacto Alternativo</value>
   </data>
   <data name="Contact2Relationship" xml:space="preserve">
-    <value>Alternate contact relationship to child</value>
+    <value>Relación del Contacto Alternativo con el Niño</value>
   </data>
   <data name="EmailAddress" xml:space="preserve">
-    <value>Email address</value>
+    <value>Direccion de Correo Electronico</value>
   </data>
   <data name="Father" xml:space="preserve">
     <value>Father</value>
