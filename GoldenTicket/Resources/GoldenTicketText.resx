@@ -412,4 +412,8 @@
     <value>You've successfully entered {0} {1} into the state-wide lottery for pre-kindergarten enrollment. If selected, you will be notified via phone on {2}.</value>
     <comment>{0} is student first name, {1} is student last name, and {2} is notification date</comment>
   </data>
+  <data name="ForEmailAssistance" xml:space="preserve">
+    <value>For email assistance, please contact &lt;a href="mailto:{0}" tabindex="-1"&gt;{1}&lt;/a&gt; at &lt;a href="tel:{2}" tabindex="-1"&gt;{2}&lt;/a&gt;</value>
+    <comment>{0} is contact email address, {1} is contact name, {2} is contact phone</comment>
+  </data>
 </root>

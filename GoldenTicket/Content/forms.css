@@ -1,3 +1,9 @@
+/* @override http://preklottery.local/stylesheets/forms.css */
+
+/* @override http://preklottery.local/stylesheets/forms.css */
+
+/* @override http://preklottery.local/stylesheets/forms.css */
+
 /* @override http://ticket2ride.local/stylesheets/forms.css */
 
 /* @override http://preklottery.local/stylesheets/forms.css */
@@ -14,7 +20,6 @@
 }
 
 /* @group Forms */
-
 
 /* @group shared*/
 
@@ -67,9 +72,7 @@ input[type=date],
 select,
 textarea{
 	font-size: 1em;
-  border: 0.08em solid #ccc;
-  border-top-color: #c3c3c3;
-  border-left-color: #c3c3c3;
+  border: 1px solid #ccc;
   font: inherit;  
   padding: 0.4rem 0.33rem 0.33rem;
   margin: 0;
@@ -85,7 +88,6 @@ textarea{
   box-shadow: none;
   width: 100%;
   background: #fafafa;
-  box-shadow: inset 0.08em 0.08em 0 rgba(0,0,0,0.05);
 }
 
 @media screen and (min-width: 24em) {
@@ -136,9 +138,9 @@ div.field.field-radiobutton label{
   min-height: 2em;
   line-height: 1.2rem;
   position: relative;
-  border: 0.08em solid #ccc;
+  border: 1px solid #ccc;
   font-weight: normal;
-  color: #777;
+  color: #555;
   margin-bottom: 0;
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
@@ -146,7 +148,6 @@ div.field.field-radiobutton label{
 	-webkit-touch-callout: none;
 	-webkit-user-select: none;
 	-moz-user-select: none;
-    -ie-user-select: none;
 	user-select: none;
 	cursor: pointer;
 
@@ -210,7 +211,7 @@ div.field.field-select:hover select{ cursor: pointer; }
 
 .custom-select select,
 .custom-select .btn-select {
-  border: 0.08rem solid #ccc;
+  border: 1px solid #ccc;
   border-top-color: #c3c3c3;
   border-left-color: #c3c3c3;
   font: inherit;  
@@ -230,7 +231,6 @@ div.field.field-select:hover select{ cursor: pointer; }
   box-shadow: none;
   width: 100%;
 	background: #fafafa;
-	box-shadow: inset 0.08rem 0.08rem 0 rgba(0,0,0,0.05);
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -299,9 +299,7 @@ div.field.field-select:hover select{ cursor: pointer; }
   -webkit-appearance: none;
   -moz-appearance: none;
   outline: none;
-  border: 0.08rem solid #aaa;
-  border-top-color: #a3a3a3;
-  border-left-color: #a3a3a3; 
+  border: 1px solid #aaa;
   -moz-border-radius: 0.1rem;
   border-radius: 0.1rem;
   background: rgba(0,0,0,0.025);
@@ -316,7 +314,7 @@ box-shadow: inset 0.08em 0.08em 0 rgba(0,0,0,0.05);
 .custom-input div.field.field-radiobutton label::before{
 	border: none;
 	background: #555;
-	border: 0.125em double #fff;
+	border: 2px solid #fff;
 	opacity: 0;
 }
 .custom-input div.field.field-checkbox label.checked::before{
@@ -401,6 +399,7 @@ fieldset p.note{
 	margin-bottom: 1rem;
 }
 
+
 div.field.field-other{
   float: left;
   width: 4.7rem;
@@ -445,7 +444,7 @@ div.field.field-width-small input{ width: 4rem; }
 div.field-select input,
 div.field-phone-number input,
 div.field-width-medium input[type=text],
-div.field-width-medium input[type=text],
+div.field-width-medium input[type=date],
 div.field-width-medium select,
 div.field-width-medium.custom-select .btn-select{ 
 	width: 8rem; 
@@ -571,6 +570,10 @@ fieldset.fieldset-address div.field.field-state.field-select div::after{
 
 	}
 	
+	fieldset.fieldset-date-range div.field.field-date{
+	width: 12rem;
+	}
+	
 	fieldset.fieldset-name div.field label,
 	fieldset.fieldset-date-range div.field label{
 		position: absolute;
@@ -664,7 +667,7 @@ button{
   box-sizing: border-box;
   text-decoration: none;
   cursor: pointer;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   -webkit-appearance: none;
   background-color: #fff;
 	background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#eee));
@@ -689,8 +692,8 @@ button{
   min-height: 1.4rem;
   border-radius: 0.2rem;
   text-decoration: none;
-  font-size: 0.7rem;
-  border: 0.125rem solid #009253;
+  font-size: 0.8rem;
+  border: 2px solid #009253;
 	box-shadow: none !important;
 	cursor: pointer;
 	margin: 0 0.2rem;
@@ -734,7 +737,7 @@ button.backward{
 
 dl dt,
 dl dd{
-	font-size: 0.8rem;
+	font-size: 0.9rem;
 	line-height: 1.4em;
 	padding-top: 0.35rem;
 }
@@ -830,7 +833,7 @@ nav.pagination a{
 	text-decoration: none;
 	-moz-border-radius: 0.1rem;
 	border-radius: 0.1rem;
-	border: 0.1rem solid #eee;
+	border: 2px solid #eee;
 	-moz-border-radius: 0.2rem;
 	border-radius: 0.2rem;
 }

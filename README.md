@@ -1,4 +1,4 @@
-# Golden Ticket - School Lottery Registration and Selection
+# Golden Ticket - The Most Awesome School Lottery Registration and Selection
 
 Golden Ticket is a web application that provides forms for parents to register their children for school lotteries and an administrator to perform a randomized selection process based on factors such as income, gender, and location.
 

@@ -1,4 +1,6 @@
-﻿/* @override http://preklottery.local/stylesheets/styles.css */
+/* @override http://preklottery.local/stylesheets/styles.css */
+
+/* @override http://preklottery.local/stylesheets/styles.css */
 
 /* @override http://preklottery.local/stylesheets/styles.css */
 
@@ -80,7 +82,7 @@ div#signpost{
 	background: #f7f2e9;
 	color: #5e3d25;
 	padding: 0.6rem 0;
-	font-size: 0.8em;
+	font-size: 0.9em;
 	line-height: 1rem;
 	margin-bottom: 1.2rem;
 }
@@ -125,17 +127,40 @@ main h2{
 }
 
 
-.student-information main  p,
-.guardian-information main p,
-.school-selection main p,
-.review main p{
-	font-size: 0.9em;
-	margin-bottom: 1rem;
+main h1+p:first-of-type{
+	font-size: 1.1em;
+	margin-bottom: 1.4em;
 	padding-bottom: 1rem;
-	border-bottom: 0.125rem double #e3e3e3;
+	border-bottom: 0.125rem solid #eee;
 	color: #423d4f;
 }
 
+.review main section{
+	margin-bottom: 1rem;
+}
+
+.review main section h1{
+	color: inherit;
+	font-size: 1em;
+	letter-spacing: 0.08em;
+}
+
+main p.note{
+	font-size: 0.7rem;
+	width: 11rem;
+}
+
+main p.note a {
+    display: inline-block;
+}
+
+@media (min-width: 30em){
+	main p.note{
+	float: right;
+	margin-top: -0.1rem;
+	margin-bottom: -0.1rem;
+	}	
+}
 
 /* @end */
 
@@ -191,46 +216,60 @@ footer{
 
 /* @end */
 
-/* @group 4. review */
+/* @group 5. review */
 
-.review main section{ 
-    position: relative;
-	margin-bottom: 1rem;
-}
-
+.review main section{ position: relative; }
 .review main section h1{
 	text-transform: none;
 	letter-spacing: normal;
 	display: inline-block;
 	vertical-align: middle;
-    font-size: 1.2rem;
-	color: inherit;
-    margin-bottom: 0.4em;
 }
 .review main section h1+a{ 
-	font-size: 0.8em; 
-	top: -1px;
+	font-size: 0.7em; 
+	top: -0.3em;
 	position: relative;
+  color: #009253;
+  font-weight: 600;
+  line-height: 1rem;
+  padding: 0 0.4rem 0;
+  display: inline-block;
+  vertical-align: middle;
+  min-height: 1rem;
+  border-radius: 0.2rem;
+  text-decoration: none;
+  border: 0.1rem solid;
+  box-shadow: none;
+  cursor: pointer;
+  background: none;
+  margin-left: 0.2em;
 }
 
-.review main section h1+a+h2{
-    margin-top: 1em;
+.review main section h1+a:hover{
+	color: #007200; 
 }
 
-.review main section h2{
-    font-size: 0.8rem;
-	color: inherit;
-    text-transform: uppercase;
-	letter-spacing: 0.125em;}
-
-.review main section li p{
-    border: none;
-    margin-bottom: 0;
+.review main section h2 {
+    font-size: 0.8em !important;
 }
 
-.review dd.gender,
-.review dd.relationship{
-    text-transform: capitalize;
+.review main section#agreement h1{
+	
+}
+.review main section#agreement p{
+	max-width: 28em;
+	margin-bottom: 0;
+	padding-bottom: 0.8em;
+}
+
+.review main section#agreement div.field{
+	margin-top: 1em;
+}
+
+.review main section#agreement::after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
 
@@ -257,7 +296,7 @@ footer{
 	html, body{ font-size: 24px; }	
 	main h1{ 
 		text-transform: none;
-		font-size: 2rem;
+		font-size: 2.4rem;
 		font-weight: 100;
 		letter-spacing: normal;
 		display: inline-block;
@@ -275,6 +314,7 @@ footer{
 
 	.review main section h1{
 		font-weight: 600;
+		margin-bottom: 0.6em;
 	}
 }
 

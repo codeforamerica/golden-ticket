@@ -53,14 +53,14 @@ table {
 ::-webkit-input-placeholder{ color: #ccc; }
 
 @font-face {
-	font-family: 'icomoon';
-	src:url('fonts/icomoon.eot?-ey1r05');
-	src:url('fonts/icomoon.eot?#iefix-ey1r05') format('embedded-opentype'),
-		url('fonts/icomoon.woff?-ey1r05') format('woff'),
-		url('fonts/icomoon.ttf?-ey1r05') format('truetype'),
-		url('fonts/icomoon.svg?-ey1r05#icomoon') format('svg');
-	font-weight: normal;
-	font-style: normal;
+  font-family: 'icomoon';
+  src:url('fonts/icomoon.eot?khistc');
+  src:url('fonts/icomoon.eot?#iefixkhistc') format('embedded-opentype'),
+    url('fonts/icomoon.woff?khistc') format('woff'),
+    url('fonts/icomoon.ttf?khistc') format('truetype'),
+    url('fonts/icomoon.svg?khistc#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 
 [class^="icon-"], [class*=" icon-"] {
