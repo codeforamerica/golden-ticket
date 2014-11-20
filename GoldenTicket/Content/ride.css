@@ -4,6 +4,10 @@
 
 /* @override http://preklottery.local/stylesheets/ride.css */
 
+/* @override http://preklottery.local/stylesheets/ride.css */
+
+/* @override http://preklottery.local/stylesheets/ride.css */
+
 /* @group bootstrap */
 
 body{
@@ -12,7 +16,7 @@ body{
 	font-size: 18px;
 }
 
-@media screen and (min-width: 48em){ html, body{ font-size: 24px; } }
+@media screen and (min-width: 48em){ html, body{ font-size: 20px; } }
 
 a{
 	color: #1f7ab8;
@@ -121,7 +125,7 @@ header#header nav a.schools::before,
 header#header nav a.settings::before,
 header#header nav a.sign-out::before{ 
 	text-decoration: none;
-	content: "signout";
+	content: "sign out";
 	font-family: 'icomoon';
 	speak: none;
 	font-style: normal;
@@ -181,7 +185,7 @@ header#header nav.nav-secondary a.settings::before{ content: "settings"; }
 
 body main header{
 	font-family: "Titillium Web", Trebuchet MS;
-	font-size: 1.6rem;
+	font-size: 1.6em;
 	font-weight: 100;
 	line-height: 1.33em;
 	color: #333;
@@ -210,7 +214,10 @@ main header span{
 	font-weight: 100;
 	line-height: 1.33em;
 	color: #333;
-	margin-bottom: 1.2em;
+}
+
+main header .custom-select{
+	margin-top: -0.4em !important;
 }
 
 @media screen & (min-width: 40em){
@@ -315,27 +322,228 @@ table .table-people-col-actions a{ display: inline-block; }
 table .table-people-col-actions a:hover{ text-decoration: underline; }
 table.table-applications tbody tr:hover a{ background: #fff2c0; }
 
+table.table-applications thead td.table-applications-col-duplicate{ text-align: right; }
+
+table.table-applications thead td.table-applications-col-duplicate,
+table.table-applications tbody td.table-applications-col-duplicate{
+	border: none;
+}
+
+table.table-applications thead td.table-applications-col-duplicate span{ text-indent: 9999em; display: inline-block; }
+
+table.table-applications td.table-applications-col-duplicate,
+table.table-applications td.table-applications-col-delete{
+	text-transform: lowercase;	
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 0.8rem;
+	/* Enable Ligatures ================ */
+	-webkit-font-feature-settings: "liga";
+	-moz-font-feature-settings: "liga=1";
+	-moz-font-feature-settings: "liga";
+	-ms-font-feature-settings: "liga" 1;
+	-o-font-feature-settings: "liga";
+	font-feature-settings: "liga";
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	font-size: 16px;
+	width: 1.4em;
+}
+
+table.table-applications td.table-applications-col-duplicate span.label{ display: none; }
+table.table-applications td.table-applications-col-duplicate span.icon-duplicate{ display: block; }
+
+span.icon-delete::before{ content: "delete"; }
+span.icon-duplicate::before{ content: "potential duplicate"; }
+
+table.table-applications thead td.table-applications-col-delete{ visibility: hidden; }
+table.table-applications td.table-applications-col-delete{ text-align: right; padding-right: 0.4em; border: none;}
+table.table-applications td.table-applications-col-delete button{ text-transform: lowercase; visibility: hidden; }
+table.table-applications tr:hover td.table-applications-col-delete button{ visibility: visible; }
+/* @end */
+
+/* @group shared */
+
+/* @group icons */
+
+
+
+/* @end */
+
+.notice {
+	background: #ffeead;
+	color: #4b2d06;
+	line-height: 1.4rem;
+	padding: 0.4em 1em 0.4em;
+	font-size: 0.8em;
+	-moz-border-radius: 0.2rem;
+	border-radius: 0.2rem;
+	margin: 0.7rem -0.08rem 1.4rem;
+	border: 0.08em solid #ffd880;
+	position: relative;
+}
+
+.notice h1{
+	color: #b2400c !important;
+	font-size: 1em;
+	font-weight: 600;
+	margin-top: 0.2em;
+}
+
+.notice form{
+	margin-bottom: 0.4em;
+}
+
+nav{ clear: both; }
+
+nav ul{
+	border-top: 0.2rem solid #eee;	
+	padding-top: 1.4rem;
+}
+
+nav ul li{
+	margin-bottom: 0.7rem;
+	list-style-type: none;
+}
+
+a.export,
+a.import,
+a.show-deleted{
+	display: inline-block;
+	vertical-align: middle;
+	position: relative;
+	padding-left: 1.4em;
+	margin-bottom: 0.4em;
+	font-size: 0.8rem;
+}
+
+a.show-deleted{
+	padding-left: 0;
+}
+
+
+a.export::before,
+a.import::before{
+	text-decoration: none;
+	content: "excel";
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 0.8rem;
+	/* Enable Ligatures ================ */
+	-webkit-font-feature-settings: "liga";
+	-moz-font-feature-settings: "liga=1";
+	-moz-font-feature-settings: "liga";
+	-ms-font-feature-settings: "liga" 1;
+	-o-font-feature-settings: "liga";
+	font-feature-settings: "liga";
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-size: 1em;
+}
 
 /* @end */
 
 /* @group views */
 
-/* @group Delete, New */
+/* @group loading */
+
+.loading{ 
+	background: #eee; 
+	text-align: center;
+}
+
+.loading header#header h1,
+.loading header#header h1 a{
+	float: none;	
+}
+.loading .site-width{ padding: 0; }
+
+.loading main{
+	border-bottom: none;
+	max-width: 24rem;
+	padding: 1.4rem;
+	margin: 0 auto;
+	background: white;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	text-align: center;
+	border-style: solid;
+	border-color: #60af45;
+}
+
+.loading main .icon-loading{
+  -webkit-animation: spinner 1s infinite linear;
+  -moz-animation: spinner 1s infinite linear;
+  -o-animation: spinner 1s infinite linear;
+  animation: spinner 1s infinite linear;
+  font-family: 'icomoon';
+  text-transform: lowercase;
+  display: block;
+  margin: 1em;
+  font-size: 2em;
+  color: #ffc800;
+}
+
+.loading main a{ font-size: 0.8rem; }
+
+
+@-webkit-keyframes spinner {
+  0%   { -webkit-transform:  rotate(0deg); }
+  100% { -webkit-transform:  rotate(360deg); }
+}
+
+@-moz-keyframes spinner {
+  0%   { -moz-transform:  rotate(0deg); }
+  100% { -moz-transform:  rotate(360deg); }
+}
+
+@-o-keyframes spinner {
+  0%   { -o-transform:  rotate(0deg); }
+  100% { -o-transform:  rotate(360deg); }
+}
+
+@keyframes spinner {
+  0%   { transform:  rotate(0deg); }
+  100% { transform:  rotate(360deg); }
+}
+
+
+
+/* @end */
+
+/* @group Delete, New, Reset */
 
 .schools-delete,
 .schools-new,
 .applications-delete,
-.people-new{ background: #eee; }
+.people-new,
+.lottery-reset{ background: #eee; }
 
 .schools-delete main .site-width,
 .schools-new main .site-width,
 .applications-delete main .site-width,
-.people-new main .site-width{ padding: 0; }
+.people-new main .site-width,
+.lottery-reset main .site-width{ padding: 0; }
 
 .schools-delete main,
 .schools-new main,
 .applications-delete main,
-.people-new main{
+.people-new main,
+.lottery-reset main{
 	border-bottom: none;
 	border: 0.2rem solid #ff514d;
 	max-width: 24rem;
@@ -348,35 +556,47 @@ table.table-applications tbody tr:hover a{ background: #fff2c0; }
 }
 
 
-@media screen && (min-width: 24em){	
+.schools-delete main h1,
+.schools-new main h1,
+.applications-delete main h1,
+.people-new main h1,
+.lottery-reset main h1{ 
+	font-size: 1.4rem; 
+	line-height: 1.2;
+}
+
+.applications-delete #header h1,
+.applications-delete #header h1 a,
+.lottery-reset #header h1,
+.lottery-reset #header h1 a,
+.applications-delete main h1,
+.lottery-reset main h1{
+	text-align: center;
+	float: none;
+}
+
+
+@media screen and (min-width: 24em){	
 	.schools-delete main,
 	.schools-new main,
 	.applications-delete main,
-	.people-new main{
-	padding: 1.4rem;
+	.people-new main,
+	.lottery-reset main{
+		padding: 1.4rem;
+		max-width: 28em;
 	}
 }
 
 .schools-new main h1,
 .schools-delete main h1,
-.applications-delete main h1{
-	margin-bottom: 0;
+.applications-delete main h1,
+.lottery-reset main h1{
+	margin-bottom: 1em;
 }
 
 .people-new main,
 .schools-new main{
 	border-color: #009253;
-}
-
-@media screen && (min-width: 24em){
-	
-	.schools-delete main,
-	.schools-new main,
-	.applications-delete main,
-	.people-new main{
-		padding: 1.4em;
-		max-width: 28em;
-	}
 }
 
 .schools-new .field-small span.percentage{ color: #888;	}
@@ -397,7 +617,7 @@ table.table-applications tbody tr:hover a{ background: #fff2c0; }
 	border-radius: 0.2rem;
 	width: 48%;
 	float: left;
-		-webkit-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	padding: 0.7rem;
@@ -424,22 +644,14 @@ table.table-applications tbody tr:hover a{ background: #fff2c0; }
 }
 
 .school .adr{
-	margin-bottom: 0.2em;
+	margin-bottom: 0.4em;
 }
 
 .school span.classroom-count,
-.school span.poverty-threshold{ font-size: 0.7rem; }
-
-.school span.classroom-count::after{
-	content: "";
-	width: 0.4em;
-	height: 0.4em;
-	background: #555;
-	display: inline-block;
-	vertical-align: middle;
-	-moz-border-radius: 100%;
-	border-radius: 100%;
-	margin: -0.3em 0.2em 0;	
+.school span.poverty-threshold{ 
+	font-size: 0.7rem; 
+	line-height: 1.4;
+	display: block;
 }
 
 .school a,
@@ -564,6 +776,22 @@ body[class^=applications] main .page h1{
 	color: #3f7e73;
 }
 
+
+body[class^=applications] main aside dl{
+	padding-left: 2em;
+}
+body[class^=applications] main aside dd,
+body[class^=applications] main aside dt{
+	border: none;
+	padding: 0;
+}
+
+body[class^=applications] main aside dt{
+	width: 2em;
+	margin-left: -2em;
+}
+
+
 /* @end */
 
 /* @group Application show, Application edit */
@@ -668,11 +896,16 @@ fieldset#guardian-relationship legend{ font-weight: normal; }
 /* @group Settings */
 
 body[class^=settings] main .page legend{
-	font-size: 1em;
+	font-size: 1.125em;
 	margin-bottom: 0.4em;
 }
 
 .settings fieldset{ margin-bottom: 2.4rem; }
+
+.settings main{
+	max-width: 32em;
+	margin: 0 auto;
+}
 
 .settings main table{
 	table-layout: fixed;
@@ -744,83 +977,5 @@ body[class^=settings] main .page legend{
 
 
 /* @end */
-
-/* @end */
-
-/* @group shared */
-
-.notice {
-	background: #ffeead;
-	color: #4b2d06;
-	line-height: 1.4rem;
-	padding: 0.4em 1em 0.4em;
-	font-size: 0.8em;
-	-moz-border-radius: 0.2rem;
-	border-radius: 0.2rem;
-	margin: 0.7rem -0.08rem 1.4rem;
-	border: 0.08em solid #ffd880;
-	position: relative;
-}
-
-.notice h1{
-	color: #b2400c !important;
-	font-size: 1em;
-	font-weight: 600;
-	margin-top: 0.2em;
-}
-
-.notice form{
-	margin-bottom: 0.4em;
-}
-
-nav{ clear: both; }
-
-nav ul{
-	border-top: 0.2rem solid #eee;	
-	padding-top: 1.4rem;
-}
-
-nav ul li{
-	margin-bottom: 0.7rem;
-	list-style-type: none;
-}
-
-a.export,
-a.import{
-	display: inline-block;
-	vertical-align: middle;
-	position: relative;
-	padding-left: 1.4em;
-	margin-bottom: 0.4em;
-	font-size: 0.8rem;
-}
-
-
-a.export::before,
-a.import::before{
-	text-decoration: none;
-	content: "excel";
-	font-family: 'icomoon';
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 0.8rem;
-	/* Enable Ligatures ================ */
-	-webkit-font-feature-settings: "liga";
-	-moz-font-feature-settings: "liga=1";
-	-moz-font-feature-settings: "liga";
-	-ms-font-feature-settings: "liga" 1;
-	-o-font-feature-settings: "liga";
-	font-feature-settings: "liga";
-	/* Better Font Rendering =========== */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	position: absolute;
-	top: 0;
-	left: 0;
-	font-size: 1em;
-}
 
 /* @end */
