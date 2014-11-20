@@ -160,44 +160,44 @@
     <value>Direccion de Correo Electronico</value>
   </data>
   <data name="Father" xml:space="preserve">
-    <value>Father</value>
+    <value>Padre</value>
   </data>
   <data name="Female" xml:space="preserve">
-    <value>Female</value>
+    <value>Hembra</value>
   </data>
   <data name="First" xml:space="preserve">
-    <value>First</value>
+    <value>Primer</value>
   </data>
   <data name="FullName" xml:space="preserve">
-    <value>Full name</value>
+    <value>Nombre Completo</value>
   </data>
   <data name="Guardian" xml:space="preserve">
     <value>Guardian</value>
   </data>
   <data name="GuardianInformation" xml:space="preserve">
-    <value>Guardian information</value>
+    <value>Información del Guardian</value>
   </data>
   <data name="HouseholdIncomeMissing" xml:space="preserve">
-    <value>The average monthly income must be entered or selected.</value>
+    <value> El promedio de Ingresos Mensual debe ser introducido o seleccionado.</value>
   </data>
   <data name="HouseholdMembers" xml:space="preserve">
-    <value>Household members</value>
+    <value>Miembros del Hogar</value>
   </data>
   <data name="HouseholdMembersMissingOrInvalid" xml:space="preserve">
-    <value>The number of household members must be entered and must be at least 2 people.</value>
+    <value>El Número de Miembros del Hogar debe ser Introducido y debe ser al menos 2 Personas.</value>
   </data>
   <data name="HouseholdMonthlyIncome" xml:space="preserve">
-    <value>Household monthly income</value>
+    <value>Promedio de Ingresos Mensual</value>
   </data>
   <data name="IneligibleBirthday" xml:space="preserve">
-    <value>Student is not an eligible age. He/she must be 4 years old on 9/1/{0}.</value>
+    <value>Edad del Estudiante no es elegible. El/Ella debe tener 4 años de edad en 9/1/{0}.</value>
     <comment>{0} is the current year (ex: 2014)</comment>
   </data>
   <data name="Last" xml:space="preserve">
-    <value>Last</value>
+    <value>Apellido</value>
   </data>
   <data name="LettersSpacesAndApostrophesOnlyError" xml:space="preserve">
-    <value>{0} can only have letters, spaces, dashes, and apostrophes.</value>
+    <value>{0} sólo puede tener letras, espacios, guiones y apóstrofes.</value>
     <comment>{0} is the property name (ex: Student first name)</comment>
   </data>
   <data name="Male" xml:space="preserve">
