@@ -43,7 +43,8 @@
                 </div>
                 <div class="field field-email-address">
                     @Html.LabelFor(model => model.Contact1Email, @GoldenTicketText.EmailAddress)
-                    @Html.TextBoxFor(model => model.Contact1Email)
+                    <p class="note" id="guardian-email-address-note">@Html.Raw(string.Format(GoldenTicketText.ForEmailAssistance, ViewBag.GlobalConfig.ContactEmail, ViewBag.GlobalConfig.ContactPersonName, ViewBag.GlobalConfig.ContactPhone))</p>
+                    @Html.TextBoxFor(model => model.Contact1Email, new { @aria_describedby="guardian-email-address-note"})
                 </div>
                 <fieldset>
                     <legend>@string.Format(GoldenTicketText.RelationshipToPerson, @Model.StudentFirstName)</legend>
