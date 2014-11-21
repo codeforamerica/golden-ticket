@@ -175,7 +175,7 @@
     <Compile Include="Models\GlobalConfig.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\PovertyConfig.cs" />
-    <Compile Include="Models\Program.cs" />
+    <Compile Include="Models\School.cs" />
     <Compile Include="Models\Applied.cs" />
     <Compile Include="Models\Shuffled.cs" />
     <Compile Include="Models\Selected.cs" />
@@ -208,7 +208,7 @@
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\logo_small.png" />
     <Content Include="Content\reset.css" />
-    <Content Include="Content\ride.css" />
+    <Content Include="Content\admin.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\styles.css" />
@@ -264,10 +264,11 @@
     <Content Include="Views\Registration\Review.cshtml" />
     <Content Include="Views\Registration\SchoolSelection.cshtml" />
     <Content Include="Views\Tester\Index.cshtml" />
+    <Content Include="Views\Admin\AllApplications.cshtml" />
+    <Content Include="Views\Shared\_AdminLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Admin\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

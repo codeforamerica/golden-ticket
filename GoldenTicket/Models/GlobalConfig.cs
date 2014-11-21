@@ -20,6 +20,6 @@ namespace GoldenTicket.Models
          * This is the day that the lottery was run. 
          * If null or not set, the lottery has not yet been run.
          **/
-        public DateTime LotteryRunDate { get; set; }
+        public DateTime? LotteryRunDate { get; set; }
     }
 }
