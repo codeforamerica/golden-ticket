@@ -201,79 +201,79 @@
     <comment>{0} is the property name (ex: Student first name)</comment>
   </data>
   <data name="Male" xml:space="preserve">
-    <value>Male</value>
+    <value>Varón</value>
   </data>
   <data name="Middle" xml:space="preserve">
-    <value>Middle</value>
+    <value>Medio</value>
   </data>
   <data name="Mother" xml:space="preserve">
-    <value>Mother</value>
+    <value>Madre</value>
   </data>
   <data name="NoSchoolSelected" xml:space="preserve">
-    <value>At least one school must be selected.</value>
+    <value>Al Menos una Escuela debe ser Seleccionada.</value>
   </data>
   <data name="Other" xml:space="preserve">
-    <value>Other</value>
+    <value>Otro</value>
   </data>
   <data name="ParentHeaderTitle" xml:space="preserve">
-    <value>2015 Application for Pre-Kindergarten</value>
+    <value>2015 Solicitud de Pre-kinder</value>
   </data>
   <data name="ParentIntroApplyToTheLotteryButton" xml:space="preserve">
-    <value>Apply to the lottery</value>
+    <value>Solicitar a la Loteria</value>
   </data>
   <data name="ParentIntroContactInfo" xml:space="preserve">
-    <value>For further assistance, email &lt;a href="mailto:{0}"&gt;{1}&lt;/a&gt; or call him at &lt;a href="tel:{2}"&gt;{2}&lt;/a&gt;.</value>
+    <value>Para asistencia adicional, mandar un correo electronico a &lt;a href="mailto:{0}"&gt;{1}&lt;/a&gt; o llamar al &lt;a href="tel:{2}"&gt;{2}&lt;/a&gt;.</value>
     <comment>{0} is contact person email address, {1} is contact person name, {2} is contact person phone number</comment>
   </data>
   <data name="ParentIntroPageIntro" xml:space="preserve">
-    <value>Thanks for your interest in enrolling your student in one of the state's pre-kindergarten classes. Due to demand, students must be selected for enrollment through a state-supervised lottery.</value>
+    <value>Gracias por su interés en inscribir a su estudiante en una de las clases de Pre-Kinder del estado. Debido a la demanda, los estudiantes deben ser seleccionados para la inscripción a través de una lotería supervisada por el estado.</value>
   </data>
   <data name="ParentIntroWhatHappensNextBody" xml:space="preserve">
-    <value>Applications to the statewide lottery are accepted until August 15th. Selected applicants will be notified via phone on August 16th.</value>
+    <value>Solicitudes para la lotería estatal se aceptan hasta el 15 de Agosto. Los solicitantes seleccionados serán notificados a través del teléfono el 16 de Agosto.</value>
   </data>
   <data name="ParentIntroWhatHappensNextHeader" xml:space="preserve">
-    <value>What happens next?</value>
+    <value>¿Cuál es el siguiente paso?</value>
   </data>
   <data name="ParentIntroWhatYouNeedToKnowBody" xml:space="preserve">
-    <value>To be eligible for enrollment, you child must turn 4 years of age by September 1 and live in the community in which their pre-k program is located. A copy of the child's birth certificate and proof of residency will be required upon enrollment.</value>
+    <value>Para ser elegible para la inscripción, su niño debe tener 4 años de edad el 1 de septiembre y vivir en la comunidad donde se encuentra su programa pre-kinder. Una copia de la Acta de nacimiento y comprobante de residencia será requeridos durante la inscripción.</value>
   </data>
   <data name="ParentIntroWhatYouNeedToKnowHeader" xml:space="preserve">
-    <value>What you need to know</value>
+    <value>Lo que necesita saber</value>
   </data>
   <data name="PhoneAndFormat" xml:space="preserve">
-    <value>Phone (###-###-####)</value>
+    <value>Número de teléfono (###-###-####)</value>
   </data>
   <data name="PhoneValidationError" xml:space="preserve">
-    <value>{0} must be 10 numbers long (area code +phone number).</value>
+    <value>{0} Debe ser de 10 números en cantidad (código de área +número telefónico).</value>
     <comment>{0} is the property name (ex: Guardian phone number)</comment>
   </data>
   <data name="PleaseProvideBasicInformationAbout" xml:space="preserve">
-    <value>Please provide some basic information about {0}'s primary guardian.</value>
+    <value>Por favor proporcione un poco de información básica sobre {0}'s guardián primario.</value>
     <comment>{0} is a student's first name.</comment>
   </data>
   <data name="PropertyMissing" xml:space="preserve">
-    <value>{0} must be entered.</value>
+    <value>{0} Debe de incluir.</value>
     <comment>{0} is the property name (ex: Student first name)</comment>
   </data>
   <data name="ProvideBasicStudentInformation" xml:space="preserve">
-    <value>Please provide some basic information about the student you wish to enter into the lottery.</value>
+    <value>Por favor de proporcionar información básica sobre el estudiante que desea entrar en la lotería.</value>
   </data>
   <data name="RelationshipToPerson" xml:space="preserve">
-    <value>Relationship to {0}</value>
+    <value>Relación a {0}</value>
     <comment>{0} is a person's name (ex: student first name)</comment>
   </data>
   <data name="Stepfather" xml:space="preserve">
-    <value>Stepfather</value>
+    <value>Padrastro</value>
   </data>
   <data name="Stepmother" xml:space="preserve">
-    <value>Stepmother</value>
+    <value>Madrastra</value>
   </data>
   <data name="StepXOfY" xml:space="preserve">
-    <value>You're on step {0} of {1}:</value>
+    <value>Está en el procedimiento {0} de {1}:</value>
     <comment>{0} is current step, {1} is total steps (ex: 1, 4)</comment>
   </data>
   <data name="StreetAddress1" xml:space="preserve">
-    <value>Street address (line 1)</value>
+    <value>Dirección de hogar (line 1)</value>
   </data>
   <data name="StreetAddress2" xml:space="preserve">
     <value>Street address (line 2)</value>
