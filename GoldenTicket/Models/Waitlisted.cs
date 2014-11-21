@@ -15,6 +15,6 @@ namespace GoldenTicket.Models
         public virtual Applicant Applicant { get; set; }
 
         public int ProgramID { get; set; }
-        public virtual Program Program { get; set; }
+        public virtual School Program { get; set; }
     }
 }

@@ -41,7 +41,7 @@ namespace GoldenTicket.DAL
 
 
             // Programs
-            var willysSchool = new Program
+            var willysSchool = new School
             {
                 Name = "Willy Wonka School",
                 StreetAddress1 = "1000 Chocolate Factory Rd",
@@ -54,9 +54,9 @@ namespace GoldenTicket.DAL
                 PovertyRate = 0.87,
                 GenderBalance = 0.5
             };
-            context.Programs.Add(willysSchool);
+            context.Schools.Add(willysSchool);
 
-            var arthurAcademy = new Program
+            var arthurAcademy = new School
             {
                 Name = "Arthur Academy",
                 StreetAddress1 = "999 Gobstopper Blvd",
@@ -68,9 +68,9 @@ namespace GoldenTicket.DAL
                 PovertyRate = 0.87,
                 GenderBalance = 0.5
             };
-            context.Programs.Add(arthurAcademy);
+            context.Schools.Add(arthurAcademy);
 
-            var giantPeach = new Program
+            var giantPeach = new School
             {
                 Name = "Giant Peach",
                 StreetAddress1 = "1 Humongous Fruit Blvd",
@@ -83,7 +83,7 @@ namespace GoldenTicket.DAL
                 PovertyRate = 0.35,
                 GenderBalance = 0.5
             };
-            context.Programs.Add(giantPeach);
+            context.Schools.Add(giantPeach);
             
             context.SaveChanges();
         }

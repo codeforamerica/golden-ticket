@@ -231,7 +231,7 @@ namespace GoldenTicket.Controllers
                 applied.ProgramID = programId;
 
                 // Confirm that the program ID is within the city lived in (no sneakers into other districts)
-                var program = database.Programs.Find(programId);
+                var program = database.Schools.Find(programId);
                 if(program != null && program.City.Equals(populatedApplicant.StudentCity, StringComparison.CurrentCultureIgnoreCase))
                 {
                     database.Applieds.Add(applied);
@@ -308,7 +308,7 @@ namespace GoldenTicket.Controllers
             ISet<string> districtNames = new HashSet<string>();
             districtNames.Add("");
 
-            foreach(Program program in database.Programs)
+            foreach(School program in database.Schools)
             {
                 districtNames.Add(program.City);
             }
@@ -441,7 +441,7 @@ namespace GoldenTicket.Controllers
 
         private void SchoolSelectionViewSetup(Applicant applicant)
         {
-            var eligiblePrograms = database.Programs.Where(p => p.City == applicant.StudentCity).OrderBy(p => p.Name).ToList();
+            var eligiblePrograms = database.Schools.Where(p => p.City == applicant.StudentCity).OrderBy(p => p.Name).ToList();
             ViewBag.Programs = eligiblePrograms;
 
             var applieds = database.Applieds.Where(a => a.ApplicantID == applicant.ID).ToList();
@@ -451,7 +451,7 @@ namespace GoldenTicket.Controllers
         private void ReviewViewSetup(Applicant applicant)
         {
             var applieds = database.Applieds.Where(a => a.ApplicantID == applicant.ID).ToList();
-            var programs = new List<Program>();
+            var programs = new List<School>();
 
             applieds.ForEach(a => programs.Add(a.Program));
 

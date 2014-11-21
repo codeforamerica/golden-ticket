@@ -6,9 +6,9 @@ using System.Web;
 
 namespace GoldenTicket.Models
 {
-    public class Program
+    public class School
     {
-        public Program()
+        public School()
         {
             Applieds = new List<Applied>();
             Shuffleds = new List<Shuffled>();
