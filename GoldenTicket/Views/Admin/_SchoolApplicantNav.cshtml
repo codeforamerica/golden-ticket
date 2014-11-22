@@ -1,0 +1,15 @@
+﻿@if (ViewBag.LotteryRunDate == null) // If the lottery has NOT been run
+{
+    <h1>Applications for</h1>
+}
+else // If the lottery has been run
+{
+    <h1>Lottery results for</h1>
+}
+@using (Html.BeginForm())
+{
+    <div class="field field-select">
+        @Html.DropDownList("school-select", new SelectList(ViewBag.Schools, "ID", "Name"))
+        <input type="submit" class="button" value="View" />
+    </div>
+}

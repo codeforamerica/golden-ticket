@@ -264,8 +264,11 @@
     <Content Include="Views\Registration\Review.cshtml" />
     <Content Include="Views\Registration\SchoolSelection.cshtml" />
     <Content Include="Views\Tester\Index.cshtml" />
-    <Content Include="Views\Admin\AllApplications.cshtml" />
+    <Content Include="Views\Admin\AllApplicants.cshtml" />
     <Content Include="Views\Shared\_AdminLayout.cshtml" />
+    <Content Include="Views\Admin\_ApplicantTable.cshtml" />
+    <Content Include="Views\Admin\_SchoolApplicantNav.cshtml" />
+    <Content Include="Views\Admin\SchoolApplicants.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

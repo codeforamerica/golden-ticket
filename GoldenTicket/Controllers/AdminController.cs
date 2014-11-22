@@ -12,7 +12,7 @@ namespace GoldenTicket.Controllers
     {
 
         private GoldenTicketDbContext db = new GoldenTicketDbContext();
-        private static School allSchoolSchool = GetAllSchoolSchool();
+        private static School ALL_SCHOOL_SCHOOL = GetAllSchoolSchool();
 
         // All Applications
         // GET: Admin
@@ -21,12 +21,29 @@ namespace GoldenTicket.Controllers
             return Redirect("AllApplications");
         }
 
-        public ActionResult AllApplications()
+
+        private void PrepareApplicationsView()
+        {
+            ViewBag.LotteryRunDate = GetLotteryRunDate();
+            ViewBag.IsLotteryClosed = GetLotteryCloseDate() <= DateTime.Now;
+
+            var schools = db.Schools.OrderBy(s => s.Name).ToList();
+            schools.Insert(0, ALL_SCHOOL_SCHOOL);
+            ViewBag.Schools = schools;
+        }
+
+        public ActionResult AllApplicants()
         {
             PrepareApplicationsView();
 
             ViewBag.Applicants = db.Applicants.Where( a=>a.ConfirmationCode != null ).OrderBy(a => a.StudentLastName).ToList();
             
+            return View();
+        }
+
+        public ActionResult SchoolApplicants(string id)
+        {
+            ViewBag.TestID = id;
             return View();
         }
 
@@ -36,23 +53,25 @@ namespace GoldenTicket.Controllers
 
         private static School GetAllSchoolSchool()
         {
-            School school = new School();
+            var school = new School();
             school.ID = 0;
             school.Name = "All Schools";
 
             return school;
         }
 
-        private void PrepareApplicationsView()
+        private DateTime? GetLotteryRunDate()
         {
-            var globalConfig = db.GlobalConfigs.First();
-            ViewBag.LotteryRunDate = globalConfig.LotteryRunDate;
-            ViewBag.IsLotteryClosed = globalConfig.CloseDate <= DateTime.Now;
-
-            var schools = db.Schools.OrderBy(s => s.Name).ToList();
-            schools.Insert(0, GetAllSchoolSchool());
-            ViewBag.Schools = schools;
+            //return db.GlobalConfigs.First().LotteryRunDate; // real call
+            return null; // forced lottery not run
+            //return new DateTime(2014, 11, 21); // forced lottery run already
         }
 
+        private DateTime? GetLotteryCloseDate()
+        {
+            //return db.GlobalConfigs.First().CloseDate; // real call
+            //return new DateTime(2014, 11, 20); // forced lottery closed
+            return new DateTime(2014, 11, 30); // forced lottery open
+        }
     }
 }

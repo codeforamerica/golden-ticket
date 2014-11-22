@@ -1,0 +1,49 @@
+﻿@using GoldenTicket.Models
+@model List<Applicant>
+           
+<table class="table-applications">
+    <thead>
+        <tr>
+            <td class="table-applications-col-fname">
+                <span>First Name</span>
+            </td>
+            <td class="table-applications-col-lname">
+                <span>Last Name</span>
+            </td>
+            <td class="table-applications-col-gender">
+                <span>Gender</span>
+            </td>
+            <td class="table-applications-col-poverty">
+                <span>Poverty</span>
+            </td>
+            <td class="table-applications-col-delete">
+                <span>Delete</span>
+            </td>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            @foreach (Applicant applicant in Model)
+            {
+                <td class="table-applications-col-fname">
+                    <a href="ViewApplicant/@applicant.ID">@applicant.StudentFirstName</a>
+                </td>
+                <td class="table-applications-col-lname">
+                    <a href="ViewApplicant/@applicant.ID">@applicant.StudentLastName</a>
+                </td>
+                <td class="table-applications-col-gender">
+                    <a href="ViewApplicant/@applicant.ID">@applicant.StudentGender.ToString()</a>
+                </td>
+                <td class="table-applications-col-poverty">
+                    <a href="ViewApplicant/@applicant.ID">
+                        <span class="badge-poverty badge-poverty-below">Below</span>
+                    </a>
+                </td>
+                <td class="table-applications-col-delete">
+                    <a href="DeleteApplicant/@applicant.ID"><span>Delete</span></a>
+                </td>
+            }
+        </tr>
+    </tbody>
+</table>

@@ -4,6 +4,8 @@
 
 /* @override http://preklottery.local/stylesheets/forms.css */
 
+/* @override http://preklottery.local/stylesheets/forms.css */
+
 /* @override http://ticket2ride.local/stylesheets/forms.css */
 
 /* @override http://preklottery.local/stylesheets/forms.css */
@@ -88,6 +90,7 @@ textarea{
   box-shadow: none;
   width: 100%;
   background: #fafafa;
+  -webkit-appearance: none;
 }
 
 @media screen and (min-width: 24em) {
@@ -398,7 +401,6 @@ fieldset p.note{
 	margin-top: -0.3rem;
 	margin-bottom: 1rem;
 }
-
 
 div.field.field-other{
   float: left;
@@ -797,11 +799,11 @@ span.badge-poverty{
 	height: 1.2em;
 	line-height: 1.2em;
 	padding: 0.4em;
-	margin: -1.2em 0.2rem;
+	margin: -1.2rem 0.2rem;
 	display: inline-block;
 	vertical-align: middle;
 	position: relative;
-	top: -0.2em;
+	top: -0.1rem;
 }
 
 span.badge-poverty.badge-poverty-above{
@@ -810,74 +812,6 @@ span.badge-poverty.badge-poverty-above{
 
 span.badge-poverty.badge-poverty-below{
 	background: #b34100;
-}
-
-
-/* @end */
-
-/* @group pagination */
-
-nav.pagination{
-	font-size: 0.8rem;
-	margin-bottom: 1.4em;
-	clear: both;
-}
-
-nav.pagination a{
-	display: inline-block;
-	padding: 0 0.7rem;
-	height: 1.4rem;
-	line-height: 1.4rem;
-	text-align: center;
-	background: white;	
-	text-decoration: none;
-	-moz-border-radius: 0.1rem;
-	border-radius: 0.1rem;
-	border: 2px solid #eee;
-	-moz-border-radius: 0.2rem;
-	border-radius: 0.2rem;
-}
-
-nav.pagination a:hover{
-	color: #007fab;
-	border-color: #00c3e2;
-}
-
-nav.pagination a.is-active{
-	background: #2b82b7;
-	border-color: #2b82b7;
-	color: white;
-}
-
-@media screen and (min-width: 24em){ 
-	nav.pagination{ float: left; }
-	nav.pagination a{ 
-	padding: 0 0.6rem;
-	
-	}
-}
-
-/* @end */
-
-/* @group signpost */
-
-div.signpost{
-	font-size: 0.9rem;
-	margin-top: 1.4rem;
-	color: #888;
-}
-
-div.signpost a{ color: inherit; }
-div.signpost a:hover{
-	text-decoration: none;
-	color: #333;
-}
-
-@media screen and (min-width: 24em){ 
-	div.signpost{ 
-		float: right; 
-		margin-top: 0.7em;
-	}
 }
 
 
