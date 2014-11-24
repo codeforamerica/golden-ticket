@@ -1,0 +1,419 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BirthdayAndInstructions" xml:space="preserve">
+    <value>Fecha de Nacimiento (mm/dd/yyyy format)</value>
+  </data>
+  <data name="City" xml:space="preserve">
+    <value>Ciudad</value>
+  </data>
+  <data name="ConfirmationCode" xml:space="preserve">
+    <value>Codigo de Confirmación</value>
+  </data>
+  <data name="Contact1Email" xml:space="preserve">
+    <value>Dirección de correo electrónico del Guardian</value>
+  </data>
+  <data name="Contact1FirstName" xml:space="preserve">
+    <value>Primer Nombre del Guardian</value>
+  </data>
+  <data name="Contact1LastName" xml:space="preserve">
+    <value>Apellido del Guardian</value>
+  </data>
+  <data name="Contact1Phone" xml:space="preserve">
+    <value>Numero de Telefono del Guardian</value>
+  </data>
+  <data name="Contact1Relationship" xml:space="preserve">
+    <value>Relación del Guardian al Niño</value>
+  </data>
+  <data name="Contact2Email" xml:space="preserve">
+    <value>Dirección de Correo Electrónico Alternativo</value>
+  </data>
+  <data name="Contact2FirstName" xml:space="preserve">
+    <value>Primer Nombre de Contacto Alternativo</value>
+  </data>
+  <data name="Contact2LastName" xml:space="preserve">
+    <value>Apellido de Contacto Alternativo</value>
+  </data>
+  <data name="Contact2Phone" xml:space="preserve">
+    <value>Numero de Telefono de Contacto Alternativo</value>
+  </data>
+  <data name="Contact2Relationship" xml:space="preserve">
+    <value>Relación del Contacto Alternativo con el Niño</value>
+  </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>Direccion de Correo Electronico</value>
+  </data>
+  <data name="Father" xml:space="preserve">
+    <value>Padre</value>
+  </data>
+  <data name="Female" xml:space="preserve">
+    <value>Hembra</value>
+  </data>
+  <data name="First" xml:space="preserve">
+    <value>Primer</value>
+  </data>
+  <data name="FullName" xml:space="preserve">
+    <value>Nombre Completo</value>
+  </data>
+  <data name="Guardian" xml:space="preserve">
+    <value>Guardian</value>
+  </data>
+  <data name="GuardianInformation" xml:space="preserve">
+    <value>Información del Guardian</value>
+  </data>
+  <data name="HouseholdIncomeMissing" xml:space="preserve">
+    <value> El promedio de Ingresos Mensual debe ser introducido o seleccionado.</value>
+  </data>
+  <data name="HouseholdMembers" xml:space="preserve">
+    <value>Miembros del Hogar</value>
+  </data>
+  <data name="HouseholdMembersMissingOrInvalid" xml:space="preserve">
+    <value>El Número de Miembros del Hogar debe ser Introducido y debe ser al menos 2 Personas.</value>
+  </data>
+  <data name="HouseholdMonthlyIncome" xml:space="preserve">
+    <value>Promedio de Ingresos Mensual</value>
+  </data>
+  <data name="IneligibleBirthday" xml:space="preserve">
+    <value>Edad del Estudiante no es elegible. El/Ella debe tener 4 años de edad en 9/1/{0}.</value>
+    <comment>{0} is the current year (ex: 2014)</comment>
+  </data>
+  <data name="Last" xml:space="preserve">
+    <value>Apellido</value>
+  </data>
+  <data name="LettersSpacesAndApostrophesOnlyError" xml:space="preserve">
+    <value>{0} sólo puede tener letras, espacios, guiones y apóstrofes.</value>
+    <comment>{0} is the property name (ex: Student first name)</comment>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>Varón</value>
+  </data>
+  <data name="Middle" xml:space="preserve">
+    <value>Medio</value>
+  </data>
+  <data name="Mother" xml:space="preserve">
+    <value>Madre</value>
+  </data>
+  <data name="NoSchoolSelected" xml:space="preserve">
+    <value>Al Menos una Escuela debe ser Seleccionada.</value>
+  </data>
+  <data name="Other" xml:space="preserve">
+    <value>Otro</value>
+  </data>
+  <data name="ParentHeaderTitle" xml:space="preserve">
+    <value>2015 Solicitud de Pre-kinder</value>
+  </data>
+  <data name="ParentIntroApplyToTheLotteryButton" xml:space="preserve">
+    <value>Solicitar a la Loteria</value>
+  </data>
+  <data name="ParentIntroContactInfo" xml:space="preserve">
+    <value>Para asistencia adicional, mandar un correo electronico a &lt;a href="mailto:{0}"&gt;{1}&lt;/a&gt; o llamar al &lt;a href="tel:{2}"&gt;{2}&lt;/a&gt;.</value>
+    <comment>{0} is contact person email address, {1} is contact person name, {2} is contact person phone number</comment>
+  </data>
+  <data name="ParentIntroPageIntro" xml:space="preserve">
+    <value>Gracias por su interés en inscribir a su estudiante en una de las clases de Pre-Kinder del estado. Debido a la demanda, los estudiantes deben ser seleccionados para la inscripción a través de una lotería supervisada por el estado.</value>
+  </data>
+  <data name="ParentIntroWhatHappensNextBody" xml:space="preserve">
+    <value>Solicitudes para la lotería estatal se aceptan hasta el 15 de Agosto. Los solicitantes seleccionados serán notificados a través del teléfono el 16 de Agosto.</value>
+  </data>
+  <data name="ParentIntroWhatHappensNextHeader" xml:space="preserve">
+    <value>¿Cuál es el siguiente paso?</value>
+  </data>
+  <data name="ParentIntroWhatYouNeedToKnowBody" xml:space="preserve">
+    <value>Para ser elegible para la inscripción, su niño debe tener 4 años de edad el 1 de septiembre y vivir en la comunidad donde se encuentra su programa pre-kinder. Una copia de la Acta de nacimiento y comprobante de residencia será requeridos durante la inscripción.</value>
+  </data>
+  <data name="ParentIntroWhatYouNeedToKnowHeader" xml:space="preserve">
+    <value>Lo que necesita saber</value>
+  </data>
+  <data name="PhoneAndFormat" xml:space="preserve">
+    <value>Número de teléfono (###-###-####)</value>
+  </data>
+  <data name="PhoneValidationError" xml:space="preserve">
+    <value>{0} Debe ser de 10 números en cantidad (código de área +número telefónico).</value>
+    <comment>{0} is the property name (ex: Guardian phone number)</comment>
+  </data>
+  <data name="PleaseProvideBasicInformationAbout" xml:space="preserve">
+    <value>Por favor proporcione un poco de información básica sobre {0}'s guardián primario.</value>
+    <comment>{0} is a student's first name.</comment>
+  </data>
+  <data name="PropertyMissing" xml:space="preserve">
+    <value>{0} Debe de incluir.</value>
+    <comment>{0} is the property name (ex: Student first name)</comment>
+  </data>
+  <data name="ProvideBasicStudentInformation" xml:space="preserve">
+    <value>Por favor de proporcionar información básica sobre el estudiante que desea entrar en la lotería.</value>
+  </data>
+  <data name="RelationshipToPerson" xml:space="preserve">
+    <value>Relación a {0}</value>
+    <comment>{0} is a person's name (ex: student first name)</comment>
+  </data>
+  <data name="Stepfather" xml:space="preserve">
+    <value>Padrastro</value>
+  </data>
+  <data name="Stepmother" xml:space="preserve">
+    <value>Madrastra</value>
+  </data>
+  <data name="StepXOfY" xml:space="preserve">
+    <value>Está en el procedimiento {0} de {1}:</value>
+    <comment>{0} is current step, {1} is total steps (ex: 1, 4)</comment>
+  </data>
+  <data name="StreetAddress1" xml:space="preserve">
+    <value>Dirección de hogar (line 1)</value>
+  </data>
+  <data name="StreetAddress2" xml:space="preserve">
+    <value>Dirección de hogar (line 2)</value>
+  </data>
+  <data name="StreetAddressValidationError" xml:space="preserve">
+    <value>{0}Sólo puede tener letras, números, puntos, #s, guiones y espacios.</value>
+    <comment>{0} is the property name (ex: Student street address)</comment>
+  </data>
+  <data name="StudentBirthday" xml:space="preserve">
+    <value>Fecha de Nacimiento del Estudiante</value>
+  </data>
+  <data name="StudentCity" xml:space="preserve">
+    <value>Ciudad de Residencia del Estudiante</value>
+  </data>
+  <data name="StudentFirstName" xml:space="preserve">
+    <value>Primer Nombre del Estudiante</value>
+  </data>
+  <data name="StudentGender" xml:space="preserve">
+    <value>Sexo del Estudiante</value>
+  </data>
+  <data name="StudentInformation" xml:space="preserve">
+    <value>Information del Estudiante</value>
+  </data>
+  <data name="StudentLastName" xml:space="preserve">
+    <value>Apellido del Estudiante</value>
+  </data>
+  <data name="StudentMiddleName" xml:space="preserve">
+    <value>Segundo Nombre del Estudiante</value>
+  </data>
+  <data name="StudentStreetAddress1" xml:space="preserve">
+    <value>Dirección de calle del estudiante (line 1)</value>
+  </data>
+  <data name="StudentStreetAddress2" xml:space="preserve">
+    <value>Dirección de calle del estudiante (line 2)</value>
+  </data>
+  <data name="StudentZipCode" xml:space="preserve">
+    <value>Codigo Postal del Estudiante</value>
+  </data>
+  <data name="Zip" xml:space="preserve">
+    <value>Codigo Postal</value>
+  </data>
+  <data name="ZipCodeValidationError" xml:space="preserve">
+    <value>{0} debe tener 5 números (y opcionalmente puede tener un guión con 4 números adicionales).</value>
+    <comment>{0} is the property name (ex: Student ZIP code)</comment>
+  </data>
+  <data name="AverageHouseholdIncomeInstructions" xml:space="preserve">
+    <value>Por favor, introduzca el valor en dólares de los ingresos familiares mensuales (sin comas)</value>
+  </data>
+  <data name="AverageMonthlyIncomeAndExplanation" xml:space="preserve">
+    <value>Promedio de Ingreso Mensual (Combinacion total de Ingresos de Todos los Miembros del Hogar)</value>
+  </data>
+  <data name="HouseholdInformation" xml:space="preserve">
+    <value>Información del Hogar</value>
+  </data>
+  <data name="NumberOfPeopleInHousehold" xml:space="preserve">
+    <value>Cantitad de Personas en su Hogar</value>
+  </data>
+  <data name="NumberOfPeopleInHouseholdInstructions" xml:space="preserve">
+    <value>Por favor proporcione la información sobre el número de personas en su hogar y los ingresos combinados de todos los miembros.</value>
+  </data>
+  <data name="OrMore" xml:space="preserve">
+    <value>{0} o más</value>
+    <comment>{0} is a number. (ex: $1 or more)</comment>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Dirección de Hogar</value>
+  </data>
+  <data name="AgreementInformationIsCorrect" xml:space="preserve">
+    <value>La información proporcionada encima es correcta y entiendo que la presentación de documentos que contengan información falsa, es ilegal con el gobierno. (RIGL 11-18-1).</value>
+  </data>
+  <data name="AgreementReachableOnNotificationDate" xml:space="preserve">
+    <value>Confirmo que puedo ser alcanzado en los números de teléfono que aparecen en esta solicitud en {0} si mi hijo es elegido via la lotería del estado a participar en el programa estatal de Pre-K.</value>
+    <comment>{0} is notification date</comment>
+  </data>
+  <data name="AgreementResponsibleForTransportation" xml:space="preserve">
+    <value>Entiendo que si mi hijo es elegido para el programa estatal de Pre-K, soy responsable de proporcionar transporte regular desde y hacia el programa que asegura que mi niño&rsquo;s asistencia cada día. Si mi hijo está ausente por razones injustificadas (incluyendo las vacaciones familiares) por 20 días de escuela o más, yo entiendo que mi niño probablemente perderá su puesto en el programa estatal de Pre-K y le será dado al niño siguiente en la lista de inscripción estatal de Pre-K.</value>
+  </data>
+  <data name="AlternateContact" xml:space="preserve">
+    <value>Contacto Alterno</value>
+  </data>
+  <data name="AppliedTo" xml:space="preserve">
+    <value>Proporcionado a</value>
+  </data>
+  <data name="Birthday" xml:space="preserve">
+    <value>Fecha de Nacimiento</value>
+  </data>
+  <data name="BySubmittingThisForm" xml:space="preserve">
+    <value>Al someter este formulario, doy fe:</value>
+  </data>
+  <data name="ChooseOneOrMoreSchools" xml:space="preserve">
+    <value>Elija una o más escuelas para la cual {0} será considerado/a para la inscripción .</value>
+    <comment>{0} is the student's name</comment>
+  </data>
+  <data name="ConfirmationNumberIs" xml:space="preserve">
+    <value>Su número de confirmación es {0}</value>
+    <comment>{0] is confirmation number</comment>
+  </data>
+  <data name="EnrollAnotherFamilyMember" xml:space="preserve">
+    <value>Inscribir a otro miembro de la familia</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Sexo</value>
+  </data>
+  <data name="HowToContact" xml:space="preserve">
+    <value>Si tiene alguna pregunta, por favor de contactar a &lt;a href="mailto:{0}"&gt;{1}&lt;/a&gt; at &lt;a href="tel:{2}"&gt;{2}&lt;/a&gt;.</value>
+    <comment>{0} is the contact email, {1} is contact person name, {2} is contact phone number.</comment>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Número de Teléfono</value>
+  </data>
+  <data name="Relationship" xml:space="preserve">
+    <value>Relación</value>
+  </data>
+  <data name="Review" xml:space="preserve">
+    <value>Revisar</value>
+  </data>
+  <data name="ReviewApplication" xml:space="preserve">
+    <value>Revisión de la Solicitud</value>
+  </data>
+  <data name="ReviewInstructions" xml:space="preserve">
+    <value>Por favor, tómese un momento para revisar la información que&amp;rsquo;ed entró, a continuación, antes de presentar su solicitud.</value>
+  </data>
+  <data name="Schools" xml:space="preserve">
+    <value>Escuelas</value>
+  </data>
+  <data name="SchoolSelection" xml:space="preserve">
+    <value>Selección de Escuelas</value>
+  </data>
+  <data name="SubmitApplication" xml:space="preserve">
+    <value>Presentar la Solicitud</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Éxito!</value>
+  </data>
+  <data name="SuccessfullyEnteredStudent" xml:space="preserve">
+    <value>Has introducido con éxito {0} {1} en la lotería estatal para la inscripción de pre-kinder. Si se selecciona, se le notificará por teléfono en {2}.</value>
+    <comment>{0} is student first name, {1} is student last name, and {2} is notification date</comment>
+  </data>
+  <data name="ForEmailAssistance" xml:space="preserve">
+    <value>Para obtener asistencia, póngase en contacto con el correo electrónico &lt;a href="mailto:{0}" tabindex="-1"&gt;{1}&lt;/a&gt; at &lt;a href="tel:{2}" tabindex="-1"&gt;{2}&lt;/a&gt;</value>
+    <comment>{0} is contact email address, {1} is contact name, {2} is contact phone</comment>
+  </data>
+</root>
