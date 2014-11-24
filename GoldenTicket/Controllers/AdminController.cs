@@ -96,7 +96,7 @@ namespace GoldenTicket.Controllers
             {
                 var selecteds = db.Selecteds.Where(s => s.ProgramID == id).OrderBy(s => s.Rank).ToList();
                 var selectedApplicants = new List<Applicant>();
-                foreach (var selected in selecteds)
+                foreach (var selected in selecteds) // don't convert to LINQ -- needs to preserve order
                 {
                     selectedApplicants.Add(selected.Applicant);
                 }
@@ -104,7 +104,7 @@ namespace GoldenTicket.Controllers
 
                 var waitlisteds = db.Waitlisteds.Where(w => w.ProgramID == id).OrderBy(w => w.Rank).ToList();
                 var waitlistedApplicants = new List<Applicant>();
-                foreach (var waitlisted in waitlisteds)
+                foreach (var waitlisted in waitlisteds) // don't convert to LINQ -- needs to preserve order
                 {
                    waitlistedApplicants.Add(waitlisted.Applicant);
                 }
@@ -114,7 +114,7 @@ namespace GoldenTicket.Controllers
             {
                 var applieds = db.Applieds.Where(a => a.ProgramID == id).OrderBy(a => a.Applicant.StudentLastName).ToList();
                 var applicants = new List<Applicant>();
-                foreach (var applied in applieds)
+                foreach (var applied in applieds) // don't convert to LINQ -- needs to preserve order
                 {
                     applicants.Add(applied.Applicant);
                 }
