@@ -276,144 +276,144 @@
     <value>Dirección de hogar (line 1)</value>
   </data>
   <data name="StreetAddress2" xml:space="preserve">
-    <value>Street address (line 2)</value>
+    <value>Dirección de hogar (line 2)</value>
   </data>
   <data name="StreetAddressValidationError" xml:space="preserve">
-    <value>{0} can only have letters, numbers, periods, #s, dashes, and spaces.</value>
+    <value>{0}Sólo puede tener letras, números, puntos, #s, guiones y espacios.</value>
     <comment>{0} is the property name (ex: Student street address)</comment>
   </data>
   <data name="StudentBirthday" xml:space="preserve">
-    <value>Student birthday</value>
+    <value>Fecha de Nacimiento del Estudiante</value>
   </data>
   <data name="StudentCity" xml:space="preserve">
-    <value>Student city</value>
+    <value>Ciudad de Residencia del Estudiante</value>
   </data>
   <data name="StudentFirstName" xml:space="preserve">
-    <value>Student first name</value>
+    <value>Primer Nombre del Estudiante</value>
   </data>
   <data name="StudentGender" xml:space="preserve">
-    <value>Student gender</value>
+    <value>Sexo del Estudiante</value>
   </data>
   <data name="StudentInformation" xml:space="preserve">
-    <value>Student information</value>
+    <value>Information del Estudiante</value>
   </data>
   <data name="StudentLastName" xml:space="preserve">
-    <value>Student last name</value>
+    <value>Apellido del Estudiante</value>
   </data>
   <data name="StudentMiddleName" xml:space="preserve">
-    <value>Student middle name</value>
+    <value>Segundo Nombre del Estudiante</value>
   </data>
   <data name="StudentStreetAddress1" xml:space="preserve">
-    <value>Student street address (line 1)</value>
+    <value>Dirección de calle del estudiante (line 1)</value>
   </data>
   <data name="StudentStreetAddress2" xml:space="preserve">
-    <value>Student street address (line 2)</value>
+    <value>Dirección de calle del estudiante (line 2)</value>
   </data>
   <data name="StudentZipCode" xml:space="preserve">
-    <value>Student ZIP code</value>
+    <value>Codigo Postal del Estudiante</value>
   </data>
   <data name="Zip" xml:space="preserve">
-    <value>Zip</value>
+    <value>Codigo Postal</value>
   </data>
   <data name="ZipCodeValidationError" xml:space="preserve">
-    <value>{0} must have 5 numbers (and can optionally have a trailing dash with 4 more numbers).</value>
+    <value>{0} debe tener 5 números (y opcionalmente puede tener un guión con 4 números adicionales).</value>
     <comment>{0} is the property name (ex: Student ZIP code)</comment>
   </data>
   <data name="AverageHouseholdIncomeInstructions" xml:space="preserve">
-    <value>Please enter the dollar amount of the monthly household income (no commas)</value>
+    <value>Por favor, introduzca el valor en dólares de los ingresos familiares mensuales (sin comas)</value>
   </data>
   <data name="AverageMonthlyIncomeAndExplanation" xml:space="preserve">
-    <value>Average monthly income (combined total of all income earning household members)</value>
+    <value>Promedio de Ingreso Mensual (Combinacion total de Ingresos de Todos los Miembros del Hogar)</value>
   </data>
   <data name="HouseholdInformation" xml:space="preserve">
-    <value>Household information</value>
+    <value>Información del Hogar</value>
   </data>
   <data name="NumberOfPeopleInHousehold" xml:space="preserve">
-    <value>Number of people in your household</value>
+    <value>Cantitad de Personas en su Hogar</value>
   </data>
   <data name="NumberOfPeopleInHouseholdInstructions" xml:space="preserve">
-    <value>Please provide information about the number of people in your household and the combined income of all household members.</value>
+    <value>Por favor proporcione la información sobre el número de personas en su hogar y los ingresos combinados de todos los miembros.</value>
   </data>
   <data name="OrMore" xml:space="preserve">
-    <value>{0} or more</value>
+    <value>{0} o más</value>
     <comment>{0} is a number. (ex: $1 or more)</comment>
   </data>
   <data name="Address" xml:space="preserve">
-    <value>Address</value>
+    <value>Dirección de Hogar</value>
   </data>
   <data name="AgreementInformationIsCorrect" xml:space="preserve">
-    <value>The information provided above is correct and I understand that filing documents containing false information with the government is illegal. (RIGL 11-18-1).</value>
+    <value>La información proporcionada encima es correcta y entiendo que la presentación de documentos que contengan información falsa, es ilegal con el gobierno. (RIGL 11-18-1).</value>
   </data>
   <data name="AgreementReachableOnNotificationDate" xml:space="preserve">
-    <value>I confirm that I can be reached at the phone numbers listed in this application on {0} if my child is chosen in the state lottery to participate in the state Pre-K program.</value>
+    <value>Confirmo que puedo ser alcanzado en los números de teléfono que aparecen en esta solicitud en {0} si mi hijo es elegido via la lotería del estado a participar en el programa estatal de Pre-K.</value>
     <comment>{0} is notification date</comment>
   </data>
   <data name="AgreementResponsibleForTransportation" xml:space="preserve">
-    <value>I understand that if my child is chosen for the state Pre-K program, I am responsible for providing regular transportation to and from the program which ensures my child&amp;rsquo;s attendance each day. If my child is absent for unexcused reasons (including family vacations) for 20 or more school days, I understand that my child will likely lose their slot in the state Pre-K program and it will be given to the next child on the state Pre-K enrollment list.</value>
+    <value>Entiendo que si mi hijo es elegido para el programa estatal de Pre-K, soy responsable de proporcionar transporte regular desde y hacia el programa que asegura que mi niño&rsquo;s asistencia cada día. Si mi hijo está ausente por razones injustificadas (incluyendo las vacaciones familiares) por 20 días de escuela o más, yo entiendo que mi niño probablemente perderá su puesto en el programa estatal de Pre-K y le será dado al niño siguiente en la lista de inscripción estatal de Pre-K.</value>
   </data>
   <data name="AlternateContact" xml:space="preserve">
-    <value>Alternate contact</value>
+    <value>Contacto Alterno</value>
   </data>
   <data name="AppliedTo" xml:space="preserve">
-    <value>Applied to</value>
+    <value>Proporcionado a</value>
   </data>
   <data name="Birthday" xml:space="preserve">
-    <value>Birthday</value>
+    <value>Fecha de Nacimiento</value>
   </data>
   <data name="BySubmittingThisForm" xml:space="preserve">
-    <value>By submitting this form, I attest that:</value>
+    <value>Al someter este formulario, doy fe:</value>
   </data>
   <data name="ChooseOneOrMoreSchools" xml:space="preserve">
-    <value>Choose one or more schools that {0} will be considered for enrollment.</value>
+    <value>Elija una o más escuelas para la cual {0} será considerado/a para la inscripción .</value>
     <comment>{0} is the student's name</comment>
   </data>
   <data name="ConfirmationNumberIs" xml:space="preserve">
-    <value>Your confirmation number is {0}</value>
+    <value>Su número de confirmación es {0}</value>
     <comment>{0] is confirmation number</comment>
   </data>
   <data name="EnrollAnotherFamilyMember" xml:space="preserve">
-    <value>Enroll another family member</value>
+    <value>Inscribir a otro miembro de la familia</value>
   </data>
   <data name="Gender" xml:space="preserve">
-    <value>Gender</value>
+    <value>Sexo</value>
   </data>
   <data name="HowToContact" xml:space="preserve">
-    <value>If you have any questions, please contact &lt;a href="mailto:{0}"&gt;{1}&lt;/a&gt; at &lt;a href="tel:{2}"&gt;{2}&lt;/a&gt;.</value>
+    <value>Si tiene alguna pregunta, por favor de contactar a &lt;a href="mailto:{0}"&gt;{1}&lt;/a&gt; at &lt;a href="tel:{2}"&gt;{2}&lt;/a&gt;.</value>
     <comment>{0} is the contact email, {1} is contact person name, {2} is contact phone number.</comment>
   </data>
   <data name="Phone" xml:space="preserve">
-    <value>Phone</value>
+    <value>Número de Teléfono</value>
   </data>
   <data name="Relationship" xml:space="preserve">
-    <value>Relationship</value>
+    <value>Relación</value>
   </data>
   <data name="Review" xml:space="preserve">
-    <value>Review</value>
+    <value>Revisar</value>
   </data>
   <data name="ReviewApplication" xml:space="preserve">
-    <value>Review application</value>
+    <value>Revisión de la Solicitud</value>
   </data>
   <data name="ReviewInstructions" xml:space="preserve">
-    <value>Please take a moment to review the information you&amp;rsquo;ve entered, below, before submitting your application.</value>
+    <value>Por favor, tómese un momento para revisar la información que&amp;rsquo;ed entró, a continuación, antes de presentar su solicitud.</value>
   </data>
   <data name="Schools" xml:space="preserve">
-    <value>Schools</value>
+    <value>Escuelas</value>
   </data>
   <data name="SchoolSelection" xml:space="preserve">
-    <value>School selection</value>
+    <value>Selección de Escuelas</value>
   </data>
   <data name="SubmitApplication" xml:space="preserve">
-    <value>Submit application</value>
+    <value>Presentar la Solicitud</value>
   </data>
   <data name="Success" xml:space="preserve">
-    <value>Success!</value>
+    <value>Éxito!</value>
   </data>
   <data name="SuccessfullyEnteredStudent" xml:space="preserve">
-    <value>You've successfully entered {0} {1} into the state-wide lottery for pre-kindergarten enrollment. If selected, you will be notified via phone on {2}.</value>
+    <value>Has introducido con éxito {0} {1} en la lotería estatal para la inscripción de pre-kinder. Si se selecciona, se le notificará por teléfono en {2}.</value>
     <comment>{0} is student first name, {1} is student last name, and {2} is notification date</comment>
   </data>
   <data name="ForEmailAssistance" xml:space="preserve">
-    <value>For email assistance, please contact &lt;a href="mailto:{0}" tabindex="-1"&gt;{1}&lt;/a&gt; at &lt;a href="tel:{2}" tabindex="-1"&gt;{2}&lt;/a&gt;</value>
+    <value>Para obtener asistencia, póngase en contacto con el correo electrónico &lt;a href="mailto:{0}" tabindex="-1"&gt;{1}&lt;/a&gt; at &lt;a href="tel:{2}" tabindex="-1"&gt;{2}&lt;/a&gt;</value>
     <comment>{0} is contact email address, {1} is contact name, {2} is contact phone</comment>
   </data>
 </root>
