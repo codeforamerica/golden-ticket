@@ -94,7 +94,7 @@ namespace GoldenTicket.Controllers
             ViewBag.WasLotteryRun = WasLotteryRun();
             if (ViewBag.WasLotteryRun)
             {
-                var selecteds = db.Selecteds.Where(s => s.ProgramID == id).OrderBy(s => s.Rank).ToList();
+                var selecteds = db.Selecteds.Where(s => s.SchoolID == id).OrderBy(s => s.Rank).ToList();
                 var selectedApplicants = new List<Applicant>();
                 foreach (var selected in selecteds) // don't convert to LINQ -- needs to preserve order
                 {

@@ -1,5 +1,5 @@
 ﻿using CsvHelper;
-using GoldenTicket.Domain;
+using GoldenTicket.Models;
 using GoldenTicket.Reader;
 using System;
 using System.Collections.Generic;

@@ -1,5 +1,5 @@
 ﻿using CsvHelper.Configuration;
-using GoldenTicket.Domain;
+using GoldenTicket.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +13,7 @@ namespace GoldenTicket.Csv
         public SchoolCsvMapper()
         {
             Map(s => s.Name).Name("SCHOOL NAME");
-            Map(s => s.District).Name("DISTRICT");
+            Map(s => s.City).Name("DISTRICT");
             Map(s => s.NumClassrooms).Name("NUMBER OF CLASSROOMS");
             Map(s => s.PercentBelowPovertyLine).Name("PERCENT OF STUDENTS BELOW POVERTY LINE");
         }
