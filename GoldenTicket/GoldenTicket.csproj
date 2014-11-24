@@ -200,6 +200,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GoldenTicketText.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\GoldenTicketText.es.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GoldenTicketText.es.resx</DependentUpon>
+    </Compile>
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -271,6 +276,11 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\GoldenTicketText.es.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>GoldenTicketText.es.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>GoldenTicket.Resources</CustomToolNamespace>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\GoldenTicketText.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <CustomToolNamespace>GoldenTicket.Resources</CustomToolNamespace>
