@@ -32,14 +32,20 @@ namespace GoldenTicket.Controllers
 
         public ActionResult AllApplicants(int? id)
         {
-            if (id == null)
+
+            if (id == null || id <= 0)
             {
                 id = 0;
+            }
+            else
+            {
+                id = id - 1;
             }
 
             PrepareApplicationsView();
             ViewBag.School = ALL_SCHOOL_SCHOOL;
 
+            // Get the applicants based on the page
             var numApplicants = db.Applicants.Count();
             var skipCount = id.Value*100;
 
@@ -55,6 +61,18 @@ namespace GoldenTicket.Controllers
                     .Take(100)
                     .ToList();
             ViewBag.Applicants = applicants;
+
+            // Pagination
+            var numPages = numApplicants/100;
+            if (numApplicants%100 >= 1)
+            {
+                numPages += 1;
+            }
+            ViewBag.NumPages = numPages;
+            ViewBag.PageNum = id + 1;
+
+
+
 
             return View();
         }
@@ -91,7 +109,7 @@ namespace GoldenTicket.Controllers
                 var waitlistedApplicants = new List<Applicant>();
                 foreach (var waitlisted in waitlisteds)
                 {
-                   waitlistedApplicants.Add(waitlisted);
+                   waitlistedApplicants.Add(waitlisted.Applicant);
                 }
                 ViewBag.WaitlistedApplicants = waitlistedApplicants;
             }
