@@ -7,50 +7,49 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<p>Testing @ViewBag.TestID</p>
+<main>
+    <header>
+        <div class="site-width">
+            @Html.Partial("_SchoolApplicantNav")
+        </div>
+    </header>
 
-@*<main>*@
-@*    <header>*@
-@*        <div class="site-width">*@
-@*            @Html.Partial("_SchoolApplicantNav")*@
-@*        </div>*@
-@*    </header>*@
-@**@
-@*    <div class="page">*@
-@*        <div class="site-width">*@
-@*            @if (ViewBag.IsLotteryClosed && ViewBag.LotterRunDate != null)*@
-@*            {*@
-@*                <div class="notice">*@
-@*                    <p>The pre-k lottery application can no longer be applied to. Click the button below to run the lottery for all applicants.</p>*@
-@*                    <p>@Html.ActionLink("Run lottery", "RunLottery", null, new { @class = "button" })</p>*@
-@*                </div>*@
-@*            }*@
-@**@
-@*            @Html.Partial("_ApplicantTable", (List<Applicant>)ViewBag.Applicants)*@
-@**@
-@*            <footer>*@
-@*                <section>*@
-@*                    <nav class="pagination">*@
-@*                        <a href="#" class="is-active">1</a>*@
-@*                        <a href="#">2</a>*@
-@*                        <a href="#">Next</a>*@
-@*                    </nav>*@
-@*                </section>*@
-@**@
-@*                <section>*@
-@*                    <nav class="export">*@
-@*                        <ul>*@
-@*                            <li><a href="#">Export applicant list</a></li>*@
-@*                        </ul>*@
-@*                    </nav>*@
-@*                    <nav class="status">*@
-@*                        <a href="#">Show duplicate applications</a>*@
-@*                        <a href="#">Show deleted applications</a>*@
-@*                    </nav>*@
-@*                </section>*@
-@*            </footer>*@
-@*        </div>*@
-@*    </div>*@
-@**@
-@**@
-@*</main>*@
+    <div class="page">
+        <div class="site-width">
+            
+            @if (ViewBag.WasLotteryRun)
+            {
+                <h1>Selected to attend</h1>
+                @Html.Partial("_ApplicantTable", (List<Applicant>) ViewBag.SelectedApplicants)
+                
+                <h1>Waitlisted</h1>
+                @Html.Partial("_ApplicantTable", (List<Applicant>) ViewBag.WaitlistedApplicants)
+            }
+            else
+            {
+                
+                @Html.Partial("_ApplicantTable", (List<Applicant>) ViewBag.Applicants)
+                if (ViewBag.Applicants.Count == 0)
+                {
+                    <h1>No applicants yet for this school</h1>
+                }
+            }
+
+            <footer>
+                <section>
+                    <nav class="export">
+                        <ul>
+                            <li><a href="#">Export applicant list</a></li>
+                        </ul>
+                    </nav>
+                    <nav class="status">
+                        <a href="#">Show duplicate applications</a>
+                        <a href="#">Show deleted applications</a>
+                    </nav>
+                </section>
+            </footer>
+        </div>
+    </div>
+
+
+</main>

@@ -12,13 +12,13 @@ namespace GoldenTicket.Controllers
     {
 
         private GoldenTicketDbContext db = new GoldenTicketDbContext();
-        private static School ALL_SCHOOL_SCHOOL = GetAllSchoolSchool();
+        private static readonly School ALL_SCHOOL_SCHOOL = GetAllSchoolSchool();
 
         // All Applications
         // GET: Admin
         public ActionResult Index()
         {
-            return Redirect("AllApplications");
+            return RedirectToAction("AllApplicants");
         }
 
 
@@ -27,23 +27,88 @@ namespace GoldenTicket.Controllers
             ViewBag.LotteryRunDate = GetLotteryRunDate();
             ViewBag.IsLotteryClosed = GetLotteryCloseDate() <= DateTime.Now;
 
-            var schools = db.Schools.OrderBy(s => s.Name).ToList();
-            schools.Insert(0, ALL_SCHOOL_SCHOOL);
-            ViewBag.Schools = schools;
+            AddSchoolsToViewBag();
         }
 
-        public ActionResult AllApplicants()
+        public ActionResult AllApplicants(int? id)
         {
-            PrepareApplicationsView();
+            if (id == null)
+            {
+                id = 0;
+            }
 
-            ViewBag.Applicants = db.Applicants.Where( a=>a.ConfirmationCode != null ).OrderBy(a => a.StudentLastName).ToList();
-            
+            PrepareApplicationsView();
+            ViewBag.School = ALL_SCHOOL_SCHOOL;
+
+            var numApplicants = db.Applicants.Count();
+            var skipCount = id.Value*100;
+
+            if (numApplicants < skipCount)
+            {
+                skipCount = 0;
+            }
+
+            var applicants =
+                db.Applicants.Where(a => a.ConfirmationCode != null)
+                    .OrderBy(a => a.StudentLastName)
+                    .Skip(skipCount)
+                    .Take(100)
+                    .ToList();
+            ViewBag.Applicants = applicants;
+
             return View();
         }
 
-        public ActionResult SchoolApplicants(string id)
+
+        public ActionResult SchoolApplicants(int? id)
         {
-            ViewBag.TestID = id;
+            if (id == null)
+            {
+                return RedirectToAction("AllApplicants");
+            }
+
+
+            // If the school ID is not valid, show all the applicants
+            ViewBag.School = db.Schools.Find(id);
+            if (ViewBag.School == null)
+            {
+                return RedirectToAction("AllApplicants", 0);
+            }
+
+            // If the lottery was run, get the selected and waitlisted applicants
+            ViewBag.WasLotteryRun = WasLotteryRun();
+            if (ViewBag.WasLotteryRun)
+            {
+                var selecteds = db.Selecteds.Where(s => s.ProgramID == id).OrderBy(s => s.Rank).ToList();
+                var selectedApplicants = new List<Applicant>();
+                foreach (var selected in selecteds)
+                {
+                    selectedApplicants.Add(selected.Applicant);
+                }
+                ViewBag.SelectedApplicants = selectedApplicants;
+
+                var waitlisteds = db.Waitlisteds.Where(w => w.ProgramID == id).OrderBy(w => w.Rank).ToList();
+                var waitlistedApplicants = new List<Applicant>();
+                foreach (var waitlisted in waitlisteds)
+                {
+                   waitlistedApplicants.Add(waitlisted);
+                }
+                ViewBag.WaitlistedApplicants = waitlistedApplicants;
+            }
+            else
+            {
+                var applieds = db.Applieds.Where(a => a.ProgramID == id).OrderBy(a => a.Applicant.StudentLastName).ToList();
+                var applicants = new List<Applicant>();
+                foreach (var applied in applieds)
+                {
+                    applicants.Add(applied.Applicant);
+                }
+                ViewBag.Applicants = applicants;
+            }
+
+            // Other things needed for disply
+            AddSchoolsToViewBag();
+
             return View();
         }
 
@@ -72,6 +137,18 @@ namespace GoldenTicket.Controllers
             //return db.GlobalConfigs.First().CloseDate; // real call
             //return new DateTime(2014, 11, 20); // forced lottery closed
             return new DateTime(2014, 11, 30); // forced lottery open
+        }
+
+        private bool WasLotteryRun()
+        {
+            return db.GlobalConfigs.First().LotteryRunDate != null;
+        }
+
+        private void AddSchoolsToViewBag()
+        {
+            var schools = db.Schools.OrderBy(s => s.Name).ToList();
+            schools.Insert(0, ALL_SCHOOL_SCHOOL);
+            ViewBag.Schools = schools;
         }
     }
 }
