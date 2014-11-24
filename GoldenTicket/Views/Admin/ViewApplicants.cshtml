@@ -33,25 +33,25 @@
                         @if (ViewBag.PageNum > 1)
                         {
                             var previousIndex = ViewBag.PageNum - 1;
-                            @Html.ActionLink(linkText: "Previous", actionName: "AllApplicants", routeValues: new { id = previousIndex })
+                            @Html.ActionLink(linkText: "Previous", actionName: "ViewApplicants", routeValues: new { id = previousIndex })
                         }
 
                         @for (var i = 1; i <= ViewBag.NumPages; i++)
                         {
                             if (i == ViewBag.PageNum)
                             {
-                                @Html.ActionLink( linkText:i.ToString(), actionName: "AllApplicants", routeValues: new{id = i}, htmlAttributes: new{@class="is-active"})
+                                @Html.ActionLink( linkText:i.ToString(), actionName: "ViewApplicants", routeValues: new{id = i}, htmlAttributes: new{@class="is-active"})
                             }
                             else
                             {
-                                @Html.ActionLink(linkText: i.ToString(), actionName: "AllApplicants", routeValues: new { id = i })
+                                @Html.ActionLink(linkText: i.ToString(), actionName: "ViewApplicants", routeValues: new { id = i })
                             }
                         }
                         
                         @if (ViewBag.PageNum < ViewBag.NumPages)
                         {
                             var nextIndex = ViewBag.PageNum + 1;
-                            @Html.ActionLink(linkText: "Next", actionName: "AllApplicants", routeValues: new { id = nextIndex })
+                            @Html.ActionLink(linkText: "Next", actionName: "ViewApplicants", routeValues: new { id = nextIndex })
                         }
                     </nav>
                 </section>

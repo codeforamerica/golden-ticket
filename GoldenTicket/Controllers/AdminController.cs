@@ -18,7 +18,7 @@ namespace GoldenTicket.Controllers
         // GET: Admin
         public ActionResult Index()
         {
-            return RedirectToAction("AllApplicants");
+            return RedirectToAction("ViewApplicants");
         }
 
 
@@ -30,7 +30,7 @@ namespace GoldenTicket.Controllers
             AddSchoolsToViewBag();
         }
 
-        public ActionResult AllApplicants(int? id)
+        public ActionResult ViewApplicants(int? id)
         {
 
             if (id == null || id <= 0)
@@ -71,18 +71,15 @@ namespace GoldenTicket.Controllers
             ViewBag.NumPages = numPages;
             ViewBag.PageNum = id + 1;
 
-
-
-
             return View();
         }
 
 
-        public ActionResult SchoolApplicants(int? id)
+        public ActionResult ViewApplicantsForSchool(int? id)
         {
             if (id == null)
             {
-                return RedirectToAction("AllApplicants");
+                return RedirectToAction("ViewApplicants");
             }
 
 
@@ -90,7 +87,7 @@ namespace GoldenTicket.Controllers
             ViewBag.School = db.Schools.Find(id);
             if (ViewBag.School == null)
             {
-                return RedirectToAction("AllApplicants", 0);
+                return RedirectToAction("ViewApplicants", 0);
             }
 
             // If the lottery was run, get the selected and waitlisted applicants

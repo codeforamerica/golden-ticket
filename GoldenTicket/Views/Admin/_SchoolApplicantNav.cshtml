@@ -6,7 +6,7 @@ else // If the lottery has been run
 {
     <h1>Lottery results for</h1>
 }
-@using (Html.BeginForm("SchoolApplicants","Admin"))
+@using (Html.BeginForm("ViewApplicantsForSchool","Admin"))
 {
     <div class="field field-select">
         @Html.DropDownList("id", new SelectList(ViewBag.Schools, "ID", "Name", ViewBag.School.ID), new {@onchange="submit()", @id="school-selection"})

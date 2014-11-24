@@ -33,12 +33,12 @@
 <body id="@bodyId" class="@bodyClass">
     <header id="header">
         <div class="site-width">
-            <h1><a href="applications.php">Pre-k Lottery</a></h1>
+            <h1>@Html.ActionLink("RI Pre-K Lottery", "ViewApplicants")</h1>
             <nav class="nav-secondary">
-                <a class="people" href="people.php"><span>People</span></a>
-                <a class="schools" href="schools.php"><span>Schools</span></a>
-                <a class="settings" href="settings.php"><span>Settings</span></a>
-                <a class="sign-out" href="sign-in.php"><span>Sign out</span></a>
+                @Html.ActionLink("People", "ViewPeople")
+                @Html.ActionLink("Schools", "ViewSchools")
+                @Html.ActionLink("Settings", "EditSettings")
+                <a class="sign-out" href="#"><span>Sign out</span></a>
             </nav>
         </div>
     </header>
