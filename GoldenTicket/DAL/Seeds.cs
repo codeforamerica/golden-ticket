@@ -5,6 +5,7 @@ using System.Web;
 using System.Data.Entity;
 using GoldenTicket.Models;
 using System.Data.Entity.Validation;
+using GoldenTicket.Csv;
 
 namespace GoldenTicket.DAL 
 {
@@ -243,6 +244,11 @@ namespace GoldenTicket.DAL
             db.Schools.Add(woonsocket);
 
             db.SaveChanges();
+
+
+            // Import applicants
+            var applicantCsvReader = new ApplicantCsvReader("C:/Users/jeff/code/golden-ticket/GoldenTicket/TestData/data.csv", db.Schools.ToList());
+            applicantCsvReader.ReadApplicants();
         }
     }
 }

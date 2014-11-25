@@ -95,6 +95,16 @@ namespace GoldenTicket.Csv
                 }
             }
 
+            // Fix Zip code (for test data only)
+            if (a.StudentZipCode.Length == 4)
+            {
+                a.StudentZipCode = "0" + a.StudentZipCode;
+            }
+
+            // Add a fake confirmation number
+            a.ConfirmationCode = "123ABC";
+
+
             db.Applicants.Add(a);
             db.SaveChanges(); // needed to get an ID for the applicant
 
