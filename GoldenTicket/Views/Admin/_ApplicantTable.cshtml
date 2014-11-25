@@ -23,9 +23,9 @@
     </thead>
 
     <tbody>
-        <tr>
-            @foreach (Applicant applicant in Model)
-            {
+        @foreach (Applicant applicant in Model)
+        {
+            <tr>
                 <td class="table-applications-col-fname">
                     <a href="ViewApplicant/@applicant.ID">@applicant.StudentFirstName</a>
                 </td>
@@ -43,7 +43,7 @@
                 <td class="table-applications-col-delete">
                     <a href="DeleteApplicant/@applicant.ID"><span>Delete</span></a>
                 </td>
-            }
-        </tr>
+            </tr>
+        }
     </tbody>
 </table>
