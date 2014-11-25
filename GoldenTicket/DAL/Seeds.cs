@@ -247,8 +247,8 @@ namespace GoldenTicket.DAL
 
 
             // Import applicants
-            var applicantCsvReader = new ApplicantCsvReader("C:/Users/jeff/code/golden-ticket/GoldenTicket/TestData/data.csv", db.Schools.ToList());
-            applicantCsvReader.ReadApplicants();
+//            var applicantCsvReader = new ApplicantCsvReader("C:/Users/jeff/code/golden-ticket/GoldenTicket/TestData/data.csv", db.Schools.ToList());
+//            applicantCsvReader.ReadApplicants();
         }
     }
 }
