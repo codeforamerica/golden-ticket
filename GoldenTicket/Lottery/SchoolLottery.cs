@@ -11,41 +11,33 @@ namespace GoldenTicket.Lottery
 {
     public class SchoolLottery
     {
-        int studentsPerClassroom;
-        double percentMale;
-        DateTime age4ByDate;
-
+        private readonly double percentMale;
         private GoldenTicketDbContext db = new GoldenTicketDbContext();
 
-        public SchoolLottery(int studentsPerClassroom, double percentMale, DateTime age4ByDate)
+        public SchoolLottery(double percentMale)
         {
-            this.studentsPerClassroom = studentsPerClassroom;
             this.percentMale = percentMale;
-            this.age4ByDate = age4ByDate;
         }
-
-//        public School Run(School school)
-//        {
-//            return Run(school, school.Applicants, true, true);
-//        }
 
         public School Run(School school, List<Applicant> applicantList)
         {
-            return Run(school, applicantList, true, true);
+            return Run(school, applicantList, true);
         }
 
         //TODO Optimize this later. There are a lot of repeated loops.
-        public School Run(School school, List<Applicant> applicantList, bool shuffleApplicantList, bool filterApplicantList)
+        public School Run(School school, List<Applicant> applicantList, bool shuffleApplicantList)
         {
+            var shuffledApplicants = Utils.GetApplicants(db.Shuffleds.OrderBy(s=>s.Rank).ToList());
+            var selectedApplicants = Utils.GetApplicants(db.Selecteds.OrderBy(s=>s.Rank).ToList());
+            var waitlistedApplicants = Utils.GetApplicants(db.Waitlisteds.OrderBy(w=>w.Rank).ToList());
+
             // Counts
             int countMale = 0;
             int countFemale = 0;
             int countBelowPovertyLine = 0;
             int countAbovePovertyLine = 0;
-            foreach(var a in db.Selecteds.ToList())
+            foreach(var applicant in selectedApplicants)
             {
-                var applicant = a.Applicant;
-
                 // Gender counts
                 if(applicant.StudentGender == Gender.Male)
                 {
@@ -77,33 +69,33 @@ namespace GoldenTicket.Lottery
             // Copy the list to preserve the passed in list
             List<Applicant> applicants = new List<Applicant>(applicantList);
 
-            // Filter applicants
-            if(filterApplicantList)
-            {
-                // Remove duplicates
-                applicants = FilterDuplicates(applicants);
-
-                // Remove those that don't live in the distrct
-                applicants = FilterByDistrict(applicants,school.City);
-
-                // Remove applicants who are too old or young
-                applicants = FilterByAge(applicants);
-
-//                // Record the filtering
-//                school.FilteredApplicants.Clear();
-//                school.FilteredApplicants.AddRange(applicants);
-
-            }
 
             // Randomly sort the list
             if(shuffleApplicantList)
             {
+                // Clear existing shuffled // TODO make a utility method for this
+                ClearTable("Shuffleds");
+
                 // Randomly shuffle the applicants
                 applicants.Shuffle(new Random());
 
                 // Record the shuffling
-                school.ShuffledApplicants.Clear();
-                school.ShuffledApplicants.AddRange(applicants);
+                shuffledApplicants.AddRange(applicants);
+
+                // Preserve the shuffle order
+                for (int i = 0; i < shuffledApplicants.Count; i++)
+                {
+                    var shuffled = new Shuffled
+                    {
+                        Applicant = shuffledApplicants[i],
+                        School = school,
+                        Rank = i
+                    };
+
+                    db.Shuffleds.Add(shuffled);
+                }
+                db.SaveChanges();
+
             }
 
             // Select low income students
@@ -111,7 +103,7 @@ namespace GoldenTicket.Lottery
             foreach(Applicant a in lowIncomeApplicants)
             {
                 // If the low income quota has been met, move on
-                if(countBelowPovertyLine >= numBelowPovertyLine || school.SelectedApplicants.Count >= numStudents)
+                if(countBelowPovertyLine >= numBelowPovertyLine || selectedApplicants.Count >= numStudents)
                 {
                     break;
                 }
@@ -119,7 +111,7 @@ namespace GoldenTicket.Lottery
                 // Add the student if the male/female ratio hasn't been violated
                 if(a.StudentGender == Gender.Male && countMale < numMale)
                 {
-                    school.SelectedApplicants.Add(a);
+                    selectedApplicants.Add(a);
                     applicants.Remove(a);
 
                     countBelowPovertyLine++;
@@ -127,7 +119,7 @@ namespace GoldenTicket.Lottery
                 }
                 else if(a.StudentGender == Gender.Female && countFemale < numFemale)
                 {
-                    school.SelectedApplicants.Add(a);
+                    selectedApplicants.Add(a);
                     applicants.Remove(a);
 
                     countBelowPovertyLine++;
@@ -144,7 +136,7 @@ namespace GoldenTicket.Lottery
                 foreach (Applicant a in lowIncomeApplicants)
                 {
                     // If the low income quota has been met, move on
-                    if (countBelowPovertyLine >= numBelowPovertyLine || school.SelectedApplicants.Count >= numStudents)
+                    if (countBelowPovertyLine >= numBelowPovertyLine || selectedApplicants.Count >= numStudents)
                     {
                         break;
                     }
@@ -152,7 +144,7 @@ namespace GoldenTicket.Lottery
                     // Add the student
                     if (a.StudentGender == Gender.Male)
                     {
-                        school.SelectedApplicants.Add(a);
+                        selectedApplicants.Add(a);
                         applicants.Remove(a);
 
                         countBelowPovertyLine++;
@@ -160,7 +152,7 @@ namespace GoldenTicket.Lottery
                     }
                     else if (a.StudentGender == Gender.Female)
                     {
-                        school.SelectedApplicants.Add(a);
+                        selectedApplicants.Add(a);
                         applicants.Remove(a);
 
                         countBelowPovertyLine++;
@@ -184,7 +176,7 @@ namespace GoldenTicket.Lottery
                 // Add the student if the male/female ratio hasn't been violated
                 if (a.StudentGender == Gender.Male && countMale < numMale)
                 {
-                    school.SelectedApplicants.Add(a);
+                    selectedApplicants.Add(a);
                     applicants.Remove(a);
 
                     countAbovePovertyLine++;
@@ -192,7 +184,7 @@ namespace GoldenTicket.Lottery
                 }
                 else if (a.StudentGender == Gender.Female && countFemale < numFemale)
                 {
-                    school.SelectedApplicants.Add(a);
+                    selectedApplicants.Add(a);
                     applicants.Remove(a);
 
                     countAbovePovertyLine++;
@@ -209,7 +201,7 @@ namespace GoldenTicket.Lottery
                 foreach (Applicant a in higherIncomeApplicants)
                 {
                     // If the low income quota has been met, move on
-                    if (countAbovePovertyLine >= numAbovePovertyLine || school.SelectedApplicants.Count >= numStudents)
+                    if (countAbovePovertyLine >= numAbovePovertyLine || selectedApplicants.Count >= numStudents)
                     {
                         break;
                     }
@@ -217,7 +209,7 @@ namespace GoldenTicket.Lottery
                     // Add the student
                     if (a.StudentGender == Gender.Male)
                     {
-                        school.SelectedApplicants.Add(a);
+                        selectedApplicants.Add(a);
                         applicants.Remove(a);
 
                         countBelowPovertyLine++;
@@ -225,7 +217,7 @@ namespace GoldenTicket.Lottery
                     }
                     else if (a.StudentGender == Gender.Female)
                     {
-                        school.SelectedApplicants.Add(a);
+                        selectedApplicants.Add(a);
                         applicants.Remove(a);
 
                         countBelowPovertyLine++;
@@ -238,7 +230,7 @@ namespace GoldenTicket.Lottery
             // Are there still openings? (income agnostic, gender checked selection)
             foreach(Applicant a in new List<Applicant>(applicants)) // prevents modification during iteration
             {
-                if(school.SelectedApplicants.Count >= numStudents)
+                if(selectedApplicants.Count >= numStudents)
                 {
                     break;
                 }
@@ -247,14 +239,14 @@ namespace GoldenTicket.Lottery
                 // Add the student if the male/female ratio hasn't been violated
                 if (a.StudentGender == Gender.Male && countMale < numMale)
                 {
-                    school.SelectedApplicants.Add(a);
+                    selectedApplicants.Add(a);
                     applicants.Remove(a);
 
                     countMale++;
                 }
                 else if (a.StudentGender == Gender.Female && countFemale < numFemale)
                 {
-                    school.SelectedApplicants.Add(a);
+                    selectedApplicants.Add(a);
                     applicants.Remove(a);
 
                     countFemale++;
@@ -264,75 +256,49 @@ namespace GoldenTicket.Lottery
             // Are there still openings? (income and gender agnostic selection)
             foreach (Applicant a in new List<Applicant>(applicants))
             {
-                if (school.SelectedApplicants.Count >= numStudents)
+                if (selectedApplicants.Count >= numStudents)
                 {
                     break;
                 }
 
-                school.SelectedApplicants.Add(a);
+                selectedApplicants.Add(a);
                 applicants.Remove(a);
             }
 
             // Wait list the rest
-            school.WaitlistedApplicants.Clear();
-            school.WaitlistedApplicants.AddRange(applicants);
+            waitlistedApplicants.Clear();
+            waitlistedApplicants.AddRange(applicants);
+
+            // Preserve the ranks
+            ClearTable("Selecteds");
+            ClearTable("Waitlisteds");
+            
+            for (int i = 0; i < selectedApplicants.Count; i++)
+            {
+                var selected = new Selected
+                {
+                    Applicant = selectedApplicants[i],
+                    School = school,
+                    Rank = i
+                };
+                db.Selecteds.Add(selected);
+            }
+
+            for (int i = 0; i < waitlistedApplicants.Count; i++)
+            {
+                var waitlisted = new Selected
+                {
+                    Applicant = waitlistedApplicants[i],
+                    School = school,
+                    Rank = i
+                };
+                db.Selecteds.Add(waitlisted);
+            }
+
+            db.SaveChanges();
+
 
             return school;
-        }
-
-        private List<Applicant> FilterDuplicates(List<Applicant> applicants)
-        {
-            List<Applicant> dedupedApplicants = new List<Applicant>();
-            HashSet<string> applicantCodes = new HashSet<string>();
-
-            foreach(Applicant a in applicants)
-            {
-                string checksum = a.Checksum();
-                if(!applicantCodes.Contains(checksum))
-                {
-                    dedupedApplicants.Add(a);
-                    applicantCodes.Add(checksum);
-                }
-            }
-
-            return dedupedApplicants;
-        }
-
-        private static List<Applicant> FilterByDistrict(List<Applicant> applicants, string district)
-        {
-            List<Applicant> filteredApplicants = new List<Applicant>();
-
-            foreach (Applicant a in applicants)
-            {
-                if(district.Equals(a.StudentCity))
-                {
-                    filteredApplicants.Add(a);
-                }
-            }
-
-            return filteredApplicants;
-        }
-
-        private List<Applicant> FilterByAge(List<Applicant> applicants)
-        {
-            List<Applicant> filteredApplicants = new List<Applicant>();
-
-            foreach (Applicant a in applicants)
-            {
-                int ageByCutoff = age4ByDate.Year - a.StudentBirthday.Year;
-                DateTime adjustedDate = age4ByDate.AddYears(-ageByCutoff);
-                if(a.StudentBirthday > adjustedDate)
-                {
-                    ageByCutoff--;
-                }
-
-                if (ageByCutoff == 4)
-                {
-                    filteredApplicants.Add(a);
-                }
-            }
-
-            return filteredApplicants;
         }
 
         private List<Applicant> GetByPovertyStatus(List<Applicant> applicants, bool isBelowPovertyLine)
@@ -340,13 +306,19 @@ namespace GoldenTicket.Lottery
             List<Applicant> filteredApplicants = new List<Applicant>();
             foreach(Applicant a in applicants)
             {
-                if(IncomeCalculator.IsBelowPovertyLine(a) == isBelowPovertyLine))
+                if(IncomeCalculator.IsBelowPovertyLine(a) == isBelowPovertyLine)
                 {
                     filteredApplicants.Add(a);
                 }
             }
 
             return filteredApplicants;
+        }
+
+        private void ClearTable(string tableName)
+        {
+            var objCtx = ((System.Data.Entity.Infrastructure.IObjectContextAdapter)db).ObjectContext;
+            objCtx.ExecuteStoreCommand("TRUNCATE TABLE [" + tableName + "]");
         }
     }
 }
