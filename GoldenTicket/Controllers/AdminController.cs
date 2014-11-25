@@ -102,7 +102,7 @@ namespace GoldenTicket.Controllers
                 }
                 ViewBag.SelectedApplicants = selectedApplicants;
 
-                var waitlisteds = db.Waitlisteds.Where(w => w.ProgramID == id).OrderBy(w => w.Rank).ToList();
+                var waitlisteds = db.Waitlisteds.Where(w => w.SchoolID == id).OrderBy(w => w.Rank).ToList();
                 var waitlistedApplicants = new List<Applicant>();
                 foreach (var waitlisted in waitlisteds) // don't convert to LINQ -- needs to preserve order
                 {

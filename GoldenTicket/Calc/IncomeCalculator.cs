@@ -13,7 +13,7 @@ namespace GoldenTicket.Calc
 
         private GoldenTicketDbContext db = new GoldenTicketDbContext();
         private Dictionary<int, int> povertyLineByNumPeople = new Dictionary<int, int>(); // key => num househould members, val => poverty line income amount
-        private int above10Multipler = 0;
+        private double above10Multipler = 0;
 
         private IncomeCalculator()
         {
@@ -22,7 +22,8 @@ namespace GoldenTicket.Calc
                 povertyLineByNumPeople.Add(i,db.PovertyConfigs.Find(i).MinimumIncome);
             }
 
-            above10Multipler = db.GlobalConfigs.First().MinimumIncomeMultiplier();
+            var globalConfig = db.GlobalConfigs.First();
+            above10Multipler = globalConfig.MinimumIncomeMultiplier;
         }
 
         public static bool IsBelowPovertyLine(int numHouseholdMembers, int incomeAmount)

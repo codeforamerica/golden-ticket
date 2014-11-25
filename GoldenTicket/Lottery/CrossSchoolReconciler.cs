@@ -33,7 +33,7 @@ namespace GoldenTicket.Lottery
             {
                 schoolLoop: { }
 //                List<Applicant> selectedApplicants = new List<Applicant>(s.SelectedApplicants); // to prevent concurrent modification during iteration
-                var selectedApplicants = Utils.GetApplicants(db.Selecteds.Where(s => s.SchoolID == s.ID).OrderBy(s=>s.Rank).ToList());
+                var selectedApplicants = Utils.GetApplicants(db.Selecteds.Where(selected => selected.SchoolID == s.ID).OrderBy(selected=>selected.Rank).ToList());
                 foreach(Applicant a in selectedApplicants)
                 {
                     // Skip applicant if already reconciled - done to optimize in the event the schoolLoop is reset (see bottom of loop)
@@ -70,7 +70,7 @@ namespace GoldenTicket.Lottery
             foreach(School s in schools)
             {
                 var currentSelectedApplicants =
-                    Utils.GetApplicants(db.Selecteds.Where(s => s.SchoolID == s.ID).OrderBy(s => s.Rank));
+                    Utils.GetApplicants(db.Selecteds.Where(selected => selected.SchoolID == s.ID).OrderBy(selected => selected.Rank).ToList());
                 selectedApplicants.AddRange(currentSelectedApplicants);
             }
             return selectedApplicants;
@@ -89,9 +89,12 @@ namespace GoldenTicket.Lottery
             {
                 foreach (School s in schools)
                 {
-                    s.WaitlistedApplicants.Remove(a);
+                    var waitlisted = db.Waitlisteds.First(w => w.SchoolID == s.ID && w.ApplicantID == a.ID);
+                    db.Waitlisteds.Remove(waitlisted);
                 }
             }
+
+            db.SaveChanges();
         }
 
         private List<School> GetSchoolsApplicantWasSelectedAt(Applicant applicant, IEnumerable<School> schools)
@@ -101,7 +104,7 @@ namespace GoldenTicket.Lottery
             foreach(School s in schools)
             {
                 var selectedApplicants =
-                    Utils.GetApplicants(db.Selecteds.Where(s => s.SchoolID == s.ID).OrderBy(s => s.Rank));
+                    Utils.GetApplicants(db.Selecteds.Where(selected => selected.SchoolID == s.ID).OrderBy(selected => selected.Rank).ToList());
                 if(selectedApplicants.Contains(applicant))
                 {
                     selectedSchools.Add(s);
@@ -128,7 +131,7 @@ namespace GoldenTicket.Lottery
 
             foreach(School s in shuffledSchools)
             {
-                int index = db.Selecteds.First(s=>s.ApplicantID == applicant.ID).Rank;
+                int index = db.Selecteds.First(selected=>selected.ApplicantID == applicant.ID && selected.SchoolID == s.ID).Rank;
                 if(index < lowestIndex)
                 {
                     lowestSchool = s;
@@ -142,10 +145,13 @@ namespace GoldenTicket.Lottery
             {
                 if(s != lowestSchool)
                 {
-                    var selected = db.Selecteds.First(s => s.ApplicantID == applicant.ID);
+                    var selected = db.Selecteds.First(se => se.ApplicantID == applicant.ID && se.SchoolID == s.ID);
                     db.Selecteds.Remove(selected);
                     db.SaveChanges();
-                    schoolLottery.Run(s, s.WaitlistedApplicants, false, false);
+
+                    var waitlisteds = Utils.GetApplicants(db.Waitlisteds.Where(w => w.SchoolID == s.ID).OrderBy(w => w.Rank).ToList());
+
+                    schoolLottery.Run(s, waitlisteds);
                     if(s == currentSchool)
                     {
                         effectsCurrentSchool = true;

@@ -68,13 +68,13 @@
                     <legend>Gender</legend>
                     <div class="field field-radiobutton">
                         <label for="student-gender-female">
-                            @Html.RadioButtonFor(model => model.StudentGender, Gender.FEMALE, new { @id = "student-gender-female" })
+                            @Html.RadioButtonFor(model => model.StudentGender, Gender.Female, new { @id = "student-gender-female" })
                             @GoldenTicketText.Female
                         </label>
                     </div>
                     <div class="field field-radiobutton">
                         <label for="student-gender-male">
-                            @Html.RadioButtonFor(model => model.StudentGender, Gender.MALE, new { @id = "student-gender-male" })
+                            @Html.RadioButtonFor(model => model.StudentGender, Gender.Male, new { @id = "student-gender-male" })
                             @GoldenTicketText.Male
                         </label>
                     </div>

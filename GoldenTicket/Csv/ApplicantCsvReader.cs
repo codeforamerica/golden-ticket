@@ -95,7 +95,7 @@ namespace GoldenTicket.Csv
                 }
             }
 
-            db.Applicants.Add(applicant);
+            db.Applicants.Add(a);
             db.SaveChanges(); // needed to get an ID for the applicant
 
             return a;

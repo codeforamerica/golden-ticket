@@ -49,7 +49,7 @@ namespace GoldenTicket.Lottery
                 }
 
                 // Poverty counts
-                if(IncomeCalculator.IsBelowPovertyLine(a))
+                if(IncomeCalculator.IsBelowPovertyLine(applicant))
                 {
                     countBelowPovertyLine++;
                 }
@@ -168,7 +168,7 @@ namespace GoldenTicket.Lottery
             foreach (Applicant a in higherIncomeApplicants)
             {
                 // If the higher income quota has been met, move on
-                if (countAbovePovertyLine >= numAbovePovertyLine || school.SelectedApplicants.Count >= numStudents)
+                if (countAbovePovertyLine >= numAbovePovertyLine || selectedApplicants.Count >= numStudents)
                 {
                     break;
                 }
