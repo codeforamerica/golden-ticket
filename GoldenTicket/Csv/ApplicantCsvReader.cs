@@ -1,6 +1,7 @@
 ﻿using CsvHelper;
 using GoldenTicket.Calc;
-using GoldenTicket.Domain;
+using GoldenTicket.DAL;
+using GoldenTicket.Models;
 using GoldenTicket.Reader;
 using System;
 using System.Collections.Generic;
@@ -13,27 +14,20 @@ namespace GoldenTicket.Csv
 {
     public class ApplicantCsvReader : ApplicantReader
     {
-        string csvFilePath;
-        Dictionary<string,School> schools;
-        IncomeCalculator incomeCalc;
+        private string csvFilePath;
+        private Dictionary<string,School> schools = new Dictionary<string, School>();
 
-        public ApplicantCsvReader(string csvFilePath, List<School> schoolList, IncomeCalculator incomeCalc)
+        private GoldenTicketDbContext db = new GoldenTicketDbContext();
+
+        public ApplicantCsvReader(string csvFilePath, List<School> schoolList)
         {
             this.csvFilePath = csvFilePath;
-            this.incomeCalc = incomeCalc;
 
-            schools = new Dictionary<string,School>();
             schoolList.ForEach(s => schools[s.Name] = s);
         }
 
         public List<School> ReadApplicants()
         {
-            // Clear the schools
-            foreach(string key in schools.Keys)
-            {
-                schools[key].ClearApplicants();
-            }
-
             // Read the CSV
             using (StreamReader textReader = new StreamReader(csvFilePath))
             {
@@ -50,7 +44,13 @@ namespace GoldenTicket.Csv
                     foreach (string rawSchoolName in schoolNames.Split(','))
                     {
                         string schoolName = EscapeSchoolName(rawSchoolName.Trim());
-                        schools[schoolName].Applicants.Add(applicant);
+
+                        var school = db.Schools.First(s => s.Name.Equals(schoolName, StringComparison.CurrentCultureIgnoreCase));
+                        
+                        var applied = new Applied {Applicant = applicant, Program = school};
+
+                        db.Applieds.Add(applied);
+                        db.SaveChanges();
                     }
                 }
             }
@@ -68,20 +68,20 @@ namespace GoldenTicket.Csv
             a.StudentBirthday = Convert.ToDateTime(csvReader.GetField<string>("Student Birthday"));
             a.StudentGender = ParseGender(csvReader.GetField<string>("Student Gender"));
 
-            a.GuardianFirstName = csvReader.GetField<string>("Guardian First Name");
-            a.GuardianLastName = csvReader.GetField<string>("Guardian Last Name");
-            a.GuardianPhoneNumber = csvReader.GetField<string>("Guardian Phone Number");
-            a.GuardianEmailAddress = csvReader.GetField<string>("Guardian E-mail Address");
-            a.GuardianRelationshipToStudent = csvReader.GetField<string>("Guardian Relationship to Student");
+            a.Contact1FirstName = csvReader.GetField<string>("Guardian First Name");
+            a.Contact1LastName = csvReader.GetField<string>("Guardian Last Name");
+            a.Contact1Phone = csvReader.GetField<string>("Guardian Phone Number");
+            a.Contact1Email = csvReader.GetField<string>("Guardian E-mail Address");
+            a.Contact1Relationship = csvReader.GetField<string>("Guardian Relationship to Student");
 
-            a.StreetAddress = csvReader.GetField<string>("Street Address");
-            a.ZipCode = csvReader.GetField<string>("Zip Code");
-            a.District = csvReader.GetField<string>("District of Residency");
-            a.NumHouseholdMembers = Math.Abs(int.Parse(csvReader.GetField<string>("Household Members")));
+            a.StudentStreetAddress1 = csvReader.GetField<string>("Street Address");
+            a.StudentZipCode = csvReader.GetField<string>("Zip Code");
+            a.StudentCity = csvReader.GetField<string>("District of Residency");
+            a.HouseholdMembers = Math.Abs(int.Parse(csvReader.GetField<string>("Household Members")));
 
             // Income calculation (below or above poverty line?)
             int incomeAmount = ParseIncome(csvReader.GetField<string>("Annual Income"));
-            if(a.NumHouseholdMembers > 10 && incomeAmount >= 89190) //TODO change statically defined number
+            if(a.HouseholdMembers > 10 && incomeAmount >= 89190) //TODO change statically defined number
             {
                 string writeInIncomeAmountStr = csvReader.GetField<string>("Household Income Amount").Replace("$","").Replace(",","");
 
@@ -94,7 +94,19 @@ namespace GoldenTicket.Csv
                     incomeAmount = 1000000; // assume family is above poverty line if income was not entered
                 }
             }
-            a.IsBelowPovertyLevel = incomeCalc.IsBelowPovertyLine(a.NumHouseholdMembers, incomeAmount);
+
+            // Fix Zip code (for test data only)
+            if (a.StudentZipCode.Length == 4)
+            {
+                a.StudentZipCode = "0" + a.StudentZipCode;
+            }
+
+            // Add a fake confirmation number
+            a.ConfirmationCode = "123ABC";
+
+
+            db.Applicants.Add(a);
+            db.SaveChanges(); // needed to get an ID for the applicant
 
             return a;
         }
@@ -107,34 +119,34 @@ namespace GoldenTicket.Csv
             switch(incomeRange)
             {
                 case "$29,101 or below":
-                    incomeAmount = 29101;
+                    incomeAmount = 29101/12;
                     break;
                 case "$29,102 - $36,612":
-                    incomeAmount = 29102;
+                    incomeAmount = 29102/12;
                     break;
                 case "$36,613 - $44,123":
-                    incomeAmount = 36613;
+                    incomeAmount = 36613/12;
                     break;
                 case "$44,124 - $51,634":
-                    incomeAmount = 44124;
+                    incomeAmount = 44124/12;
                     break;
                 case "$51,635 - $59,145":
-                    incomeAmount = 51635;
+                    incomeAmount = 51635/12;
                     break;
                 case "$59,146 - $66,656":
-                    incomeAmount = 59146;
+                    incomeAmount = 59146/12;
                     break;
                 case "$66,657 - $74,167":
-                    incomeAmount = 66657;
+                    incomeAmount = 66657/12;
                     break;
                 case "$74,168 - $81,678":
-                    incomeAmount = 74168;
+                    incomeAmount = 74168/12;
                     break;
                 case "$81,679 - $89,189":
-                    incomeAmount = 81679;
+                    incomeAmount = 81679/12;
                     break;
                 case "$89,190 or above":
-                    incomeAmount = 89190;
+                    incomeAmount = 89190/12;
                     break;
             }
 
@@ -146,14 +158,14 @@ namespace GoldenTicket.Csv
             return schoolName.Replace("@", "at").Replace('/', '-');
         }
 
-        private static Applicant.Gender ParseGender(string genderStr)
+        private static Gender ParseGender(string genderStr)
         {
             if (genderStr.Equals("MALE", StringComparison.InvariantCultureIgnoreCase))
             {
-                return Applicant.Gender.MALE;
+                return Gender.Male;
             }
 
-            return Applicant.Gender.FEMALE;
+            return Gender.Female;
         }
     }
 }

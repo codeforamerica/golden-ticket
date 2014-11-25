@@ -108,12 +108,12 @@ namespace GoldenTicket.Models
         // Application information
         [Display(Name = "ConfirmationCode", ResourceType = typeof(GoldenTicketText))]
         public string ConfirmationCode { get; set; }
-    }
 
-    // ---- Enums ----
-    public enum Gender
-    {
-        Male, Female
-    }
 
+        // ---- Utility Methods ----
+        public string Checksum()
+        {
+            return StudentFirstName + StudentMiddleName + StudentLastName + StudentStreetAddress1 + StudentStreetAddress2 + StudentCity + StudentZipCode;
+        }
+    }
 }

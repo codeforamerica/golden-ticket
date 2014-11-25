@@ -171,7 +171,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Lottery\Utils.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Gender.cs" />
     <Compile Include="Models\GlobalConfig.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\PovertyConfig.cs" />
@@ -183,19 +185,14 @@
     <Compile Include="Models\ValidationConstants.cs" />
     <Compile Include="Models\Waitlisted.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="GoldenTicket\Calc\IncomeCalculator.cs" />
-    <Compile Include="GoldenTicket\Csv\ApplicantCsvReader.cs" />
-    <Compile Include="GoldenTicket\Csv\IncomeCsvReader.cs" />
-    <Compile Include="GoldenTicket\Csv\SchoolCsvMapper.cs" />
-    <Compile Include="GoldenTicket\Csv\SchoolCsvReader.cs" />
-    <Compile Include="GoldenTicket\Lottery\CrossSchoolReconciler.cs" />
-    <Compile Include="GoldenTicket\Lottery\ListShuffle.cs" />
-    <Compile Include="GoldenTicket\Lottery\SchoolLottery.cs" />
-    <Compile Include="GoldenTicket\Domain\Applicant.cs" />
-    <Compile Include="GoldenTicket\Domain\School.cs" />
-    <Compile Include="GoldenTicket\Reader\ApplicantReader.cs" />
-    <Compile Include="GoldenTicket\Reader\IncomeReader.cs" />
-    <Compile Include="GoldenTicket\Reader\SchoolReader.cs" />
+    <Compile Include="Calc\IncomeCalculator.cs" />
+    <Compile Include="Csv\ApplicantCsvReader.cs" />
+    <Compile Include="Lottery\CrossSchoolReconciler.cs" />
+    <Compile Include="Lottery\ListShuffle.cs" />
+    <Compile Include="Lottery\SchoolLottery.cs" />
+    <Compile Include="Reader\ApplicantReader.cs" />
+    <Compile Include="Reader\IncomeReader.cs" />
+    <Compile Include="Reader\SchoolReader.cs" />
     <Compile Include="Resources\GoldenTicketText.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -272,6 +269,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="TestData\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
