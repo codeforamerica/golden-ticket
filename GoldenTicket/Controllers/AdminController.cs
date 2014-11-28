@@ -25,7 +25,8 @@ namespace GoldenTicket.Controllers
         private void PrepareApplicationsView()
         {
             ViewBag.LotteryRunDate = GetLotteryRunDate();
-            ViewBag.IsLotteryClosed = GetLotteryCloseDate() <= DateTime.Now;
+            ViewBag.LotteryCloseDate = GetLotteryCloseDate();
+            ViewBag.IsLotteryClosed = ViewBag.LotteryCloseDate <= DateTime.Now;
 
             AddSchoolsToViewBag();
         }

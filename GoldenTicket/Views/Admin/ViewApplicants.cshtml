@@ -17,9 +17,17 @@
 
     <div class="page">
         <div class="site-width">
-            @if(ViewBag.IsLotteryClosed && ViewBag.LotterRunDate != null)
+            @if(!ViewBag.IsLotteryClosed)
             {
                 <div class="notice">
+                    <p>Lottery applications will close on @ViewBag.LotteryCloseDate.ToString("MM/dd/yyyy").</p>
+                </div>
+            }
+
+            @if(ViewBag.IsLotteryClosed && ViewBag.LotterRunDate == null)
+            {
+                <div class="notice">
+                    <h1>Lottery applications have closed</h1>
                     <p>The pre-k lottery application can no longer be applied to. Click the button below to run the lottery for all applicants.</p>
                     <p>@Html.ActionLink("Run lottery","RunLottery", null, new {@class="button"})</p>
                 </div>
