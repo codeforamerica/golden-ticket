@@ -868,10 +868,8 @@ body[class^=applications] main aside dt{
 	margin-top: 1.4rem;
 }
 
-.applications-show main header a,
-.applications-edit main header a,
-.applications-show main header button,
-.applications-edit main header button{
+.applications-show main header nav,
+.applications-edit main header nav{
 	position: absolute;
 	left: auto;
 	right: 0.5rem;
@@ -885,8 +883,14 @@ body[class^=applications] main aside dt{
 	border-radius: 0;
 	cursor: pointer;
 	line-height: 2.4rem;
-	color: inherit;
+	color: white;
 }
+
+.applications-show main header nav a,
+.applications-edit main header nav a {
+	color: rgb(193, 182, 194);
+}
+
 
 .applications-show main header a:hover,
 .applications-edit main header a:hover,

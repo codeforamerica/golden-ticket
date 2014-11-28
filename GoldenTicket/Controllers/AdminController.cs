@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using GoldenTicket.Lottery;
 using GoldenTicket.Models;
 using GoldenTicket.DAL;
 
@@ -114,7 +115,7 @@ namespace GoldenTicket.Controllers
             }
             else
             {
-                var applieds = db.Applieds.Where(a => a.ProgramID == id).OrderBy(a => a.Applicant.StudentLastName).ToList();
+                var applieds = db.Applieds.Where(a => a.SchoolID == id).OrderBy(a => a.Applicant.StudentLastName).ToList();
                 var applicants = new List<Applicant>();
                 foreach (var applied in applieds) // don't convert to LINQ -- needs to preserve order
                 {
@@ -127,6 +128,29 @@ namespace GoldenTicket.Controllers
             AddSchoolsToViewBag();
 
             return View();
+        }
+
+        public ActionResult ViewApplicant(int id)
+        {
+            var applicant = db.Applicants.Find(id);
+
+            // Send back to view all applicants if an incorrect ID is specified
+            if(applicant == null)
+            {
+                return RedirectToAction("ViewApplicants");
+            }
+
+            // Variables for display
+            ViewBag.AppliedSchools = Utils.GetSchools(db.Applieds.Where(a => a.ApplicantID == applicant.ID).OrderBy(a=>a.School.Name).ToList());
+            var selectedSchool = db.Selecteds.FirstOrDefault(s => s.ApplicantID == applicant.ID);
+            if (selectedSchool != null)
+            {
+                ViewBag.SelectedSchool = selectedSchool;
+            }
+            ViewBag.WaitlistedSchools = Utils.GetSchools(db.Waitlisteds.Where(a => a.ApplicantID == applicant.ID).OrderBy(a => a.School.Name).ToList());
+            ViewBag.WasLotteryRun = GetLotteryRunDate() != null;
+
+            return View(applicant);
         }
 
         /*

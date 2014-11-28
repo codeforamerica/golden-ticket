@@ -269,6 +269,7 @@
     <Content Include="Views\Admin\_ApplicantTable.cshtml" />
     <Content Include="Views\Admin\_SchoolApplicantNav.cshtml" />
     <Content Include="Views\Admin\ViewApplicantsForSchool.cshtml" />
+    <Content Include="Views\Admin\ViewApplicant.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

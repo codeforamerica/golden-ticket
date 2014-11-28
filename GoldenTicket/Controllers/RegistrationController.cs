@@ -228,7 +228,7 @@ namespace GoldenTicket.Controllers
             {
                 var applied = new Applied();
                 applied.ApplicantID = applicant.ID;
-                applied.ProgramID = programId;
+                applied.SchoolID = programId;
 
                 // Confirm that the program ID is within the city lived in (no sneakers into other districts)
                 var program = database.Schools.Find(programId);
@@ -453,7 +453,7 @@ namespace GoldenTicket.Controllers
             var applieds = database.Applieds.Where(a => a.ApplicantID == applicant.ID).ToList();
             var programs = new List<School>();
 
-            applieds.ForEach(a => programs.Add(a.Program));
+            applieds.ForEach(a => programs.Add(a.School));
 
             ViewBag.Programs = programs;
 

@@ -47,7 +47,7 @@ namespace GoldenTicket.Csv
 
                         var school = db.Schools.First(s => s.Name.Equals(schoolName, StringComparison.CurrentCultureIgnoreCase));
                         
-                        var applied = new Applied {Applicant = applicant, Program = school};
+                        var applied = new Applied {Applicant = applicant, School = school};
 
                         db.Applieds.Add(applied);
                         db.SaveChanges();
@@ -80,20 +80,7 @@ namespace GoldenTicket.Csv
             a.HouseholdMembers = Math.Abs(int.Parse(csvReader.GetField<string>("Household Members")));
 
             // Income calculation (below or above poverty line?)
-            int incomeAmount = ParseIncome(csvReader.GetField<string>("Annual Income"));
-            if(a.HouseholdMembers > 10 && incomeAmount >= 89190) //TODO change statically defined number
-            {
-                string writeInIncomeAmountStr = csvReader.GetField<string>("Household Income Amount").Replace("$","").Replace(",","");
-
-                if(!string.IsNullOrWhiteSpace(writeInIncomeAmountStr))
-                {
-                    incomeAmount = int.Parse(writeInIncomeAmountStr);
-                }
-                else
-                {
-                    incomeAmount = 1000000; // assume family is above poverty line if income was not entered
-                }
-            }
+            a.HouseholdMonthlyIncome = ParseIncome(csvReader.GetField<string>("Annual Income"));
 
             // Fix Zip code (for test data only)
             if (a.StudentZipCode.Length == 4)

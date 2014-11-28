@@ -52,5 +52,27 @@ namespace GoldenTicket.Lottery
             return applicants;
         }
 
+        public static List<School> GetSchools(List<Applied> applieds)
+        {
+            var schools = new List<School>();
+            foreach(var a in applieds)
+            {
+                schools.Add(a.School);
+            }
+
+            return schools;
+        }
+
+        public static List<School> GetSchools(List<Waitlisted> waitlisteds)
+        {
+            var schools = new List<School>();
+            foreach (var a in waitlisteds)
+            {
+                schools.Add(a.School);
+            }
+
+            return schools;
+        }
+
     }
 }
