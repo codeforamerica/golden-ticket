@@ -53,6 +53,7 @@ namespace GoldenTicket.Controllers
             if (numApplicants < skipCount)
             {
                 skipCount = 0;
+                id = 0;
             }
 
             var applicants =
@@ -151,8 +152,8 @@ namespace GoldenTicket.Controllers
         private DateTime? GetLotteryCloseDate()
         {
             //return db.GlobalConfigs.First().CloseDate; // real call
-            //return new DateTime(2014, 11, 20); // forced lottery closed
-            return new DateTime(2014, 11, 30); // forced lottery open
+            return new DateTime(2014, 11, 20); // forced lottery closed
+            //return new DateTime(2014, 11, 30); // forced lottery open
         }
 
         private bool WasLotteryRun()
