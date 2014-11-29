@@ -1,0 +1,24 @@
+﻿@using System.Web.UI.WebControls
+@using GoldenTicket.Models
+@using GoldenTicket.Resources
+@using GoldenTicket.Calc
+@model Applicant
+
+@{
+    ViewBag.BodyId = "";
+    ViewBag.BodyClass = "no-js applications-show";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<main>
+    <div class="page">
+        <div class="site-width">
+            <div class="notice">
+                <h1>Deleted application for @Model.StudentFirstName @Model.StudentLastName</h1>
+                <p>
+                    @Html.ActionLink(linkText: "Continue", actionName: "ViewApplicants", htmlAttributes: new {@class="button"})
+                </p>
+            </div>
+        </div>
+    </div>
+</main>

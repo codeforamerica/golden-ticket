@@ -273,6 +273,7 @@
     <Content Include="Views\Admin\ViewDuplicateApplicants.cshtml" />
     <Content Include="Views\Admin\DeleteApplicantConfirm.cshtml" />
     <Content Include="Views\Admin\_ApplicantDetails.cshtml" />
+    <Content Include="Views\Admin\DeleteApplicant.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -153,6 +153,20 @@ namespace GoldenTicket.Controllers
 
             return View();
         }
+        
+        private void PrepareApplicantDetailView(Applicant applicant)
+        {
+            ViewBag.AppliedSchools =
+                Utils.GetSchools(db.Applieds.Where(a => a.ApplicantID == applicant.ID).OrderBy(a => a.School.Name).ToList());
+            var selectedSchool = db.Selecteds.FirstOrDefault(s => s.ApplicantID == applicant.ID);
+            if (selectedSchool != null)
+            {
+                ViewBag.SelectedSchool = selectedSchool;
+            }
+            ViewBag.WaitlistedSchools =
+                Utils.GetSchools(db.Waitlisteds.Where(a => a.ApplicantID == applicant.ID).OrderBy(a => a.School.Name).ToList());
+            ViewBag.WasLotteryRun = GetLotteryRunDate() != null;
+        }
 
         public ActionResult ViewApplicant(int id)
         {
@@ -165,17 +179,12 @@ namespace GoldenTicket.Controllers
             }
 
             // Variables for display
-            ViewBag.AppliedSchools = Utils.GetSchools(db.Applieds.Where(a => a.ApplicantID == applicant.ID).OrderBy(a=>a.School.Name).ToList());
-            var selectedSchool = db.Selecteds.FirstOrDefault(s => s.ApplicantID == applicant.ID);
-            if (selectedSchool != null)
-            {
-                ViewBag.SelectedSchool = selectedSchool;
-            }
-            ViewBag.WaitlistedSchools = Utils.GetSchools(db.Waitlisteds.Where(a => a.ApplicantID == applicant.ID).OrderBy(a => a.School.Name).ToList());
-            ViewBag.WasLotteryRun = GetLotteryRunDate() != null;
+            PrepareApplicantDetailView(applicant);
 
             return View(applicant);
         }
+
+
 
         public ActionResult ViewDuplicateApplicants()
         {
@@ -204,6 +213,22 @@ namespace GoldenTicket.Controllers
             {
                 return HttpNotFound();
             }
+
+            PrepareApplicantDetailView(applicant);
+
+            return View(applicant);
+        }
+
+        public ActionResult DeleteApplicant(int id)
+        {
+            var applicant = db.Applicants.Find(id);
+            if (applicant == null)
+            {
+                return HttpNotFound();
+            }
+
+            db.Applicants.Remove(applicant);
+            db.SaveChanges();
 
             return View(applicant);
         }
