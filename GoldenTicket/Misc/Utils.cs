@@ -167,5 +167,28 @@ namespace GoldenTicket.Misc
             return csvText.ToString();
         }
 
+        public static bool AreApplicantsEqual(Applicant a1, Applicant a2)
+        {
+            return a1.Checksum() == a2.Checksum();
+        }
+
+        public static List<Applicant> GetDuplicateApplicants(IEnumerable<Applicant> applicants)
+        {
+            var applicantsCopy = new List<Applicant>(applicants); // needed to prevent concurrent iteration of the same list during count
+            var duplicates = new List<Applicant>();
+            foreach (var a in applicants)
+            {
+                var checksum = a.Checksum();
+                var count = applicantsCopy.Count(applicant => applicant.Checksum() == checksum);
+
+                if (count > 1)
+                {
+                    duplicates.Add(a);
+                }
+            }
+
+            return duplicates;            
+        }
+
     }
 }

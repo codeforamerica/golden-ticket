@@ -148,7 +148,7 @@ namespace GoldenTicket.Controllers
                 ViewBag.Applicants = applicants;
             }
 
-            // Other things needed for disply
+            // Other things needed for display
             AddSchoolsToViewBag();
 
             return View();
@@ -173,6 +173,37 @@ namespace GoldenTicket.Controllers
             }
             ViewBag.WaitlistedSchools = Utils.GetSchools(db.Waitlisteds.Where(a => a.ApplicantID == applicant.ID).OrderBy(a => a.School.Name).ToList());
             ViewBag.WasLotteryRun = GetLotteryRunDate() != null;
+
+            return View(applicant);
+        }
+
+        public ActionResult ViewDuplicateApplicants()
+        {
+            var schoolDuplicates = new Dictionary<School, List<Applicant>>();
+            
+            var schools = db.Schools.OrderBy(s => s.Name).ToList();
+            foreach (var s in schools)
+            {
+                var applieds =
+                    db.Applieds.Where(a => a.SchoolID == s.ID)
+                        .OrderBy(a => a.Applicant.StudentLastName)
+                        .ThenBy(a => a.Applicant.StudentFirstName)
+                        .ToList();
+                var duplicates = Utils.GetDuplicateApplicants(Utils.GetApplicants(applieds));
+
+                schoolDuplicates.Add(s,duplicates);
+            }
+
+            return View(schoolDuplicates);
+        }
+
+        public ActionResult DeleteApplicantConfirm(int id)
+        {
+            var applicant = db.Applicants.Find(id);
+            if (applicant == null)
+            {
+                return HttpNotFound();
+            }
 
             return View(applicant);
         }

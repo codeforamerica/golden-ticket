@@ -111,9 +111,10 @@ namespace GoldenTicket.Models
 
 
         // ---- Utility Methods ----
-        public string Checksum()
+        public int Checksum()
         {
-            return StudentFirstName + StudentMiddleName + StudentLastName + StudentStreetAddress1 + StudentStreetAddress2 + StudentCity + StudentZipCode;
+            // hash code of first name, last name, and city (no spaces and all lowercase)  
+            return (StudentFirstName.Replace(" ", string.Empty).ToLower() + StudentLastName.Replace(" ", string.Empty).ToLower() + StudentCity.Replace(" ", string.Empty).ToLower()).GetHashCode();
         }
     }
 }

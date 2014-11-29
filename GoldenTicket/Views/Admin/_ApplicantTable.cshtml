@@ -1,21 +1,20 @@
 ﻿@using GoldenTicket.Models
-@using GoldenTicket.Calc
 @model List<Applicant>
            
 <table class="table-applications">
     <thead>
         <tr>
-            <td class="table-applications-col-fname">
+            <td>
                 <span>First Name</span>
             </td>
-            <td class="table-applications-col-lname">
+            <td>
                 <span>Last Name</span>
             </td>
-            <td class="table-applications-col-gender">
-                <span>Gender</span>
+            <td>
+                <span>Street</span>
             </td>
-            <td class="table-applications-col-poverty">
-                <span>Poverty</span>
+            <td>
+                <span>City</span>
             </td>
             <td class="table-applications-col-delete">
                 <span>Delete</span>
@@ -27,27 +26,20 @@
         @foreach (Applicant applicant in Model)
         {
             <tr>
-                <td class="table-applications-col-fname">
+                <td>
                    @Html.ActionLink(linkText: applicant.StudentFirstName, actionName: "ViewApplicant", routeValues: new { id = applicant.ID })
                 </td>
-                <td class="table-applications-col-lname">
+                <td>
                     @Html.ActionLink(linkText: applicant.StudentLastName, actionName: "ViewApplicant", routeValues: new { id = applicant.ID })
                 </td>
-                <td class="table-applications-col-gender">
-                    @Html.ActionLink(linkText: applicant.StudentGender.ToString(), actionName: "ViewApplicant", routeValues: new { id = applicant.ID })
+                <td>
+                    @Html.ActionLink(linkText: applicant.StudentStreetAddress1, actionName: "ViewApplicant", routeValues: new { id = applicant.ID })
                 </td>
-                <td class="table-applications-col-poverty">
-                    @if (IncomeCalculator.IsBelowPovertyLine(applicant))
-                    {
-                        @Html.ActionLink(linkText: "Below", actionName: "ViewApplicant", routeValues: new {id=applicant.ID})
-                    }
-                    else
-                    {
-                        @Html.ActionLink(linkText: "Above", actionName: "ViewApplicant", routeValues: new { id = applicant.ID })
-                    }
+                <td>
+                    @Html.ActionLink(linkText: applicant.StudentCity, actionName: "ViewApplicant", routeValues: new { id = applicant.ID })
                 </td>
                 <td class="table-applications-col-delete">
-                    @Html.ActionLink(linkText: "Delete", actionName: "ViewApplicant", routeValues: new { id = applicant.ID })
+                    @Html.ActionLink(linkText: "Delete", actionName: "DeleteApplicant", routeValues: new { id = applicant.ID })
                 </td>
             </tr>
         }
