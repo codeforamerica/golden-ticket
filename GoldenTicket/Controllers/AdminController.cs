@@ -79,16 +79,26 @@ namespace GoldenTicket.Controllers
             return View();
         }
 
-        public FileStreamResult ExportApplicants()
+        public ActionResult ExportApplicants()
         {
-            var applicants = db.Applicants.ToList();
+            var applicants = db.Applicants.OrderBy(a=>a.StudentLastName).ToList();
 
-            var csvText = Utils.ApplicantsToCsv(applicants);
+            return ExportApplicantsCsvFile(applicants, "applicants_all.csv");
+        }
 
-            var byteArray = Encoding.UTF8.GetBytes(csvText);
-            var stream = new MemoryStream(byteArray);
+        public ActionResult ExportApplicantsForSchool(int id)
+        {
+            var school = db.Schools.Find(id);
+            if (school == null)
+            {
+                return HttpNotFound();
+            }
 
-            return File(stream, "text/plain", "all_applicants.csv");
+            var applieds = db.Applieds.Where(a => a.SchoolID == id).OrderBy(a=>a.Applicant.StudentLastName).ToList();
+            var applicants = Utils.GetApplicants(applieds);
+
+            var schoolName = db.Schools.Find(id).Name.Replace(' ', '_');
+            return ExportApplicantsCsvFile(applicants, "applicants_" + schoolName + ".csv");
         }
 
 
@@ -204,6 +214,16 @@ namespace GoldenTicket.Controllers
             var schools = db.Schools.OrderBy(s => s.Name).ToList();
             schools.Insert(0, ALL_SCHOOL_SCHOOL);
             ViewBag.Schools = schools;
+        }
+
+        private FileStreamResult ExportApplicantsCsvFile(IEnumerable<Applicant> applicants, string fileName)
+        {
+            var csvText = Utils.ApplicantsToCsv(applicants);
+
+            var byteArray = Encoding.UTF8.GetBytes(csvText);
+            var stream = new MemoryStream(byteArray);
+
+            return File(stream, "text/plain", fileName);
         }
     }
 }

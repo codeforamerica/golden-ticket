@@ -1,4 +1,5 @@
-﻿@using GoldenTicket.Models
+﻿@using System.Web.UI.WebControls
+@using GoldenTicket.Models
 @using GoldenTicket.Resources
 
 @{
@@ -39,7 +40,7 @@
                 <section>
                     <nav class="export">
                         <ul>
-                            <li><a href="#">Export applicant list</a></li>
+                            <li>@Html.ActionLink(linkText: "Export applicant list", actionName: "ExportApplicantsForSchool", routeValues: new {id = ViewBag.School.ID})</li>
                         </ul>
                     </nav>
                     <nav class="status">
