@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
-using GoldenTicket.Lottery;
+using GoldenTicket.Misc;
 using GoldenTicket.Models;
 using GoldenTicket.DAL;
 
@@ -75,6 +77,18 @@ namespace GoldenTicket.Controllers
             ViewBag.PageNum = id + 1;
 
             return View();
+        }
+
+        public FileStreamResult ExportApplicants()
+        {
+            var applicants = db.Applicants.ToList();
+
+            var csvText = Utils.ApplicantsToCsv(applicants);
+
+            var byteArray = Encoding.UTF8.GetBytes(csvText);
+            var stream = new MemoryStream(byteArray);
+
+            return File(stream, "text/plain", "all_applicants.csv");
         }
 
 

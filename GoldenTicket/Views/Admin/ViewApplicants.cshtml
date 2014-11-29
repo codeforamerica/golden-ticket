@@ -67,7 +67,9 @@
                 <section>
                     <nav class="export">
                         <ul>
-                            <li><a href="#">Export applicant list</a></li>
+                            <li>
+                                @Html.ActionLink(linkText: "Export applicant list", actionName: "ExportApplicants" )
+                            </li>
                         </ul>
                     </nav>
                     <nav class="status">

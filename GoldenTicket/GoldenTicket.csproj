@@ -170,7 +170,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Lottery\Utils.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Gender.cs" />
     <Compile Include="Models\GlobalConfig.cs" />
@@ -203,6 +202,7 @@
       <DependentUpon>GoldenTicketText.es.resx</DependentUpon>
     </Compile>
     <Compile Include="Startup.cs" />
+    <Compile Include="Misc\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\forms.css" />

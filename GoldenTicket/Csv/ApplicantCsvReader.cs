@@ -74,7 +74,7 @@ namespace GoldenTicket.Csv
             a.Contact1Email = csvReader.GetField<string>("Guardian E-mail Address");
             a.Contact1Relationship = csvReader.GetField<string>("Guardian Relationship to Student");
 
-            a.StudentStreetAddress1 = csvReader.GetField<string>("Street Address");
+            a.StudentStreetAddress1 = csvReader.GetField<string>("Street Address").Replace(',', ' ');
             a.StudentZipCode = csvReader.GetField<string>("Zip Code");
             a.StudentCity = csvReader.GetField<string>("District of Residency");
             a.HouseholdMembers = Math.Abs(int.Parse(csvReader.GetField<string>("Household Members")));
