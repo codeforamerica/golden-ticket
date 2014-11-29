@@ -10,15 +10,42 @@
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
+<script type="text/javascript">
+    function confirmDeleteText() {
+        var value = $("#delete-confirm-text-box").val();
+        var deleteConfirmButton = $("#delete-confirm-button");
+
+        if (value.toLowerCase() === "delete") {
+            deleteConfirmButton.addClass("button");
+            deleteConfirmButton.prop("disabled", false);
+        }
+        else {
+            deleteConfirmButton.removeClass("button");
+            deleteConfirmButton.prop("disabled", true);
+        }
+    }
+
+</script>
+
 <main>
     <div class="page">
         <div class="site-width">
             <div class="notice">
-                <h1>Deleted application for @Model.StudentFirstName @Model.StudentLastName</h1>
-                <p>
-                    @Html.ActionLink(linkText: "Continue", actionName: "ViewApplicants", htmlAttributes: new {@class="button"})
-                </p>
+                <h1>Confirm deletion of @Model.StudentFirstName @Model.StudentLastName's application.</h1>
+                <p>To delete this application, type the word <strong>DELETE</strong> into the text box below and press the <em>Confirm</em> button</p>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.ID)
+                    <p><input id="delete-confirm-text-box" type="text" onchange="confirmDeleteText()" onkeyup="confirmDeleteText()" /></p>
+                    <p>
+                        <input type="submit" value="Confirm" class="" disabled="disabled" id="delete-confirm-button"/>
+                        <a href="javascript:void(0);" onclick="history.go(-1);">Cancel</a>
+                    </p>
+                }
             </div>
         </div>
+        
+        @Html.Partial("_ApplicantDetails", Model)
     </div>
 </main>

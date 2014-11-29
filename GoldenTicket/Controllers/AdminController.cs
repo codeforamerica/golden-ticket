@@ -206,7 +206,7 @@ namespace GoldenTicket.Controllers
             return View(schoolDuplicates);
         }
 
-        public ActionResult DeleteApplicantConfirm(int id)
+        public ActionResult DeleteApplicant(int id)
         {
             var applicant = db.Applicants.Find(id);
             if (applicant == null)
@@ -219,18 +219,19 @@ namespace GoldenTicket.Controllers
             return View(applicant);
         }
 
-        public ActionResult DeleteApplicant(int id)
+        [HttpPost]
+        public ActionResult DeleteApplicant(Applicant applicant)
         {
-            var applicant = db.Applicants.Find(id);
-            if (applicant == null)
+            var queriedApplicant = db.Applicants.Find(applicant.ID);
+            if (queriedApplicant == null)
             {
                 return HttpNotFound();
             }
 
-            db.Applicants.Remove(applicant);
+            db.Applicants.Remove(queriedApplicant);
             db.SaveChanges();
 
-            return View(applicant);
+            return RedirectToAction("ViewApplicants");
         }
 
         /*

@@ -39,7 +39,7 @@
                     @Html.ActionLink(linkText: applicant.StudentCity, actionName: "ViewApplicant", routeValues: new { id = applicant.ID })
                 </td>
                 <td class="table-applications-col-delete">
-                    @Html.ActionLink(linkText: "Delete", actionName: "DeleteApplicantConfirm", routeValues: new { id = applicant.ID })
+                    @Html.ActionLink(linkText: "Delete", actionName: "DeleteApplicant", routeValues: new { id = applicant.ID })
                 </td>
             </tr>
         }
