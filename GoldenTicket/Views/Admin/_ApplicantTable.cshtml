@@ -1,4 +1,5 @@
 ﻿@using GoldenTicket.Models
+@using GoldenTicket.Calc
 @model List<Applicant>
            
 <table class="table-applications">
@@ -27,19 +28,26 @@
         {
             <tr>
                 <td class="table-applications-col-fname">
-                    @Html.ActionLink(applicant.StudentFirstName, "ViewApplicant", new {id=applicant.ID})
+                   @Html.ActionLink(linkText: applicant.StudentFirstName, actionName: "ViewApplicant", routeValues: new { id = applicant.ID })
                 </td>
                 <td class="table-applications-col-lname">
-                    @Html.ActionLink(applicant.StudentLastName, "ViewApplicant", new { id = applicant.ID })
+                    @Html.ActionLink(linkText: applicant.StudentLastName, actionName: "ViewApplicant", routeValues: new { id = applicant.ID })
                 </td>
                 <td class="table-applications-col-gender">
-                    <a href="ViewApplicant/@applicant.ID">@applicant.StudentGender.ToString()</a>
+                    @Html.ActionLink(linkText: applicant.StudentGender.ToString(), actionName: "ViewApplicant", routeValues: new { id = applicant.ID })
                 </td>
                 <td class="table-applications-col-poverty">
-                    @Html.ActionLink("Below", "ViewApplicant", new { id = applicant.ID })
+                    @if (IncomeCalculator.IsBelowPovertyLine(applicant))
+                    {
+                        @Html.ActionLink(linkText: "Below", actionName: "ViewApplicant", routeValues: new {id=applicant.ID})
+                    }
+                    else
+                    {
+                        @Html.ActionLink(linkText: "Above", actionName: "ViewApplicant", routeValues: new { id = applicant.ID })
+                    }
                 </td>
                 <td class="table-applications-col-delete">
-                    @Html.ActionLink("Delete", "ViewApplicant", new { id = applicant.ID })
+                    @Html.ActionLink(linkText: "Delete", actionName: "ViewApplicant", routeValues: new { id = applicant.ID })
                 </td>
             </tr>
         }

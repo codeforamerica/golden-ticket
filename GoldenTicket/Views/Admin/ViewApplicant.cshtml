@@ -1,6 +1,7 @@
 ﻿@using System.Web.UI.WebControls
 @using GoldenTicket.Models
 @using GoldenTicket.Resources
+@using GoldenTicket.Calc
 @model Applicant
 
 @{
@@ -73,7 +74,17 @@
                     <dt>Members</dt>
                     <dd>@Model.HouseholdMembers</dd>
                     <dt>Average Monthly Income</dt>
-                    <dd>@Model.HouseholdMonthlyIncome.ToString("C")</dd>
+                    <dd>
+                        @Model.HouseholdMonthlyIncome.ToString("C")
+                        @if (IncomeCalculator.IsBelowPovertyLine(Model))
+                        {
+                            <span class="badge-poverty badge-poverty-below">Below</span>
+                        }
+                        else
+                        {
+                            <span class="badge-poverty badge-poverty-above">Above</span>
+                        }
+                    </dd>
                 </dl>
 
             </section>
