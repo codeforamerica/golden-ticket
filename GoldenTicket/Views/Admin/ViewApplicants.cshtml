@@ -32,7 +32,14 @@
                 </div>
             }
             
-            @Html.Partial("_ApplicantTable", (List<Applicant>) ViewBag.Applicants)
+            @if (ViewBag.Applicants.Count > 0)
+            {
+                @Html.Partial("_ApplicantTable", (List<Applicant>) ViewBag.Applicants)
+            }
+            else
+            {
+                <h1>No applicants yet. Try back later.</h1>
+            }
                 
             <footer>
                 <section>
