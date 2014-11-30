@@ -1,0 +1,49 @@
+﻿@using GoldenTicket.Models
+@using GoldenTicket.Resources
+@model School
+
+<div class="field">
+    @Html.LabelFor(model => model.Name, labelText: "School name")
+    @Html.TextBoxFor(model => model.Name)
+</div>
+<fieldset class="fieldset-address">
+    <legend>School address</legend>
+    <div class="field field-street">
+        @Html.LabelFor(model => model.StreetAddress1, labelText: "Street address (line 1)")
+        @Html.TextBoxFor(model => model.StreetAddress1)
+    </div>
+    <div class="field field-street">
+        @Html.LabelFor(model => model.StreetAddress2, labelText: "Street address (line 2)")
+        @Html.TextBoxFor(model => model.StreetAddress2)
+    </div>
+    <div class="field field-city">
+        @Html.LabelFor(model => model.City, labelText: "City")
+        @Html.TextBoxFor(model => model.City)
+    </div>
+    <div class="field field-zip">
+        @Html.LabelFor(model => model.ZipCode, labelText: "Zip Code")
+        @Html.TextBoxFor(model => model.ZipCode)
+    </div>
+</fieldset>
+<div class="field field-width-medium">
+    @Html.LabelFor(model => model.Phone, labelText: "Phone")
+    @Html.TextBoxFor(model => model.Phone)
+</div>
+<div class="field field-width-large">
+    @Html.LabelFor(model => model.Email, labelText: "Email")
+    @Html.TextBoxFor(model => model.Email)
+</div>
+<div class="field field-width-small">
+    @Html.LabelFor(model => model.Seats, labelText: "Seats")
+    @Html.TextBoxFor(model => model.Seats)
+</div>
+<div class="field field-width-small">
+    @Html.LabelFor(model => model.PovertyRate, labelText: "Percentage of student to accept below the poverty line")
+    @Html.TextBoxFor(model => model.PovertyRate)
+    <span class="percentage">%</span>
+</div>
+<div class="field field-width-small">
+    @Html.LabelFor(model => model.GenderBalance, labelText: "Percentage of students to be male")
+    @Html.TextBoxFor(model => model.GenderBalance)
+    <span class="percentage">%</span>
+</div>

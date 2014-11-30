@@ -315,6 +315,67 @@ namespace GoldenTicket.Controllers
             return RedirectToAction("ViewApplicants");
         }
 
+        public ActionResult ViewSchools()
+        {
+            return View(db.Schools.OrderBy(s=>s.Name).ToList());
+        }
+
+        public ActionResult AddSchool()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddSchool(School school)
+        {
+            // Convert rates to multipliers
+            school.GenderBalance /= 100;
+            school.PovertyRate /= 100;
+
+            // Validate
+            ModelState.Clear();
+            TryValidateModel(school);
+            if (!ModelState.IsValid)
+            {
+                return View(school);
+            }
+
+            db.Schools.Add(school);
+            db.SaveChanges();
+
+            return RedirectToAction("ViewSchools");
+        }
+
+        public ActionResult DeleteSchool(int id)
+        {
+            var school = db.Schools.Find(id);
+            if (school == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(school);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteSchool(School school)
+        {
+            var queriedSchool = db.Schools.Find(school.ID);
+            if (queriedSchool == null)
+            {
+                return HttpNotFound();
+            }
+
+            db.Applieds.RemoveRange(queriedSchool.Applieds);
+            db.Selecteds.RemoveRange(queriedSchool.Selecteds);
+            db.Waitlisteds.RemoveRange(queriedSchool.Waitlisteds);
+            db.Shuffleds.RemoveRange(queriedSchool.Shuffleds);
+            db.Schools.Remove(queriedSchool);
+            db.SaveChanges();
+
+            return RedirectToAction("ViewSchools");
+        }
+
         /*
          * ---------- HELPER METHODS ------------
          */

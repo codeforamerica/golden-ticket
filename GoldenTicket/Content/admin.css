@@ -701,7 +701,7 @@ table.table-applications thead td.table-applications-col-delete{ visibility: hid
 
 .school a,
 .school button{
-	position: absolute;
+	/*position: absolute;*/
 	right: 0.7em;
 	top: 0.7em;
 }
