@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,7 @@ using System.Web.Mvc;
 using GoldenTicket.Misc;
 using GoldenTicket.Models;
 using GoldenTicket.DAL;
+using GoldenTicket.Resources;
 
 namespace GoldenTicket.Controllers
 {
@@ -16,6 +18,14 @@ namespace GoldenTicket.Controllers
 
         private GoldenTicketDbContext db = new GoldenTicketDbContext();
         private static readonly School ALL_SCHOOL_SCHOOL = GetAllSchoolSchool();
+
+        private readonly SharedViewHelper viewHelper;
+
+        public AdminController()
+        {
+            viewHelper = new SharedViewHelper(db);
+        }
+
 
         // All Applications
         // GET: Admin
@@ -184,6 +194,77 @@ namespace GoldenTicket.Controllers
             return View(applicant);
         }
 
+        public ActionResult EditApplicant(int id)
+        {
+            var applicant = db.Applicants.Find(id);
+            if (applicant == null)
+            {
+                return HttpNotFound();
+            }
+
+            PrepareEditApplicantView(applicant);
+
+            return View(applicant);
+        }
+
+        [HttpPost]
+        public ActionResult EditApplicant(Applicant applicant, FormCollection formCollection)
+        {
+            var queriedApplicant = db.Applicants.Find(applicant.ID);
+            if (queriedApplicant == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Empty check student and guardian information
+            viewHelper.EmptyCheckStudentInformation(ModelState, applicant);
+            viewHelper.EmptyCheckGuardianInformation(ModelState, applicant);
+
+            // School selection check //TODO Make this code shareable with the parent side
+            var schoolIds = new List<int>();
+            if (formCollection["programs"] == null || !formCollection["programs"].Any())
+            {
+                ModelState.AddModelError("programs", GoldenTicketText.NoSchoolSelected);
+                PrepareEditApplicantView(applicant);
+                return View(applicant);
+            }
+            else
+            {
+                var programIdStrs = formCollection["programs"].Split(',').ToList();
+                programIdStrs.ForEach(idStr => schoolIds.Add(int.Parse(idStr)));
+            }
+
+            if (!ModelState.IsValid)
+            {
+                PrepareEditApplicantView(applicant);
+                return View(applicant);
+            }
+
+            // Remove existing applications for this user
+            var applieds = db.Applieds.Where(applied => applied.ApplicantID == applicant.ID).ToList();
+            applieds.ForEach(a => db.Applieds.Remove(a));
+
+            // Add new Applied associations (between program and program)
+            var populatedApplicant = db.Applicants.Find(applicant.ID);
+            foreach (var programId in schoolIds)
+            {
+                var applied = new Applied();
+                applied.ApplicantID = applicant.ID;
+                applied.SchoolID = programId;
+
+                // Confirm that the program ID is within the city lived in (no sneakers into other districts)
+                var program = db.Schools.Find(programId);
+                if (program != null && program.City.Equals(populatedApplicant.StudentCity, StringComparison.CurrentCultureIgnoreCase))
+                {
+                    db.Applieds.Add(applied);
+                }
+            }
+
+            db.Applicants.AddOrUpdate(applicant);
+            db.SaveChanges();
+
+            return RedirectToAction("ViewApplicant", applicant.ID);
+        }
 
 
         public ActionResult ViewDuplicateApplicants()
@@ -281,6 +362,13 @@ namespace GoldenTicket.Controllers
             var stream = new MemoryStream(byteArray);
 
             return File(stream, "text/plain", fileName);
+        }
+
+        private void PrepareEditApplicantView(Applicant applicant)
+        {
+            viewHelper.PrepareStudentInformationView(ViewBag, false);
+            viewHelper.PrepareGuardianInformationView(ViewBag);
+            viewHelper.PrepareSchoolSelectionView(ViewBag, applicant);
         }
     }
 }

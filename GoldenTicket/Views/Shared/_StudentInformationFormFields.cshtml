@@ -33,7 +33,15 @@
         <div class="field field-city">
             <!-- TODO Add a note that if a city isn't available, then there are no programs that the applicant is eligible for -->
             @Html.LabelFor(model => model.StudentCity, GoldenTicketText.City)
-            @Html.DropDownListFor(model => model.StudentCity, new SelectList(ViewBag.DistrictNames))
+            @if (ViewBag.IsCityEditable)
+            {
+                @Html.DropDownListFor(model => model.StudentCity, new SelectList(ViewBag.DistrictNames))
+            }
+            else
+            {
+                @Html.HiddenFor(model => model.StudentCity)
+                <span>@Model.StudentCity</span>
+            }
         </div>
         <div class="field field-zip">
             @Html.LabelFor(model => model.StudentZipCode, GoldenTicketText.Zip)

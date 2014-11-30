@@ -22,7 +22,13 @@ namespace GoldenTicket.Controllers
 
         public void PrepareStudentInformationView(dynamic viewBag)
         {
+            PrepareStudentInformationView(viewBag, true);
+        }
+
+        public void PrepareStudentInformationView(dynamic viewBag, bool isCityEditable)
+        {
             viewBag.DistrictNames = GetDistrictNames();
+            viewBag.IsCityEditable = isCityEditable;
         }
 
         public string[] GetDistrictNames()
