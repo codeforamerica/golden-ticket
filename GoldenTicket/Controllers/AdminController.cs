@@ -320,6 +320,11 @@ namespace GoldenTicket.Controllers
             return View(db.Schools.ToList());
         }
 
+        public ActionResult AddSchool()
+        {
+            return View();
+        }
+
         /*
          * ---------- HELPER METHODS ------------
          */

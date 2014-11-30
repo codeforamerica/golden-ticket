@@ -40,6 +40,18 @@
                         @(school.PovertyRate*100)% of students above poverty
                     </span>
 
+                    @{
+                        var percentMale = 100 - school.GenderBalance * 100;
+                        var percentFemale = 100 - percentMale;
+                    }
+
+                    <span>
+                        @(percentMale)% female
+                    </span>
+                    <span>
+                        @(percentMale)% male
+                    </span>
+
                     <span>@Html.ActionLink(linkText: "Edit", actionName: "EditSchool", routeValues: new { id = school.ID })</span>
                     <span>@Html.ActionLink(linkText: "Delete", actionName: "DeleteSchool", routeValues: new { id = school.ID })</span>
                 </div>
