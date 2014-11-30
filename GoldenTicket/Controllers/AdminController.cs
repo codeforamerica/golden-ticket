@@ -317,12 +317,33 @@ namespace GoldenTicket.Controllers
 
         public ActionResult ViewSchools()
         {
-            return View(db.Schools.ToList());
+            return View(db.Schools.OrderBy(s=>s.Name).ToList());
         }
 
         public ActionResult AddSchool()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddSchool(School school)
+        {
+            // Convert rates to multipliers
+            school.GenderBalance /= 100;
+            school.PovertyRate /= 100;
+
+            // Validate
+            ModelState.Clear();
+            TryValidateModel(school);
+            if (!ModelState.IsValid)
+            {
+                return View(school);
+            }
+
+            db.Schools.Add(school);
+            db.SaveChanges();
+
+            return RedirectToAction("ViewSchools");
         }
 
         /*

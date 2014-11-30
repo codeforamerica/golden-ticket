@@ -10,20 +10,20 @@
 }
 
 <main>
-    @using(Html.BeginForm())
-    { 
+    @using (Html.BeginForm())
+    {
         <div class="page">
             <div class="site-width">
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary()
-                
+
                 <h1>Add a new school</h1>
-                
+
                 @Html.Partial("_SchoolFormFields", Model)
-                
+
                 <footer>
-                    <input type="submit" class="button" value="Add this school"/></input>
-                    <a href="javascript:void(0)" onclick="history.go(-1)">Cancel</a>
+                    <input type="submit" class="button" value="Add this school" />
+                    @Html.ActionLink(linkText: "Cancel", actionName: "ViewSchools")
                 </footer>
 
             </div>
