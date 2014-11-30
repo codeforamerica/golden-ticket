@@ -1,0 +1,50 @@
+﻿@using System.Web.UI.WebControls
+@using GoldenTicket.Models
+@model List<School>
+
+@{
+    ViewBag.BodyId = "";
+    ViewBag.BodyClass = "no-js schools-index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<main>
+    <header>
+        <div class="site-width">
+            <h1>Schools</h1>
+            @Html.ActionLink(linkText: "Add a new school", actionName: "AddSchool", htmlAttributes: new {@class="button-forward"}, routeValues: null)
+        </div>
+    </header>
+    <div class="page">
+        <div class="site-width">
+            @if (Model.Count == 0)
+            {
+                <div class="notice">
+                    <h1>There are currently no schools in the system. Please add one (or many!).</h1>
+                </div>
+            }
+
+            @foreach (var school in Model)
+            {
+                <div class="school vcard">
+                    <span class="fn">@school.Name</span>
+                    <div class="adr">
+                        <div class="street-address">@school.StreetAddress1</div>
+                        <div class="street-address">@school.StreetAddress2</div>
+                        <span class="locality">@school.City</span>,<span class="region">RI</span> <span class="postal-code">@school.ZipCode</span>
+                    </div>
+                    <span class="classroom-count">
+                        @school.Seats seats
+                    </span>
+                    <span class="poverty-threshold">
+                        @(school.PovertyRate*100)% of students above poverty
+                    </span>
+
+                    <span>@Html.ActionLink(linkText: "Edit", actionName: "EditSchool", routeValues: new { id = school.ID })</span>
+                    <span>@Html.ActionLink(linkText: "Delete", actionName: "DeleteSchool", routeValues: new { id = school.ID })</span>
+                </div>
+            }
+        </div>
+    </div>
+</main>
+

@@ -315,6 +315,11 @@ namespace GoldenTicket.Controllers
             return RedirectToAction("ViewApplicants");
         }
 
+        public ActionResult ViewSchools()
+        {
+            return View(db.Schools.ToList());
+        }
+
         /*
          * ---------- HELPER METHODS ------------
          */
