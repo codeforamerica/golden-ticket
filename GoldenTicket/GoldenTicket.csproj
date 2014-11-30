@@ -165,6 +165,7 @@
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
+    <Compile Include="Controllers\SharedViewHelper.cs" />
     <Compile Include="DAL\GoldenTicketDbContext.cs" />
     <Compile Include="DAL\Seeds.cs" />
     <Compile Include="Global.asax.cs">
