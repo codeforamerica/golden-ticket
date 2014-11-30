@@ -5,12 +5,20 @@ using System.Web;
 using System.Data.Entity;
 using GoldenTicket.Models;
 using System.Data.Entity.Validation;
+using GoldenTicket.Csv;
 
 namespace GoldenTicket.DAL 
 {
     public class Seeds : System.Data.Entity.DropCreateDatabaseIfModelChanges<GoldenTicketDbContext>
     {
-        protected override void Seed(GoldenTicketDbContext context)
+        private const string FAKE_ADDRESS_1 = "123 Main St";
+        private const string FAKE_ADDRESS_2 = "Suite 300";
+        private const string FAKE_ZIP_CODE = "02903";
+        private const string FAKE_PHONE = "401-123-4567";
+        private const string FAKE_EMAIL = "fake@email.com";
+        private const double GENDER_BALANCE = 0.5;
+
+        protected override void Seed(GoldenTicketDbContext db)
         {
             // Configurations
             var globalConfig = new GlobalConfig
@@ -24,7 +32,7 @@ namespace GoldenTicket.DAL
                 ContactEmail = "roald@gtridetest.org",
                 ContactPhone = "401-123-4567"
             };
-            context.GlobalConfigs.Add(globalConfig);
+            db.GlobalConfigs.Add(globalConfig);
 
             var povertyConfigs = new List<PovertyConfig> {
                 new PovertyConfig{ HouseholdMembers = 2, MinimumIncome = 2425 },
@@ -37,55 +45,210 @@ namespace GoldenTicket.DAL
                 new PovertyConfig{ HouseholdMembers = 9, MinimumIncome = 6806 },
                 new PovertyConfig{ HouseholdMembers = 10, MinimumIncome = 7432 },
             };
-            povertyConfigs.ForEach(pc => context.PovertyConfigs.Add(pc));
-
+            db.PovertyConfigs.AddRange(povertyConfigs);
 
             // Programs
-            var willysSchool = new Program
+            var captHunt = new School
             {
-                Name = "Willy Wonka School",
-                StreetAddress1 = "1000 Chocolate Factory Rd",
-                StreetAddress2 = "Blah",
-                City = "Providence",
-                ZipCode = "02904",
-                Phone = "401-000-0000",
-                Email = "willy@wonka.org",
-                Seats = 18,
-                PovertyRate = 0.87,
-                GenderBalance = 0.5
+                Name = "Central Falls - Capt. Hunt Early Learning Center",
+                StreetAddress1 = FAKE_ADDRESS_1,
+                StreetAddress2 = FAKE_ADDRESS_2,
+                City = "Central Falls",
+                ZipCode = FAKE_ZIP_CODE,
+                Phone = FAKE_PHONE,
+                Email = FAKE_EMAIL,
+                GenderBalance = GENDER_BALANCE,
+                PovertyRate = 0.857,
+                Seats = 18
             };
-            context.Programs.Add(willysSchool);
+            db.Schools.Add(captHunt);
 
-            var arthurAcademy = new Program
+            var ccap = new School
             {
-                Name = "Arthur Academy",
-                StreetAddress1 = "999 Gobstopper Blvd",
-                City = "Providence",
-                ZipCode = "02904",
-                Phone = "401-555-1234",
-                Email = "art@slugworth.com",
-                Seats = 36,
-                PovertyRate = 0.87,
-                GenderBalance = 0.5
+                Name = "Cranston - Comprehensive Community Action Program (CCAP)",
+                StreetAddress1 = FAKE_ADDRESS_1,
+                StreetAddress2 = FAKE_ADDRESS_2,
+                City = "Cranston",
+                ZipCode = FAKE_ZIP_CODE,
+                Phone = FAKE_PHONE,
+                Email = FAKE_EMAIL,
+                GenderBalance = GENDER_BALANCE,
+                PovertyRate = 0.432,
+                Seats = 18
             };
-            context.Programs.Add(arthurAcademy);
+            db.Schools.Add(ccap);
 
-            var giantPeach = new Program
+            var eastbay = new School
             {
-                Name = "Giant Peach",
-                StreetAddress1 = "1 Humongous Fruit Blvd",
-                StreetAddress2 = "Pit Suite",
+                Name = "Newport - East Bay Community Action Head Start",
+                StreetAddress1 = FAKE_ADDRESS_1,
+                StreetAddress2 = FAKE_ADDRESS_2,
+                City = "Newport",
+                ZipCode = FAKE_ZIP_CODE,
+                Phone = FAKE_PHONE,
+                Email = FAKE_EMAIL,
+                GenderBalance = GENDER_BALANCE,
+                PovertyRate = 0.61,
+                Seats = 36
+            };
+            db.Schools.Add(eastbay);
+
+            var readyPaw = new School
+            {
+                Name = "Pawtucket - Ready to Learn-Heritage Park YMCA Early Learning Center",
+                StreetAddress1 = FAKE_ADDRESS_1,
+                StreetAddress2 = FAKE_ADDRESS_2,
+                City = "Pawtucket",
+                ZipCode = FAKE_ZIP_CODE,
+                Phone = FAKE_PHONE,
+                Email = FAKE_EMAIL,
+                GenderBalance = GENDER_BALANCE,
+                PovertyRate = 0.755,
+                Seats = 18
+            };
+            db.Schools.Add(readyPaw);
+
+            var beautiful = new School
+            {
+                Name = "Providence - Beautiful Beginnings",
+                StreetAddress1 = FAKE_ADDRESS_1,
+                StreetAddress2 = FAKE_ADDRESS_2,
+                City = "Providence",
+                ZipCode = FAKE_ZIP_CODE,
+                Phone = FAKE_PHONE,
+                Email = FAKE_EMAIL,
+                GenderBalance = GENDER_BALANCE,
+                PovertyRate = 0.867,
+                Seats = 18
+            };
+            db.Schools.Add(beautiful);
+
+            var mariposa = new School
+            {
+                Name = "Providence - The Mariposa Center",
+                StreetAddress1 = FAKE_ADDRESS_1,
+                StreetAddress2 = FAKE_ADDRESS_2,
+                City = "Providence",
+                ZipCode = FAKE_ZIP_CODE,
+                Phone = FAKE_PHONE,
+                Email = FAKE_EMAIL,
+                GenderBalance = GENDER_BALANCE,
+                PovertyRate = 0.867,
+                Seats = 18
+            };
+            db.Schools.Add(mariposa);
+
+            var readyProv = new School
+            {
+                Name = "Providence - Ready to Learn Providence at CCRI Liston Campus",
+                StreetAddress1 = FAKE_ADDRESS_1,
+                StreetAddress2 = FAKE_ADDRESS_2,
+                City = "Providence",
+                ZipCode = FAKE_ZIP_CODE,
+                Phone = FAKE_PHONE,
+                Email = FAKE_EMAIL,
+                GenderBalance = GENDER_BALANCE,
+                PovertyRate = 0.867,
+                Seats = 18
+            };
+            db.Schools.Add(readyProv);
+
+            var smithHill = new School
+            {
+                Name = "Providence - Smith Hill Early Childhood Learning Center",
+                StreetAddress1 = FAKE_ADDRESS_1,
+                StreetAddress2 = FAKE_ADDRESS_2,
+                City = "Providence",
+                ZipCode = FAKE_ZIP_CODE,
+                Phone = FAKE_PHONE,
+                Email = FAKE_EMAIL,
+                GenderBalance = GENDER_BALANCE,
+                PovertyRate = 0.867,
+                Seats = 36
+            };
+            db.Schools.Add(smithHill);
+
+            var childIncWarwick = new School
+            {
+                Name = "Warwick - CHILD Inc.",
+                StreetAddress1 = FAKE_ADDRESS_1,
+                StreetAddress2 = FAKE_ADDRESS_2,
+                City = "Warwick",
+                ZipCode = FAKE_ZIP_CODE,
+                Phone = FAKE_PHONE,
+                Email = FAKE_EMAIL,
+                GenderBalance = GENDER_BALANCE,
+                PovertyRate = 0.358,
+                Seats = 18
+            };
+            db.Schools.Add(childIncWarwick);
+
+            var imagine = new School
+            {
+                Name = "Warwick - Imagine Preschool at CCRI Knight Campus",
+                StreetAddress1 = FAKE_ADDRESS_1,
+                StreetAddress2 = FAKE_ADDRESS_2,
+                City = "Warwick",
+                ZipCode = FAKE_ZIP_CODE,
+                Phone = FAKE_PHONE,
+                Email = FAKE_EMAIL,
+                GenderBalance = GENDER_BALANCE,
+                PovertyRate = 0.358,
+                Seats = 18
+            };
+            db.Schools.Add(imagine);
+
+            var westbay = new School
+            {
+                Name = "Warwick - Westbay Community Action Children's Center",
+                StreetAddress1 = FAKE_ADDRESS_1,
+                StreetAddress2 = FAKE_ADDRESS_2,
+                City = "Warwick",
+                ZipCode = FAKE_ZIP_CODE,
+                Phone = FAKE_PHONE,
+                Email = FAKE_EMAIL,
+                GenderBalance = GENDER_BALANCE,
+                PovertyRate = 0.358,
+                Seats = 18
+            };
+            db.Schools.Add(westbay);
+
+            var childIncWestWarwick = new School
+            {
+                Name = "West Warwick - CHILD Inc.",
+                StreetAddress1 = FAKE_ADDRESS_1,
+                StreetAddress2 = FAKE_ADDRESS_2,
                 City = "West Warwick",
-                ZipCode = "02911",
-                Phone = "401-333-3333",
-                Email = "james@giantpeach.edu",
-                Seats = 46,
-                PovertyRate = 0.35,
-                GenderBalance = 0.5
+                ZipCode = FAKE_ZIP_CODE,
+                Phone = FAKE_PHONE,
+                Email = FAKE_EMAIL,
+                GenderBalance = GENDER_BALANCE,
+                PovertyRate = 0.536,
+                Seats = 36
             };
-            context.Programs.Add(giantPeach);
-            
-            context.SaveChanges();
+            db.Schools.Add(childIncWestWarwick);
+
+            var woonsocket = new School
+            {
+                Name = "Woonsocket - Woonsocket Head Start Child Development Association",
+                StreetAddress1 = FAKE_ADDRESS_1,
+                StreetAddress2 = FAKE_ADDRESS_2,
+                City = "Woonsocket",
+                ZipCode = FAKE_ZIP_CODE,
+                Phone = FAKE_PHONE,
+                Email = FAKE_EMAIL,
+                GenderBalance = GENDER_BALANCE,
+                PovertyRate = 0.767,
+                Seats = 36
+            };
+            db.Schools.Add(woonsocket);
+
+            db.SaveChanges();
+
+
+            // Import applicants
+//            var applicantCsvReader = new ApplicantCsvReader("C:/Users/jeff/code/golden-ticket/GoldenTicket/TestData/data.csv", db.Schools.ToList());
+//            applicantCsvReader.ReadApplicants();
         }
     }
 }

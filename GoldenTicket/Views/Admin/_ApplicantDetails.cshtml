@@ -1,0 +1,113 @@
+﻿@using System.Web.UI.WebControls
+@using GoldenTicket.Models
+@using GoldenTicket.Calc
+@model Applicant
+
+
+<div class="site-width">
+    <section>
+        <h1>Student information</h1>
+        <dl class="vcard">
+            <dt>Full name</dt>
+            <dd class="fn">@Model.StudentFirstName @Model.StudentMiddleName @Model.StudentLastName</dd>
+            <dt>Address</dt>
+            <dd class="adr">
+                <div class="street-address">@Model.StudentStreetAddress1</div>
+                <div class="street-address">@Model.StudentStreetAddress2</div>
+                <span class="locality">@Model.StudentCity</span>,<span class="region">RI</span> <span class="postal-code">@Model.StudentZipCode</span>
+            </dd>
+            <dt>Date of birth</dt>
+            <dd>@Model.StudentBirthday.Value.ToString("MM/dd/yyyy")</dd>
+            <dt>Gender</dt>
+            <dd>@Model.StudentGender</dd>
+        </dl>
+    </section>
+    <section>
+        <h1>Guardian information</h1>
+        <dl class="vcard">
+            <dt>Full name</dt>
+            <dd class="fn">@Model.Contact1FirstName @Model.Contact1LastName</dd>
+            <dt>Phone</dt>
+            <dd class="tel"><a href="tel:@Model.Contact1Phone">@Model.Contact1Phone</a></dd>
+            <dt>Email address</dt>
+            <dd class="email"><a href="mailto:@Model.Contact1Email">@Model.Contact1Email</a></dd>
+            <dt>Relationship</dt>
+            <dd>@Model.Contact1Relationship</dd>
+        </dl>
+    </section>
+    @if (!string.IsNullOrEmpty(Model.Contact2FirstName))
+    {
+        <section>
+            <h1>Alternate contact information</h1>
+            <dl class="vcard">
+                <dt>Full name</dt>
+                <dd class="fn">@Model.Contact1FirstName @Model.Contact1LastName</dd>
+                <dt>Phone</dt>
+                <dd class="tel">@Model.Contact1Phone</dd>
+                <dt>Email address</dt>
+                <dd class="email">@Model.Contact1Email</dd>
+                <dt>Relationship</dt>
+                <dd>@Model.Contact1Relationship</dd>
+            </dl>
+        </section>
+    }
+    <section>
+        <h1>Household Information</h1>
+        <dl class="vcard">
+            <dt>Members</dt>
+            <dd>@Model.HouseholdMembers</dd>
+            <dt>Average Monthly Income</dt>
+            <dd>
+                @Model.HouseholdMonthlyIncome.ToString("C")
+                @if (IncomeCalculator.IsBelowPovertyLine(Model))
+                {
+                    <span class="badge-poverty badge-poverty-below">Below</span>
+                }
+                else
+                {
+                    <span class="badge-poverty badge-poverty-above">Above</span>
+                }
+            </dd>
+        </dl>
+
+    </section>
+    <section>
+        <h1>School</h1>
+        <dl>
+            <dt>Applied to</dt>
+            <dd>
+                <ul>
+                    @foreach (School s in (List<School>) ViewBag.AppliedSchools)
+                    {
+                        <li>@s.Name</li>
+                    }
+                </ul>
+            </dd>
+        </dl>
+    </section>
+    @if (ViewBag.WasLotteryRun)
+    {
+        <section>
+            <h1>Lottery</h1>
+            <dl>
+                @if (ViewBag.SelectedSchool != null)
+                {
+                    <dt>Selected for</dt>
+                    <dd>@ViewBag.SelectedSchool.Name</dd>
+                }
+                else if (ViewBag.WaitListedSchools.Any)
+                {
+                    <dt>Waitlisted for</dt>
+                    <dd>
+                        <ul>
+                            @foreach (School s in (List<School>) ViewBag.WaitListedSchools)
+                            {
+                                <li>@s.Name</li>
+                            }
+                        </ul>
+                    </dd>
+                }
+            </dl>
+        </section>
+    }
+</div>

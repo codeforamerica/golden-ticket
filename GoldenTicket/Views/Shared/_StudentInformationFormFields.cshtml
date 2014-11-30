@@ -1,0 +1,71 @@
+﻿@using GoldenTicket.Models
+@using GoldenTicket.Resources
+@model GoldenTicket.Models.Applicant
+
+<section id="student-information">
+    <h1>@GoldenTicketText.StudentInformation</h1>
+    <p>@GoldenTicketText.ProvideBasicStudentInformation</p>
+    <fieldset id="student-name" class="fieldset-name">
+        <legend>@GoldenTicketText.FullName</legend>
+        <div class="field">
+            @Html.LabelFor(model => model.StudentFirstName, GoldenTicketText.First)
+            @Html.TextBoxFor(model => model.StudentFirstName, new { @id = "student-name-first"})
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.StudentMiddleName, GoldenTicketText.Middle)
+            @Html.TextBoxFor(model => model.StudentMiddleName, new { @id = "student-name-middle"})
+        </div>
+        <div class="field">
+            @Html.LabelFor(model => model.StudentLastName, GoldenTicketText.Last)
+            @Html.TextBoxFor(model => model.StudentLastName, new { @id = "student-name-last"})
+        </div>
+    </fieldset>
+    <fieldset class="fieldset-address">
+        <legend>Address</legend>
+        <div class="field field-street">
+            @Html.LabelFor(model => model.StudentStreetAddress1, GoldenTicketText.StreetAddress1)
+            @Html.TextBoxFor(model => model.StudentStreetAddress1, new { @id = "student-residence-street-1" })
+        </div>
+        <div class="field field-street">
+            @Html.LabelFor(model => model.StudentStreetAddress2, GoldenTicketText.StreetAddress2)
+            @Html.TextBoxFor(model => model.StudentStreetAddress2, new { @id = "student-residence-street-2" })
+        </div>
+        <div class="field field-city">
+            <!-- TODO Add a note that if a city isn't available, then there are no programs that the applicant is eligible for -->
+            @Html.LabelFor(model => model.StudentCity, GoldenTicketText.City)
+            @if (ViewBag.IsCityEditable)
+            {
+                @Html.DropDownListFor(model => model.StudentCity, new SelectList(ViewBag.DistrictNames))
+            }
+            else
+            {
+                @Html.HiddenFor(model => model.StudentCity)
+                <span>@Model.StudentCity</span>
+            }
+        </div>
+        <div class="field field-zip">
+            @Html.LabelFor(model => model.StudentZipCode, GoldenTicketText.Zip)
+            @Html.TextBoxFor(model => model.StudentZipCode, new { @id = "student-residence-zip" })
+        </div>
+    </fieldset>
+    <div class="field field-date">
+        @Html.LabelFor(model => model.StudentBirthday, GoldenTicketText.BirthdayAndInstructions)
+        @Html.EditorFor(model => model.StudentBirthday)
+    </div>
+    <fieldset id="student-gender">
+        <legend>Gender</legend>
+        <div class="field field-radiobutton">
+            <label for="student-gender-female">
+                @Html.RadioButtonFor(model => model.StudentGender, Gender.Female, new { @id = "student-gender-female" })
+                @GoldenTicketText.Female
+            </label>
+        </div>
+        <div class="field field-radiobutton">
+            <label for="student-gender-male">
+                @Html.RadioButtonFor(model => model.StudentGender, Gender.Male, new { @id = "student-gender-male" })
+                @GoldenTicketText.Male
+            </label>
+        </div>
+    </fieldset>
+</section>
+

@@ -151,7 +151,7 @@ main p.note{
 }
 
 main p.note a {
-    display: inline-block;
+	display: inline-block;
 }
 
 @media (min-width: 30em){
@@ -250,7 +250,7 @@ footer{
 }
 
 .review main section h2 {
-    font-size: 0.8em !important;
+	font-size: 0.8em !important;
 }
 
 .review main section#agreement h1{

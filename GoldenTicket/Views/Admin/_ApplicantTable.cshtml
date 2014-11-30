@@ -1,0 +1,47 @@
+﻿@using GoldenTicket.Models
+@model List<Applicant>
+           
+<table class="table-applications">
+    <thead>
+        <tr>
+            <td>
+                <span>First Name</span>
+            </td>
+            <td>
+                <span>Last Name</span>
+            </td>
+            <td>
+                <span>Street</span>
+            </td>
+            <td>
+                <span>City</span>
+            </td>
+            <td class="table-applications-col-delete">
+                <span>Delete</span>
+            </td>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (Applicant applicant in Model)
+        {
+            <tr>
+                <td>
+                   @Html.ActionLink(linkText: applicant.StudentFirstName, actionName: "ViewApplicant", routeValues: new { id = applicant.ID })
+                </td>
+                <td>
+                    @Html.ActionLink(linkText: applicant.StudentLastName, actionName: "ViewApplicant", routeValues: new { id = applicant.ID })
+                </td>
+                <td>
+                    @Html.ActionLink(linkText: applicant.StudentStreetAddress1, actionName: "ViewApplicant", routeValues: new { id = applicant.ID })
+                </td>
+                <td>
+                    @Html.ActionLink(linkText: applicant.StudentCity, actionName: "ViewApplicant", routeValues: new { id = applicant.ID })
+                </td>
+                <td class="table-applications-col-delete">
+                    @Html.ActionLink(linkText: "Delete", actionName: "DeleteApplicant", routeValues: new { id = applicant.ID })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -6,9 +6,9 @@ using System.Web;
 
 namespace GoldenTicket.Models
 {
-    public class Program
+    public class School
     {
-        public Program()
+        public School()
         {
             Applieds = new List<Applied>();
             Shuffleds = new List<Shuffled>();
@@ -26,7 +26,7 @@ namespace GoldenTicket.Models
         [Required]
         public string StreetAddress1 { get; set; }
 
-        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_APOSTROPHE_REGEX)]
+        [RegularExpression(ValidationConstants.STREET_ADDRESS_REGEX)]
         public string StreetAddress2 { get; set; }
         
         [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_APOSTROPHE_REGEX)]
