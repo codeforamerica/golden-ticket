@@ -16,76 +16,76 @@
 
     <div class="page">
         <div class="site-width">
-            @if(!ViewBag.IsLotteryClosed)
+            @if (!ViewBag.IsLotteryClosed)
             {
                 <div class="notice">
                     <p>Lottery applications will close on @ViewBag.LotteryCloseDate.ToString("MM/dd/yyyy").</p>
                 </div>
             }
 
-            @if(ViewBag.IsLotteryClosed && ViewBag.LotterRunDate == null)
+            @if (ViewBag.IsLotteryClosed && ViewBag.LotterRunDate == null)
             {
                 <div class="notice">
                     <h1>Lottery applications have closed</h1>
                     <p>The pre-k lottery application can no longer be applied to. Click the button below to run the lottery for all applicants.</p>
-                    <p>@Html.ActionLink("Run lottery","RunLottery", null, new {@class="button"})</p>
+                    <p>@Html.ActionLink("Run lottery", "RunLottery", null, new { @class = "button" })</p>
                 </div>
             }
-            
+
             @if (ViewBag.Applicants.Count > 0)
             {
-                @Html.Partial("_ApplicantTable", (List<Applicant>) ViewBag.Applicants)
+                @Html.Partial("_ApplicantTable", (List<Applicant>)ViewBag.Applicants)
+                <footer>
+                    <section>
+                        <nav class="pagination">
+                            @if (ViewBag.PageNum > 1)
+                            {
+                                var previousIndex = ViewBag.PageNum - 1;
+                                @Html.ActionLink(linkText: "Previous", actionName: "ViewApplicants", routeValues: new { id = previousIndex })
+                            }
+
+                            @for (var i = 1; i <= ViewBag.NumPages; i++)
+                            {
+                                if (i == ViewBag.PageNum)
+                                {
+                                    @Html.ActionLink(linkText: i.ToString(), actionName: "ViewApplicants", routeValues: new { id = i }, htmlAttributes: new { @class = "is-active" })
+                                }
+                                else
+                                {
+                                    @Html.ActionLink(linkText: i.ToString(), actionName: "ViewApplicants", routeValues: new { id = i })
+                                }
+                            }
+
+                            @if (ViewBag.PageNum < ViewBag.NumPages)
+                            {
+                                var nextIndex = ViewBag.PageNum + 1;
+                                @Html.ActionLink(linkText: "Next", actionName: "ViewApplicants", routeValues: new { id = nextIndex })
+                            }
+                        </nav>
+                    </section>
+
+                    <section>
+                        <nav class="export">
+                            <ul>
+                                <li>
+                                    @Html.ActionLink(linkText: "Export applicant list", actionName: "ExportApplicants")
+                                </li>
+                            </ul>
+                        </nav>
+                        <nav class="status">
+                            @Html.ActionLink(linkText: "Show duplicate applications", actionName: "ViewDuplicateApplicants")
+                        </nav>
+                    </section>
+                </footer>
             }
             else
             {
                 <h1>No applicants yet. Try back later.</h1>
             }
-                
-            <footer>
-                <section>
-                    <nav class="pagination">
-                        @if (ViewBag.PageNum > 1)
-                        {
-                            var previousIndex = ViewBag.PageNum - 1;
-                            @Html.ActionLink(linkText: "Previous", actionName: "ViewApplicants", routeValues: new { id = previousIndex })
-                        }
 
-                        @for (var i = 1; i <= ViewBag.NumPages; i++)
-                        {
-                            if (i == ViewBag.PageNum)
-                            {
-                                @Html.ActionLink( linkText:i.ToString(), actionName: "ViewApplicants", routeValues: new{id = i}, htmlAttributes: new{@class="is-active"})
-                            }
-                            else
-                            {
-                                @Html.ActionLink(linkText: i.ToString(), actionName: "ViewApplicants", routeValues: new { id = i })
-                            }
-                        }
-                        
-                        @if (ViewBag.PageNum < ViewBag.NumPages)
-                        {
-                            var nextIndex = ViewBag.PageNum + 1;
-                            @Html.ActionLink(linkText: "Next", actionName: "ViewApplicants", routeValues: new { id = nextIndex })
-                        }
-                    </nav>
-                </section>
 
-                <section>
-                    <nav class="export">
-                        <ul>
-                            <li>
-                                @Html.ActionLink(linkText: "Export applicant list", actionName: "ExportApplicants" )
-                            </li>
-                        </ul>
-                    </nav>
-                    <nav class="status">
-                        @Html.ActionLink(linkText: "Show duplicate applications", actionName: "ViewDuplicateApplicants")
-                    </nav>
-                </section>
-            </footer>        
         </div>
     </div>
 
 
 </main>
-
