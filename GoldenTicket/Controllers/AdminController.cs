@@ -346,6 +346,36 @@ namespace GoldenTicket.Controllers
             return RedirectToAction("ViewSchools");
         }
 
+        public ActionResult DeleteSchool(int id)
+        {
+            var school = db.Schools.Find(id);
+            if (school == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(school);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteSchool(School school)
+        {
+            var queriedSchool = db.Schools.Find(school.ID);
+            if (queriedSchool == null)
+            {
+                return HttpNotFound();
+            }
+
+            db.Applieds.RemoveRange(queriedSchool.Applieds);
+            db.Selecteds.RemoveRange(queriedSchool.Selecteds);
+            db.Waitlisteds.RemoveRange(queriedSchool.Waitlisteds);
+            db.Shuffleds.RemoveRange(queriedSchool.Shuffleds);
+            db.Schools.Remove(queriedSchool);
+            db.SaveChanges();
+
+            return RedirectToAction("ViewSchools");
+        }
+
         /*
          * ---------- HELPER METHODS ------------
          */

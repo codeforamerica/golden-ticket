@@ -281,6 +281,7 @@
     <Content Include="Views\Admin\ViewSchools.cshtml" />
     <Content Include="Views\Admin\_SchoolFormFields.cshtml" />
     <Content Include="Views\Admin\AddSchool.cshtml" />
+    <Content Include="Views\Admin\DeleteSchool.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
