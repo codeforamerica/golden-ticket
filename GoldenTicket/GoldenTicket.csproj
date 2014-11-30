@@ -278,10 +278,10 @@
     <Content Include="Views\Shared\_StudentInformationFormFields.cshtml" />
     <Content Include="Views\Shared\_GuardianInformationFormFields.cshtml" />
     <Content Include="Views\Shared\_SchoolSelectionFormFields.cshtml" />
+    <Content Include="TestData\data.csv" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="TestData\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

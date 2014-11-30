@@ -263,7 +263,7 @@ namespace GoldenTicket.Controllers
             db.Applicants.AddOrUpdate(applicant);
             db.SaveChanges();
 
-            return RedirectToAction("ViewApplicant", applicant.ID);
+            return RedirectToAction("ViewApplicant", new{id=applicant.ID});
         }
 
 
