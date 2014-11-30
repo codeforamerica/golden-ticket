@@ -40,27 +40,8 @@
             @Html.AntiForgeryToken()
             @Html.HiddenFor(model => model.ID)
             
-            <section id="school-selection">
-                <h1>@GoldenTicketText.SchoolSelection</h1>
-                <p>@string.Format(GoldenTicketText.ChooseOneOrMoreSchools, @Model.StudentFirstName)</p>
-                <fieldset class="fieldset-schools" id="fieldset-schools">
-                    <legend>@GoldenTicketText.Schools</legend>
-                    @foreach(School school in ViewBag.Programs)
-                    {
-                        <div class="field field-checkbox field-school">
-                            <label class="vcard">
-                                @DisplaySchoolCheckbox(ViewBag.Applieds, school, Model)
-                                <span class="fn">@school.Name</span>
-                                <div class="adr">
-                                    <div class="street-address">@school.StreetAddress1</div>
-                                    <div class="street-address">@school.StreetAddress2</div>
-                                    <span class="locality">@school.City</span>,<span class="region">RI</span> <span class="postal-code">@school.ZipCode</span>
-                                </div>
-                            </label>
-                        </div>
-                    }
-                </fieldset>
-            </section>
+            @Html.Partial("_SchoolSelectionFormFields", Model)
+            
             <footer>
                 <button class="button" type="submit" value="continue">@GoldenTicketText.ReviewApplication</button>
             </footer>
