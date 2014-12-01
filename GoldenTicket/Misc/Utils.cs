@@ -10,7 +10,7 @@ namespace GoldenTicket.Misc
     {
         private static GoldenTicketDbContext db = new GoldenTicketDbContext();
 
-        public static List<Applicant> GetApplicants(List<Selected> selecteds)
+        public static List<Applicant> GetApplicants(IEnumerable<Selected> selecteds)
         {
             var applicants = new List<Applicant>();
             foreach (var s in selecteds)
@@ -21,7 +21,7 @@ namespace GoldenTicket.Misc
             return applicants;
         }
 
-        public static List<Applicant> GetApplicants(List<Shuffled> shuffleds)
+        public static List<Applicant> GetApplicants(IEnumerable<Shuffled> shuffleds)
         {
             var applicants = new List<Applicant>();
             foreach (var s in shuffleds)
@@ -32,7 +32,7 @@ namespace GoldenTicket.Misc
             return applicants;
         }
 
-        public static List<Applicant> GetApplicants(List<Waitlisted> waitlisteds)
+        public static List<Applicant> GetApplicants(IEnumerable<Waitlisted> waitlisteds)
         {
             var applicants = new List<Applicant>();
             foreach (var w in waitlisteds)
@@ -43,7 +43,7 @@ namespace GoldenTicket.Misc
             return applicants;
         }
 
-        public static List<Applicant> GetApplicants(List<Applied> applieds)
+        public static List<Applicant> GetApplicants(IEnumerable<Applied> applieds)
         {
             var applicants = new List<Applicant>();
             foreach (var a in applieds)
@@ -54,7 +54,7 @@ namespace GoldenTicket.Misc
             return applicants;
         }
 
-        public static List<School> GetSchools(List<Applied> applieds)
+        public static List<School> GetSchools(IEnumerable<Applied> applieds)
         {
             var schools = new List<School>();
             foreach(var a in applieds)
@@ -65,7 +65,7 @@ namespace GoldenTicket.Misc
             return schools;
         }
 
-        public static List<School> GetSchools(List<Waitlisted> waitlisteds)
+        public static List<School> GetSchools(IEnumerable<Waitlisted> waitlisteds)
         {
             var schools = new List<School>();
             foreach (var a in waitlisteds)

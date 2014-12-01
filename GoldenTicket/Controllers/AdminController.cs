@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using GoldenTicket.Lottery;
 using GoldenTicket.Misc;
 using GoldenTicket.Models;
 using GoldenTicket.DAL;
@@ -167,13 +168,18 @@ namespace GoldenTicket.Controllers
         
         private void PrepareApplicantDetailView(Applicant applicant)
         {
-            ViewBag.AppliedSchools =
-                Utils.GetSchools(db.Applieds.Where(a => a.ApplicantID == applicant.ID).OrderBy(a => a.School.Name).ToList());
-            var selectedSchool = db.Selecteds.FirstOrDefault(s => s.ApplicantID == applicant.ID);
-            if (selectedSchool != null)
+            // Applied
+            var applieds = db.Applieds.Where(a => a.ApplicantID == applicant.ID).OrderBy(a => a.School.Name).ToList();
+            ViewBag.AppliedSchools = Utils.GetSchools(applieds);
+         
+            // Selected
+            var selected = db.Selecteds.FirstOrDefault(s => s.ApplicantID == applicant.ID);
+            if (selected != null)
             {
-                ViewBag.SelectedSchool = selectedSchool;
+                ViewBag.SelectedSchool = selected.School;
             }
+            
+            // Waitlisted
             ViewBag.WaitlistedSchools =
                 Utils.GetSchools(db.Waitlisteds.Where(a => a.ApplicantID == applicant.ID).OrderBy(a => a.School.Name).ToList());
             ViewBag.WasLotteryRun = GetLotteryRunDate() != null;
@@ -310,7 +316,42 @@ namespace GoldenTicket.Controllers
                 return HttpNotFound();
             }
 
+            // Remove from lists (and run lottery to place waitlisted applicant if the student was selected)
+            if (WasLotteryRun())
+            {
+                var waitlisteds = db.Waitlisteds.Where(w => w.ApplicantID == applicant.ID).ToList();
+                db.Waitlisteds.RemoveRange(waitlisteds);
+
+                var selected = db.Selecteds.FirstOrDefault(s => s.ApplicantID == applicant.ID);
+                if (selected != null)
+                {
+                    var school = selected.School;
+
+                    db.Selecteds.Remove(selected);
+
+                    var waitlistedApplicants = Utils.GetApplicants(db.Waitlisteds.Where(w => w.SchoolID == school.ID).OrderBy(w => w.Rank).ToList());
+
+                    var lottery = new SchoolLottery(db);
+                    lottery.Run(school, waitlistedApplicants, false);
+
+                    // Remove selected applicants from the selected school from other waitlists (does it for all since we don't know which student was the one filled in at this point)
+                    var newSelecteds = school.Selecteds;
+                    var removeWaitlisteds = new List<Waitlisted>();
+                    foreach (var newSelected in newSelecteds)
+                    {
+                        var otherApplicantWaitlisteds =
+                            db.Waitlisteds.Where(w => w.ApplicantID == newSelected.ApplicantID).ToList();
+                        removeWaitlisteds.AddRange(otherApplicantWaitlisteds);
+                    }
+                    db.Waitlisteds.RemoveRange(removeWaitlisteds);
+                }                
+            }
+
+
+
             db.Applicants.Remove(queriedApplicant);
+            
+            
             db.SaveChanges();
 
             return RedirectToAction("ViewApplicants");
@@ -458,10 +499,42 @@ namespace GoldenTicket.Controllers
         {
             var applicants = db.Applicants.ToList();
             db.Applicants.RemoveRange(applicants);
+
+            var globalConfig = db.GlobalConfigs.First();
+            globalConfig.LotteryRunDate = null;
+            db.GlobalConfigs.Add(globalConfig);
+
             db.SaveChanges();
 
             return RedirectToAction("EditSettings");
         }
+
+        public ActionResult RunLottery()
+        {
+            if (!WasLotteryRun())
+            {
+                // Run the selection algorithm for each school
+                var schoolLottery = new SchoolLottery(db);
+                foreach (var school in db.Schools.ToList())
+                {
+                    schoolLottery.Run(school);
+                }
+
+                // Make sure applicants were selected for more than one school (or waitlisted on any others if they were selected)
+                //TODO this performs a little slowly ... probably too many database roundtrips. Optimize later.
+                var reconciler = new CrossSchoolReconciler(db);
+                reconciler.Reconcile();
+
+                // Save a record that the lottery was run
+                var globalConfig = db.GlobalConfigs.First();
+                globalConfig.LotteryRunDate = DateTime.Now;
+                db.GlobalConfigs.AddOrUpdate(globalConfig);
+                db.SaveChanges();
+            }
+
+            return RedirectToAction("ViewApplicants");
+        }
+
         /*
          * ---------- HELPER METHODS ------------
          */
