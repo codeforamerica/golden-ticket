@@ -334,8 +334,16 @@ namespace GoldenTicket.Controllers
                     var lottery = new SchoolLottery(db);
                     lottery.Run(school, waitlistedApplicants, false);
 
-                    var reconciler = new CrossSchoolReconciler(db);
-                    reconciler.Reconcile();
+                    // Remove selected applicants from the selected school from other waitlists (does it for all since we don't know which student was the one filled in at this point)
+                    var newSelecteds = school.Selecteds;
+                    var removeWaitlisteds = new List<Waitlisted>();
+                    foreach (var newSelected in newSelecteds)
+                    {
+                        var otherApplicantWaitlisteds =
+                            db.Waitlisteds.Where(w => w.ApplicantID == newSelected.ApplicantID).ToList();
+                        removeWaitlisteds.AddRange(otherApplicantWaitlisteds);
+                    }
+                    db.Waitlisteds.RemoveRange(removeWaitlisteds);
                 }                
             }
 
