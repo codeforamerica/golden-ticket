@@ -376,6 +376,77 @@ namespace GoldenTicket.Controllers
             return RedirectToAction("ViewSchools");
         }
 
+        public ActionResult EditSettings()
+        {
+            ViewBag.PovertyConfigs = db.PovertyConfigs.ToList();
+            return View(db.GlobalConfigs.First());
+        }
+
+        [HttpPost]
+        public ActionResult EditSettings(GlobalConfig globalConfig, FormCollection formCollection)
+        {
+            var queriedGlobalConfig = db.GlobalConfigs.Find(globalConfig.ID);
+            if (queriedGlobalConfig == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Validate that poverty fields are complete and valid
+            var updatedPovertyConfigs = new List<PovertyConfig>();
+            var previousMinIncome = 0;
+            foreach (var householdMembers in Enumerable.Range(2, 9))
+            {
+                var povertyConfig = db.PovertyConfigs.First(p => p.HouseholdMembers == householdMembers);
+
+                var key = "poverty_config_" + householdMembers;
+                var fieldName = "Minimum income (" + householdMembers + ')';
+
+                // Empty check
+                if (string.IsNullOrEmpty(formCollection[key]))
+                {
+                    ModelState.AddModelError("", fieldName + " must be completed");
+                    break;
+                }
+
+                // Is it a number?
+                int minIncome;
+                if (!int.TryParse(formCollection[key], out minIncome))
+                {
+                    ModelState.AddModelError("", fieldName + " must be a number (no decimal places)");
+                    break;
+                }
+
+                // Is it more than the previous one
+                if (previousMinIncome >= minIncome)
+                {
+                    ModelState.AddModelError("", fieldName + " must be greater than minimum income (" + (householdMembers+1) + ')');
+                    break;
+                }
+
+                previousMinIncome = minIncome;
+                povertyConfig.MinimumIncome = minIncome;
+                updatedPovertyConfigs.Add(povertyConfig);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.PovertyConfigs = db.PovertyConfigs.ToList();
+                return View(db.GlobalConfigs.First());
+            }
+
+            // Update poverty configs
+            updatedPovertyConfigs.ForEach(p => db.PovertyConfigs.AddOrUpdate(p));
+
+            // Update global config
+            db.GlobalConfigs.AddOrUpdate(globalConfig);
+
+            db.SaveChanges();
+
+            ViewBag.PovertyConfigs = updatedPovertyConfigs;
+
+            return View(db.GlobalConfigs.First());
+        }
+
         /*
          * ---------- HELPER METHODS ------------
          */

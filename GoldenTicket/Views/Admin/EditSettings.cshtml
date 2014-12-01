@@ -1,0 +1,107 @@
+﻿@using System.Web.UI.WebControls
+@using System.Linq;
+@using GoldenTicket.Models
+
+@model GlobalConfig
+
+@{
+    ViewBag.BodyId = "";
+    ViewBag.BodyClass = "no-js settings";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    List<PovertyConfig> povertyConfigs = ViewBag.PovertyConfigs;
+}
+
+<main>
+    <header>
+        <div class="site-width">
+            <h1>Settings</h1>
+        </div>
+    </header>
+    <div class="page">
+        <div class="site-width">
+            @using (Html.BeginForm())
+            {
+                @Html.ValidationSummary()
+                
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.ID)
+                
+                <fieldset class="fieldset-date-range">
+                    <legend>Application period</legend>
+                    <div class="field field-date">
+                        @Html.LabelFor(model => model.OpenDate, "Open date")
+                        @Html.EditorFor(model => model.OpenDate)
+                    </div>
+                    <div class="field field-date">
+                        @Html.LabelFor(model => model.CloseDate, "Close date")
+                        @Html.EditorFor(model => model.CloseDate)
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Notification date</legend>
+                    <div class="field field-date">
+                        @Html.LabelFor(model => model.NotificationDate, "When applicants are notified of the lottery results")
+                        @Html.EditorFor(model => model.NotificationDate)
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Lottery contact person</legend>
+                    <p>This is the person that can be contacted for questions about the lottery.</p>
+                    <div class="field field-width-medium">
+                        @Html.LabelFor(model => model.ContactPersonName, "Name")
+                        @Html.TextBoxFor(model => model.ContactPersonName)
+                    </div>
+                    <div class="field field-phone-number">
+                        @Html.LabelFor(model => model.ContactPhone, "Phone")
+                        @Html.TextBoxFor(model => model.ContactPhone)
+                    </div>
+                    <div class="field field-email">
+                        @Html.LabelFor(model => model.ContactEmail, "Email")
+                        @Html.TextBoxFor(model => model.ContactEmail)
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Poverty criteria</legend>
+                    <p>A family is considered <strong>below the poverty line</strong> if the household makes the following amount or below, based on the number of household members:</p>
+                    <table class="table-poverty-criteria">
+                        <thead>
+                            <tr>
+                                <td class="table-poverty-criteria-col-members">Members</td>
+                                <td class="table-poverty-criteria-col-income">Income Amount</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var householdMembers in Enumerable.Range(2, 9))
+                            {
+                                var name = "poverty_config_" + householdMembers;
+                                var value = povertyConfigs.First(p => p.HouseholdMembers == householdMembers).MinimumIncome;
+                                
+                                <tr class="field">
+                                    <td class="table-poverty-criteria-col-members">
+                                        <label for="@name">@householdMembers</label>
+                                    </td>
+                                    <td class="table-poverty-criteria-col-income">
+                                        <input type="text" name="@name" id="@name" value="@value"/>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div class="field field-width-medium">
+                        @Html.LabelFor(model => model.IncomeMultiplier, "Amount by which household income must increase per member over 10")
+                        @Html.TextBoxFor(model => model.IncomeMultiplier)
+                    </div>
+                </fieldset>
+                <footer>
+                    <input class="button" type="submit" value="Save" />
+                </footer>
+            }
+            <div class="reset">
+                @Html.ActionLink(linkText: "Reset lottery", actionName: "ResetLottery")
+                <span class="note">
+                    Removes all applications from the system. Likely run once a year.
+                </span>
+            </div>
+        </div>
+    </div>
+</main>
