@@ -283,6 +283,7 @@
     <Content Include="Views\Admin\AddSchool.cshtml" />
     <Content Include="Views\Admin\DeleteSchool.cshtml" />
     <Content Include="Views\Admin\EditSettings.cshtml" />
+    <Content Include="Views\Admin\ResetLottery.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

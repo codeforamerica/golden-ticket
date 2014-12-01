@@ -10,6 +10,7 @@ using GoldenTicket.Misc;
 using GoldenTicket.Models;
 using GoldenTicket.DAL;
 using GoldenTicket.Resources;
+using WebGrease.Css.Extensions;
 
 namespace GoldenTicket.Controllers
 {
@@ -447,6 +448,20 @@ namespace GoldenTicket.Controllers
             return View(db.GlobalConfigs.First());
         }
 
+        public ActionResult ResetLottery()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ResetLottery(string id) // id is just dummy text, to differentiate from the GET-based ResetLottery() ... comes in as a static-valued hidden field
+        {
+            var applicants = db.Applicants.ToList();
+            db.Applicants.RemoveRange(applicants);
+            db.SaveChanges();
+
+            return RedirectToAction("EditSettings");
+        }
         /*
          * ---------- HELPER METHODS ------------
          */
