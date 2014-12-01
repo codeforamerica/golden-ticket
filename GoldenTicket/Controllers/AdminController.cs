@@ -316,7 +316,34 @@ namespace GoldenTicket.Controllers
                 return HttpNotFound();
             }
 
+            // Remove from lists (and run lottery to place waitlisted applicant if the student was selected)
+            if (WasLotteryRun())
+            {
+                var waitlisteds = db.Waitlisteds.Where(w => w.ApplicantID == applicant.ID).ToList();
+                db.Waitlisteds.RemoveRange(waitlisteds);
+
+                var selected = db.Selecteds.FirstOrDefault(s => s.ApplicantID == applicant.ID);
+                if (selected != null)
+                {
+                    var school = selected.School;
+
+                    db.Selecteds.Remove(selected);
+
+                    var waitlistedApplicants = Utils.GetApplicants(db.Waitlisteds.Where(w => w.SchoolID == school.ID).OrderBy(w => w.Rank).ToList());
+
+                    var lottery = new SchoolLottery(db);
+                    lottery.Run(school, waitlistedApplicants, false);
+
+                    var reconciler = new CrossSchoolReconciler(db);
+                    reconciler.Reconcile();
+                }                
+            }
+
+
+
             db.Applicants.Remove(queriedApplicant);
+            
+            
             db.SaveChanges();
 
             return RedirectToAction("ViewApplicants");
