@@ -506,19 +506,26 @@ namespace GoldenTicket.Controllers
 
         public ActionResult RunLottery()
         {
-            var schoolLottery = new SchoolLottery(db);
-            foreach (var school in db.Schools.ToList())
+            if (!WasLotteryRun())
             {
-                schoolLottery.Run(school);    
+                // Run the selection algorithm for each school
+                var schoolLottery = new SchoolLottery(db);
+                foreach (var school in db.Schools.ToList())
+                {
+                    schoolLottery.Run(school);
+                }
+
+                // Make sure applicants were selected for more than one school (or waitlisted on any others if they were selected)
+                //TODO this performs a little slowly ... probably too many database roundtrips. Optimize later.
+                var reconciler = new CrossSchoolReconciler(db);
+                reconciler.Reconcile();
+
+                // Save a record that the lottery was run
+                var globalConfig = db.GlobalConfigs.First();
+                globalConfig.LotteryRunDate = DateTime.Now;
+                db.GlobalConfigs.AddOrUpdate(globalConfig);
+                db.SaveChanges();
             }
-
-            var reconciler = new CrossSchoolReconciler(db);
-            reconciler.Reconcile();
-
-            var globalConfig = db.GlobalConfigs.First();
-            globalConfig.LotteryRunDate = DateTime.Now;
-            db.GlobalConfigs.AddOrUpdate(globalConfig);
-            db.SaveChanges();
 
             return RedirectToAction("ViewApplicants");
         }
