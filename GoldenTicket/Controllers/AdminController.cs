@@ -91,7 +91,7 @@ namespace GoldenTicket.Controllers
 
         public ActionResult ExportApplicants()
         {
-            var applicants = db.Applicants.OrderBy(a=>a.StudentLastName).ToList();
+            var applicants = db.Applicants.Where(a => a.ConfirmationCode != null).OrderBy(a=>a.StudentLastName).ToList();
 
             return ExportApplicantsCsvFile(applicants, "applicants_all.csv");
         }
@@ -149,7 +149,7 @@ namespace GoldenTicket.Controllers
             }
             else
             {
-                var applieds = db.Applieds.Where(a => a.SchoolID == id).OrderBy(a => a.Applicant.StudentLastName).ToList();
+                var applieds = db.Applieds.Where(a => a.SchoolID == id && a.Applicant.ConfirmationCode != null).OrderBy(a => a.Applicant.StudentLastName).ToList();
                 var applicants = new List<Applicant>();
                 foreach (var applied in applieds) // don't convert to LINQ -- needs to preserve order
                 {
