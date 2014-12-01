@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using GoldenTicket.Lottery;
 using GoldenTicket.Misc;
 using GoldenTicket.Models;
 using GoldenTicket.DAL;
@@ -462,6 +463,26 @@ namespace GoldenTicket.Controllers
 
             return RedirectToAction("EditSettings");
         }
+
+        public ActionResult RunLottery()
+        {
+            var schoolLottery = new SchoolLottery(db);
+            foreach (var school in db.Schools.ToList())
+            {
+                schoolLottery.Run(school);    
+            }
+
+            var reconciler = new CrossSchoolReconciler(db);
+            reconciler.Reconcile();
+
+            var globalConfig = db.GlobalConfigs.First();
+            globalConfig.LotteryRunDate = DateTime.Now;
+            db.GlobalConfigs.AddOrUpdate(globalConfig);
+            db.SaveChanges();
+
+            return RedirectToAction("ViewApplicants");
+        }
+
         /*
          * ---------- HELPER METHODS ------------
          */
