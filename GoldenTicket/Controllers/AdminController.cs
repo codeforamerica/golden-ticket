@@ -168,13 +168,18 @@ namespace GoldenTicket.Controllers
         
         private void PrepareApplicantDetailView(Applicant applicant)
         {
-            ViewBag.AppliedSchools =
-                Utils.GetSchools(db.Applieds.Where(a => a.ApplicantID == applicant.ID).OrderBy(a => a.School.Name).ToList());
-            var selectedSchool = db.Selecteds.FirstOrDefault(s => s.ApplicantID == applicant.ID);
-            if (selectedSchool != null)
+            // Applied
+            var applieds = db.Applieds.Where(a => a.ApplicantID == applicant.ID).OrderBy(a => a.School.Name).ToList();
+            ViewBag.AppliedSchools = Utils.GetSchools(applieds);
+         
+            // Selected
+            var selected = db.Selecteds.FirstOrDefault(s => s.ApplicantID == applicant.ID);
+            if (selected != null)
             {
-                ViewBag.SelectedSchool = selectedSchool;
+                ViewBag.SelectedSchool = selected.School;
             }
+            
+            // Waitlisted
             ViewBag.WaitlistedSchools =
                 Utils.GetSchools(db.Waitlisteds.Where(a => a.ApplicantID == applicant.ID).OrderBy(a => a.School.Name).ToList());
             ViewBag.WasLotteryRun = GetLotteryRunDate() != null;
