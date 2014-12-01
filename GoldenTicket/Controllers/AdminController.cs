@@ -10,6 +10,7 @@ using GoldenTicket.Misc;
 using GoldenTicket.Models;
 using GoldenTicket.DAL;
 using GoldenTicket.Resources;
+using WebGrease.Css.Extensions;
 
 namespace GoldenTicket.Controllers
 {
@@ -91,7 +92,7 @@ namespace GoldenTicket.Controllers
 
         public ActionResult ExportApplicants()
         {
-            var applicants = db.Applicants.OrderBy(a=>a.StudentLastName).ToList();
+            var applicants = db.Applicants.Where(a => a.ConfirmationCode != null).OrderBy(a=>a.StudentLastName).ToList();
 
             return ExportApplicantsCsvFile(applicants, "applicants_all.csv");
         }
@@ -149,7 +150,7 @@ namespace GoldenTicket.Controllers
             }
             else
             {
-                var applieds = db.Applieds.Where(a => a.SchoolID == id).OrderBy(a => a.Applicant.StudentLastName).ToList();
+                var applieds = db.Applieds.Where(a => a.SchoolID == id && a.Applicant.ConfirmationCode != null).OrderBy(a => a.Applicant.StudentLastName).ToList();
                 var applicants = new List<Applicant>();
                 foreach (var applied in applieds) // don't convert to LINQ -- needs to preserve order
                 {
@@ -376,6 +377,91 @@ namespace GoldenTicket.Controllers
             return RedirectToAction("ViewSchools");
         }
 
+        public ActionResult EditSettings()
+        {
+            ViewBag.PovertyConfigs = db.PovertyConfigs.ToList();
+            return View(db.GlobalConfigs.First());
+        }
+
+        [HttpPost]
+        public ActionResult EditSettings(GlobalConfig globalConfig, FormCollection formCollection)
+        {
+            var queriedGlobalConfig = db.GlobalConfigs.Find(globalConfig.ID);
+            if (queriedGlobalConfig == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Validate that poverty fields are complete and valid
+            var updatedPovertyConfigs = new List<PovertyConfig>();
+            var previousMinIncome = 0;
+            foreach (var householdMembers in Enumerable.Range(2, 9))
+            {
+                var povertyConfig = db.PovertyConfigs.First(p => p.HouseholdMembers == householdMembers);
+
+                var key = "poverty_config_" + householdMembers;
+                var fieldName = "Minimum income (" + householdMembers + ')';
+
+                // Empty check
+                if (string.IsNullOrEmpty(formCollection[key]))
+                {
+                    ModelState.AddModelError("", fieldName + " must be completed");
+                    break;
+                }
+
+                // Is it a number?
+                int minIncome;
+                if (!int.TryParse(formCollection[key], out minIncome))
+                {
+                    ModelState.AddModelError("", fieldName + " must be a number (no decimal places)");
+                    break;
+                }
+
+                // Is it more than the previous one
+                if (previousMinIncome >= minIncome)
+                {
+                    ModelState.AddModelError("", fieldName + " must be greater than minimum income (" + (householdMembers+1) + ')');
+                    break;
+                }
+
+                previousMinIncome = minIncome;
+                povertyConfig.MinimumIncome = minIncome;
+                updatedPovertyConfigs.Add(povertyConfig);
+            }
+
+            if (!ModelState.IsValid)
+            {
+                ViewBag.PovertyConfigs = db.PovertyConfigs.ToList();
+                return View(db.GlobalConfigs.First());
+            }
+
+            // Update poverty configs
+            updatedPovertyConfigs.ForEach(p => db.PovertyConfigs.AddOrUpdate(p));
+
+            // Update global config
+            db.GlobalConfigs.AddOrUpdate(globalConfig);
+
+            db.SaveChanges();
+
+            ViewBag.PovertyConfigs = updatedPovertyConfigs;
+
+            return View(db.GlobalConfigs.First());
+        }
+
+        public ActionResult ResetLottery()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ResetLottery(string id) // id is just dummy text, to differentiate from the GET-based ResetLottery() ... comes in as a static-valued hidden field
+        {
+            var applicants = db.Applicants.ToList();
+            db.Applicants.RemoveRange(applicants);
+            db.SaveChanges();
+
+            return RedirectToAction("EditSettings");
+        }
         /*
          * ---------- HELPER METHODS ------------
          */
@@ -391,15 +477,15 @@ namespace GoldenTicket.Controllers
 
         private DateTime? GetLotteryRunDate()
         {
-            //return db.GlobalConfigs.First().LotteryRunDate; // real call
-            return null; // forced lottery not run
+            return db.GlobalConfigs.First().LotteryRunDate; // real call
+//            return null; // forced lottery not run
             //return new DateTime(2014, 11, 21); // forced lottery run already
         }
 
         private DateTime? GetLotteryCloseDate()
         {
-            //return db.GlobalConfigs.First().CloseDate; // real call
-            return new DateTime(2014, 11, 20); // forced lottery closed
+            return db.GlobalConfigs.First().CloseDate; // real call
+//            return new DateTime(2014, 11, 20); // forced lottery closed
             //return new DateTime(2014, 11, 30); // forced lottery open
         }
 

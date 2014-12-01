@@ -28,25 +28,29 @@
             else
             {
                 
-                @Html.Partial("_ApplicantTable", (List<Applicant>) ViewBag.Applicants)
+                
                 if (ViewBag.Applicants.Count == 0)
                 {
                     <h1>No applicants yet for this school</h1>
                 }
+                else
+                {
+                    @Html.Partial("_ApplicantTable", (List<Applicant>)ViewBag.Applicants)
+                    <footer>
+                        <section>
+                            <nav class="export">
+                                <ul>
+                                    <li>@Html.ActionLink(linkText: "Export applicant list", actionName: "ExportApplicantsForSchool", routeValues: new { id = ViewBag.School.ID })</li>
+                                </ul>
+                            </nav>
+                            <nav class="status">
+                                @Html.ActionLink(linkText: "Show duplicate applications", actionName: "ViewDuplicateApplicants")
+                            </nav>
+                        </section>
+                    </footer>
+                }
             }
 
-            <footer>
-                <section>
-                    <nav class="export">
-                        <ul>
-                            <li>@Html.ActionLink(linkText: "Export applicant list", actionName: "ExportApplicantsForSchool", routeValues: new {id = ViewBag.School.ID})</li>
-                        </ul>
-                    </nav>
-                    <nav class="status">
-                        @Html.ActionLink(linkText: "Show duplicate applications", actionName: "ViewDuplicateApplicants")
-                    </nav>
-                </section>
-            </footer>
         </div>
     </div>
 

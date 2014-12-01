@@ -23,7 +23,7 @@ namespace GoldenTicket.Calc
             }
 
             var globalConfig = db.GlobalConfigs.First();
-            above10Multipler = globalConfig.MinimumIncomeMultiplier;
+            above10Multipler = globalConfig.IncomeMultiplier;
         }
 
         public static bool IsBelowPovertyLine(int numHouseholdMembers, int incomeAmount)

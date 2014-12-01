@@ -14,7 +14,7 @@ namespace GoldenTicket.Models
         [Required]
         public int HouseholdMembers { get; set; }
 
-        [Range(0,double.MaxValue)]
+        [Range(0,int.MaxValue)]
         [Required]
         public int MinimumIncome { get; set; }
     }
