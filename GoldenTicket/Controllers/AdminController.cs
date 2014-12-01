@@ -499,6 +499,11 @@ namespace GoldenTicket.Controllers
         {
             var applicants = db.Applicants.ToList();
             db.Applicants.RemoveRange(applicants);
+
+            var globalConfig = db.GlobalConfigs.First();
+            globalConfig.LotteryRunDate = null;
+            db.GlobalConfigs.Add(globalConfig);
+
             db.SaveChanges();
 
             return RedirectToAction("EditSettings");
