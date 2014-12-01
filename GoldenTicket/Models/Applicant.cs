@@ -114,7 +114,7 @@ namespace GoldenTicket.Models
         public int Checksum()
         {
             // hash code of first name, last name, and city (no spaces and all lowercase)  
-            return (StudentFirstName.Replace(" ", string.Empty).ToLower() + StudentLastName.Replace(" ", string.Empty).ToLower() + StudentCity.Replace(" ", string.Empty).ToLower()).GetHashCode();
+            return (StudentLastName.Replace(" ", "").ToLower() + StudentCity.Replace(" ", "").ToLower() + StudentBirthday.ToString()).GetHashCode();
         }
     }
 }
