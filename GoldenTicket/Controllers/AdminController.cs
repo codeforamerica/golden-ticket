@@ -462,15 +462,15 @@ namespace GoldenTicket.Controllers
 
         private DateTime? GetLotteryRunDate()
         {
-            //return db.GlobalConfigs.First().LotteryRunDate; // real call
-            return null; // forced lottery not run
+            return db.GlobalConfigs.First().LotteryRunDate; // real call
+//            return null; // forced lottery not run
             //return new DateTime(2014, 11, 21); // forced lottery run already
         }
 
         private DateTime? GetLotteryCloseDate()
         {
-            //return db.GlobalConfigs.First().CloseDate; // real call
-            return new DateTime(2014, 11, 20); // forced lottery closed
+            return db.GlobalConfigs.First().CloseDate; // real call
+//            return new DateTime(2014, 11, 20); // forced lottery closed
             //return new DateTime(2014, 11, 30); // forced lottery open
         }
 
