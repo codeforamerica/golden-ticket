@@ -214,6 +214,8 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\styles.css" />
+    <None Include="Properties\PublishProfiles\gt-ride-test-2.pubxml" />
+    <None Include="Properties\PublishProfiles\gt-ride-test-3.pubxml" />
     <None Include="Properties\PublishProfiles\gt-ride-test.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\golden_ticket.js" />
@@ -285,6 +287,7 @@
     <Content Include="Views\Admin\EditSettings.cshtml" />
     <Content Include="Views\Admin\ResetLottery.cshtml" />
     <Content Include="TestData\data.csv" />
+    <Content Include="Views\Admin\EditSchool.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
