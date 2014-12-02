@@ -106,6 +106,24 @@ namespace GoldenTicket.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Alternate contact information.
+        /// </summary>
+        public static string AlternateContactInformation {
+            get {
+                return ResourceManager.GetString("AlternateContactInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to These fields are optional, but provide backup contact information in the event the guardian (above) can&apos;t be reached..
+        /// </summary>
+        public static string AlternateContactInformationInstructions {
+            get {
+                return ResourceManager.GetString("AlternateContactInformationInstructions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Applied to.
         /// </summary>
         public static string AppliedTo {
@@ -282,6 +300,15 @@ namespace GoldenTicket.Resources {
         public static string Contact2Relationship {
             get {
                 return ResourceManager.GetString("Contact2Relationship", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Continue.
+        /// </summary>
+        public static string Continue {
+            get {
+                return ResourceManager.GetString("Continue", resourceCulture);
             }
         }
         

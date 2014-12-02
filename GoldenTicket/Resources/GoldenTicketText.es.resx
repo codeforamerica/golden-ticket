@@ -244,7 +244,7 @@
     <value>Número de teléfono (###-###-####)</value>
   </data>
   <data name="PhoneValidationError" xml:space="preserve">
-    <value>{0} Debe ser de 10 números en cantidad (código de área +número telefónico).</value>
+    <value>Debe ser de 10 números en cantidad (código de área +número telefónico) {0}.</value>
     <comment>{0} is the property name (ex: Guardian phone number)</comment>
   </data>
   <data name="PleaseProvideBasicInformationAbout" xml:space="preserve">
@@ -252,7 +252,7 @@
     <comment>{0} is a student's first name.</comment>
   </data>
   <data name="PropertyMissing" xml:space="preserve">
-    <value>{0} Debe de incluir.</value>
+    <value>Debe de incluir {0}.</value>
     <comment>{0} is the property name (ex: Student first name)</comment>
   </data>
   <data name="ProvideBasicStudentInformation" xml:space="preserve">
@@ -349,7 +349,7 @@
     <comment>{0} is notification date</comment>
   </data>
   <data name="AgreementResponsibleForTransportation" xml:space="preserve">
-    <value>Entiendo que si mi hijo es elegido para el programa estatal de Pre-K, soy responsable de proporcionar transporte regular desde y hacia el programa que asegura que mi niño&rsquo;s asistencia cada día. Si mi hijo está ausente por razones injustificadas (incluyendo las vacaciones familiares) por 20 días de escuela o más, yo entiendo que mi niño probablemente perderá su puesto en el programa estatal de Pre-K y le será dado al niño siguiente en la lista de inscripción estatal de Pre-K.</value>
+    <value />
   </data>
   <data name="AlternateContact" xml:space="preserve">
     <value>Contacto Alterno</value>
@@ -378,7 +378,7 @@
     <value>Sexo</value>
   </data>
   <data name="HowToContact" xml:space="preserve">
-    <value>Si tiene alguna pregunta, por favor de contactar a &lt;a href="mailto:{0}"&gt;{1}&lt;/a&gt; at &lt;a href="tel:{2}"&gt;{2}&lt;/a&gt;.</value>
+    <value>Si tiene alguna pregunta, por favor de contactar a &lt;a href="mailto:{0}"&gt;{1}&lt;/a&gt; al&lt;a href="tel:{2}"&gt;{2}&lt;/a&gt;.</value>
     <comment>{0} is the contact email, {1} is contact person name, {2} is contact phone number.</comment>
   </data>
   <data name="Phone" xml:space="preserve">
@@ -409,11 +409,20 @@
     <value>Éxito!</value>
   </data>
   <data name="SuccessfullyEnteredStudent" xml:space="preserve">
-    <value>Has introducido con éxito {0} {1} en la lotería estatal para la inscripción de pre-kinder. Si se selecciona, se le notificará por teléfono en {2}.</value>
+    <value>Has introducido con éxito a {0} {1} en la lotería estatal para la inscripción de pre-kinder. Si se selecciona, se le notificará por teléfono en {2}.</value>
     <comment>{0} is student first name, {1} is student last name, and {2} is notification date</comment>
   </data>
   <data name="ForEmailAssistance" xml:space="preserve">
     <value>Para obtener asistencia, póngase en contacto con el correo electrónico &lt;a href="mailto:{0}" tabindex="-1"&gt;{1}&lt;/a&gt; at &lt;a href="tel:{2}" tabindex="-1"&gt;{2}&lt;/a&gt;</value>
     <comment>{0} is contact email address, {1} is contact name, {2} is contact phone</comment>
+  </data>
+  <data name="AlternateContactInformation" xml:space="preserve">
+    <value>Informacion de Contacto Alterna</value>
+  </data>
+  <data name="AlternateContactInformationInstructions" xml:space="preserve">
+    <value>Estas areas son opcional, pero proveeran informacion de contacto adicional en casos cuando el guardian (arriba) no pueda ser contactado</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Proxima</value>
   </data>
 </root>

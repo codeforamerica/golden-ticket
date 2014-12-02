@@ -416,4 +416,13 @@
     <value>For email assistance, please contact &lt;a href="mailto:{0}" tabindex="-1"&gt;{1}&lt;/a&gt; at &lt;a href="tel:{2}" tabindex="-1"&gt;{2}&lt;/a&gt;</value>
     <comment>{0} is contact email address, {1} is contact name, {2} is contact phone</comment>
   </data>
+  <data name="AlternateContactInformation" xml:space="preserve">
+    <value>Alternate contact information</value>
+  </data>
+  <data name="AlternateContactInformationInstructions" xml:space="preserve">
+    <value>These fields are optional, but provide backup contact information in the event the guardian (above) can't be reached.</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
 </root>
