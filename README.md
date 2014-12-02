@@ -1,10 +1,26 @@
 # Golden Ticket - School Lottery Registration and Selection
 
-Golden Ticket is a web application that provides forms for parents to register their children for school lotteries and an administrator to perform a randomized selection process based on factors such as income, gender, and location.
+Golden Ticket is a web application that provides forms for parents to register their children for school lotteries and a series administrator interfaces to perform a randomized selection process based on factors such as income, gender, and location. It also provides the ability to notify parents about the status of their child's application.
 
-The project is very much a work in progress right now, with the first stable version expected in early December 2014.  
+**The project is a work in progress right now, with the first stable version expected in early December 2014.**  
 
-# Project History
+![](docs/img/student_info_screen.png)
+
+![](docs/img/view_applicants_screen.png)
+
+## Documentation
+
+### User
+
+- (nothing yet)
+
+### Developer
+
+- [Developer Setup](docs/Developer Setup.md): If you're a coder and want to hack on the application (maybe add a feature or fix a bug?), this is a good place to start.
+- [Load Test Data](docs/Load Test Data.md): How to load test data into a local dev system. Includes schools, applicants, and a default configuration.
+
+
+## Project History
 
 The project began as a way to conduct the Rhode Island Pre-K Lottery process for the Rhode Island Department of Education's (RIDE) Early Childhood Education program.
 
@@ -24,4 +40,4 @@ Learning: The lottery selection process ran on 1000 registrations in about 2 sec
 
 ## Phase 3
 
-This project is phase 3. In place of a Google Form and a command line tool, the application will cover the process end-to-end in the form of a web app. [Here are designs for the app.](https://codeforamerica.mybalsamiq.com/projects/ri-pre-kindergartenlottery/grid)
+**This** project is phase 3. In place of a Google Form and a command line tool, the application will cover the process end-to-end in the form of a web app. [Here are designs for the app.](https://codeforamerica.mybalsamiq.com/projects/ri-pre-kindergartenlottery/grid)
