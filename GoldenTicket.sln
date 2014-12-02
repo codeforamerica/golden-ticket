@@ -8,9 +8,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoldenTicket.Tests", "GoldenTicket.Tests\GoldenTicket.Tests.csproj", "{4B8C62D7-D66A-4391-A7FB-6C7698366224}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{778B470C-5386-4645-ABE4-14E91261893E}"
-	ProjectSection(SolutionItems) = preProject
-		income_levels.txt = income_levels.txt
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
