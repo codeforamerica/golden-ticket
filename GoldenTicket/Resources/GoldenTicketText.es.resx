@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BirthdayAndInstructions" xml:space="preserve">
-    <value>Fecha de Nacimiento (mm/dd/yyyy format)</value>
+    <value>Fecha de Nacimiento (forma mm/dd/yyyy)</value>
   </data>
   <data name="City" xml:space="preserve">
     <value>Ciudad</value>
@@ -142,19 +142,19 @@
     <value>Relación del Guardian al Niño</value>
   </data>
   <data name="Contact2Email" xml:space="preserve">
-    <value>Dirección de Correo Electrónico Alternativo</value>
+    <value>Dirección de Correo Electrónico Alterno</value>
   </data>
   <data name="Contact2FirstName" xml:space="preserve">
-    <value>Primer Nombre de Contacto Alternativo</value>
+    <value>Primer Nombre de Contacto Alterno</value>
   </data>
   <data name="Contact2LastName" xml:space="preserve">
-    <value>Apellido de Contacto Alternativo</value>
+    <value>Apellido de Contacto Alterno</value>
   </data>
   <data name="Contact2Phone" xml:space="preserve">
-    <value>Numero de Telefono de Contacto Alternativo</value>
+    <value>Numero de Telefono de Contacto Alterno</value>
   </data>
   <data name="Contact2Relationship" xml:space="preserve">
-    <value>Relación del Contacto Alternativo con el Niño</value>
+    <value>Relación del Contacto Alterno con el Niño</value>
   </data>
   <data name="EmailAddress" xml:space="preserve">
     <value>Direccion de Correo Electronico</value>
@@ -166,7 +166,7 @@
     <value>Hembra</value>
   </data>
   <data name="First" xml:space="preserve">
-    <value>Primer</value>
+    <value>Primer Nombre</value>
   </data>
   <data name="FullName" xml:space="preserve">
     <value>Nombre Completo</value>
@@ -178,19 +178,19 @@
     <value>Información del Guardian</value>
   </data>
   <data name="HouseholdIncomeMissing" xml:space="preserve">
-    <value> El promedio de Ingresos Mensual debe ser introducido o seleccionado.</value>
+    <value> El promedio de ingresos mensual debe ser introducido o seleccionado.</value>
   </data>
   <data name="HouseholdMembers" xml:space="preserve">
     <value>Miembros del Hogar</value>
   </data>
   <data name="HouseholdMembersMissingOrInvalid" xml:space="preserve">
-    <value>El Número de Miembros del Hogar debe ser Introducido y debe ser al menos 2 Personas.</value>
+    <value>El número de miembros del hogar debe ser introducido y debe ser al menos 2 personas.</value>
   </data>
   <data name="HouseholdMonthlyIncome" xml:space="preserve">
     <value>Promedio de Ingresos Mensual</value>
   </data>
   <data name="IneligibleBirthday" xml:space="preserve">
-    <value>Edad del Estudiante no es elegible. El/Ella debe tener 4 años de edad en 9/1/{0}.</value>
+    <value>Edad del estudiante no es elegible. El/Ella debe tener 4 años de edad en 9/1/{0}.</value>
     <comment>{0} is the current year (ex: 2014)</comment>
   </data>
   <data name="Last" xml:space="preserve">
@@ -204,13 +204,13 @@
     <value>Varón</value>
   </data>
   <data name="Middle" xml:space="preserve">
-    <value>Medio</value>
+    <value>Segundo Nombre</value>
   </data>
   <data name="Mother" xml:space="preserve">
     <value>Madre</value>
   </data>
   <data name="NoSchoolSelected" xml:space="preserve">
-    <value>Al Menos una Escuela debe ser Seleccionada.</value>
+    <value>Al menos una escuela debe ser seleccionada.</value>
   </data>
   <data name="Other" xml:space="preserve">
     <value>Otro</value>
@@ -235,7 +235,7 @@
     <value>¿Cuál es el siguiente paso?</value>
   </data>
   <data name="ParentIntroWhatYouNeedToKnowBody" xml:space="preserve">
-    <value>Para ser elegible para la inscripción, su niño debe tener 4 años de edad el 1 de septiembre y vivir en la comunidad donde se encuentra su programa pre-kinder. Una copia de la Acta de nacimiento y comprobante de residencia será requeridos durante la inscripción.</value>
+    <value>Para ser elegible para la inscripción, su niño debe tener 4 años de edad el 1 de Septiembre y vivir en la comunidad donde se encuentra su programa Pre-Kinder. Una copia de la acta de nacimiento y comprobante de residencia serán requeridos durante la inscripción.</value>
   </data>
   <data name="ParentIntroWhatYouNeedToKnowHeader" xml:space="preserve">
     <value>Lo que necesita saber</value>
@@ -295,7 +295,7 @@
     <value>Sexo del Estudiante</value>
   </data>
   <data name="StudentInformation" xml:space="preserve">
-    <value>Information del Estudiante</value>
+    <value>Información del Estudiante</value>
   </data>
   <data name="StudentLastName" xml:space="preserve">
     <value>Apellido del Estudiante</value>
@@ -304,10 +304,10 @@
     <value>Segundo Nombre del Estudiante</value>
   </data>
   <data name="StudentStreetAddress1" xml:space="preserve">
-    <value>Dirección de calle del estudiante (line 1)</value>
+    <value>Dirección de Calle del Estudiante (line 1)</value>
   </data>
   <data name="StudentStreetAddress2" xml:space="preserve">
-    <value>Dirección de calle del estudiante (line 2)</value>
+    <value>Dirección de Calle del Estudiante (line 2)</value>
   </data>
   <data name="StudentZipCode" xml:space="preserve">
     <value>Codigo Postal del Estudiante</value>
@@ -320,7 +320,7 @@
     <comment>{0} is the property name (ex: Student ZIP code)</comment>
   </data>
   <data name="AverageHouseholdIncomeInstructions" xml:space="preserve">
-    <value>Por favor, introduzca el valor en dólares de los ingresos familiares mensuales (sin comas)</value>
+    <value>Por favor, proporcione el valor en dólares de los ingresos familiares mensuales (No use comas)</value>
   </data>
   <data name="AverageMonthlyIncomeAndExplanation" xml:space="preserve">
     <value>Promedio de Ingreso Mensual (Combinacion total de Ingresos de Todos los Miembros del Hogar)</value>
