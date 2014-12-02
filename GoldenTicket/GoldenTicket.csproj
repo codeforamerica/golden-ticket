@@ -206,6 +206,7 @@
     <Compile Include="Misc\Utils.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\fonts\icomoon.svg" />
     <Content Include="Content\forms.css" />
     <Content Include="Content\Images\logo.png" />
     <Content Include="Content\Images\logo_small.png" />
@@ -214,6 +215,9 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\styles.css" />
+    <Content Include="Content\fonts\icomoon.eot" />
+    <Content Include="Content\fonts\icomoon.ttf" />
+    <Content Include="Content\fonts\icomoon.woff" />
     <None Include="Properties\PublishProfiles\gt-ride-test-2.pubxml" />
     <None Include="Properties\PublishProfiles\gt-ride-test-3.pubxml" />
     <None Include="Properties\PublishProfiles\gt-ride-test.pubxml" />
