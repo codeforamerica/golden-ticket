@@ -1,4 +1,5 @@
-﻿using CsvHelper;
+﻿using System.Web.WebPages;
+using CsvHelper;
 using GoldenTicket.Calc;
 using GoldenTicket.DAL;
 using GoldenTicket.Models;
@@ -14,10 +15,10 @@ namespace GoldenTicket.Csv
 {
     public class ApplicantCsvReader : ApplicantReader
     {
-        private string csvFilePath;
-        private Dictionary<string,School> schools = new Dictionary<string, School>();
+        private readonly string csvFilePath;
+        private readonly Dictionary<string,School> schools = new Dictionary<string, School>();
 
-        private GoldenTicketDbContext db = new GoldenTicketDbContext();
+        private readonly GoldenTicketDbContext db = new GoldenTicketDbContext();
 
         public ApplicantCsvReader(string csvFilePath, List<School> schoolList)
         {
@@ -29,30 +30,41 @@ namespace GoldenTicket.Csv
         public List<School> ReadApplicants()
         {
             // Read the CSV
-            using (StreamReader textReader = new StreamReader(csvFilePath))
+            using (var textReader = new StreamReader(csvFilePath))
             {
-                CsvReader csvReader = new CsvReader(textReader);
+                var csvReader = new CsvReader(textReader);
                 csvReader.Configuration.SkipEmptyRecords = true;
                 csvReader.Configuration.TrimFields = true;
 
+                var applicants = new List<Applicant>();
+                var applieds = new List<Applied>();
+
                 while (csvReader.Read())
                 {
-                    Applicant applicant = ParseApplicant(csvReader);
+                    var applicant = ParseApplicant(csvReader);
+                    applicants.Add(applicant);
 
                     // Add student to each school
-                    string schoolNames = csvReader.GetField<string>("Schools");
-                    foreach (string rawSchoolName in schoolNames.Split(','))
+                    var schoolNames = csvReader.GetField<string>("Schools Applied").Split(';');
+                    foreach (var rawSchoolName in schoolNames)
                     {
-                        string schoolName = EscapeSchoolName(rawSchoolName.Trim());
+                        var schoolName = rawSchoolName.Trim();
+                        if (schoolName.IsEmpty())
+                        {
+                            continue;
+                        }
 
                         var school = db.Schools.First(s => s.Name.Equals(schoolName, StringComparison.CurrentCultureIgnoreCase));
                         
                         var applied = new Applied {Applicant = applicant, School = school};
 
-                        db.Applieds.Add(applied);
-                        db.SaveChanges();
+                        applieds.Add(applied);
                     }
                 }
+
+                db.Applicants.AddRange(applicants);
+                db.Applieds.AddRange(applieds);
+                db.SaveChanges();
             }
 
             return schools.Values.ToList();
@@ -60,89 +72,38 @@ namespace GoldenTicket.Csv
 
         private Applicant ParseApplicant(CsvReader csvReader)
         {
-            Applicant a = new Applicant();
-
-            a.StudentFirstName = csvReader.GetField<string>("Student First Name");
-            a.StudentMiddleName = csvReader.GetField<string>("Student Middle Name");
-            a.StudentLastName = csvReader.GetField<string>("Student Last Name");
-            a.StudentBirthday = Convert.ToDateTime(csvReader.GetField<string>("Student Birthday"));
-            a.StudentGender = ParseGender(csvReader.GetField<string>("Student Gender"));
-
-            a.Contact1FirstName = csvReader.GetField<string>("Guardian First Name");
-            a.Contact1LastName = csvReader.GetField<string>("Guardian Last Name");
-            a.Contact1Phone = csvReader.GetField<string>("Guardian Phone Number");
-            a.Contact1Email = csvReader.GetField<string>("Guardian E-mail Address");
-            a.Contact1Relationship = csvReader.GetField<string>("Guardian Relationship to Student");
-
-            a.StudentStreetAddress1 = csvReader.GetField<string>("Street Address").Replace(',', ' ');
-            a.StudentZipCode = csvReader.GetField<string>("Zip Code");
-            a.StudentCity = csvReader.GetField<string>("District of Residency");
-            a.HouseholdMembers = Math.Abs(int.Parse(csvReader.GetField<string>("Household Members")));
-
-            // Income calculation (below or above poverty line?)
-            a.HouseholdMonthlyIncome = ParseIncome(csvReader.GetField<string>("Annual Income"));
-
-            // Fix Zip code (for test data only)
-            if (a.StudentZipCode.Length == 4)
+            var a = new Applicant
             {
-                a.StudentZipCode = "0" + a.StudentZipCode;
-            }
+                ConfirmationCode = ValueOrNull(csvReader.GetField<string>("Confirmation Code")),
 
-            // Add a fake confirmation number
-            a.ConfirmationCode = "123ABC";
+                StudentFirstName = csvReader.GetField<string>("Student First Name"),
+                StudentMiddleName = csvReader.GetField<string>("Student Middle Name"),
+                StudentLastName = csvReader.GetField<string>("Student Last Name"),
+                StudentBirthday = Convert.ToDateTime(csvReader.GetField<string>("Student Birthday")),
+                StudentGender = ParseGender(csvReader.GetField<string>("Student Gender")),
 
+                StudentStreetAddress1 = csvReader.GetField<string>("Student Street Address 1"),
+                StudentStreetAddress2 = csvReader.GetField<string>("Student Street Address 2"),
+                StudentCity = csvReader.GetField<string>("Student City"),
+                StudentZipCode = csvReader.GetField<string>("Student ZIP Code"),
 
-            db.Applicants.Add(a);
-            db.SaveChanges(); // needed to get an ID for the applicant
+                Contact1FirstName = csvReader.GetField<string>("Contact 1 First Name"),
+                Contact1LastName = csvReader.GetField<string>("Contact 1 Last Name"),
+                Contact1Phone = csvReader.GetField<string>("Contact 1 Phone"),
+                Contact1Email = csvReader.GetField<string>("Contact 1 Email"),
+                Contact1Relationship = csvReader.GetField<string>("Contact 1 Relationship"),
+
+                Contact2FirstName = ValueOrNull(csvReader.GetField<string>("Contact 2 First Name")),
+                Contact2LastName = ValueOrNull(csvReader.GetField<string>("Contact 2 Last Name")),
+                Contact2Phone = ValueOrNull(csvReader.GetField<string>("Contact 2 Phone")),
+                Contact2Email = ValueOrNull(csvReader.GetField<string>("Contact 2 Email")),
+                Contact2Relationship = ValueOrNull(csvReader.GetField<string>("Contact 2 Relationship")),
+
+                HouseholdMembers = csvReader.GetField<int>("Household Members"),
+                HouseholdMonthlyIncome = csvReader.GetField<int>("Household Monthly Income")
+            };
 
             return a;
-        }
-
-        private static int ParseIncome(string incomeRange)
-        {
-            int incomeAmount = 0;
-            
-            //TODO change statically defined numbers
-            switch(incomeRange)
-            {
-                case "$29,101 or below":
-                    incomeAmount = 29101/12;
-                    break;
-                case "$29,102 - $36,612":
-                    incomeAmount = 29102/12;
-                    break;
-                case "$36,613 - $44,123":
-                    incomeAmount = 36613/12;
-                    break;
-                case "$44,124 - $51,634":
-                    incomeAmount = 44124/12;
-                    break;
-                case "$51,635 - $59,145":
-                    incomeAmount = 51635/12;
-                    break;
-                case "$59,146 - $66,656":
-                    incomeAmount = 59146/12;
-                    break;
-                case "$66,657 - $74,167":
-                    incomeAmount = 66657/12;
-                    break;
-                case "$74,168 - $81,678":
-                    incomeAmount = 74168/12;
-                    break;
-                case "$81,679 - $89,189":
-                    incomeAmount = 81679/12;
-                    break;
-                case "$89,190 or above":
-                    incomeAmount = 89190/12;
-                    break;
-            }
-
-            return incomeAmount;
-        }
-
-        private static string EscapeSchoolName(string schoolName)
-        {
-            return schoolName.Replace("@", "at").Replace('/', '-');
         }
 
         private static Gender ParseGender(string genderStr)
@@ -153,6 +114,11 @@ namespace GoldenTicket.Csv
             }
 
             return Gender.Female;
+        }
+
+        private static string ValueOrNull(string value)
+        {
+            return string.IsNullOrEmpty(value) ? null : value;
         }
     }
 }
