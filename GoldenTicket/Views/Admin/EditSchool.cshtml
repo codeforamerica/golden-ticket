@@ -1,0 +1,34 @@
+﻿@using System.Web.UI.WebControls
+@using GoldenTicket.Models
+
+@model School
+
+@{
+    ViewBag.BodyId = "";
+    ViewBag.BodyClass = "no-js schools-new";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    ViewBag.IsCityEditable = false;
+}
+
+<main>
+    @using (Html.BeginForm())
+    {
+        <div class="page">
+            <div class="site-width">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary()
+
+                <h1>Edit school</h1>
+
+                @Html.Partial("_SchoolFormFields", Model)
+
+                <footer>
+                    <input type="submit" class="button" value="Save" />
+                    @Html.ActionLink(linkText: "Cancel", actionName: "ViewSchools")
+                </footer>
+
+            </div>
+        </div>
+    }
+</main>

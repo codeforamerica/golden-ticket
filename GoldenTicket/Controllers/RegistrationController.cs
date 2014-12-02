@@ -16,11 +16,14 @@ namespace GoldenTicket.Controllers
         private readonly GoldenTicketDbContext database = new GoldenTicketDbContext();
         private GlobalConfig config;
 
-        private static readonly DateTime AGE_4_BY_DATE = new DateTime(DateTime.Today.Year, 9, 1);
+        
+
+        private SharedViewHelper viewHelper;
 
         public RegistrationController()
         {
             config = database.GlobalConfigs.First();
+            viewHelper = new SharedViewHelper(database);
         }
 
         // GET: Registration
@@ -35,7 +38,7 @@ namespace GoldenTicket.Controllers
 
         public ActionResult StudentInformation()
         {
-            StudentInformationViewSetup();
+            viewHelper.PrepareStudentInformationView(ViewBag);
 
             var applicant = GetSessionApplicant();
 
@@ -53,47 +56,7 @@ namespace GoldenTicket.Controllers
             }
 
             // Check for required fields
-            if(string.IsNullOrEmpty(applicant.StudentFirstName))
-            {
-                var message = string.Format(GoldenTicketText.PropertyMissing, GoldenTicketText.StudentFirstName);
-                ModelState.AddModelError("StudentFirstName", message);
-            }
-            if (string.IsNullOrEmpty(applicant.StudentLastName))
-            {
-                var message = string.Format(GoldenTicketText.PropertyMissing, GoldenTicketText.StudentLastName);
-                ModelState.AddModelError("StudentLastName", message);
-            }
-            if (string.IsNullOrEmpty(applicant.StudentStreetAddress1))
-            {
-                var message = string.Format(GoldenTicketText.PropertyMissing, GoldenTicketText.StudentStreetAddress1);
-                ModelState.AddModelError("StudentStreetAddress1", message);
-            }
-            if (string.IsNullOrEmpty(applicant.StudentCity))
-            {
-                var message = string.Format(GoldenTicketText.PropertyMissing, GoldenTicketText.StudentCity);
-                ModelState.AddModelError("StudentCity", message);
-            }
-            if (string.IsNullOrEmpty(applicant.StudentZipCode))
-            {
-                var message = string.Format(GoldenTicketText.PropertyMissing, GoldenTicketText.StudentZipCode);
-                ModelState.AddModelError("StudentZipCode", message);
-            }
-            if (applicant.StudentBirthday == null)
-            {
-                var message = string.Format(GoldenTicketText.PropertyMissing, GoldenTicketText.StudentBirthday);
-                ModelState.AddModelError("StudentBirthday", message);
-            }
-            if (applicant.StudentGender == null)
-            {
-                var message = string.Format(GoldenTicketText.PropertyMissing, GoldenTicketText.StudentGender);
-                ModelState.AddModelError("StudentGender", message);
-            }
-
-            if (applicant.StudentBirthday != null && !IsAgeEligible(applicant.StudentBirthday.Value))
-            {
-                var message = string.Format(GoldenTicketText.IneligibleBirthday, DateTime.Today.Year.ToString());
-                ModelState.AddModelError("StudentBirthday", message);
-            }
+            viewHelper.EmptyCheckStudentInformation(ModelState, applicant);
 
             // Valid fields
             if(ModelState.IsValid)
@@ -104,7 +67,7 @@ namespace GoldenTicket.Controllers
             }
 
             // Invalid fields
-            StudentInformationViewSetup();
+            viewHelper.PrepareStudentInformationView(ViewBag);
             return View(applicant);
         }
 
@@ -115,7 +78,7 @@ namespace GoldenTicket.Controllers
                 return RedirectToAction("Index");
             }
 
-            GuardianInformationViewSetup();
+            viewHelper.PrepareGuardianInformationView(ViewBag);
 
             var applicant = GetSessionApplicant();
 
@@ -133,39 +96,7 @@ namespace GoldenTicket.Controllers
             }
 
             // Check required fields
-            if( string.IsNullOrEmpty(applicant.Contact1FirstName) )
-            {
-                var message = string.Format(GoldenTicketText.PropertyMissing, GoldenTicketText.Contact1FirstName);
-                ModelState.AddModelError("Contact1FirstName", message);
-            }
-            if( string.IsNullOrEmpty(applicant.Contact1LastName) )
-            {
-                var message = string.Format(GoldenTicketText.PropertyMissing, GoldenTicketText.Contact1LastName);
-                ModelState.AddModelError("Contact1FirstName", message);
-            }
-            if( string.IsNullOrEmpty(applicant.Contact1Phone) )
-            {
-                var message = string.Format(GoldenTicketText.PropertyMissing, GoldenTicketText.Contact1Phone);
-                ModelState.AddModelError("Contact1Phone", message);
-            }
-            if( string.IsNullOrEmpty(applicant.Contact1Email) )
-            {
-                var message = string.Format(GoldenTicketText.PropertyMissing, GoldenTicketText.Contact1Email);
-                ModelState.AddModelError("Contact1Email", message);
-            }
-            if( string.IsNullOrEmpty(applicant.Contact1Relationship) )
-            {
-                var message = string.Format(GoldenTicketText.PropertyMissing, GoldenTicketText.Contact1Relationship);
-                ModelState.AddModelError("Contact1Relationship", message);
-            }          
-            if( applicant.HouseholdMembers == null || applicant.HouseholdMembers < 2)
-            {
-                ModelState.AddModelError("HouseholdMembers", GoldenTicketText.HouseholdMembersMissingOrInvalid);
-            }
-            if( applicant.HouseholdMonthlyIncome == null || applicant.HouseholdMonthlyIncome == 0) // 1 is the bottom range, although to users 0 will appear as the minimum. This will help with validation checking, since an empty selection is assigned 0 by MVC framework. This does not impact income calculations for lottery selection.
-            {
-                ModelState.AddModelError("HouseholdMonthlyIncome", GoldenTicketText.HouseholdIncomeMissing);
-            }
+            viewHelper.EmptyCheckGuardianInformation(ModelState, applicant);
 
             // Validate model
             if(ModelState.IsValid)
@@ -176,7 +107,7 @@ namespace GoldenTicket.Controllers
             }
 
             // Invalid model
-            GuardianInformationViewSetup();
+            viewHelper.PrepareGuardianInformationView(ViewBag);
             return View(applicant);
         }
 
@@ -188,7 +119,7 @@ namespace GoldenTicket.Controllers
             }
 
             var applicant = GetSessionApplicant();
-            SchoolSelectionViewSetup(applicant);
+            viewHelper.PrepareSchoolSelectionView(ViewBag, applicant);
 
             return View(applicant); 
         }
@@ -206,10 +137,10 @@ namespace GoldenTicket.Controllers
             // At least one program needs to be selected
             applicant = GetSessionApplicant(); // fills in the other properties, other than just Applicant ID
             var programIds = new List<int>();
-            if(formCollection["programs"] == null || formCollection["programs"].Count() <= 0)
+            if(formCollection["programs"] == null || !formCollection["programs"].Any())
             {
                 ModelState.AddModelError("programs", GoldenTicketText.NoSchoolSelected);
-                SchoolSelectionViewSetup(applicant);
+                viewHelper.PrepareSchoolSelectionView(ViewBag, applicant);
                 return View(applicant);
             }
             else
@@ -228,10 +159,10 @@ namespace GoldenTicket.Controllers
             {
                 var applied = new Applied();
                 applied.ApplicantID = applicant.ID;
-                applied.ProgramID = programId;
+                applied.SchoolID = programId;
 
                 // Confirm that the program ID is within the city lived in (no sneakers into other districts)
-                var program = database.Programs.Find(programId);
+                var program = database.Schools.Find(programId);
                 if(program != null && program.City.Equals(populatedApplicant.StudentCity, StringComparison.CurrentCultureIgnoreCase))
                 {
                     database.Applieds.Add(applied);
@@ -251,7 +182,7 @@ namespace GoldenTicket.Controllers
 
             var applicant = GetSessionApplicant();
             
-            ReviewViewSetup(applicant);
+            PrepareReviewView(applicant);
 
             return View(applicant);
         }
@@ -289,61 +220,7 @@ namespace GoldenTicket.Controllers
         }
 
         // ---- Helper Fields ----
-        private void StudentInformationViewSetup()
-        {
-            ViewBag.DistrictNames = GetDistrictNames();   
-        }
 
-        private void GuardianInformationViewSetup()
-        {
-            var incomeRanges = GetIncomeRanges();
-            ViewBag.IncomeRanges = incomeRanges;
-            ViewBag.MaxIncome = incomeRanges.Last().Value;
-
-            ViewBag.GlobalConfig = database.GlobalConfigs.First();
-        }
-
-        private string[] GetDistrictNames()
-        {
-            ISet<string> districtNames = new HashSet<string>();
-            districtNames.Add("");
-
-            foreach(Program program in database.Programs)
-            {
-                districtNames.Add(program.City);
-            }
-
-            return districtNames.OrderBy(s=>s).ToArray();
-        }
-
-        private IEnumerable<SelectListItem> GetIncomeRanges()
-        {
-            var incomeRanges = new List<SelectListItem>();
-
-            int previousIncomeLine = 1; // 1 is the bottom range, although to users 0 will appear as the minimum. This will help with validation checking.
-            foreach( int householdMembers in Enumerable.Range(2,9))
-            {
-                var povertyConfig = database.PovertyConfigs.First(p => p.HouseholdMembers == householdMembers);
-                var item = new SelectListItem
-                {
-                    Text = previousIncomeLine.ToString("C") + " - " + povertyConfig.MinimumIncome.ToString("C"),
-                    Value = povertyConfig.MinimumIncome.ToString()
-                };
-
-                previousIncomeLine = povertyConfig.MinimumIncome;
-                incomeRanges.Add(item);
-            }
-
-            var maxIncome = previousIncomeLine + 1;
-            var maxRange = new SelectListItem
-            {
-                Text =  string.Format(GoldenTicketText.OrMore, maxIncome.ToString("C")),
-                Value = maxIncome.ToString()
-            };
-            incomeRanges.Add(maxRange);
-
-            return incomeRanges;
-        }
 
         private void SaveStudentInformation(Applicant applicant)
         {
@@ -406,18 +283,6 @@ namespace GoldenTicket.Controllers
             return !isApplicantNew && isActiveSession && isActiveApplicantSameAsSubmitted;
         }
 
-        private static bool IsAgeEligible(DateTime birthday)
-        {
-            int ageByCutoff = AGE_4_BY_DATE.Year - birthday.Year;
-            DateTime adjustedDate = AGE_4_BY_DATE.AddYears(-ageByCutoff);
-            if(birthday > adjustedDate)
-            {
-                ageByCutoff--;
-            }
-
-            return (ageByCutoff == 4);
-        }
-
         private void SaveGuardianInformation(Applicant applicant)
         {
             database.Applicants.Attach(applicant);
@@ -439,21 +304,12 @@ namespace GoldenTicket.Controllers
             database.SaveChanges();
         }
 
-        private void SchoolSelectionViewSetup(Applicant applicant)
-        {
-            var eligiblePrograms = database.Programs.Where(p => p.City == applicant.StudentCity).OrderBy(p => p.Name).ToList();
-            ViewBag.Programs = eligiblePrograms;
-
-            var applieds = database.Applieds.Where(a => a.ApplicantID == applicant.ID).ToList();
-            ViewBag.Applieds = applieds;
-        }
-
-        private void ReviewViewSetup(Applicant applicant)
+        private void PrepareReviewView(Applicant applicant)
         {
             var applieds = database.Applieds.Where(a => a.ApplicantID == applicant.ID).ToList();
-            var programs = new List<Program>();
+            var programs = new List<School>();
 
-            applieds.ForEach(a => programs.Add(a.Program));
+            applieds.ForEach(a => programs.Add(a.School));
 
             ViewBag.Programs = programs;
 

@@ -8,7 +8,7 @@ namespace GoldenTicket.DAL
     public class GoldenTicketDbContext : DbContext
     {
         public DbSet<Applicant> Applicants { get; set; }
-        public DbSet<Program> Programs { get; set; }
+        public DbSet<School> Schools { get; set; }
         public DbSet<Applied> Applieds { get; set; }
         public DbSet<Shuffled> Shuffleds { get; set; }
         public DbSet<Selected> Selecteds { get; set; }

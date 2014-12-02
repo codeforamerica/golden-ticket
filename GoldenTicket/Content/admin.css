@@ -1,13 +1,5 @@
 /* @override http://preklottery.local/stylesheets/ride.css */
 
-/* @override http://preklottery.local/stylesheets/ride.css */
-
-/* @override http://preklottery.local/stylesheets/ride.css */
-
-/* @override http://preklottery.local/stylesheets/ride.css */
-
-/* @override http://preklottery.local/stylesheets/ride.css */
-
 /* @group bootstrap */
 
 body{
@@ -190,6 +182,19 @@ body main header{
 	line-height: 1.33em;
 	color: #333;
 	margin-bottom: 1em;
+	padding-top: 0.125em;
+}
+
+body main header a.back{
+	font-size: 0.9rem;
+	font-family: "Noto sans", "Lucida Grande", Lucida, Verdana, sans-serif;	
+	margin-top: -1em;
+	display: block;
+	width: 16em;
+}
+
+body main header a.back+h1{
+	display: block;
 }
 
 body main header h1{
@@ -198,10 +203,13 @@ body main header h1{
 	width: auto;
 	margin-right: 0.2rem;
 	color: #206180;
+	line-height: 2rem;
 }
 
 body main header h1+.button-forward{
+	display: inline-block;
 	vertical-align: middle;
+	line-height: 2rem;
 	margin-top: 0.125em;
 }
 
@@ -238,14 +246,118 @@ main header .custom-select{
 
 /* @end */
 
-
 /* @group footer */
 
-footer a{ 
+main footer section{
+	border-bottom: 0.2rem solid #eee;	
+	padding-top: 0.8rem;
+	padding-bottom: 1rem;
+	font-size: 0.8rem;
+	line-height: 1.2;
+	color: #888;
+	}
+
+main footer section::after{
+  content: "";
+  display: table;
+  clear: both;
+
+}
+
+main footer section:last-of-type{
+	border-bottom: none;
+	padding-bottom: 0;
+}
+
+main footer{  }
+
+main footer a{ 
 	color: #888; 
-	font-size: 0.9rem;
 	text-decoration: underline;
 }
+
+main footer nav.export{ float: left; }
+main footer nav.export+nav.status{ float: right; }
+main footer nav ul li{ list-style-type: none; }
+
+main footer nav a{
+	display: inline-block;
+	vertical-align: middle;
+	position: relative;
+}
+
+footer nav.status a{ margin-right: 0.4em; }
+
+a.export,
+a.import{ padding-left: 1.4em;	 }
+
+
+a.export::before,
+a.import::before{
+	text-decoration: none;
+	content: "excel";
+	font-family: 'icomoon';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 0.8rem;
+	/* Enable Ligatures ================ */
+	-webkit-font-feature-settings: "liga";
+	-moz-font-feature-settings: "liga=1";
+	-moz-font-feature-settings: "liga";
+	-ms-font-feature-settings: "liga" 1;
+	-o-font-feature-settings: "liga";
+	font-feature-settings: "liga";
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	position: absolute;
+	top: 0;
+	left: 0;
+	font-size: 1em;
+}
+
+
+
+/* @group pagination */
+
+nav.pagination a{
+	display: inline-block;
+	padding: 0 0.7rem;
+	height: 1.4rem;
+	line-height: 1.4rem;
+	text-align: center;
+	background: white;	
+	text-decoration: none;
+	-moz-border-radius: 0.1rem;
+	border-radius: 0.1rem;
+	border: 2px solid #eee;
+	-moz-border-radius: 0.2rem;
+	border-radius: 0.2rem;
+}
+
+nav.pagination a:hover{
+	color: #007fab;
+	border-color: #00c3e2;
+}
+
+nav.pagination a.is-active{
+	background: #2b82b7;
+	border-color: #2b82b7;
+	color: white;
+}
+
+@media screen and (min-width: 24em){ 
+	
+	nav.pagination a{ 
+	padding: 0 0.6rem;
+	
+	}
+}
+
+/* @end */
 
 
 /* @end */
@@ -260,7 +372,7 @@ table{
 	overflow: hidden;
 	table-layout: fixed;
 	font-size: 0.8rem;
-	margin-bottom: 1.4em;
+	margin-bottom: 2em;
 }
 
 table thead,
@@ -320,27 +432,27 @@ table .sort-desc a::after{
 
 table .table-people-col-actions a{ display: inline-block; }
 table .table-people-col-actions a:hover{ text-decoration: underline; }
-table.table-applications tbody tr:hover a{ background: #fff2c0; }
+table.table-applications tbody tr:hover a,
+table.table-applications tbody tr:hover td.table-applications-col-delete{ background: #fff2c0; }
 
-table.table-applications thead td.table-applications-col-duplicate{ text-align: right; }
+table.table-applications tr:hover td.table-applications-col-delete button{ 
+color: #333;
 
-table.table-applications thead td.table-applications-col-duplicate,
-table.table-applications tbody td.table-applications-col-duplicate{
-	border: none;
 }
 
-table.table-applications thead td.table-applications-col-duplicate span{ text-indent: 9999em; display: inline-block; }
-
-table.table-applications td.table-applications-col-duplicate,
 table.table-applications td.table-applications-col-delete{
+	width: 1.4rem;	
+}
+
+table.table-applications td.table-applications-col-delete a{
 	text-transform: lowercase;	
 	font-family: 'icomoon';
 	speak: none;
 	font-style: normal;
 	font-weight: normal;
 	font-variant: normal;
-	text-transform: none;
-	line-height: 0.8rem;
+	text-transform: lowercase;
+	line-height: 1.2rem;
 	/* Enable Ligatures ================ */
 	-webkit-font-feature-settings: "liga";
 	-moz-font-feature-settings: "liga=1";
@@ -348,23 +460,18 @@ table.table-applications td.table-applications-col-delete{
 	-ms-font-feature-settings: "liga" 1;
 	-o-font-feature-settings: "liga";
 	font-feature-settings: "liga";
-
-	/* Better Font Rendering =========== */
-	-webkit-font-smoothing: antialiased;
-	font-size: 16px;
-	width: 1.4em;
+	font-size: 10px;
+	color: #ccc;
+	padding-left: 0.4rem; 
+	padding-right: 0.4rem; 
+	border: none;
 }
 
-table.table-applications td.table-applications-col-duplicate span.label{ display: none; }
-table.table-applications td.table-applications-col-duplicate span.icon-duplicate{ display: block; }
-
-span.icon-delete::before{ content: "delete"; }
-span.icon-duplicate::before{ content: "potential duplicate"; }
+table.table-applications td.table-applications-col-delete a span{
+	text-indent: -9999em;
+}
 
 table.table-applications thead td.table-applications-col-delete{ visibility: hidden; }
-table.table-applications td.table-applications-col-delete{ text-align: right; padding-right: 0.4em; border: none;}
-table.table-applications td.table-applications-col-delete button{ text-transform: lowercase; visibility: hidden; }
-table.table-applications tr:hover td.table-applications-col-delete button{ visibility: visible; }
 /* @end */
 
 /* @group shared */
@@ -397,61 +504,6 @@ table.table-applications tr:hover td.table-applications-col-delete button{ visib
 
 .notice form{
 	margin-bottom: 0.4em;
-}
-
-nav{ clear: both; }
-
-nav ul{
-	border-top: 0.2rem solid #eee;	
-	padding-top: 1.4rem;
-}
-
-nav ul li{
-	margin-bottom: 0.7rem;
-	list-style-type: none;
-}
-
-a.export,
-a.import,
-a.show-deleted{
-	display: inline-block;
-	vertical-align: middle;
-	position: relative;
-	padding-left: 1.4em;
-	margin-bottom: 0.4em;
-	font-size: 0.8rem;
-}
-
-a.show-deleted{
-	padding-left: 0;
-}
-
-
-a.export::before,
-a.import::before{
-	text-decoration: none;
-	content: "excel";
-	font-family: 'icomoon';
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 0.8rem;
-	/* Enable Ligatures ================ */
-	-webkit-font-feature-settings: "liga";
-	-moz-font-feature-settings: "liga=1";
-	-moz-font-feature-settings: "liga";
-	-ms-font-feature-settings: "liga" 1;
-	-o-font-feature-settings: "liga";
-	font-feature-settings: "liga";
-	/* Better Font Rendering =========== */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	position: absolute;
-	top: 0;
-	left: 0;
-	font-size: 1em;
 }
 
 /* @end */
@@ -533,17 +585,11 @@ a.import::before{
 .people-new,
 .lottery-reset{ background: #eee; }
 
-.schools-delete main .site-width,
-.schools-new main .site-width,
-.applications-delete main .site-width,
-.people-new main .site-width,
-.lottery-reset main .site-width{ padding: 0; }
-
-.schools-delete main,
-.schools-new main,
-.applications-delete main,
-.people-new main,
-.lottery-reset main{
+.schools-delete .page,
+.schools-new .page,
+.applications-delete .page,
+.people-new .page,
+.lottery-reset .page{
 	border-bottom: none;
 	border: 0.2rem solid #ff514d;
 	max-width: 24rem;
@@ -554,7 +600,6 @@ a.import::before{
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
-
 
 .schools-delete main h1,
 .schools-new main h1,
@@ -577,11 +622,11 @@ a.import::before{
 
 
 @media screen and (min-width: 24em){	
-	.schools-delete main,
-	.schools-new main,
-	.applications-delete main,
-	.people-new main,
-	.lottery-reset main{
+	.schools-delete .page,
+	.schools-new .page,
+	.applications-delete .page,
+	.people-new .page,
+	.lottery-reset .page{
 		padding: 1.4rem;
 		max-width: 28em;
 	}
@@ -656,7 +701,7 @@ a.import::before{
 
 .school a,
 .school button{
-	position: absolute;
+	/*position: absolute;*/
 	right: 0.7em;
 	top: 0.7em;
 }
@@ -823,10 +868,8 @@ body[class^=applications] main aside dt{
 	margin-top: 1.4rem;
 }
 
-.applications-show main header a,
-.applications-edit main header a,
-.applications-show main header button,
-.applications-edit main header button{
+.applications-show main header nav,
+.applications-edit main header nav{
 	position: absolute;
 	left: auto;
 	right: 0.5rem;
@@ -840,8 +883,14 @@ body[class^=applications] main aside dt{
 	border-radius: 0;
 	cursor: pointer;
 	line-height: 2.4rem;
-	color: inherit;
+	color: white;
 }
+
+.applications-show main header nav a,
+.applications-edit main header nav a {
+	color: rgb(193, 182, 194);
+}
+
 
 .applications-show main header a:hover,
 .applications-edit main header a:hover,

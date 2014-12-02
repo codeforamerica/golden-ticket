@@ -1,0 +1,24 @@
+﻿@using System.Web.UI.WebControls
+@using GoldenTicket.Models
+@model Applicant
+
+@{
+    ViewBag.BodyId = "";
+    ViewBag.BodyClass = "no-js applications-show";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<main>
+    <header>
+        <div class="site-width">
+            <h1>Confirmation Code: @Model.ConfirmationCode</h1>
+            <nav>
+                @Html.ActionLink(linkText: "Edit", actionName: "EditApplicant", routeValues: new {id = Model.ID}, htmlAttributes: new { @class = "button-edit" })
+                @Html.ActionLink(linkText: "Delete", actionName: "DeleteApplicant", routeValues: new {id = Model.ID}, htmlAttributes: new { @class = "button-delete" })
+            </nav>
+        </div>
+    </header>
+    <div class="page">
+        @Html.Partial("_ApplicantDetails", Model)
+    </div>
+</main>

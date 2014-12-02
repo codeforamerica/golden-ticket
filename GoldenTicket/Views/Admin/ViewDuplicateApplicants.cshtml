@@ -1,0 +1,62 @@
+﻿@using System.Web.UI.WebControls
+@using GoldenTicket.Models
+@model Dictionary<School, List<Applicant>>
+
+@{
+    ViewBag.BodyId = "";
+    ViewBag.BodyClass = "no-js applications-index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    var anyDuplicates = false;
+}
+
+<main>
+    <header>
+        <div class="site-width">
+            <div class="notice">
+                These are <em>potential</em> duplicate applicants per school. Please carefully inspect their full applications
+                before deleting a record.
+            </div>
+        </div>
+    </header>
+
+    <div class="page">
+        <div class="site-width">
+            @foreach (KeyValuePair<School, List<Applicant>> entry in Model)
+            {
+                var school = entry.Key;
+                var duplicates = entry.Value;
+
+                if (duplicates.Any())
+                {
+                    <section>
+                        <h1>@school.Name</h1>
+                        @Html.Partial("_ApplicantTable", duplicates)
+                    </section>
+                    anyDuplicates = true;
+                }
+            }
+            
+            @if (!anyDuplicates)
+            {
+                <section>
+                    <h1>No duplicates found!</h1>
+                </section>
+            }
+            
+            <footer>
+                <section>
+                    <nav>
+                        <ul>
+                            <li>
+                                @Html.ActionLink(linkText: "View all applicants", actionName: "ViewApplicants")
+                            </li>
+                        </ul>
+                    </nav>
+                </section>
+            </footer>
+        </div>
+    </div>
+
+
+</main>
+

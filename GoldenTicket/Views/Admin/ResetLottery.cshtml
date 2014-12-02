@@ -1,0 +1,50 @@
+﻿@using System.Web.UI.WebControls
+@using GoldenTicket.Models
+
+@model School
+
+@{
+    ViewBag.BodyId = "";
+    ViewBag.BodyClass = "no-js lottery-reset";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script type="text/javascript">
+    function confirmDeleteText() {
+        var value = $("#delete-confirm-text-box").val();
+        var deleteConfirmButton = $("#delete-confirm-button");
+
+        if (value.toLowerCase() === "delete") {
+            deleteConfirmButton.addClass("button");
+            deleteConfirmButton.prop("disabled", false);
+        }
+        else {
+            deleteConfirmButton.removeClass("button");
+            deleteConfirmButton.prop("disabled", true);
+        }
+    }
+
+</script>
+
+<main>
+    @using (Html.BeginForm())
+    {
+        <div class="page">
+            <div class="site-width">
+                @Html.AntiForgeryToken()
+                <input name="id" type="hidden" value="ResetLottery"/>
+
+                <h1>Are you sure you want to reset the lottery?</h1>
+                <p>Resetting the lottery will delete all applications. Before you do this, you may wish to <a href="#">download a CSV file of all applications</a> received to date. To confirm this action, please type <strong>delete</strong> below.</p>
+                <div class="field field-width-medium">
+                    <input type="text" id="delete-confirm-text-box" onchange="confirmDeleteText()" onkeyup="confirmDeleteText()" />
+                </div>
+                <footer>
+                    <input type="submit" value="Reset the application" id="delete-confirm-button" disabled="disabled"/>
+                    @Html.ActionLink(linkText: "Cancel", actionName: "EditSettings")
+                </footer>
+
+            </div>
+        </div>
+    }
+</main>

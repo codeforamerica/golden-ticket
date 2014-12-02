@@ -10,19 +10,19 @@
 }
 
 
-@helper DisplayProgramCheckbox(List<Applied> applieds, Program program, Applicant applicant)
+@helper DisplaySchoolCheckbox(List<Applied> applieds, School school, Applicant applicant)
 {
-    var programChecked = false;
+    var schoolChecked = false;
     foreach (Applied applied in applieds)
     {
-        if (applied.ProgramID == program.ID)
+        if (applied.SchoolID == school.ID)
         {
-            programChecked = true;
+            schoolChecked = true;
             break;
         }
     }
 
-    <input type="checkbox" id="program-@(program.ID)" value="@program.ID" name="programs" checked="@programChecked">
+    <input type="checkbox" id="school-@(school.ID)" value="@school.ID" name="programs" checked="@schoolChecked">
 }
 
 <div id="signpost">
@@ -40,27 +40,8 @@
             @Html.AntiForgeryToken()
             @Html.HiddenFor(model => model.ID)
             
-            <section id="school-selection">
-                <h1>@GoldenTicketText.SchoolSelection</h1>
-                <p>@string.Format(GoldenTicketText.ChooseOneOrMoreSchools, @Model.StudentFirstName)</p>
-                <fieldset class="fieldset-schools" id="fieldset-schools">
-                    <legend>@GoldenTicketText.Schools</legend>
-                    @foreach(Program program in ViewBag.Programs)
-                    {
-                        <div class="field field-checkbox field-school">
-                            <label class="vcard">
-                                @DisplayProgramCheckbox(ViewBag.Applieds, program, Model)
-                                <span class="fn">@program.Name</span>
-                                <div class="adr">
-                                    <div class="street-address">@program.StreetAddress1</div>
-                                    <div class="street-address">@program.StreetAddress2</div>
-                                    <span class="locality">@program.City</span>,<span class="region">RI</span> <span class="postal-code">@program.ZipCode</span>
-                                </div>
-                            </label>
-                        </div>
-                    }
-                </fieldset>
-            </section>
+            @Html.Partial("_SchoolSelectionFormFields", Model)
+            
             <footer>
                 <button class="button" type="submit" value="continue">@GoldenTicketText.ReviewApplication</button>
             </footer>

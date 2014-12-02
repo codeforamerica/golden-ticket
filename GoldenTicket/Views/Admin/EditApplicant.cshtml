@@ -1,0 +1,40 @@
+﻿@using System.Web.UI.WebControls
+@using GoldenTicket.Models
+
+@model Applicant
+
+@{
+    ViewBag.BodyId = "";
+    ViewBag.BodyClass = "no-js applications-edit";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<main>
+    @using(Html.BeginForm())
+    { 
+        <header>
+            <div class="site-width">
+                <h1>Confirmation: @Model.ConfirmationCode</h1>
+                <nav>
+                    <input class="button-save" type="submit" value="Save"/>
+                    <a href="javascript:void(0);" onclick="history.go(-1);" class="button-cancel">Cancel</a>
+                </nav>
+            </div>
+        </header>
+        <div class="page">
+            <div class="site-width">
+                
+                @Html.ValidationSummary()
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.ID)
+                @Html.HiddenFor(model => model.ConfirmationCode)
+
+                @Html.Partial("_StudentInformationFormFields", Model)
+                @Html.Partial("_GuardianInformationFormFields", Model)
+                @Html.Partial("_SchoolSelectionFormFields", Model)
+                
+                <input class="button" type="submit" value="Save" />
+            </div>
+        </div>
+    }
+</main>

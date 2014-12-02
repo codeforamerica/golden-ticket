@@ -1,0 +1,54 @@
+﻿@using System.Web.UI.WebControls
+@using GoldenTicket.Models
+
+@model School
+
+@{
+    ViewBag.BodyId = "";
+    ViewBag.BodyClass = "no-js schools-delete";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<script type="text/javascript">
+    function confirmDeleteText() {
+        var value = $("#delete-confirm-text-box").val();
+        var deleteConfirmButton = $("#delete-confirm-button");
+
+        if (value.toLowerCase() === "delete") {
+            deleteConfirmButton.addClass("button");
+            deleteConfirmButton.prop("disabled", false);
+        }
+        else {
+            deleteConfirmButton.removeClass("button");
+            deleteConfirmButton.prop("disabled", true);
+        }
+    }
+</script>
+
+<main>
+    @using (Html.BeginForm())
+    {
+        <div class="page">
+            <div class="site-width">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary()
+                @Html.HiddenFor(model => model.ID)
+
+                <h1>Are you sure you want to delete @Model.Name?</h1>
+                <p>
+                    Deleting <strong>@Model.Name</strong> will delete any applications associated with that school. 
+                    To confirm this action, please type <strong>delete</strong> below.
+                </p>
+                <div class="field field-width-medium">
+                    <label>Confirm deletion</label>
+                    <input id="delete-confirm-text-box" type="text" onchange="confirmDeleteText()" onkeyup="confirmDeleteText()" />
+                </div>
+                <footer>
+                    <input type="submit" value="Delete this school" class="" disabled="disabled" id="delete-confirm-button" />
+                    @Html.ActionLink(linkText: "Cancel", actionName: "ViewSchools")
+                </footer>
+
+            </div>
+        </div>
+    }
+</main>

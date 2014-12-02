@@ -1,0 +1,58 @@
+﻿@using System.Web.UI.WebControls
+@using GoldenTicket.Models
+
+@{
+    ViewBag.BodyId = "";
+    ViewBag.BodyClass = "no-js applications-index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<main>
+    <header>
+        <div class="site-width">
+            @Html.Partial("_SchoolApplicantNav")
+        </div>
+    </header>
+
+    <div class="page">
+        <div class="site-width">
+            
+            @if (ViewBag.WasLotteryRun)
+            {
+                <h1>Selected to attend</h1>
+                @Html.Partial("_ApplicantTable", (List<Applicant>) ViewBag.SelectedApplicants)
+                
+                <h1>Waitlisted</h1>
+                @Html.Partial("_ApplicantTable", (List<Applicant>) ViewBag.WaitlistedApplicants)
+            }
+            else
+            {
+                
+                
+                if (ViewBag.Applicants.Count == 0)
+                {
+                    <h1>No applicants yet for this school</h1>
+                }
+                else
+                {
+                    @Html.Partial("_ApplicantTable", (List<Applicant>)ViewBag.Applicants)
+                    <footer>
+                        <section>
+                            <nav class="export">
+                                <ul>
+                                    <li>@Html.ActionLink(linkText: "Export applicant list", actionName: "ExportApplicantsForSchool", routeValues: new { id = ViewBag.School.ID })</li>
+                                </ul>
+                            </nav>
+                            <nav class="status">
+                                @Html.ActionLink(linkText: "Show duplicate applications", actionName: "ViewDuplicateApplicants")
+                            </nav>
+                        </section>
+                    </footer>
+                }
+            }
+
+        </div>
+    </div>
+
+
+</main>

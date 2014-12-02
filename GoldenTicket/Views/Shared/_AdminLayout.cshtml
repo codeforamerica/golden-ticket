@@ -1,0 +1,49 @@
+﻿@using GoldenTicket.Resources
+
+@{
+    string bodyId = "";
+    if(!string.IsNullOrEmpty(ViewBag.BodyId))
+    {
+        bodyId = ViewBag.BodyId;
+    }
+    string bodyClass = "";
+    if(!string.IsNullOrEmpty(ViewBag.BodyClass))
+    {
+        bodyClass = ViewBag.BodyClass;
+    }  
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>RI Pre-K Lottery</title>
+    @Styles.Render("~/Content/reset.css")
+    @Styles.Render("~/Content/forms.css")
+    @Styles.Render("~/Content/admin.css")
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link href='http://fonts.googleapis.com/css?family=Noto+Sans:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Titillium+Web:300,700' rel='stylesheet' type='text/css'>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/Scripts/modernizr.custom.78865.js")
+    @Scripts.Render("~/Scripts/golden_ticket.js")
+    @RenderSection("scripts", required: false)
+</head>
+
+<body id="@bodyId" class="@bodyClass">
+    <header id="header">
+        <div class="site-width">
+            <h1>@Html.ActionLink("RI Pre-K Lottery", "ViewApplicants")</h1>
+            <nav class="nav-secondary">
+                @Html.ActionLink("Applications", "ViewApplicants")
+                @Html.ActionLink("Admins", "ViewAdmins")
+                @Html.ActionLink("Schools", "ViewSchools")
+                @Html.ActionLink("Settings", "EditSettings")
+                <a class="sign-out" href="#"><span>Sign out</span></a>
+            </nav>
+        </div>
+    </header>
+    
+    @RenderBody()
+</body>
+</html>
