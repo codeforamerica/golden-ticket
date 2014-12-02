@@ -7,8 +7,8 @@
     ViewBag.BodyId = "";
     ViewBag.BodyClass = "no-js schools-new";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
-    
-    ViewBag.IsCityEditable = true;
+
+    ViewBag.IsCityEditable = false;
 }
 
 <main>
@@ -19,12 +19,12 @@
                 @Html.AntiForgeryToken()
                 @Html.ValidationSummary()
 
-                <h1>Add a new school</h1>
+                <h1>Edit school</h1>
 
                 @Html.Partial("_SchoolFormFields", Model)
 
                 <footer>
-                    <input type="submit" class="button" value="Add this school" />
+                    <input type="submit" class="button" value="Save" />
                     @Html.ActionLink(linkText: "Cancel", actionName: "ViewSchools")
                 </footer>
 

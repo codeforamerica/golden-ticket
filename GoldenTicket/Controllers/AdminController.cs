@@ -388,6 +388,54 @@ namespace GoldenTicket.Controllers
             return RedirectToAction("ViewSchools");
         }
 
+        public ActionResult EditSchool(int id)
+        {
+            var school = db.Schools.Find(id);
+            if (school == null)
+            {
+                return HttpNotFound();
+            }
+
+            // Convert rates to percents
+            school.GenderBalance *= 100;
+            school.PovertyRate *= 100;
+
+            return View(school);
+        }
+
+        [HttpPost]
+        public ActionResult EditSchool(School school)
+        {
+
+            var queriedSchool = db.Schools.Find(school.ID);
+            if (queriedSchool == null)
+            {
+                return HttpNotFound();
+            }
+
+            //TODO Reuse this code with AddSchool's POST
+            // Convert rates to multipliers
+            school.GenderBalance /= 100;
+            school.PovertyRate /= 100;
+
+            // Validate
+            ModelState.Clear();
+            TryValidateModel(school);
+            if (!ModelState.IsValid)
+            {
+                // Convert rates to percents
+                school.GenderBalance *= 100;
+                school.PovertyRate *= 100;
+
+                return View(school);
+            }
+
+            db.Schools.AddOrUpdate(school);
+            db.SaveChanges();
+
+            return RedirectToAction("ViewSchools");
+        }
+
         public ActionResult DeleteSchool(int id)
         {
             var school = db.Schools.Find(id);

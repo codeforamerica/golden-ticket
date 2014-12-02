@@ -18,7 +18,15 @@
     </div>
     <div class="field field-city">
         @Html.LabelFor(model => model.City, labelText: "City")
-        @Html.TextBoxFor(model => model.City)
+        @if (ViewBag.IsCityEditable)
+        {
+            @Html.TextBoxFor(model => model.City)
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.City)
+            @Model.City
+        }
     </div>
     <div class="field field-zip">
         @Html.LabelFor(model => model.ZipCode, labelText: "Zip Code")
