@@ -349,7 +349,7 @@
     <comment>{0} is notification date</comment>
   </data>
   <data name="AgreementResponsibleForTransportation" xml:space="preserve">
-    <value>I understand that if my child is chosen for the state Pre-K program, I am responsible for providing regular transportation to and from the program which ensures my child&amp;rsquo;s attendance each day. If my child is absent for unexcused reasons (including family vacations) for 20 or more school days, I understand that my child will likely lose their slot in the state Pre-K program and it will be given to the next child on the state Pre-K enrollment list.</value>
+    <value>I understand that if my child is chosen for the state Pre-K program, I am responsible for providing regular transportation to and from the program which ensures my child's attendance each day. If my child is absent for unexcused reasons (including family vacations) for 20 or more school days, I understand that my child will likely lose their slot in the state Pre-K program and it will be given to the next child on the state Pre-K enrollment list.</value>
   </data>
   <data name="AlternateContact" xml:space="preserve">
     <value>Alternate contact</value>
@@ -415,5 +415,14 @@
   <data name="ForEmailAssistance" xml:space="preserve">
     <value>For email assistance, please contact &lt;a href="mailto:{0}" tabindex="-1"&gt;{1}&lt;/a&gt; at &lt;a href="tel:{2}" tabindex="-1"&gt;{2}&lt;/a&gt;</value>
     <comment>{0} is contact email address, {1} is contact name, {2} is contact phone</comment>
+  </data>
+  <data name="AlternateContactInformation" xml:space="preserve">
+    <value>Alternate contact information</value>
+  </data>
+  <data name="AlternateContactInformationInstructions" xml:space="preserve">
+    <value>These fields are optional, but provide backup contact information in the event the guardian (above) can't be reached.</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Continue</value>
   </data>
 </root>

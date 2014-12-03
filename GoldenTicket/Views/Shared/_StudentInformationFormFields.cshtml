@@ -21,7 +21,7 @@
         </div>
     </fieldset>
     <fieldset class="fieldset-address">
-        <legend>Address</legend>
+        <legend>@GoldenTicketText.Address</legend>
         <div class="field field-street">
             @Html.LabelFor(model => model.StudentStreetAddress1, GoldenTicketText.StreetAddress1)
             @Html.TextBoxFor(model => model.StudentStreetAddress1, new { @id = "student-residence-street-1" })
@@ -53,7 +53,7 @@
         @Html.EditorFor(model => model.StudentBirthday)
     </div>
     <fieldset id="student-gender">
-        <legend>Gender</legend>
+        <legend>@GoldenTicketText.Gender</legend>
         <div class="field field-radiobutton">
             <label for="student-gender-female">
                 @Html.RadioButtonFor(model => model.StudentGender, Gender.Female, new { @id = "student-gender-female" })

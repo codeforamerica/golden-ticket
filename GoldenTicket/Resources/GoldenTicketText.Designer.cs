@@ -88,7 +88,7 @@ namespace GoldenTicket.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to I understand that if my child is chosen for the state Pre-K program, I am responsible for providing regular transportation to and from the program which ensures my child&amp;rsquo;s attendance each day. If my child is absent for unexcused reasons (including family vacations) for 20 or more school days, I understand that my child will likely lose their slot in the state Pre-K program and it will be given to the next child on the state Pre-K enrollment list..
+        ///   Looks up a localized string similar to I understand that if my child is chosen for the state Pre-K program, I am responsible for providing regular transportation to and from the program which ensures my child&apos;s attendance each day. If my child is absent for unexcused reasons (including family vacations) for 20 or more school days, I understand that my child will likely lose their slot in the state Pre-K program and it will be given to the next child on the state Pre-K enrollment list..
         /// </summary>
         public static string AgreementResponsibleForTransportation {
             get {
@@ -102,6 +102,24 @@ namespace GoldenTicket.Resources {
         public static string AlternateContact {
             get {
                 return ResourceManager.GetString("AlternateContact", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Alternate contact information.
+        /// </summary>
+        public static string AlternateContactInformation {
+            get {
+                return ResourceManager.GetString("AlternateContactInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to These fields are optional, but provide backup contact information in the event the guardian (above) can&apos;t be reached..
+        /// </summary>
+        public static string AlternateContactInformationInstructions {
+            get {
+                return ResourceManager.GetString("AlternateContactInformationInstructions", resourceCulture);
             }
         }
         
@@ -282,6 +300,15 @@ namespace GoldenTicket.Resources {
         public static string Contact2Relationship {
             get {
                 return ResourceManager.GetString("Contact2Relationship", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Continue.
+        /// </summary>
+        public static string Continue {
+            get {
+                return ResourceManager.GetString("Continue", resourceCulture);
             }
         }
         

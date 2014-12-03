@@ -64,10 +64,10 @@
         </div>
     </fieldset>
 
-    <h1>Alternate contact information</h1>
-    <p>These fields are optional, but provide backup contact information in the event the guardian (above) can't be reached.</p>
+    <h1>@GoldenTicketText.AlternateContactInformation</h1>
+    <p>@GoldenTicketText.AlternateContactInformationInstructions</p>
     <fieldset class="fieldset-name">
-        <legend>Full name</legend>
+        <legend>@GoldenTicketText.FullName</legend>
         <div class="field">
             @Html.LabelFor(model => model.Contact2FirstName, @GoldenTicketText.First)
             @Html.TextBoxFor(model => model.Contact2FirstName)
@@ -86,7 +86,7 @@
         @Html.TextBoxFor(model => model.Contact2Email)
     </div>
     <fieldset>
-        <legend>Relationship to @Model.StudentFirstName</legend>
+        <legend>@string.Format(GoldenTicketText.RelationshipToPerson, Model.StudentFirstName)</legend>
         <div class="field field-radiobutton">
             <label>
                 @Html.RadioButtonFor(model => model.Contact2Relationship, "father")
