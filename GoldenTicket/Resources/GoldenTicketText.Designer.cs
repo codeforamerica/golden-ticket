@@ -88,7 +88,7 @@ namespace GoldenTicket.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to I understand that if my child is chosen for the state Pre-K program, I am responsible for providing regular transportation to and from the program which ensures my child&amp;rsquo;s attendance each day. If my child is absent for unexcused reasons (including family vacations) for 20 or more school days, I understand that my child will likely lose their slot in the state Pre-K program and it will be given to the next child on the state Pre-K enrollment list..
+        ///   Looks up a localized string similar to I understand that if my child is chosen for the state Pre-K program, I am responsible for providing regular transportation to and from the program which ensures my child&apos;s attendance each day. If my child is absent for unexcused reasons (including family vacations) for 20 or more school days, I understand that my child will likely lose their slot in the state Pre-K program and it will be given to the next child on the state Pre-K enrollment list..
         /// </summary>
         public static string AgreementResponsibleForTransportation {
             get {

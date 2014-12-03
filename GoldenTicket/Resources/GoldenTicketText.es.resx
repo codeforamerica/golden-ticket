@@ -349,7 +349,7 @@
     <comment>{0} is notification date</comment>
   </data>
   <data name="AgreementResponsibleForTransportation" xml:space="preserve">
-    <value />
+    <value>I understand that if my child is chosen for the state Pre-K program, I am responsible for providing regular transportation to and from the program which ensures my child's attendance each day. If my child is absent for unexcused reasons (including family vacations) for 20 or more school days, I understand that my child will likely lose their slot in the state Pre-K program and it will be given to the next child on the state Pre-K enrollment list.</value>
   </data>
   <data name="AlternateContact" xml:space="preserve">
     <value>Contacto Alterno</value>
