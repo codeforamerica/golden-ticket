@@ -592,7 +592,7 @@ namespace GoldenTicket.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Applications to the statewide lottery are accepted until August 15th. Selected applicants will be notified via phone on August 16th..
+        ///   Looks up a localized string similar to Applications to the statewide lottery are accepted until {0}. Selected applicants will be notified by {1}..
         /// </summary>
         public static string ParentIntroWhatHappensNextBody {
             get {
