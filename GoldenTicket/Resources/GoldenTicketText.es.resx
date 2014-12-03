@@ -229,7 +229,8 @@
     <value>Gracias por su interés en inscribir a su estudiante en una de las clases de Pre-Kinder del estado. Debido a la demanda, los estudiantes deben ser seleccionados para la inscripción a través de una lotería supervisada por el estado.</value>
   </data>
   <data name="ParentIntroWhatHappensNextBody" xml:space="preserve">
-    <value>Solicitudes para la lotería estatal se aceptan hasta el 15 de Agosto. Los solicitantes seleccionados serán notificados a través del teléfono el 16 de Agosto.</value>
+    <value>Solicitudes para la lotería estatal se aceptan hasta el {0}. Los solicitantes seleccionados serán notificados a través del teléfono el {1}.</value>
+    <comment>{0} is the lottery close date, {1} is the lottery notification date.</comment>
   </data>
   <data name="ParentIntroWhatHappensNextHeader" xml:space="preserve">
     <value>¿Cuál es el siguiente paso?</value>

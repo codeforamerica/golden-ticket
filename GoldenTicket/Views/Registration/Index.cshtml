@@ -12,7 +12,7 @@
         <h1>@GoldenTicketText.ParentIntroWhatYouNeedToKnowHeader</h1>
         <p>@GoldenTicketText.ParentIntroWhatYouNeedToKnowBody</p>
         <h1>@GoldenTicketText.ParentIntroWhatHappensNextHeader</h1>
-        <p>@GoldenTicketText.ParentIntroWhatHappensNextBody</p>
+        <p>@string.Format(GoldenTicketText.ParentIntroWhatHappensNextBody, ViewBag.GlobalConfig.CloseDate.ToString("MM/dd"), ViewBag.GlobalConfig.NotificationDate.ToString("MM/dd"))</p>
         <p>@Html.Raw(string.Format(GoldenTicketText.ParentIntroContactInfo, ViewBag.GlobalConfig.ContactEmail, ViewBag.GlobalConfig.ContactPersonName, ViewBag.GlobalConfig.ContactPhone))</p>
         <footer>
             @Html.ActionLink(@GoldenTicketText.ParentIntroApplyToTheLotteryButton, "StudentInformation", null, new { @class = "button" })

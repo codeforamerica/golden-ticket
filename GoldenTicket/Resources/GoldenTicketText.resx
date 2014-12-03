@@ -229,7 +229,8 @@
     <value>Thanks for your interest in enrolling your student in one of the state's pre-kindergarten classes. Due to demand, students must be selected for enrollment through a state-supervised lottery.</value>
   </data>
   <data name="ParentIntroWhatHappensNextBody" xml:space="preserve">
-    <value>Applications to the statewide lottery are accepted until August 15th. Selected applicants will be notified via phone on August 16th.</value>
+    <value>Applications to the statewide lottery are accepted until {0}. All applicants will be notified by {1} about their selection status (i.e. selected or waitlisted).</value>
+    <comment>{0} is the lottery close date, {1} is the lottery notification date.</comment>
   </data>
   <data name="ParentIntroWhatHappensNextHeader" xml:space="preserve">
     <value>What happens next?</value>
