@@ -309,7 +309,6 @@
     <EmbeddedResource Include="Resources\GoldenTicketText.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <CustomToolNamespace>GoldenTicket.Resources</CustomToolNamespace>
-      <LastGenOutput>GoldenTicketText.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
