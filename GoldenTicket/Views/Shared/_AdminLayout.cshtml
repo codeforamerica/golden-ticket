@@ -49,5 +49,15 @@
     </header>
     
     @RenderBody()
+    
+    <hr/>
+    <div id="temp-logoff">
+        @using (Html.BeginForm(actionName: "LogOff", controllerName: "Account"))
+        {
+            @Html.AntiForgeryToken()
+            <input type="submit" class="sign-out" value="Sign out (this link will be moved later)" />
+        }
+    </div>
+
 </body>
 </html>
