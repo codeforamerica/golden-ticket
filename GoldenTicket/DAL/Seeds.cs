@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Data.Entity;
+using System.Web.Security;
 using GoldenTicket.Models;
 using System.Data.Entity.Validation;
 using GoldenTicket.Csv;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace GoldenTicket.DAL 
 {
@@ -49,6 +52,15 @@ namespace GoldenTicket.DAL
                 new PovertyConfig{ HouseholdMembers = 10, MinimumIncome = 7432 },
             };
             db.PovertyConfigs.AddRange(povertyConfigs);
+
+            // Create the default admin user
+            var email = "admin@admin.edu";
+            var password = "passwordGT1@";
+
+            var user = new ApplicationUser() { UserName = email, Email = email };
+            var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            userManager.Create(user, password);
+
 
             if (LOAD_TEST_DATA)
             {
@@ -248,14 +260,13 @@ namespace GoldenTicket.DAL
                 };
                 db.Schools.Add(woonsocket);
 
-                db.SaveChanges();
-
-
                 // Import applicants
                 var csvFilePath = HttpContext.Current.Server.MapPath("~/TestData/data.csv");
                 var applicantCsvReader = new ApplicantCsvReader(csvFilePath, db.Schools.ToList());
                 applicantCsvReader.ReadApplicants();                
             }
+
+            db.SaveChanges();
         }
     }
 }
