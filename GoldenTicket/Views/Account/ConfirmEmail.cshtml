@@ -1,10 +1,16 @@
 ﻿@{
-    ViewBag.Title = "ConfirmAccount";
+    ViewBag.BodyId = "sign-in";
+    ViewBag.BodyClass = "no-js sign-in";
+    Layout = "~/Views/Account/_AccountLayout.cshtml";
 }
 
-<h2>@ViewBag.Title.</h2>
-<div>
-    <p>
-        Thank you for confirming your account. Please @Html.ActionLink("click here to log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
-    </p>
+
+<div class="page">
+    <div class="site-width">
+        <p>
+            Thank you for confirming your account. 
+            Please @Html.ActionLink("click here to log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+        </p>
+    </div>
 </div>
+
