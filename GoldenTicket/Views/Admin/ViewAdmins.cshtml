@@ -1,0 +1,58 @@
+﻿@using System.Web.UI.WebControls
+@using GoldenTicket.Models
+@model List<ApplicationUser>
+
+@{
+    ViewBag.BodyId = "";
+    ViewBag.BodyClass = "no-js applications-index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    ApplicationUser currentUser = ViewBag.CurrentUser;
+}
+
+<main>
+    <header>
+        <div class="site-width">
+            <h1>Admins</h1>
+            @Html.ActionLink(linkText: "Add a new admin", actionName: "AddAdmin", htmlAttributes: new { @class = "button-forward" }, routeValues: null)
+        </div>
+    </header>
+
+    <div class="page">
+        <div class="site-width">
+            <table class="table-applications">
+                <thead>
+                    <tr>
+                        <td>
+                            <span>Email</span>
+                        </td>
+                        <td class="table-applications-col-delete">
+                            <span>Delete</span>
+                        </td>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.ActionLink(linkText: user.Email, actionName: "ViewAdmin", routeValues: new { id = user.Email })
+                            </td>
+                            <td class="table-applications-col-delete">
+                                @if (!user.Email.Equals(currentUser.Email))
+                                {
+                                    @Html.ActionLink(linkText: "Delete", actionName: "DeleteAdmin", routeValues: new { id = user.Email })
+                                }
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+
+        </div>
+    </div>
+
+
+</main>

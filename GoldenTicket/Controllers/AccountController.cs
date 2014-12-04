@@ -5,6 +5,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using GoldenTicket.Misc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -227,6 +228,7 @@ namespace GoldenTicket.Controllers
 		private void SendEmail(string email, string callbackUrl, string subject, string message)
 		{
 			// For information on sending mail, please visit http://go.microsoft.com/fwlink/?LinkID=320771
+            EmailHelper.SendEmail(email, subject, message);
 		}
 
 		public enum ManageMessageId

@@ -11,6 +11,8 @@ using GoldenTicket.Misc;
 using GoldenTicket.Models;
 using GoldenTicket.DAL;
 using GoldenTicket.Resources;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace GoldenTicket.Controllers
 {
@@ -19,6 +21,7 @@ namespace GoldenTicket.Controllers
     {
 
         private GoldenTicketDbContext db = new GoldenTicketDbContext();
+        private ApplicationDbContext identityContext = new ApplicationDbContext();
         private static readonly School ALL_SCHOOL_SCHOOL = GetAllSchoolSchool();
 
         private readonly SharedViewHelper viewHelper;
@@ -581,6 +584,42 @@ namespace GoldenTicket.Controllers
             }
 
             return RedirectToAction("ViewApplicants");
+        }
+
+        public ActionResult ViewAdmins()
+        {
+            var userManager= new ApplicationUserManager(new UserStore<ApplicationUser>(identityContext));
+            var currentUser = userManager.FindById(User.Identity.GetUserId());
+            ViewBag.CurrentUser = currentUser;
+
+            return View(identityContext.Users.ToList());
+        }
+
+        public ActionResult AddAdmin()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddAdmin(RegisterViewModel registerViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser()
+                {
+                    UserName = registerViewModel.Email,
+                    Email = registerViewModel.Email,
+                    EmailConfirmed = true // we don't confirm email, so just switch this to true so that password resets can happen
+                };
+                var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(identityContext));
+                userManager.Create(user, registerViewModel.Password);
+
+                identityContext.SaveChanges();
+
+                return RedirectToAction(actionName: "ViewAdmins");
+            }
+
+            return View(registerViewModel);
         }
 
         /*
