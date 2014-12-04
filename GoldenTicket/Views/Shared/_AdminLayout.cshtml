@@ -39,7 +39,11 @@
                 @Html.ActionLink("Admins", "ViewAdmins")
                 @Html.ActionLink("Schools", "ViewSchools")
                 @Html.ActionLink("Settings", "EditSettings")
-                <a class="sign-out" href="#"><span>Sign out</span></a>
+                @using (Html.BeginForm(actionName: "LogOff", controllerName: "Account"))
+                {
+                    <input type="submit" class="sign-out" value="Sign out" />
+                }
+                
             </nav>
         </div>
     </header>

@@ -11,10 +11,10 @@ using GoldenTicket.Misc;
 using GoldenTicket.Models;
 using GoldenTicket.DAL;
 using GoldenTicket.Resources;
-using WebGrease.Css.Extensions;
 
 namespace GoldenTicket.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
 
