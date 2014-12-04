@@ -57,7 +57,12 @@ namespace GoldenTicket.DAL
             var email = "admin@admin.edu";
             var password = "passwordGT1@";
 
-            var user = new ApplicationUser() { UserName = email, Email = email };
+            var user = new ApplicationUser()
+            {
+                UserName = email, 
+                Email = email,
+                EmailConfirmed = true
+            };
             var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
             userManager.Create(user, password);
 
