@@ -556,6 +556,15 @@ namespace GoldenTicket.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;p&gt;You&apos;ve been entered into the RI pre-K lottery! Your confirmation number is {0}&lt;/p&gt;&lt;p&gt;While you wait to receive results of the Pre-K lottery, please take the time to make sure your child has participated in a full developmental screening from your local school district. Through your school district, you have access to a free service called Child Outreach, which is a developmental screening system designed to screen all children, ages three to five years old. This screening will give you important informat [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string ParentConfirmationEmail {
+            get {
+                return ResourceManager.GetString("ParentConfirmationEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 2015 Application for Pre-Kindergarten.
         /// </summary>
         public static string ParentHeaderTitle {
@@ -592,7 +601,7 @@ namespace GoldenTicket.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Applications to the statewide lottery are accepted until {0}. Selected applicants will be notified by {1}..
+        ///   Looks up a localized string similar to Applications to the statewide lottery are accepted until {0}. All applicants will be notified by {1} about their selection status (i.e. selected or waitlisted)..
         /// </summary>
         public static string ParentIntroWhatHappensNextBody {
             get {

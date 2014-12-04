@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using GoldenTicket.Misc;
 using GoldenTicket.Models;
 using GoldenTicket.DAL;
 using GoldenTicket.Resources;
@@ -215,6 +216,12 @@ namespace GoldenTicket.Controllers
             Session.Clear();
 
             ViewBag.GlobalConfig = GetGlobalConfig();
+
+            EmailHelper.SendEmail(applicant.Contact1Email, "RI Pre-K Lottery Confirmation", GoldenTicketText.ParentConfirmationEmail);
+            if (!string.IsNullOrEmpty(applicant.Contact2Email))
+            {
+                EmailHelper.SendEmail(applicant.Contact2Email, "RI Pre-K Lottery Confirmation", GoldenTicketText.ParentConfirmationEmail);    
+            }
 
             return View(applicant);
         }
