@@ -176,10 +176,6 @@ namespace GoldenTicket.Controllers
                 var message = string.Format(GoldenTicketText.PropertyMissing, GoldenTicketText.Contact1Relationship);
                 modelState.AddModelError("Contact1Relationship", message);
             }
-            if (applicant.HouseholdMembers == null || applicant.HouseholdMembers < 2)
-            {
-                modelState.AddModelError("HouseholdMembers", GoldenTicketText.HouseholdMembersMissingOrInvalid);
-            }
             if (applicant.HouseholdMonthlyIncome == null || applicant.HouseholdMonthlyIncome == 0) // 1 is the bottom range, although to users 0 will appear as the minimum. This will help with validation checking, since an empty selection is assigned 0 by MVC framework. This does not impact income calculations for lottery selection.
             {
                 modelState.AddModelError("HouseholdMonthlyIncome", GoldenTicketText.HouseholdIncomeMissing);

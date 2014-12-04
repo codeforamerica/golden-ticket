@@ -426,4 +426,22 @@
   <data name="Continue" xml:space="preserve">
     <value>Continue</value>
   </data>
+  <data name="ParentConfirmationEmail" xml:space="preserve">
+    <value>&lt;p&gt;You've been entered into the RI pre-K lottery! Your confirmation number is {0}&lt;/p&gt;&lt;p&gt;While you wait to receive results of the Pre-K lottery, please take the time to make sure your child has participated in a full developmental screening from your local school district. Through your school district, you have access to a free service called Child Outreach, which is a developmental screening system designed to screen all children, ages three to five years old. This screening will give you important information about your child’s general development, speech/language, social emotional skills, vision, and hearing. Child Outreach providers can also help connect you to other services in your community. The screening results will NOT be used to determine whether your child receives a spot in the state Pre-K program. However, the screening is important to help you know whether your child’s development is on track. To find out more about developmental screening and to locate the Child Outreach provider in your community, please visit the families page at &lt;a href="http://www.exceed.ri.gov"&gt;http://www.exceed.ri.gov&lt;/a&gt;.&lt;/p&gt;&lt;p&gt;If you have any questions, you can reach {1} at &lt;a href="mailto:{2} "&gt;{2}&lt;/a&gt; or &lt;a href="tel:{3}"&gt;{3}&lt;/a&gt;.&lt;/p&gt;</value>
+    <comment>{0} is is confirmation code, {1} is contact person name, {2} is contact person email, {3} is contact person phone</comment>
+  </data>
+  <data name="GoBack" xml:space="preserve">
+    <value>Go back</value>
+  </data>
+  <data name="HouseholdMemberRange" xml:space="preserve">
+    <value>{0} must be a positive number.</value>
+    <comment>{0} is the property name</comment>
+  </data>
+  <data name="IsNotAValidEmailAddress" xml:space="preserve">
+    <value>The {0} field is not valid</value>
+    <comment>{0} is the property name</comment>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
 </root>

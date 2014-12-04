@@ -14,7 +14,7 @@ namespace GoldenTicket.DAL
 {
     public class Seeds : System.Data.Entity.DropCreateDatabaseIfModelChanges<GoldenTicketDbContext>
     {
-        private const bool LOAD_TEST_DATA = false;
+        private const bool LOAD_TEST_DATA = true;
 
         
         private const string FAKE_ADDRESS_1 = "123 Main St";
@@ -53,6 +53,8 @@ namespace GoldenTicket.DAL
             };
             db.PovertyConfigs.AddRange(povertyConfigs);
 
+            db.SaveChanges();
+
             // Create the default admin user
             var email = "admin@admin.edu";
             var password = "passwordGT1@";
@@ -63,8 +65,10 @@ namespace GoldenTicket.DAL
                 Email = email,
                 EmailConfirmed = true
             };
-            var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+            var identityContext = new ApplicationDbContext();
+            var userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(identityContext));
             userManager.Create(user, password);
+            identityContext.SaveChanges();
 
 
             if (LOAD_TEST_DATA)
@@ -265,13 +269,15 @@ namespace GoldenTicket.DAL
                 };
                 db.Schools.Add(woonsocket);
 
+                db.SaveChanges();
+
                 // Import applicants
                 var csvFilePath = HttpContext.Current.Server.MapPath("~/TestData/data.csv");
                 var applicantCsvReader = new ApplicantCsvReader(csvFilePath, db.Schools.ToList());
-                applicantCsvReader.ReadApplicants();                
-            }
+                applicantCsvReader.ReadApplicants();
 
-            db.SaveChanges();
+                db.SaveChanges();
+            }
         }
     }
 }

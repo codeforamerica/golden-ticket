@@ -55,7 +55,7 @@ namespace GoldenTicket.Models
         public DateTime? StudentBirthday { get; set; }
         
         // Household information
-        [Range(2, int.MaxValue)]
+        [Range(2, int.MaxValue, ErrorMessageResourceName = "HouseholdMemberRange", ErrorMessageResourceType = typeof(GoldenTicketText))]
         [Display(Name = "HouseholdMembers", ResourceType = typeof(GoldenTicketText))]
         public int HouseholdMembers { get; set; }
         
@@ -77,6 +77,7 @@ namespace GoldenTicket.Models
         public string Contact1Phone { get; set; }
         
         [EmailAddress]
+//        [EmailAddress(ErrorMessageResourceName = "IsNotAValidEmailAddress", ErrorMessageResourceType = typeof(GoldenTicketText))]
         [Display(Name = "Contact1Email", ResourceType = typeof(GoldenTicketText))]
         public string Contact1Email { get; set; }
 
@@ -96,8 +97,9 @@ namespace GoldenTicket.Models
         [RegularExpression(ValidationConstants.PHONE_REGEX, ErrorMessageResourceName = "PhoneValidationError", ErrorMessageResourceType = typeof(GoldenTicketText))] //Phone annotation accepted internal numbers, using regex instead
         [Display(Name = "Contact2Phone", ResourceType = typeof(GoldenTicketText))]
         public string Contact2Phone { get; set; }
-        
+
         [EmailAddress]
+//        [EmailAddress(ErrorMessageResourceName = "IsNotAValidEmailAddress", ErrorMessageResourceType = typeof(GoldenTicketText))]
         [Display(Name = "Contact2Email", ResourceType = typeof(GoldenTicketText))]
         public string Contact2Email { get; set; }
 
