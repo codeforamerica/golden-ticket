@@ -20,7 +20,7 @@ namespace GoldenTicket.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("GoldenTicketDbContext", throwIfV1Schema: false)
         {
         }
 
