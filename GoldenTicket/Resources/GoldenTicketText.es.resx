@@ -253,7 +253,7 @@
     <comment>{0} is a student's first name.</comment>
   </data>
   <data name="PropertyMissing" xml:space="preserve">
-    <value>Debe de incluir {0}.</value>
+    <value>Debe de incluir, {0}.</value>
     <comment>{0} is the property name (ex: Student first name)</comment>
   </data>
   <data name="ProvideBasicStudentInformation" xml:space="preserve">
@@ -425,5 +425,19 @@
   </data>
   <data name="Continue" xml:space="preserve">
     <value>Proxima</value>
+  </data>
+  <data name="GoBack" xml:space="preserve">
+    <value>Regresar</value>
+  </data>
+  <data name="HouseholdMemberRange" xml:space="preserve">
+    <value>{0} debe de ser un número positivo.</value>
+    <comment>{0} is the property name</comment>
+  </data>
+  <data name="IsNotAValidEmailAddress" xml:space="preserve">
+    <value>{0} no es válido.</value>
+    <comment>{0} is the property name</comment>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Corregir</value>
   </data>
 </root>

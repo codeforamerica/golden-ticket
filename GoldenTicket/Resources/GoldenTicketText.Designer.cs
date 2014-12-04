@@ -313,6 +313,15 @@ namespace GoldenTicket.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email address.
         /// </summary>
         public static string EmailAddress {
@@ -385,6 +394,15 @@ namespace GoldenTicket.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Go back.
+        /// </summary>
+        public static string GoBack {
+            get {
+                return ResourceManager.GetString("GoBack", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Guardian.
         /// </summary>
         public static string Guardian {
@@ -417,6 +435,15 @@ namespace GoldenTicket.Resources {
         public static string HouseholdInformation {
             get {
                 return ResourceManager.GetString("HouseholdInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} must be a positive number..
+        /// </summary>
+        public static string HouseholdMemberRange {
+            get {
+                return ResourceManager.GetString("HouseholdMemberRange", resourceCulture);
             }
         }
         
@@ -462,6 +489,15 @@ namespace GoldenTicket.Resources {
         public static string IneligibleBirthday {
             get {
                 return ResourceManager.GetString("IneligibleBirthday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The {0} field is not valid.
+        /// </summary>
+        public static string IsNotAValidEmailAddress {
+            get {
+                return ResourceManager.GetString("IsNotAValidEmailAddress", resourceCulture);
             }
         }
         

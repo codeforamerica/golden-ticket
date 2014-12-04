@@ -10,7 +10,7 @@
 <div id="signpost">
     <div class="site-width">
         <h2>@string.Format(GoldenTicketText.StepXOfY, 4, 4) @GoldenTicketText.ReviewApplication</h2>
-        @Html.ActionLink("Go back", "SchoolSelection")
+        @Html.ActionLink(GoldenTicketText.GoBack, "SchoolSelection")
     </div>
 </div>
 <main>
@@ -24,7 +24,7 @@
             <p/>
             <section id="student-information">
                 <h1>@GoldenTicketText.StudentInformation</h1>
-                @Html.ActionLink("Edit", "StudentInformation")
+                @Html.ActionLink(GoldenTicketText.Edit, "StudentInformation")
                 <dl class="vcard">
                     <dt>@GoldenTicketText.FullName</dt>
                     <dd class="fn">@Model.StudentFirstName @Model.StudentMiddleName @Model.StudentLastName</dd>
@@ -42,7 +42,7 @@
             </section>
             <section id="guardian-information">
                 <h1>@GoldenTicketText.GuardianInformation</h1>
-                @Html.ActionLink("Edit", "GuardianInformation")
+                @Html.ActionLink(GoldenTicketText.Edit, "GuardianInformation")
                 <h2>@GoldenTicketText.Guardian</h2>
                 <dl class="vcard">
                     <dt>@GoldenTicketText.FullName</dt>
@@ -80,7 +80,7 @@
 
             <section id="school-selection">
                 <h1>@GoldenTicketText.SchoolSelection</h1>
-                @Html.ActionLink("Edit", "SchoolSelection")
+                @Html.ActionLink(GoldenTicketText.Edit, "SchoolSelection")
                 <dl>
                     <dt>@GoldenTicketText.AppliedTo</dt>
                     <dd>
