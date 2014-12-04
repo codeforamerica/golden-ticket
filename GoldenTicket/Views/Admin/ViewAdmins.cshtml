@@ -37,12 +37,12 @@
                     {
                         <tr>
                             <td>
-                                @Html.ActionLink(linkText: user.Email, actionName: "ViewAdmin", routeValues: new { id = user.Email })
+                                @user.Email
                             </td>
                             <td class="table-applications-col-delete">
                                 @if (!user.Email.Equals(currentUser.Email))
                                 {
-                                    @Html.ActionLink(linkText: "Delete", actionName: "DeleteAdmin", routeValues: new { id = user.Email })
+                                    @Html.ActionLink(linkText: "Delete", actionName: "DeleteAdmin", routeValues: new { email = user.Email })
                                 }
                             </td>
                         </tr>
