@@ -1,0 +1,34 @@
+﻿@using System.Web.UI.WebControls
+@using GoldenTicket.Models
+
+@model RegisterViewModel
+
+@{
+    ViewBag.BodyId = "";
+    ViewBag.BodyClass = "no-js schools-new";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    
+    ViewBag.IsCityEditable = true;
+}
+
+<main>
+    @using (Html.BeginForm())
+    {
+        <div class="page">
+            <div class="site-width">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary()
+
+                <h1>Add a new admin</h1>
+
+                @Html.Partial("_AdminFormFields", Model)
+
+                <footer>
+                    <input type="submit" class="button" value="Add admin" />
+                    @Html.ActionLink(linkText: "Cancel", actionName: "ViewAdmins")
+                </footer>
+
+            </div>
+        </div>
+    }
+</main>

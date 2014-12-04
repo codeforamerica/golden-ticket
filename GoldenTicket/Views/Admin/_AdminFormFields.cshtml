@@ -1,0 +1,16 @@
+﻿@using GoldenTicket.Models
+@using GoldenTicket.Resources
+@model RegisterViewModel
+
+<div class="field">
+    @Html.LabelFor(model => model.Email, labelText: "Email")
+    @Html.TextBoxFor(model => model.Email)
+</div>
+<div class="field">
+    @Html.LabelFor(model => model.Password, labelText: "Password")
+    @Html.PasswordFor(model => model.Password)
+</div>
+<div class="field">
+    @Html.LabelFor(model => model.ConfirmPassword, labelText: "Confirm password")
+    @Html.PasswordFor(model => model.ConfirmPassword)
+</div>

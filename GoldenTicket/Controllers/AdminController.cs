@@ -11,21 +11,25 @@ using GoldenTicket.Misc;
 using GoldenTicket.Models;
 using GoldenTicket.DAL;
 using GoldenTicket.Resources;
-using WebGrease.Css.Extensions;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace GoldenTicket.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
-
-        private GoldenTicketDbContext db = new GoldenTicketDbContext();
         private static readonly School ALL_SCHOOL_SCHOOL = GetAllSchoolSchool();
-
+        
+        private readonly GoldenTicketDbContext db = new GoldenTicketDbContext();
+        private readonly ApplicationDbContext identityContext = new ApplicationDbContext();
+        private readonly ApplicationUserManager userManager;
         private readonly SharedViewHelper viewHelper;
 
         public AdminController()
         {
             viewHelper = new SharedViewHelper(db);
+            userManager = new ApplicationUserManager(new UserStore<ApplicationUser>(identityContext));
         }
 
 
@@ -581,6 +585,67 @@ namespace GoldenTicket.Controllers
             }
 
             return RedirectToAction("ViewApplicants");
+        }
+
+        public ActionResult ViewAdmins()
+        {
+            var currentUser = userManager.FindById(User.Identity.GetUserId());
+            ViewBag.CurrentUser = currentUser;
+
+            return View(identityContext.Users.ToList());
+        }
+
+        public ActionResult AddAdmin()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddAdmin(RegisterViewModel registerViewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser()
+                {
+                    UserName = registerViewModel.Email,
+                    Email = registerViewModel.Email,
+                    EmailConfirmed = true // we don't confirm email, so just switch this to true so that password resets can happen
+                };
+                userManager.Create(user, registerViewModel.Password);
+
+                identityContext.SaveChanges();
+
+                return RedirectToAction(actionName: "ViewAdmins");
+            }
+
+            return View(registerViewModel);
+        }
+
+        public ActionResult DeleteAdmin(string email)
+        {
+            var user = userManager.FindByEmail(email);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(user);
+        }
+
+        [HttpPost]
+        public ActionResult DeleteAdmin(ApplicationUser applicationUser)
+        {
+            var user = userManager.FindByEmail(applicationUser.Email);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+
+            userManager.Delete(user);
+
+            identityContext.SaveChanges();
+
+            return RedirectToAction(actionName: "ViewAdmins");
         }
 
         /*

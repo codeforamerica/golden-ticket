@@ -42,3 +42,7 @@ There are currently some bugs in the Mono Framework that prevent the project fro
 - [Bug 23754 - System.Web.Entity assembly missing from Mono for .NET 4.5](https://bugzilla.xamarin.com/show_bug.cgi?id=23754)
 
 After these are resolved or if anyone has any luck loading the project, please update this document.
+
+## Working with Emails
+
+There are several features in Golden Ticket that send emails. If you want to work on these features, review the [Run Local Email Server](Run Local Email Server.md) document.
