@@ -36,21 +36,29 @@
                 else
                 {
                     @Html.Partial("_ApplicantTable", (List<Applicant>)ViewBag.Applicants)
-                    <footer>
-                        <section>
-                            <nav class="export">
-                                <ul>
-                                    <li>@Html.ActionLink(linkText: "Export applicant list", actionName: "ExportApplicantsForSchool", routeValues: new { id = ViewBag.School.ID })</li>
-                                </ul>
-                            </nav>
-                            <nav class="status">
-                                @Html.ActionLink(linkText: "Show duplicate applications", actionName: "ViewDuplicateApplicants")
-                            </nav>
-                        </section>
-                    </footer>
+
                 }
             }
+            <footer>
+                <section>
+                    <nav class="export">
+                        <ul>
+                            <li><strong>Export to CSV:</strong></li>
+                            <li>@Html.ActionLink(linkText: "All applicants", actionName: "ExportApplicantsForSchool", routeValues: new { id = ViewBag.School.ID })</li>
 
+                            @if (ViewBag.WasLotteryRun)
+                            {
+                                <li>@Html.ActionLink(linkText: "Shuffled applicants", actionName: "ExportShuffleForSchool", routeValues: new { id = ViewBag.School.ID })</li>
+                                <li>@Html.ActionLink(linkText: "Selected applicants", actionName: "ExportSelectedForSchool", routeValues: new { id = ViewBag.School.ID })</li>
+                                <li>@Html.ActionLink(linkText: "Waitlisted applicants", actionName: "ExportWaitlistedForSchool", routeValues: new { id = ViewBag.School.ID })</li>
+                            }
+                        </ul>
+                    </nav>
+                    <nav class="status">
+                        @Html.ActionLink(linkText: "Show duplicate applications", actionName: "ViewDuplicateApplicants")
+                    </nav>
+                </section>
+            </footer>
         </div>
     </div>
 

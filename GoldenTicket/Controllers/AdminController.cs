@@ -98,7 +98,7 @@ namespace GoldenTicket.Controllers
         {
             var applicants = db.Applicants.Where(a => a.ConfirmationCode != null).OrderBy(a=>a.StudentLastName).ToList();
 
-            return ExportApplicantsCsvFile(applicants, "applicants_all.csv");
+            return ExportApplicantsCsvFile(applicants, "applicants_all.csv", true);
         }
 
         public ActionResult ExportApplicantsForSchool(int id)
@@ -112,10 +112,54 @@ namespace GoldenTicket.Controllers
             var applieds = db.Applieds.Where(a => a.SchoolID == id).OrderBy(a=>a.Applicant.StudentLastName).ToList();
             var applicants = Utils.GetApplicants(applieds);
 
-            var schoolName = db.Schools.Find(id).Name.Replace(' ', '_');
+            var schoolName = school.Name.Replace(' ', '_');
             return ExportApplicantsCsvFile(applicants, "applicants_" + schoolName + ".csv");
         }
 
+        public ActionResult ExportShuffleForSchool(int id)
+        {
+            var school = db.Schools.Find(id);
+            if (school == null)
+            {
+                return HttpNotFound();
+            }
+
+            var shuffleds = db.Shuffleds.Where(s => s.SchoolID == id).OrderBy(s => s.Rank).ToList();
+            var applicants = Utils.GetApplicants(shuffleds);
+
+            var schoolName = school.Name.Replace(' ', '_');
+            return ExportApplicantsCsvFile(applicants, "shuffle_" + schoolName + ".csv");
+        }
+
+        public ActionResult ExportSelectedForSchool(int id)
+        {
+            var school = db.Schools.Find(id);
+            if (school == null)
+            {
+                return HttpNotFound();
+            }
+
+            var selecteds = db.Selecteds.Where(s => s.SchoolID == id).OrderBy(s => s.Rank).ToList();
+            var applicants = Utils.GetApplicants(selecteds);
+
+            var schoolName = school.Name.Replace(' ', '_');
+            return ExportApplicantsCsvFile(applicants, "selected_" + schoolName + ".csv");
+        }
+
+        public ActionResult ExportWaitlistedForSchool(int id)
+        {
+            var school = db.Schools.Find(id);
+            if (school == null)
+            {
+                return HttpNotFound();
+            }
+
+            var waitlisteds = db.Waitlisteds.Where(w => w.SchoolID == id).OrderBy(w => w.Rank).ToList();
+            var applicants = Utils.GetApplicants(waitlisteds);
+
+            var schoolName = school.Name.Replace(' ', '_');
+            return ExportApplicantsCsvFile(applicants, "waitlisted_" + schoolName + ".csv");
+        }
 
         public ActionResult ViewApplicantsForSchool(int? id)
         {
@@ -724,7 +768,7 @@ namespace GoldenTicket.Controllers
             ViewBag.Schools = schools;
         }
 
-        private FileStreamResult ExportApplicantsCsvFile(IEnumerable<Applicant> applicants, string fileName)
+        private FileStreamResult ExportApplicantsCsvFile(IEnumerable<Applicant> applicants, string fileName, bool printSchoolList = false)
         {
             var csvText = Utils.ApplicantsToCsv(applicants);
 
