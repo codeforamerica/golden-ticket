@@ -89,7 +89,7 @@ After the application is deployed and running, you'll be able to get to the pare
 In case someone asks what the stack required by the application is, here you go:
 
 - C# 5
-- .NET Framework 5
+- .NET Framework 4.5
 - ASP.NET MVC 5
 - ASP.NET Identity 2
 
