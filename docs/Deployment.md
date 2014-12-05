@@ -84,6 +84,12 @@ The following guides should be sufficient for deploying it:
 
 After the application is deployed and running, you'll be able to get to the parent side of the application at the base URL and to the admin side at `(base URL)/Admin`.
 
+### Azure Websites
+
+Not intended to be promotional for Microsoft, but deploying to Azure Websites is super easy. For those without deployment chops, this is a good option.
+
+It's all very self-explanatory (for real). After you open the solution in Visual Studio, right-click on the `GoldenTicket` project and choose `Publish` from the contextual menu. Click on `Microsoft Azure Websites` and follow the wizard.
+
 ## System Specs
 
 In case someone asks what the stack required by the application is, here you go:
