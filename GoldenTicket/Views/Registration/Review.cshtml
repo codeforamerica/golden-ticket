@@ -6,6 +6,8 @@
     ViewBag.BodyId = "";
     ViewBag.BodyClass = "no-js review";
     Layout = "~/Views/Shared/_RegistrationLayout.cshtml";
+
+    var resourceManager = GoldenTicketText.ResourceManager;
 }
 <div id="signpost">
     <div class="site-width">
@@ -37,7 +39,7 @@
                     <dt>@GoldenTicketText.Birthday</dt>
                     <dd>@Model.StudentBirthday.Value.ToString("MM/dd/yyyy")</dd>
                     <dt class="gender">@GoldenTicketText.Gender</dt>
-                    <dd class="gender">@Model.StudentGender</dd>
+                    <dd class="gender">@resourceManager.GetString(Model.StudentGender.ToString())</dd>
                 </dl>
             </section>
             <section id="guardian-information">
@@ -52,7 +54,20 @@
                     <dt>@GoldenTicketText.EmailAddress</dt>
                     <dd class="email">@Model.Contact1Email</dd>
                     <dt class="relationship">@GoldenTicketText.Relationship</dt>
-                    <dd class="relationship">@Model.Contact1Relationship</dd>
+                    <dd class="relationship">
+                        @{
+                            var contact1Relationship = Model.Contact1Relationship;
+                            var contact1Text = resourceManager.GetString(contact1Relationship);
+                        }
+                        @if (string.IsNullOrEmpty(contact1Text))
+                        {
+                            @Model.Contact1Relationship
+                        }
+                        else
+                        {
+                            @contact1Text
+                        }
+                    </dd>
                 </dl>
                 @if(!string.IsNullOrEmpty(@Model.Contact2FirstName))
                 {
@@ -65,7 +80,20 @@
                         <dt>@GoldenTicketText.EmailAddress</dt>
                         <dd class="email">@Model.Contact2Email</dd>
                         <dt class="relationship">@GoldenTicketText.Relationship</dt>
-                        <dd class="relationship">@Model.Contact2Relationship</dd>
+                        <dd class="relationship">
+                            @{
+                                var contact2Relationship = Model.Contact2Relationship;
+                                var contact2Text = resourceManager.GetString(contact2Relationship);
+                            }
+                            @if (string.IsNullOrEmpty(contact2Text))
+                            {
+                                @Model.Contact2Relationship
+                            }
+                            else
+                            {
+                                @contact2Text
+                            }
+                        </dd>
                     </dl>
                 }
                 <h2>@GoldenTicketText.HouseholdInformation</h2>
@@ -73,7 +101,7 @@
                     <dt>@GoldenTicketText.HouseholdMembers</dt>
                     <dd>@Model.HouseholdMembers</dd>
                     <dt>@GoldenTicketText.HouseholdMonthlyIncome</dt>
-                    <dd>@Model.HouseholdMonthlyIncome.ToString("C")</dd>
+                    <dd>@Model.HouseholdMonthlyIncome.ToString("")</dd>
                 </dl>
             </section>
 

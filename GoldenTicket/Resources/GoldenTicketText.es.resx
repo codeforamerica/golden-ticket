@@ -379,7 +379,7 @@
     <value>Sexo</value>
   </data>
   <data name="HowToContact" xml:space="preserve">
-    <value>Si tiene alguna pregunta, por favor de contactar a &lt;a href="mailto:{0}"&gt;{1}&lt;/a&gt; al&lt;a href="tel:{2}"&gt;{2}&lt;/a&gt;.</value>
+    <value>Si tiene alguna pregunta, por favor de contactar a &lt;a href="mailto:{0}"&gt;{1}&lt;/a&gt; al &lt;a href="tel:{2}"&gt;{2}&lt;/a&gt;.</value>
     <comment>{0} is the contact email, {1} is contact person name, {2} is contact phone number.</comment>
   </data>
   <data name="Phone" xml:space="preserve">
