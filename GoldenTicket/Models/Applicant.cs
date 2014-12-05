@@ -76,9 +76,8 @@ namespace GoldenTicket.Models
         [RegularExpression(ValidationConstants.PHONE_REGEX, ErrorMessageResourceName="PhoneValidationError", ErrorMessageResourceType=typeof(GoldenTicketText))] //Phone annotation accepted internal numbers, using regex instead
         [Display(Name = "Contact1Phone", ResourceType = typeof(GoldenTicketText))]
         public string Contact1Phone { get; set; }
-        
-        [EmailAddress]
-//        [EmailAddress(ErrorMessageResourceName = "IsNotAValidEmailAddress", ErrorMessageResourceType = typeof(GoldenTicketText))]
+
+        [EmailAddress(ErrorMessageResourceName = "IsNotAValidEmailAddress", ErrorMessageResourceType = typeof(GoldenTicketText), ErrorMessage = null)] // ErrorMessage = Null is for .NET 4.5 Bug: https://connect.microsoft.com/VisualStudio/feedback/details/757298/emailaddress-attribute-is-unable-to-load-error-message-from-resource-mvc
         [Display(Name = "Contact1Email", ResourceType = typeof(GoldenTicketText))]
         public string Contact1Email { get; set; }
 
@@ -99,8 +98,7 @@ namespace GoldenTicket.Models
         [Display(Name = "Contact2Phone", ResourceType = typeof(GoldenTicketText))]
         public string Contact2Phone { get; set; }
 
-        [EmailAddress]
-//        [EmailAddress(ErrorMessageResourceName = "IsNotAValidEmailAddress", ErrorMessageResourceType = typeof(GoldenTicketText))]
+        [EmailAddress(ErrorMessageResourceName = "IsNotAValidEmailAddress", ErrorMessageResourceType = typeof(GoldenTicketText), ErrorMessage = null)] // ErrorMessage = Null is for .NET 4.5 Bug: https://connect.microsoft.com/VisualStudio/feedback/details/757298/emailaddress-attribute-is-unable-to-load-error-message-from-resource-mvc
         [Display(Name = "Contact2Email", ResourceType = typeof(GoldenTicketText))]
         public string Contact2Email { get; set; }
 
