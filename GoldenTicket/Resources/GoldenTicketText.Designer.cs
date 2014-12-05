@@ -592,7 +592,7 @@ namespace GoldenTicket.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;p&gt;You&apos;ve been entered into the RI pre-K lottery! Your confirmation number is {0}&lt;/p&gt;&lt;p&gt;While you wait to receive results of the Pre-K lottery, please take the time to make sure your child has participated in a full developmental screening from your local school district. Through your school district, you have access to a free service called Child Outreach, which is a developmental screening system designed to screen all children, ages three to five years old. This screening will give you important informat [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to &lt;p&gt;{0} has been entered into the RI pre-K lottery and your confirmation number is {1}. This is exciting! We&apos;ll notify you on {2}.&lt;/p&gt;&lt;p&gt;While you wait to receive results of the Pre-K lottery, please take the time to make sure your child has participated in a full developmental screening from your local school district. Through your school district, you have access to a free service called Child Outreach, which is a developmental screening system designed to screen all children, ages three to five years old. [rest of string was truncated]&quot;;.
         /// </summary>
         public static string ParentConfirmationEmail {
             get {
@@ -790,6 +790,15 @@ namespace GoldenTicket.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;p&gt;We&apos;re so happy to tell you that {0} has been selected to attend pre-kindergarten at {1}! They&apos;ll be in contact soon, either via phone or email. Congratulations!&lt;/p&gt;&lt;p&gt;If you don&apos;t hear anything, {1} can be reached at &lt;a href=&quot;mailto:{2}&quot;&gt;{2}&lt;/a&gt; or &lt;a href=&quot;tel:{3}&quot;&gt;{3}&lt;/a&gt;, or you can contact {4} &lt;a href=&quot;mailto:{5}&quot;&gt;{5}&lt;/a&gt; or &lt;a href=&quot;tel:{6}&quot;&gt;{6}&lt;/a&gt;.&lt;p&gt;Cheers,&lt;/p&gt;&lt;p&gt;RIDE Early Childhood Education&lt;/p&gt;.
+        /// </summary>
+        public static string SelectedNotificationEmail {
+            get {
+                return ResourceManager.GetString("SelectedNotificationEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Stepfather.
         /// </summary>
         public static string Stepfather {
@@ -952,11 +961,20 @@ namespace GoldenTicket.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to You&apos;ve successfully entered {0} {1} into the state-wide lottery for pre-kindergarten enrollment. If selected, you will be notified via phone on {2}..
+        ///   Looks up a localized string similar to You&apos;ve successfully entered {0} {1} into the state-wide lottery for pre-kindergarten enrollment. If selected, you will be notified on {2}..
         /// </summary>
         public static string SuccessfullyEnteredStudent {
             get {
                 return ResourceManager.GetString("SuccessfullyEnteredStudent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;p&gt;We&apos;re sorry to say that {0} has not been selected to attend pre-kindergarten through the RI Pre-Kindergarten Lottery. The lottery selection is truly random, with only weights being given to income level (based on Federal guidelines) and gender balance.&lt;/p&gt;&lt;p&gt;The good news is that {0} has been added to the waitlist for the following schools:&lt;/p&gt;{1}&lt;p&gt;In the event that a selected student at one of the schools decides to not enroll or withdraws from the program, it&apos;s possible that you&apos;ll be contacted to enr [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string WaitlistedNotificationEmail {
+            get {
+                return ResourceManager.GetString("WaitlistedNotificationEmail", resourceCulture);
             }
         }
         

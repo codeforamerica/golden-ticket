@@ -46,5 +46,7 @@ namespace GoldenTicket.Models
          * If null or not set, the lottery has not yet been run.
          **/
         public DateTime? LotteryRunDate { get; set; }
+
+        public bool WereNotificationsSent { get; set; }
     }
 }

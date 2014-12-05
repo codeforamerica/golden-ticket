@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -199,6 +200,7 @@ namespace GoldenTicket.Controllers
             }
 
             applicant.ConfirmationCode = Guid.NewGuid().ToString().Split('-')[0].ToUpper();
+            applicant.Language = CultureInfo.CurrentUICulture.Name;
             SaveReview(applicant);
 
             return RedirectToAction("Confirmation");
@@ -215,12 +217,20 @@ namespace GoldenTicket.Controllers
 
             Session.Clear();
 
-            ViewBag.GlobalConfig = GetGlobalConfig();
+            var globalConfig = GetGlobalConfig();
+            ViewBag.GlobalConfig = globalConfig;
 
-            EmailHelper.SendEmail(applicant.Contact1Email, "RI Pre-K Lottery Confirmation", GoldenTicketText.ParentConfirmationEmail);
+            var messageBody = string.Format(GoldenTicketText.ParentConfirmationEmail,
+                applicant.StudentFirstName,
+                applicant.ConfirmationCode,
+                globalConfig.NotificationDate.ToString("MM/dd/yyyy"),
+                globalConfig.ContactPersonName, 
+                globalConfig.ContactEmail, 
+                globalConfig.ContactPhone);
+            EmailHelper.SendEmail(applicant.Contact1Email, "RI Pre-K Lottery Confirmation", messageBody);
             if (!string.IsNullOrEmpty(applicant.Contact2Email))
             {
-                EmailHelper.SendEmail(applicant.Contact2Email, "RI Pre-K Lottery Confirmation", GoldenTicketText.ParentConfirmationEmail);    
+                EmailHelper.SendEmail(applicant.Contact2Email, "RI Pre-K Lottery Confirmation", messageBody);    
             }
 
             return View(applicant);
@@ -329,6 +339,7 @@ namespace GoldenTicket.Controllers
             var applicantEntry = database.Entry(applicant);
 
             applicantEntry.Property(a => a.ConfirmationCode).IsModified = true;
+            applicantEntry.Property(a => a.Language).IsModified = true;
 
             database.SaveChanges();
         }
