@@ -663,6 +663,10 @@ namespace GoldenTicket.Controllers
         {
             var globalConfig = db.GlobalConfigs.First();
 
+            if (globalConfig.WereNotificationsSent)
+            {
+                return RedirectToAction(actionName: "ViewApplicants");
+            }
 
             // Notify selected applicants
             var selecteds = db.Selecteds.ToList();
