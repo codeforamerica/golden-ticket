@@ -13,10 +13,12 @@ namespace GoldenTicket.Lottery
     public class SchoolLottery
     {
         private GoldenTicketDbContext db;
+        private IncomeCalculator incomeCalculator;
 
         public SchoolLottery(GoldenTicketDbContext db)
         {
             this.db = db;
+            this.incomeCalculator = new IncomeCalculator(db);
         }
 
         public School Run(School school)
@@ -60,7 +62,7 @@ namespace GoldenTicket.Lottery
                 }
 
                 // Poverty counts
-                if(IncomeCalculator.IsBelowPovertyLine(applicant))
+                if(incomeCalculator.IsBelowPovertyLine(applicant))
                 {
                     countBelowPovertyLine++;
                 }
@@ -320,7 +322,7 @@ namespace GoldenTicket.Lottery
             var filteredApplicants = new List<Applicant>();
             foreach(var a in applicants)
             {
-                if(IncomeCalculator.IsBelowPovertyLine(a) == isBelowPovertyLine)
+                if(incomeCalculator.IsBelowPovertyLine(a) == isBelowPovertyLine)
                 {
                     filteredApplicants.Add(a);
                 }
