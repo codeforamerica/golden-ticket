@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,7 @@ namespace GoldenTicket.Controllers
     public class AdminController : Controller
     {
         private static readonly School ALL_SCHOOL_SCHOOL = GetAllSchoolSchool();
+        private const string NOTIFICATION_E_MAIL_SUBJECT = "RI Pre-K Lottery Results";
         
         private readonly GoldenTicketDbContext db = new GoldenTicketDbContext();
         private readonly ApplicationDbContext identityContext = new ApplicationDbContext();
@@ -43,10 +45,6 @@ namespace GoldenTicket.Controllers
 
         private void PrepareApplicationsView()
         {
-            ViewBag.LotteryRunDate = GetLotteryRunDate();
-            ViewBag.LotteryCloseDate = GetLotteryCloseDate();
-            ViewBag.IsLotteryClosed = ViewBag.LotteryCloseDate <= DateTime.Now;
-
             AddSchoolsToViewBag();
         }
 
@@ -64,6 +62,7 @@ namespace GoldenTicket.Controllers
 
             PrepareApplicationsView();
             ViewBag.School = ALL_SCHOOL_SCHOOL;
+            ViewBag.GlobalConfig = db.GlobalConfigs.First();
 
             // Get the applicants based on the page
             var numApplicants = db.Applicants.Count();
@@ -219,6 +218,7 @@ namespace GoldenTicket.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditApplicant(Applicant applicant, FormCollection formCollection)
         {
             var queriedApplicant = db.Applicants.Find(applicant.ID);
@@ -312,6 +312,7 @@ namespace GoldenTicket.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteApplicant(Applicant applicant)
         {
             var queriedApplicant = db.Applicants.Find(applicant.ID);
@@ -372,6 +373,7 @@ namespace GoldenTicket.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddSchool(School school)
         {
             // Convert rates to multipliers
@@ -408,6 +410,7 @@ namespace GoldenTicket.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditSchool(School school)
         {
 
@@ -452,6 +455,7 @@ namespace GoldenTicket.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteSchool(School school)
         {
             var queriedSchool = db.Schools.Find(school.ID);
@@ -477,6 +481,7 @@ namespace GoldenTicket.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult EditSettings(GlobalConfig globalConfig, FormCollection formCollection)
         {
             var queriedGlobalConfig = db.GlobalConfigs.Find(globalConfig.ID);
@@ -547,6 +552,7 @@ namespace GoldenTicket.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult ResetLottery(string id) // id is just dummy text, to differentiate from the GET-based ResetLottery() ... comes in as a static-valued hidden field
         {
             var applicants = db.Applicants.ToList();
@@ -554,6 +560,7 @@ namespace GoldenTicket.Controllers
 
             var globalConfig = db.GlobalConfigs.First();
             globalConfig.LotteryRunDate = null;
+            globalConfig.WereNotificationsSent = false;
             db.GlobalConfigs.Add(globalConfig);
 
             db.SaveChanges();
@@ -601,6 +608,7 @@ namespace GoldenTicket.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult AddAdmin(RegisterViewModel registerViewModel)
         {
             if (ModelState.IsValid)
@@ -633,6 +641,7 @@ namespace GoldenTicket.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult DeleteAdmin(ApplicationUser applicationUser)
         {
             var user = userManager.FindByEmail(applicationUser.Email);
@@ -646,6 +655,38 @@ namespace GoldenTicket.Controllers
             identityContext.SaveChanges();
 
             return RedirectToAction(actionName: "ViewAdmins");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult NotifyApplicants()
+        {
+            var globalConfig = db.GlobalConfigs.First();
+
+            if (globalConfig.WereNotificationsSent)
+            {
+                return RedirectToAction(actionName: "ViewApplicants");
+            }
+
+            // Notify selected applicants
+            var selecteds = db.Selecteds.ToList();
+            foreach (var selected in selecteds)
+            {
+               SendSelectedEmail(selected);
+            }
+
+            // Notify waitlisted students
+            foreach (var applicant in db.Applicants.ToList())
+            {
+                var waitlisteds = db.Waitlisteds.Where(w => w.ApplicantID == applicant.ID).ToList();
+                SendWaitlistedEmail(waitlisteds);
+            }
+
+            globalConfig.WereNotificationsSent = true;
+            db.GlobalConfigs.AddOrUpdate(globalConfig);
+            db.SaveChanges();
+
+            return RedirectToAction(actionName:"ViewApplicants");
         }
 
         /*
@@ -663,16 +704,12 @@ namespace GoldenTicket.Controllers
 
         private DateTime? GetLotteryRunDate()
         {
-            return db.GlobalConfigs.First().LotteryRunDate; // real call
-//            return null; // forced lottery not run
-            //return new DateTime(2014, 11, 21); // forced lottery run already
+            return db.GlobalConfigs.First().LotteryRunDate;
         }
 
         private DateTime? GetLotteryCloseDate()
         {
-            return db.GlobalConfigs.First().CloseDate; // real call
-//            return new DateTime(2014, 11, 20); // forced lottery closed
-            //return new DateTime(2014, 11, 30); // forced lottery open
+            return db.GlobalConfigs.First().CloseDate;
         }
 
         private bool WasLotteryRun()
@@ -702,6 +739,75 @@ namespace GoldenTicket.Controllers
             viewHelper.PrepareStudentInformationView(ViewBag, false);
             viewHelper.PrepareGuardianInformationView(ViewBag);
             viewHelper.PrepareSchoolSelectionView(ViewBag, applicant);
+        }
+
+        private void SendSelectedEmail(Selected selected)
+        {
+            var applicant = selected.Applicant;
+            var school = selected.School;
+            var globalConfig = db.GlobalConfigs.First();
+
+            var cultureInfo = CultureInfo.InvariantCulture;
+            if (applicant.Language != null)
+            {
+                cultureInfo = new CultureInfo(applicant.Language);
+            }
+
+            var messageBody = GoldenTicketText.ResourceManager.GetString("SelectedNotificationEmail", cultureInfo);
+            messageBody = string.Format(messageBody,
+                applicant.StudentFirstName,
+                school.Name,
+                school.Email,
+                school.Phone,
+                globalConfig.ContactPersonName,
+                globalConfig.ContactEmail,
+                globalConfig.ContactPhone
+                );
+
+            EmailHelper.SendEmail(applicant.Contact1Email, NOTIFICATION_E_MAIL_SUBJECT, messageBody);
+            if (!string.IsNullOrEmpty(applicant.Contact2Email))
+            {
+                EmailHelper.SendEmail(applicant.Contact2Email, NOTIFICATION_E_MAIL_SUBJECT, messageBody);
+            }            
+        }
+
+        private void SendWaitlistedEmail(IEnumerable<Waitlisted> waitlisteds)
+        {
+            
+            var globalConfig = db.GlobalConfigs.First();
+
+            if (waitlisteds.Any())
+            {
+                var applicant = waitlisteds.First().Applicant; // First() is okay, since all elements in the IEnumerable will have the same applicant
+                var waitlistedSchools = "";
+                foreach (var waitlisted in waitlisteds)
+                {
+                    var schoolName = waitlisted.School.Name;
+                    waitlistedSchools += "<li>" + schoolName + "</li>";
+                }
+
+                var cultureInfo = CultureInfo.InvariantCulture;
+                if (applicant.Language != null)
+                {
+                    cultureInfo = new CultureInfo(applicant.Language);
+                }
+
+                var messageBody = GoldenTicketText.ResourceManager.GetString("WaitlistedNotificationEmail", cultureInfo);
+                messageBody = string.Format(messageBody,
+                    applicant.StudentFirstName,
+                    waitlistedSchools,
+                    globalConfig.ContactPersonName,
+                    globalConfig.ContactEmail,
+                    globalConfig.ContactPhone
+                    );
+
+                EmailHelper.SendEmail(applicant.Contact1Email, NOTIFICATION_E_MAIL_SUBJECT, messageBody);
+                if (!string.IsNullOrEmpty(applicant.Contact2Email))
+                {
+                    EmailHelper.SendEmail(applicant.Contact2Email, NOTIFICATION_E_MAIL_SUBJECT, messageBody);
+                }
+            }
+   
         }
     }
 }

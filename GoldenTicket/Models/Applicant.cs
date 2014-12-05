@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -110,6 +111,9 @@ namespace GoldenTicket.Models
         // Application information
         [Display(Name = "ConfirmationCode", ResourceType = typeof(GoldenTicketText))]
         public string ConfirmationCode { get; set; }
+
+        // This is the language the applicant filled out the application in
+        public string Language { get; set; }
 
 
         // ---- Utility Methods ----

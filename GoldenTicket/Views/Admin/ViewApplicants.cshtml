@@ -5,6 +5,9 @@
     ViewBag.BodyId = "";
     ViewBag.BodyClass = "no-js applications-index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
+
+    GlobalConfig globalConfig = ViewBag.GlobalConfig;
+    bool isLotteryClosed = globalConfig.CloseDate < DateTime.Now;
 }
 
 <main>
@@ -16,19 +19,33 @@
 
     <div class="page">
         <div class="site-width">
-            @if (!ViewBag.IsLotteryClosed)
+
+            @if (!isLotteryClosed)
             {
                 <div class="notice">
-                    <p>Lottery applications will close on @ViewBag.LotteryCloseDate.ToString("MM/dd/yyyy").</p>
+                    <p>Lottery applications will close on @globalConfig.CloseDate.ToString("MM/dd/yyyy").</p>
                 </div>
             }
 
-            @if (ViewBag.IsLotteryClosed && ViewBag.LotteryRunDate == null)
+            @if (isLotteryClosed && globalConfig.LotteryRunDate == null)
             {
                 <div class="notice">
                     <h1>Lottery applications have closed</h1>
                     <p>The pre-k lottery application can no longer be applied to. Click the button below to run the lottery for all applicants.</p>
                     <p>@Html.ActionLink("Run lottery", "RunLottery", null, new { @class = "button" })</p>
+                </div>
+            }
+            
+            @if (isLotteryClosed && globalConfig.LotteryRunDate != null && !globalConfig.WereNotificationsSent)
+            {
+                <div class="notice">
+                    <h1>The lottery has been run!</h1>
+                    <p>Send an email to all applicants letting them know their selection status.</p>
+                    @using (Html.BeginForm(actionName: "NotifyApplicants", controllerName: "Admin"))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input value="Notify applicants" type="submit" class="button"/>
+                    }
                 </div>
             }
 

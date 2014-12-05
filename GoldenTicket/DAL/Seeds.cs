@@ -36,7 +36,8 @@ namespace GoldenTicket.DAL
                 IncomeMultiplier = 625,
                 ContactPersonName = "Roald Dahl",
                 ContactEmail = "roald@gtridetest.org",
-                ContactPhone = "401-123-4567"
+                ContactPhone = "401-123-4567",
+                WereNotificationsSent = false
             };
             db.GlobalConfigs.Add(globalConfig);
 
