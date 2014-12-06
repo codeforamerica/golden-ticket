@@ -39,8 +39,8 @@
             }
             else
             {
+                <input type="text" disabled value="@Model.StudentCity" />
                 @Html.HiddenFor(model => model.StudentCity)
-                <span>@Model.StudentCity</span>
             }
         </div>
         <div class="field field-zip">

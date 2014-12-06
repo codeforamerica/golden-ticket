@@ -86,9 +86,22 @@ header#header a{
 	text-align: center;
 	white-space: nowrap;
 	line-height: 2.4rem;
+    margin-right: 0.8em;
 }
 
-header#header a:hover{color: #fff;}
+header#header a:hover,
+header#header input[type=submit]:hover{color: #fff;}
+
+header#header input[type=submit]{
+    padding: 0;
+    background: 0;
+    -webkit-appearance: none;
+    font: inherit;
+    line-height: 2.4rem;
+    color: inherit;
+    border: none;
+    cursor: pointer;
+}
 
 header#header nav.nav-secondary{
 	position: absolute;
@@ -115,7 +128,7 @@ header#header nav a.sign-out span{ display: none;  }
 header#header nav a.people::before,
 header#header nav a.schools::before,
 header#header nav a.settings::before,
-header#header nav a.sign-out::before{ 
+header#header nav .sign-out::before{ 
 	text-decoration: none;
 	content: "sign out";
 	font-family: 'icomoon';
@@ -407,6 +420,9 @@ table a,
 table a:hover{
 	display: block;
 	color: inherit;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 table .sort-desc a{ 
@@ -452,7 +468,7 @@ table.table-applications td.table-applications-col-delete a{
 	font-weight: normal;
 	font-variant: normal;
 	text-transform: lowercase;
-	line-height: 1.2rem;
+	line-height: 1;
 	/* Enable Ligatures ================ */
 	-webkit-font-feature-settings: "liga";
 	-moz-font-feature-settings: "liga=1";
@@ -661,7 +677,8 @@ table.table-applications thead td.table-applications-col-delete{ visibility: hid
 	-moz-border-radius: 0.2rem;
 	border-radius: 0.2rem;
 	width: 48%;
-	float: left;
+    display: inline-block;
+    vertical-align: top;
 	-webkit-box-sizing: border-box;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
@@ -673,7 +690,6 @@ table.table-applications thead td.table-applications-col-delete{ visibility: hid
 	position: relative;
 	min-width: 21em;
 	padding-right: 4em;
-	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
@@ -693,23 +709,25 @@ table.table-applications thead td.table-applications-col-delete{ visibility: hid
 }
 
 .school span.classroom-count,
-.school span.poverty-threshold{ 
+.school span.poverty-threshold,
+.school span.percentage-female,
+.school span.percentage-male{ 
 	font-size: 0.7rem; 
 	line-height: 1.4;
 	display: block;
 }
 
-.school a,
-.school button{
-	/*position: absolute;*/
+.school a.edit,
+.school a.delete{
+	position: absolute;
 	right: 0.7em;
 	top: 0.7em;
+	font-size: 0.7rem;
 }
 
-.school button{
+.school a.delete{
 	top: 2rem;
 	color: #fd5050;
-	font-size: 0.8em;
 	cursor: pointer;
 }
 
@@ -872,7 +890,7 @@ body[class^=applications] main aside dt{
 .applications-edit main header nav{
 	position: absolute;
 	left: auto;
-	right: 0.5rem;
+	right: -0.5rem;
 	top: 0;
 	bottom: 0;
 	padding: 0 1em;
@@ -887,15 +905,24 @@ body[class^=applications] main aside dt{
 }
 
 .applications-show main header nav a,
-.applications-edit main header nav a {
+.applications-edit main header nav a,
+.applications-show main header nav input,
+.applications-edit main header nav input {
 	color: rgb(193, 182, 194);
+    background: none;
+    margin-left: 0.8em;
+    display: inline-block;
+    border: none;
+    line-height: 2.4rem;
+    font: inherit;
+    cursor: pointer;
 }
 
 
 .applications-show main header a:hover,
 .applications-edit main header a:hover,
-.applications-show main header button:hover,
-.applications-edit main header button:hover{
+.applications-show main header input:hover,
+.applications-edit main header input:hover{
 	color: white;
 }
 
@@ -905,7 +932,7 @@ main form header button:active{
 }
 
 main form header button.button-edit{
-	right: 5rem;
+	right: 6rem;
 }
 
 main form header button.button-save{
@@ -923,14 +950,7 @@ fieldset#guardian-relationship legend{ font-weight: normal; }
 #sign-in{ background: #eee; }
 #sign-in h1{ display: none; }
 
-@media screen and (min-width: 36em) { 
-	#sign-in main{
-		margin-top: 5rem;
-		max-width: 14rem;
-	}
-}
-
-#sign-in main{
+#sign-in main .page .site-width{
 	padding: 1.4rem;
 	background: white;
 	border: 0.1em solid #ccc;
@@ -938,6 +958,12 @@ fieldset#guardian-relationship legend{ font-weight: normal; }
 	border-radius: 0.2rem;
 }
 
+@media screen and (min-width: 36em) { 
+    #sign-in main .page .site-width {
+		margin-top: 5rem;
+		max-width: 24rem;
+	}
+}
 
 
 /* @end */
