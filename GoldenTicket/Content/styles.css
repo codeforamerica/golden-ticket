@@ -271,11 +271,7 @@ footer{
 
 /* @group 5. success */
 
-.success a{
-	font-size: 0.8em;
-	display: inline-block;
-	margin-bottom: 2em;
-}
+.success a{ display: inline-block; }
 
 
 

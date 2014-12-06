@@ -78,7 +78,6 @@ textarea{
   box-shadow: none;
   width: 100%;
   background: #fafafa;
-  -webkit-appearance: none;
 }
 
 @media screen and (min-width: 24em) {
@@ -481,6 +480,7 @@ fieldset.fieldset-date-range div.field label{
 	margin: 0;
 	font-size: 0.7rem;
 	color: #888;
+    white-space: nowrap;
 }
 
 fieldset.fieldset-address div.field.field-city,
@@ -535,7 +535,7 @@ fieldset.fieldset-address div.field.field-city{
 }
 
 fieldset.fieldset-address div.field.field-state,
-fieldset.fieldset-address div.field.field-zip{ width: 4.2rem; }
+fieldset.fieldset-address div.field.field-zip input{ width: 4.2rem; }
 fieldset.fieldset-address div.field.field-zip{ padding-left: 0; }
 
 fieldset.fieldset-address div.field.field-state.field-select div::after{

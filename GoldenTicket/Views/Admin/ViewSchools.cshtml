@@ -45,15 +45,15 @@
                         var percentFemale = 100 - percentMale;
                     }
 
-                    <span>
+                    <span class="percentage-female">
                         @(percentMale)% female
                     </span>
-                    <span>
+                    <span class="percentage-male">
                         @(percentMale)% male
                     </span>
 
-                    <span>@Html.ActionLink(linkText: "Edit", actionName: "EditSchool", routeValues: new { id = school.ID })</span>
-                    <span>@Html.ActionLink(linkText: "Delete", actionName: "DeleteSchool", routeValues: new { id = school.ID })</span>
+                    @Html.ActionLink(linkText: "Edit", actionName: "EditSchool", routeValues: new { id = school.ID }, htmlAttributes: new { @class = "edit" })
+                    @Html.ActionLink(linkText: "Delete", actionName: "DeleteSchool", routeValues: new { id = school.ID }, htmlAttributes: new { @class = "delete" })
                 </div>
             }
         </div>
