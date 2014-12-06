@@ -230,6 +230,10 @@ namespace GoldenTicket.Controllers
             ViewBag.WaitlistedSchools =
                 Utils.GetSchools(db.Waitlisteds.Where(a => a.ApplicantID == applicant.ID).OrderBy(a => a.School.Name).ToList());
             ViewBag.WasLotteryRun = GetLotteryRunDate() != null;
+
+            // Income status
+            var incomeCalc = new IncomeCalculator(db);
+            ViewBag.IsBelowPoverty = incomeCalc.IsBelowPovertyLine(applicant);
         }
 
         public ActionResult ViewApplicant(int id)

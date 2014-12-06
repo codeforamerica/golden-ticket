@@ -148,6 +148,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Lottery\IncomeCalculator.cs" />
     <Compile Include="Misc\EmailHelper.cs" />
     <Compile Include="Controllers\RegistrationController.cs" />
     <Compile Include="Controllers\SharedViewHelper.cs" />
@@ -169,7 +170,6 @@
     <Compile Include="Models\ValidationConstants.cs" />
     <Compile Include="Models\Waitlisted.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Calc\IncomeCalculator.cs" />
     <Compile Include="Csv\ApplicantCsvReader.cs" />
     <Compile Include="Lottery\CrossSchoolReconciler.cs" />
     <Compile Include="Lottery\ListShuffle.cs" />

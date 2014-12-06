@@ -1,6 +1,5 @@
 ﻿using System.Web.WebPages;
 using CsvHelper;
-using GoldenTicket.Calc;
 using GoldenTicket.DAL;
 using GoldenTicket.Models;
 using GoldenTicket.Reader;

@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using GoldenTicket.Calc;
 using GoldenTicket.DAL;
 using GoldenTicket.Misc;
 using GoldenTicket.Models;

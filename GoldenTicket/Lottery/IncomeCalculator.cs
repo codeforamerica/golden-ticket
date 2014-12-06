@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using GoldenTicket.DAL;
 using GoldenTicket.Models;
 
-namespace GoldenTicket.Calc
+namespace GoldenTicket.Lottery
 {
     /**
      * <summary>
