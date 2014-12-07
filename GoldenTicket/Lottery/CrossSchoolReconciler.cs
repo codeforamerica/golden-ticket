@@ -9,19 +9,48 @@ using GoldenTicket.Lottery; //for List shuffle extensions
 
 namespace GoldenTicket.Lottery
 {
+    /**
+     * <summary>
+     * Prevents applicants from being selected at more than one school. For applicants selected
+     * at more than one school, they are removed from the school in which they had the lower rank (see
+     * Selected object). Selected students are also removed from all schools they were waitlisted for.
+     * </summary>
+     */
     public class CrossSchoolReconciler
     {
+        // Database connection
         private GoldenTicketDbContext db = new GoldenTicketDbContext();
+        
+        // School lottery algorithm
         private SchoolLottery schoolLottery;
 
+        /**
+         * <summary>
+         * Creates a new reconciliation algorithm object.
+         * </summary>
+         * 
+         * <param name="db">Database connection</param>
+         */
         public CrossSchoolReconciler(GoldenTicketDbContext db)
         {
             this.db = db;
             this.schoolLottery = new SchoolLottery(db);
         }
 
-        //TODO This method can be made more efficient. Optimize later.
-        public List<School> Reconcile()
+        /**
+         * <summary>
+         * Prevent applicants from being selected more than once. Selected applicants will remain
+         * in the school that they had the best rank (i.e. lowest number) and will be removed from other
+         * selected and waitlisted schools.
+         * </summary>
+         * 
+         * <remarks>
+         * There's a lot that can be done to optimize this method. Currently takes too long to run (still
+         * faster than the old paper method, but in computer time, it's still slow). Database roundtrips
+         * can be minimized, as well as repeat functions eliminated.
+         * </remarks>
+         */
+        public void Reconcile()
         {
             var schools = db.Schools.ToList();
 
@@ -62,10 +91,13 @@ namespace GoldenTicket.Lottery
                 }
                 remainingSchools.Remove(s);
             }
-
-            return schools;
         }
 
+        /**
+         * <summary>Gets a list of applicants that have been selected at the indicated schools</summary>
+         * <param name="schools">The schools to get selected applicants for</param>
+         * <returns>Selected applicants</returns>
+         */
         private List<Applicant> GetAllSelectedApplicants(IEnumerable<School> schools)
         {
             var selectedApplicants = new List<Applicant>();
@@ -78,13 +110,22 @@ namespace GoldenTicket.Lottery
             return selectedApplicants;
         }
 
-        // Global removal of selected from all schools' waitlists
+        /**
+         * <summary>Global removal of all selected applicants from specified schools' waitlists</summary>
+         * <param name="schools">Schools to remove selected applicants from</param>
+         * <remarks>TODO rename this</remarks>
+         */
         private void RemoveSelectedFromWaitlists(IEnumerable<School> schools)
         {
             RemoveSelectedFromWaitlists(schools, GetAllSelectedApplicants(schools));
         }
 
-        //TODO Rename this method
+        /**
+         * <summary>Removal of specified selected applicants from specified schools' waitlists</summary>
+         * <param name="schools">Schools to remove selected applicants from</param>
+         * <param name="applicants">Applicants to remove from waitlists</param>
+         * <remarks>TODO rename this</remarks>
+         */
         private void RemoveSelectedFromWaitlists(IEnumerable<School> schools, IEnumerable<Applicant> applicants)
         {
             var removeWaitlisteds = new List<Waitlisted>();
@@ -104,6 +145,15 @@ namespace GoldenTicket.Lottery
             db.SaveChanges();
         }
 
+        /**
+         * <summary>
+         * Identify the schools (from the list passed in) that an applicant was selected at
+         * </summary>
+         * 
+         * <param name="applicant">Applicant</param>
+         * <param name="schools">Schools to see if the applicant was selected at</param>
+         * <returns>List of schools that the applicant was selected at</returns>
+         */
         private List<School> GetSchoolsApplicantWasSelectedAt(Applicant applicant, IEnumerable<School> schools)
         {
             var selectedSchools = new List<School>();
@@ -121,6 +171,17 @@ namespace GoldenTicket.Lottery
             return selectedSchools;
         }
 
+        /**
+         * <summary>
+         * Makes sure that an applicant is only selected once. If the applicant is removed from currentSchool because
+         * they had a better selected rank at another school, returns true. Otherwise returns false.
+         * </summary>
+         * 
+         * <param name="applicant">Applicant to reconcile across schools</param>
+         * <param name="currentSchool">The school that is currently being iterated through by the larger algorithm</param>
+         * <param name="selectedSchools">Schools the applicant was selected at</param>
+         * <returns>True if removed from the current school, false otherwise</returns>
+         */
         private bool ReconcileApplicant(Applicant applicant, School currentSchool, List<School> selectedSchools)
         {
             // If applicant is only in one school, no reconciliation needed
