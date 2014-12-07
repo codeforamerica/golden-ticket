@@ -4,7 +4,6 @@ using GoldenTicket.Misc;
 using GoldenTicket.Models;
 using System;
 using System.Collections.Generic;
-using GoldenTicket.Models;
 using GoldenTicket.Lottery; //for List shuffle extensions
 
 namespace GoldenTicket.Lottery
