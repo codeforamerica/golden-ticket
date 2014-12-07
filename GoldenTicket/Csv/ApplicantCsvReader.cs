@@ -7,18 +7,33 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GoldenTicket.Csv
 {
+    /**
+     * <summary>
+     * Imports an all applicants CSV file (as exported via the app's ViewApplicants for all schools view)
+     * into the system's database. Before importing applicants, all the schools must be setup in the system
+     * with the exact names used in the all applicants CSV file.
+     * </summary>
+     */
     public class ApplicantCsvReader : ApplicantReader
     {
+        // File system path to the CSV file to import
         private readonly string csvFilePath;
+
+        // Dictionary of school names to School objects
         private readonly Dictionary<string,School> schools = new Dictionary<string, School>();
 
+        // Database connection
         private readonly GoldenTicketDbContext db = new GoldenTicketDbContext();
 
+        /**
+         * <summary>Setup a new ApplicantCsvReader object</summary>
+         * 
+         * <param name="csvFilePath">File system path to an all applicants CSV file</param>
+         * <param name="schoolList">List of schools that the applicants might belong to</param>
+         */
         public ApplicantCsvReader(string csvFilePath, List<School> schoolList)
         {
             this.csvFilePath = csvFilePath;
@@ -26,6 +41,9 @@ namespace GoldenTicket.Csv
             schoolList.ForEach(s => schools[s.Name] = s);
         }
 
+        /**
+         * <summary>Import all the applicants from the CSV file into the system.</summary>
+         */
         public List<School> ReadApplicants()
         {
             // Read the CSV
@@ -68,7 +86,15 @@ namespace GoldenTicket.Csv
 
             return schools.Values.ToList();
         }
-
+        
+        /**
+         * <summary>
+         * Parses a row of the CSV file.
+         * </summary>
+         * 
+         * <param name="csvReader">CSV file input stream</param>
+         * <returns>A parsed Applicant form the row of data</returns>
+         */
         private Applicant ParseApplicant(CsvReader csvReader)
         {
             var a = new Applicant
@@ -105,6 +131,10 @@ namespace GoldenTicket.Csv
             return a;
         }
 
+        /**
+         * <summary>Converts gender text to the Gender enum value</summary>
+         * <returns>A gender based on the text</returns>
+         */
         private static Gender ParseGender(string genderStr)
         {
             if (genderStr.Equals("MALE", StringComparison.InvariantCultureIgnoreCase))
@@ -115,6 +145,14 @@ namespace GoldenTicket.Csv
             return Gender.Female;
         }
 
+        /**
+         * <summary>
+         * Gets the value of a string object if it's not null. Otherwise, it'll return null.
+         * This prevents null pointer exceptions when reading optional fields.
+         * </summary>
+         * 
+         * <param name="value">A string value</param>
+         */
         private static string ValueOrNull(string value)
         {
             return string.IsNullOrEmpty(value) ? null : value;
