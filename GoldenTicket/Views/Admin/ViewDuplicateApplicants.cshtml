@@ -12,15 +12,19 @@
 <main>
     <header>
         <div class="site-width">
-            <div class="notice">
-                These are <em>potential</em> duplicate applicants per school. Please carefully inspect their full applications
-                before deleting a record.
-            </div>
+            @Html.ActionLink(linkText: "← Back to all applications", actionName: "ViewApplicants", htmlAttributes: new { @class = "back" }, routeValues: null)
+            <h1>Duplicate applications</h1>
         </div>
     </header>
-
     <div class="page">
         <div class="site-width">
+            <div class="notice">
+                <p>
+                    These are <em>potential</em> duplicate applicants per school. Please carefully inspect their full applications
+                    before deleting a record.
+                </p>
+            </div>
+
             @foreach (KeyValuePair<School, List<Applicant>> entry in Model)
             {
                 var school = entry.Key;

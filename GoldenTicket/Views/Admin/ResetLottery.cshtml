@@ -15,11 +15,9 @@
         var deleteConfirmButton = $("#delete-confirm-button");
 
         if (value.toLowerCase() === "delete") {
-            deleteConfirmButton.addClass("button");
             deleteConfirmButton.prop("disabled", false);
         }
         else {
-            deleteConfirmButton.removeClass("button");
             deleteConfirmButton.prop("disabled", true);
         }
     }
@@ -40,7 +38,7 @@
                     <input type="text" id="delete-confirm-text-box" onchange="confirmDeleteText()" onkeyup="confirmDeleteText()" />
                 </div>
                 <footer>
-                    <input type="submit" value="Reset the application" id="delete-confirm-button" disabled="disabled"/>
+                    <input type="submit" value="Reset the application" id="delete-confirm-button" disabled="disabled" class="button" />
                     @Html.ActionLink(linkText: "Cancel", actionName: "EditSettings")
                 </footer>
 
