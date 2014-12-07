@@ -15,11 +15,9 @@
         var deleteConfirmButton = $("#delete-confirm-button");
 
         if (value.toLowerCase() === "delete") {
-            deleteConfirmButton.addClass("button");
             deleteConfirmButton.prop("disabled", false);
         }
         else {
-            deleteConfirmButton.removeClass("button");
             deleteConfirmButton.prop("disabled", true);
         }
     }
@@ -38,7 +36,7 @@
                     @Html.HiddenFor(model => model.ID)
                     <p><input id="delete-confirm-text-box" type="text" onchange="confirmDeleteText()" onkeyup="confirmDeleteText()" /></p>
                     <p>
-                        <input type="submit" value="Confirm" class="" disabled="disabled" id="delete-confirm-button"/>
+                        <input type="submit" value="Confirm" class="button" disabled="disabled" id="delete-confirm-button"/>
                         <a href="javascript:void(0);" onclick="history.go(-1);">Cancel</a>
                     </p>
                 }

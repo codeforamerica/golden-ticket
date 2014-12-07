@@ -4,7 +4,7 @@
 
 @{
     ViewBag.BodyId = "";
-    ViewBag.BodyClass = "no-js applications-index";
+    ViewBag.BodyClass = "no-js people-index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 
     ApplicationUser currentUser = ViewBag.CurrentUser;
@@ -20,13 +20,13 @@
 
     <div class="page">
         <div class="site-width">
-            <table class="table-applications">
+            <table class="table-people">
                 <thead>
                     <tr>
-                        <td>
+                        <td class="table-people-col-email">
                             <span>Email</span>
                         </td>
-                        <td class="table-applications-col-delete">
+                        <td class="table-people-col-actions">
                             <span>Delete</span>
                         </td>
                     </tr>
@@ -35,11 +35,11 @@
                 <tbody>
                     @foreach (var user in Model)
                     {
-                        <tr>
+                        <tr class="table-people-col-email">
                             <td>
                                 @user.Email
                             </td>
-                            <td class="table-applications-col-delete">
+                            <td class="table-people-col-actions">
                                 @if (!user.Email.Equals(currentUser.Email))
                                 {
                                     @Html.ActionLink(linkText: "Delete", actionName: "DeleteAdmin", routeValues: new { email = user.Email })

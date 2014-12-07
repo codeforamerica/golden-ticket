@@ -666,6 +666,17 @@ button{
 	left: -0.1em;
 }
 
+.button[disabled],
+.button[disabled]:hover{
+    color: #888;
+    border-color: #ccc;
+    background: #eee;
+	-moz-box-shadow: none !important;
+	box-shadow: none !important;
+    cursor: default;
+}
+
+
 .button:hover{ 
 	-moz-box-shadow:  0 1px 0 rgba(0,0,0,0.1);
 	box-shadow: 0 1px 0 rgba(0,0,0,0.1);
