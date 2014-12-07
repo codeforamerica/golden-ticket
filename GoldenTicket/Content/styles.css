@@ -43,7 +43,7 @@ span.preposition{ font-style: italic; }
 
 header{
 	background: #34655c;
-	font-size: 1em;
+	font-size: 0.9em;
 	color: white;
 	padding: 0.6rem 0;
 	margin-bottom: 1rem;
@@ -114,8 +114,8 @@ main h2{
 	line-height: 1.1em;
 	color: #5a1b3c;
 	text-transform: uppercase;
-	font-size: 01em;
-	margin-bottom: 0.4rem;
+	font-size: 1em;
+	margin-bottom: 0.6rem;
 	letter-spacing: 0.1em;
 	word-spacing: 0.125em;
 }

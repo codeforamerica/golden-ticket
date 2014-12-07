@@ -37,7 +37,7 @@ div.site-width{
 	padding: 0 0.7rem;
 }
 
-@media screen & (min-width: 24em){
+@media screen and (min-width: 24em){
 	div.site-width{ padding: 0 1.4rem; }
 }
 
@@ -80,7 +80,8 @@ body[class="settings"] header a.settings{
 	color: #fff !important;
 }
 
-header#header a{
+header#header a,
+header#header form {
 	float: left;
 	color: inherit;
 	text-align: center;
@@ -338,6 +339,7 @@ a.import::before{
 
 nav.pagination a{
 	display: inline-block;
+    margin-right: 0.4em;
 	padding: 0 0.7rem;
 	height: 1.4rem;
 	line-height: 1.4rem;
@@ -492,6 +494,9 @@ table.table-applications thead td.table-applications-col-delete{ visibility: hid
 
 /* @group shared */
 
+.page em{
+    font-style: italic;
+}
 /* @group icons */
 
 
@@ -516,6 +521,10 @@ table.table-applications thead td.table-applications-col-delete{ visibility: hid
 	font-size: 1em;
 	font-weight: 600;
 	margin-top: 0.2em;
+}
+
+.notice p:last-child{
+    margin-bottom: 0;
 }
 
 .notice form{

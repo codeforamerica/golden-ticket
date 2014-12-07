@@ -39,11 +39,11 @@
 </div>
 <div class="field field-width-large">
     @Html.LabelFor(model => model.Email, labelText: "Email")
-    @Html.TextBoxFor(model => model.Email)
+    @Html.EditorFor(model => model.Email)
 </div>
 <div class="field field-width-small">
     @Html.LabelFor(model => model.Seats, labelText: "Seats")
-    @Html.TextBoxFor(model => model.Seats)
+    @Html.EditorFor(model => model.Seats)
 </div>
 <div class="field field-width-small">
     @Html.LabelFor(model => model.PovertyRate, labelText: "Percentage of student to accept below the poverty line")
