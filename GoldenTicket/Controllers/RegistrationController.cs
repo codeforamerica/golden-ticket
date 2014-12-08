@@ -451,7 +451,7 @@ namespace GoldenTicket.Controllers
 
             ViewBag.Programs = programs;
 
-            ViewBag.NotificationDate = database.GlobalConfigs.First();
+            ViewBag.NotificationDate = database.GlobalConfigs.First().NotificationDate;
         }
 
         /**
