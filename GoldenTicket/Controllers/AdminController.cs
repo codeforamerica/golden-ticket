@@ -509,7 +509,7 @@ namespace GoldenTicket.Controllers
             foreach (var s in schools)
             {
                 var applieds =
-                    db.Applieds.Where(a => a.SchoolID == s.ID)
+                    db.Applieds.Where(a => a.SchoolID == s.ID && a.Applicant.ConfirmationCode != null)
                         .OrderBy(a => a.Applicant.StudentLastName)
                         .ThenBy(a => a.Applicant.StudentFirstName)
                         .ToList();
