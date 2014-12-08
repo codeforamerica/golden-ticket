@@ -1,37 +1,91 @@
 ﻿using System.Linq;
-using GoldenTicket.Calc;
 using GoldenTicket.DAL;
 using GoldenTicket.Misc;
 using GoldenTicket.Models;
 using System;
 using System.Collections.Generic;
-using GoldenTicket.Models;
 using GoldenTicket.Lottery; //for List shuffle extensions
 
 namespace GoldenTicket.Lottery
 {
+    /**
+     * <summary>
+     * Lottery selection algorithm.
+     * 
+     * <para>
+     * The lottery randomly selects applicants for schools, with only weights
+     * being income level (above/below poverty line) and gender. While each school may
+     * have a different income and gender requirement, income is always considered a more
+     * important factor.
+     * </para>
+     * 
+     * </summary>
+     */
     public class SchoolLottery
     {
+        // Database connection
         private GoldenTicketDbContext db;
 
+        // Calculates whether an applicant is below/above
+        private IncomeCalculator incomeCalculator;
+
+        /**
+         * <summary>Creates a new lottery algorithm object</summary>
+         * <param name="db">Database connection</param>
+         */
         public SchoolLottery(GoldenTicketDbContext db)
         {
             this.db = db;
+            this.incomeCalculator = new IncomeCalculator(db);
         }
 
+        /**
+         * <summary>
+         * Runs the lottery algorithm for an individual school.
+         * The school's entire applicant list is used for the run.
+         * Will shuffle the applicant list during the run.
+         * </summary>
+         * 
+         * <param name="school">School to run the algorithm for</param>
+         * <returns>The school passed in</returns>
+         */
         public School Run(School school)
         {
-            return Run(school, Utils.GetApplicants(school.Applieds), true);
+            var applicants = Utils.GetApplicants(school.Applieds.Where(a => a.Applicant.ConfirmationCode != null).ToList());
+            return Run(school, applicants, true);
         }
 
+        /**
+         * <summary>
+         * Runs the lottery algorithm for an individual school.
+         * A specific list of applicants is used for the lottery run.
+         * Will shuffle the applicants during the running.
+         * </summary>
+         * 
+         * <param name="school">School to run the algorithm for</param>
+         * <param name="applicantList">Applicants to use for selection in the lottery run</param>
+         * <returns>The school passed in</returns>
+         */
         public School Run(School school, List<Applicant> applicantList)
         {
             return Run(school, applicantList, true);
         }
 
-        //TODO Optimize this later. There are a lot of repeated loops.
+        /**
+         * <summary>
+         * Runs the lottery algorithm for an individual school.
+         * A specific list of applicants is used for the lottery run.
+         * </summary>
+         * 
+         * <remarks>TODO Optimize this later. There are a lot of repeated loops.</remarks>
+         * 
+         * <param name="school">School to run the algorithm for</param>
+         * <param name="applicantList">Applicants to use for selection in the lottery run</param>
+         * <returns>The school passed in</returns>
+         */
         public School Run(School school, List<Applicant> applicantList, bool shuffleApplicantList)
         {
+            // Order the selected and waitlists by rank
             var selecteds = school.Selecteds.OrderBy(s => s.Rank).ToList();
             var selectedApplicants = Utils.GetApplicants(selecteds);
 
@@ -42,7 +96,7 @@ namespace GoldenTicket.Lottery
             db.Selecteds.RemoveRange(selecteds);
             db.Waitlisteds.RemoveRange(waitlisteds);
 
-            // Counts
+            // Counts the existing numbers of selected applicants for the school
             var countMale = 0;
             var countFemale = 0;
             var countBelowPovertyLine = 0;
@@ -60,7 +114,7 @@ namespace GoldenTicket.Lottery
                 }
 
                 // Poverty counts
-                if(IncomeCalculator.IsBelowPovertyLine(applicant))
+                if(incomeCalculator.IsBelowPovertyLine(applicant))
                 {
                     countBelowPovertyLine++;
                 }
@@ -315,12 +369,18 @@ namespace GoldenTicket.Lottery
             return school;
         }
 
+        /**
+         * <summary>Get all applicants by a specific poverty status</summary>
+         * <param name="applicants">Applicants to return for poverty level</param>
+         * <param name="isBelowPovertyLine">True if returned students should be below the poverty line, false otherwise</param>
+         * <returns>List of applicants</returns>
+         */
         private List<Applicant> GetByPovertyStatus(IEnumerable<Applicant> applicants, bool isBelowPovertyLine)
         {
             var filteredApplicants = new List<Applicant>();
             foreach(var a in applicants)
             {
-                if(IncomeCalculator.IsBelowPovertyLine(a) == isBelowPovertyLine)
+                if(incomeCalculator.IsBelowPovertyLine(a) == isBelowPovertyLine)
                 {
                     filteredApplicants.Add(a);
                 }

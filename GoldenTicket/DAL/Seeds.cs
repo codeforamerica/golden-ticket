@@ -2,21 +2,27 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Data.Entity;
-using System.Web.Security;
 using GoldenTicket.Models;
-using System.Data.Entity.Validation;
 using GoldenTicket.Csv;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace GoldenTicket.DAL 
 {
+    /**
+     * <summary>
+     * Loads a default configuration, but is also able to load test schools and applicants based
+     * on the 2014-2015 lottery. To enable test data load, switch the LOAD_TEST_DATA variable to true.
+     * 
+     * Also creates the first admin user with email "admin@admin.edu" and password "passwordGT1@".
+     * </summary>
+     */
     public class Seeds : System.Data.Entity.DropCreateDatabaseIfModelChanges<GoldenTicketDbContext>
     {
-        private const bool LOAD_TEST_DATA = true;
+        // When true, loads test schools and applicants
+        private const bool LOAD_TEST_DATA = false;
 
-        
+        // Used for test data setup
         private const string FAKE_ADDRESS_1 = "123 Main St";
         private const string FAKE_ADDRESS_2 = "Suite 300";
         private const string FAKE_ZIP_CODE = "02903";
@@ -24,6 +30,10 @@ namespace GoldenTicket.DAL
         private const string FAKE_EMAIL = "fake@email.com";
         private const double GENDER_BALANCE = 0.5;
 
+        /**
+         * <summary>Loads data</summary>
+         * <param name="db">The database to load data to</param>
+         */
         protected override void Seed(GoldenTicketDbContext db)
         {
             // Configurations

@@ -1,173 +1,89 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 using GoldenTicket.DAL;
 using GoldenTicket.Misc;
 using GoldenTicket.Models;
-using System;
-using System.Collections.Generic;
-using GoldenTicket.Models;
-using GoldenTicket.Lottery; //for List shuffle extensions
-
 
 namespace GoldenTicket.Lottery
 {
     public class CrossSchoolReconciler
     {
-        private GoldenTicketDbContext db = new GoldenTicketDbContext();
-        private SchoolLottery schoolLottery;
+        private GoldenTicketDbContext db;
+        private SchoolLottery lottery;
 
         public CrossSchoolReconciler(GoldenTicketDbContext db)
         {
             this.db = db;
-            this.schoolLottery = new SchoolLottery(db);
+            lottery = new SchoolLottery(db);
         }
 
-        //TODO This method can be made more efficient. Optimize later.
-        public List<School> Reconcile()
+        public void Reconcile()
         {
-            var schools = db.Schools.ToList();
-
-            // Remove selected students from all school waitlists
-            RemoveSelectedFromWaitlists(schools);
-
-            // Reconcile students selected for multiple schools
-            // i.e. Leave the student in the school in which they are highest on the selected list
-            var reconciledApplicants = new List<Applicant>();
-            var remainingSchools = new List<School>(schools);
-            foreach(var s in schools)
+            while (true)
             {
-                schoolLoop: { }
-                var selectedApplicants = Utils.GetApplicants(s.Selecteds.OrderBy(selected=>selected.Rank).ToList());
-                foreach(var a in selectedApplicants)
+                var selecteds = db.Selecteds.ToList();
+
+                // Selected applicants can't be waitlisted anywhere
+                var waitlisteds = db.Waitlisteds.ToList();
+                var waitlistedsToRemove = new List<Waitlisted>();
+                selecteds.ForEach(x => waitlistedsToRemove.AddRange(waitlisteds.Where(y => y.ApplicantID == x.ApplicantID)));
+                db.Waitlisteds.RemoveRange(waitlistedsToRemove);
+                db.SaveChanges();
+
+                // Find out if there are any applicants that need to be reconciled
+                var selectedCount = new Dictionary<int, int>(); // key => selected applicant ID, # of schools selected for
+                foreach (var selected in selecteds)
                 {
-                    // Skip applicant if already reconciled - done to optimize in the event the schoolLoop is reset (see bottom of loop)
-                    if(reconciledApplicants.Contains(a))
-                    {
-                        continue;
-                    }
-
-                    // Reconcile the applicant between schools he/she was selected 
-                    var selectedSchools = GetSchoolsApplicantWasSelectedAt(a, remainingSchools);
-                    var currentSchoolEffected = ReconcileApplicant(a, s, selectedSchools);
-
-                    RemoveSelectedFromWaitlists(schools, selectedApplicants); //TODO This step is very inefficient. Optimize later.
-
-                    // Adjust the control structures
-                    reconciledApplicants.Add(a);
-
-                    // Reset the loop if the current school's selected list has been updated/impacted 
-                    // (i.e. the current applicant has been removed and someone new has been added to the selected list)
-                    if (currentSchoolEffected)
-                    {
-                        goto schoolLoop; //TODO Is there a better way than a goto? Optimize later.
-                    }
+                    var count = 0;
+                    selectedCount.TryGetValue(selected.ApplicantID, out count);
+                    selectedCount[selected.ApplicantID] = ++count;
                 }
-                remainingSchools.Remove(s);
-            }
 
-            return schools;
-        }
-
-        private List<Applicant> GetAllSelectedApplicants(IEnumerable<School> schools)
-        {
-            var selectedApplicants = new List<Applicant>();
-            foreach(var s in schools)
-            {
-                var currentSelectedApplicants =
-                    Utils.GetApplicants(s.Selecteds.OrderBy(selected => selected.Rank).ToList());
-                selectedApplicants.AddRange(currentSelectedApplicants);
-            }
-            return selectedApplicants;
-        }
-
-        // Global removal of selected from all schools' waitlists
-        private void RemoveSelectedFromWaitlists(IEnumerable<School> schools)
-        {
-            RemoveSelectedFromWaitlists(schools, GetAllSelectedApplicants(schools));
-        }
-
-        //TODO Rename this method
-        private void RemoveSelectedFromWaitlists(IEnumerable<School> schools, IEnumerable<Applicant> applicants)
-        {
-            var removeWaitlisteds = new List<Waitlisted>();
-            foreach (var a in applicants)
-            {
-                foreach (var s in schools)
+                // --- Exit case: all selected students are only selected for one school ---
+                var multiSelectedApplicantCounts = selectedCount.Where(x => x.Value > 2).ToList();
+                if (!multiSelectedApplicantCounts.Any())
                 {
-                    var waitlisted = s.Waitlisteds.FirstOrDefault( w=> w.ApplicantID == a.ID);
-                    if (waitlisted != null)
-                    {
-                        removeWaitlisteds.Add(waitlisted);    
-                    }
+                    return;
+                }
+
+                // Applicants can only be selected once
+                // Remove selected applicants from schools with a worse rank
+                var schoolIdsToRerun = new List<int>();
+                foreach (var pair in multiSelectedApplicantCounts)
+                {
+                    var applicantId = pair.Key;
+                    var worseRankSchoolsForApplicant = RemoveWorseRankSelecteds(applicantId);
+                    schoolIdsToRerun.AddRange(worseRankSchoolsForApplicant);
+                }
+                db.SaveChanges();
+
+                // Re-run lottery for schools that had a selected removed
+                var uniqueSchoolIdsToRerun = new HashSet<int>(schoolIdsToRerun); // eliminate school IDs appearing twice
+                foreach (var schoolId in uniqueSchoolIdsToRerun)
+                {
+                    var school = db.Schools.Find(schoolId);
+                    lottery.Run(school, Utils.GetApplicants(school.Waitlisteds), false);
                 }
             }
-
-            db.Waitlisteds.RemoveRange(removeWaitlisteds);
-            db.SaveChanges();
         }
 
-        private List<School> GetSchoolsApplicantWasSelectedAt(Applicant applicant, IEnumerable<School> schools)
+        private IEnumerable<int> RemoveWorseRankSelecteds(int applicantId)
         {
-            var selectedSchools = new List<School>();
+            // The best rank selected will be the first in order, the others should be removed
+            var selecteds = db.Selecteds.Where(x => x.ApplicantID == applicantId).OrderBy(x => x.Rank).ToList();
+            var worseRankSelecteds = selecteds.GetRange(1, selecteds.Count - 1);
+            var schoolsRemovedFrom = new List<int>();
             
-            foreach(var s in schools)
-            {
-                var selectedApplicants =
-                    Utils.GetApplicants(db.Selecteds.Where(selected => selected.SchoolID == s.ID).OrderBy(selected => selected.Rank).ToList());
-                if(selectedApplicants.Contains(applicant))
-                {
-                    selectedSchools.Add(s);
-                }
-            }
+            // Identify the schools for the worse rank selecteds for the applicant
+            worseRankSelecteds.ForEach(x => schoolsRemovedFrom.Add(x.SchoolID));
 
-            return selectedSchools;
+            // Remove the selecteds
+            db.Selecteds.RemoveRange(worseRankSelecteds);
+
+            return schoolsRemovedFrom;
         }
 
-        private bool ReconcileApplicant(Applicant applicant, School currentSchool, List<School> selectedSchools)
-        {
-            // If applicant is only in one school, no reconciliation needed
-            if(selectedSchools.Count <= 1)
-            {
-                return false;
-            }
-
-            // Determine which school the applicant is the lowest (number-wise) on the list
-            School lowestSchool = null;
-            var lowestIndex = 10000; //start very high
-            
-            List<School> shuffledSchools = new List<School>(selectedSchools);
-            shuffledSchools.Shuffle(new Random());
-
-            foreach(School s in shuffledSchools)
-            {
-                int index = db.Selecteds.First(selected=>selected.ApplicantID == applicant.ID && selected.SchoolID == s.ID).Rank;
-                if(index < lowestIndex)
-                {
-                    lowestSchool = s;
-                    lowestIndex = index;
-                }
-            }
-
-            // Remove the student from the higher (number-wise) on the list schools and run lotteries for those schools
-            var effectsCurrentSchool = false;
-            foreach(School s in selectedSchools)
-            {
-                if(s != lowestSchool)
-                {
-                    var selected = s.Selecteds.First(se => se.ApplicantID == applicant.ID);
-                    db.Selecteds.Remove(selected);
-                    db.SaveChanges();
-
-                    var waitlisteds = Utils.GetApplicants(s.Waitlisteds.OrderBy(w => w.Rank).ToList());
-
-                    schoolLottery.Run(s, waitlisteds);
-                    if(s == currentSchool)
-                    {
-                        effectsCurrentSchool = true;
-                    }
-                }
-            }
-
-            return effectsCurrentSchool;
-        }
     }
 }

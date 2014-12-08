@@ -4,7 +4,7 @@
 @{
     ViewBag.BodyId = "";
     ViewBag.BodyClass = "no-js applications-index";
-    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+    Layout = "~/Views/Admin/_AdminLayout.cshtml";
 
     GlobalConfig globalConfig = ViewBag.GlobalConfig;
     bool isLotteryClosed = globalConfig.CloseDate < DateTime.Now;
@@ -32,7 +32,11 @@
                 <div class="notice">
                     <h1>Lottery applications have closed</h1>
                     <p>The pre-k lottery application can no longer be applied to. Click the button below to run the lottery for all applicants.</p>
-                    <p>@Html.ActionLink("Run lottery", "RunLottery", null, new { @class = "button" })</p>
+                    @using (Html.BeginForm(actionName: "RunLottery", controllerName: "Admin"))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input value="Run lottery" type="submit" class="button" />
+                    }
                 </div>
             }
             
