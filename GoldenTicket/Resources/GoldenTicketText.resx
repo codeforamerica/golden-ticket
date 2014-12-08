@@ -452,4 +452,11 @@
     <value>&lt;p&gt;We're sorry to say that {0} has not been selected to attend pre-kindergarten through the RI Pre-Kindergarten Lottery. The lottery selection is truly random, with only weights being given to income level (based on Federal guidelines) and gender balance.&lt;/p&gt;&lt;p&gt;The good news is that {0} has been added to the waitlist for the following schools:&lt;/p&gt;{1}&lt;p&gt;In the event that a selected student at one of the schools decides to not enroll or withdraws from the program, it's possible that you'll be contacted to enroll {0}.&lt;/p&gt;&lt;p&gt;If you have any questions regarding the process, you can contact {2} at either &lt;a href="mailto:{3}"&gt;{3}&lt;/a&gt; or &lt;a href="tel:{4}"&gt;{4}&lt;/a&gt;.&lt;/p&gt;&lt;p/&gt;&lt;p&gt;RIDE Early Childhood Education&lt;/p&gt;</value>
     <comment>{0} is student first name, {1} is the list of schools the student was waitlisted for, {2} is contact person name, {3} is contact email, {4} is contact phone</comment>
   </data>
+  <data name="LotteryClosed" xml:space="preserve">
+    <value>The lottery is closed</value>
+  </data>
+  <data name="LotteryClosedMessage" xml:space="preserve">
+    <value>The lottery closed on {0}. Notifications will be sent out on {1}.</value>
+    <comment>{0} is lottery close date. {1} is notification date.</comment>
+  </data>
 </root>
