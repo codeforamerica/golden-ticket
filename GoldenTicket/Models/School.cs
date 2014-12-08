@@ -18,7 +18,7 @@ namespace GoldenTicket.Models
 
         public int ID { get; set; }
 
-        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_APOSTROPHE_REGEX, ErrorMessage = "City can only have letters, spaces, dashes, and apostrophes")]
+        [RegularExpression(ValidationConstants.SAFE_TEXT, ErrorMessage = "City can only have letters, spaces, dashes, and apostrophes")]
         [Required]
         public string Name { get; set; }
 
@@ -30,7 +30,7 @@ namespace GoldenTicket.Models
         public string StreetAddress2 { get; set; }
         
         //TODO update the error message
-        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_APOSTROPHE_REGEX, ErrorMessage = "City can only have letters, spaces, dashes, and apostrophes")]
+        [RegularExpression(ValidationConstants.SAFE_TEXT, ErrorMessage = "City can only have letters, spaces, dashes, and apostrophes")]
         [Required]
         public string City { get; set; }
 

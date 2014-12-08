@@ -19,15 +19,15 @@ namespace GoldenTicket.Models
 
         public int ID { get; set; }
 
-        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_APOSTROPHE_REGEX, ErrorMessageResourceName="LettersSpacesAndApostrophesOnlyError", ErrorMessageResourceType=typeof(GoldenTicketText))]
+        [RegularExpression(ValidationConstants.SAFE_TEXT, ErrorMessageResourceName="LettersSpacesAndApostrophesOnlyError", ErrorMessageResourceType=typeof(GoldenTicketText))]
         [Display(Name = "StudentFirstName", ResourceType = typeof(GoldenTicketText))]
         public string StudentFirstName { get; set; }
 
-        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_APOSTROPHE_REGEX, ErrorMessageResourceName = "LettersSpacesAndApostrophesOnlyError", ErrorMessageResourceType = typeof(GoldenTicketText))]
+        [RegularExpression(ValidationConstants.SAFE_TEXT, ErrorMessageResourceName = "LettersSpacesAndApostrophesOnlyError", ErrorMessageResourceType = typeof(GoldenTicketText))]
         [Display(Name = "StudentMiddleName", ResourceType = typeof(GoldenTicketText))]
         public string StudentMiddleName { get; set; }
 
-        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_APOSTROPHE_REGEX, ErrorMessageResourceName = "LettersSpacesAndApostrophesOnlyError", ErrorMessageResourceType = typeof(GoldenTicketText))]
+        [RegularExpression(ValidationConstants.SAFE_TEXT, ErrorMessageResourceName = "LettersSpacesAndApostrophesOnlyError", ErrorMessageResourceType = typeof(GoldenTicketText))]
         [Display(Name = "StudentLastName", ResourceType = typeof(GoldenTicketText))]
         public string StudentLastName { get; set; }
 
@@ -39,7 +39,7 @@ namespace GoldenTicket.Models
         [Display(Name = "StudentStreetAddress2", ResourceType = typeof(GoldenTicketText))]
         public string StudentStreetAddress2 { get; set; }
 
-        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_APOSTROPHE_REGEX, ErrorMessageResourceName = "LettersSpacesAndApostrophesOnlyError", ErrorMessageResourceType = typeof(GoldenTicketText))]
+        [RegularExpression(ValidationConstants.SAFE_TEXT, ErrorMessageResourceName = "LettersSpacesAndApostrophesOnlyError", ErrorMessageResourceType = typeof(GoldenTicketText))]
         [Display(Name = "StudentCity", ResourceType = typeof(GoldenTicketText))]
         public string StudentCity { get; set; }
 
@@ -65,11 +65,11 @@ namespace GoldenTicket.Models
         public int HouseholdMonthlyIncome { get; set; }
 
         // Contact person 1
-        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_APOSTROPHE_REGEX, ErrorMessageResourceName = "LettersSpacesAndApostrophesOnlyError", ErrorMessageResourceType = typeof(GoldenTicketText))]
+        [RegularExpression(ValidationConstants.SAFE_TEXT, ErrorMessageResourceName = "LettersSpacesAndApostrophesOnlyError", ErrorMessageResourceType = typeof(GoldenTicketText))]
         [Display(Name = "Contact1FirstName", ResourceType = typeof(GoldenTicketText))]
         public string Contact1FirstName { get; set; }
 
-        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_APOSTROPHE_REGEX, ErrorMessageResourceName = "LettersSpacesAndApostrophesOnlyError", ErrorMessageResourceType = typeof(GoldenTicketText))]
+        [RegularExpression(ValidationConstants.SAFE_TEXT, ErrorMessageResourceName = "LettersSpacesAndApostrophesOnlyError", ErrorMessageResourceType = typeof(GoldenTicketText))]
         [Display(Name = "Contact1LastName", ResourceType = typeof(GoldenTicketText))]
         public string Contact1LastName { get; set; }
         
@@ -81,16 +81,16 @@ namespace GoldenTicket.Models
         [Display(Name = "Contact1Email", ResourceType = typeof(GoldenTicketText))]
         public string Contact1Email { get; set; }
 
-        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_APOSTROPHE_REGEX, ErrorMessageResourceName = "LettersSpacesAndApostrophesOnlyError", ErrorMessageResourceType = typeof(GoldenTicketText))]
+        [RegularExpression(ValidationConstants.SAFE_TEXT, ErrorMessageResourceName = "LettersSpacesAndApostrophesOnlyError", ErrorMessageResourceType = typeof(GoldenTicketText))]
         [Display(Name = "Contact1Relationship", ResourceType = typeof(GoldenTicketText))]
         public string Contact1Relationship { get; set; }
 
         // Contact person 2
-        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_APOSTROPHE_REGEX, ErrorMessageResourceName = "LettersSpacesAndApostrophesOnlyError", ErrorMessageResourceType = typeof(GoldenTicketText))]
+        [RegularExpression(ValidationConstants.SAFE_TEXT, ErrorMessageResourceName = "LettersSpacesAndApostrophesOnlyError", ErrorMessageResourceType = typeof(GoldenTicketText))]
         [Display(Name = "Contact2FirstName", ResourceType = typeof(GoldenTicketText))]
         public string Contact2FirstName { get; set; }
 
-        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_APOSTROPHE_REGEX, ErrorMessageResourceName = "LettersSpacesAndApostrophesOnlyError", ErrorMessageResourceType = typeof(GoldenTicketText))]
+        [RegularExpression(ValidationConstants.SAFE_TEXT, ErrorMessageResourceName = "LettersSpacesAndApostrophesOnlyError", ErrorMessageResourceType = typeof(GoldenTicketText))]
         [Display(Name = "Contact2LastName", ResourceType = typeof(GoldenTicketText))]
         public string Contact2LastName { get; set; }
 
@@ -102,7 +102,7 @@ namespace GoldenTicket.Models
         [Display(Name = "Contact2Email", ResourceType = typeof(GoldenTicketText))]
         public string Contact2Email { get; set; }
 
-        [RegularExpression(ValidationConstants.LETTERS_SPACES_DASHES_APOSTROPHE_REGEX, ErrorMessageResourceName = "LettersSpacesAndApostrophesOnlyError", ErrorMessageResourceType = typeof(GoldenTicketText))]
+        [RegularExpression(ValidationConstants.SAFE_TEXT, ErrorMessageResourceName = "LettersSpacesAndApostrophesOnlyError", ErrorMessageResourceType = typeof(GoldenTicketText))]
         [Display(Name = "Contact2Relationship", ResourceType = typeof(GoldenTicketText))]
         public string Contact2Relationship { get; set; }
 

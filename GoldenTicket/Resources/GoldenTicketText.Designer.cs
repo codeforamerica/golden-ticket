@@ -844,7 +844,7 @@ namespace GoldenTicket.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} can only have letters, numbers, periods, #s, dashes, and spaces..
+        ///   Looks up a localized string similar to {0} can only have letters, numbers, periods, #s, semicolons, dashes, and spaces..
         /// </summary>
         public static string StreetAddressValidationError {
             get {

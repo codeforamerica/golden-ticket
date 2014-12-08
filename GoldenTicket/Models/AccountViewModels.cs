@@ -2,6 +2,8 @@
 
 namespace GoldenTicket.Models
 {
+    // These are all view models used by the Microsoft Identity framework for authentication views.
+
     public class ExternalLoginConfirmationViewModel
     {
         [Required]

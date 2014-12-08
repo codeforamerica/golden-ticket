@@ -8,6 +8,8 @@ namespace GoldenTicket.Models
     public class Selected
     {
         public int ID { get; set; }
+
+        // Lower number is better for applicant
         public int Rank { get; set; }
 
         // Foreign items
