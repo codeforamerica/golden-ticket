@@ -911,6 +911,8 @@ namespace GoldenTicket.Controllers
          * 
          * <remarks>TODO this should be a POST request</remarks>
          **/
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult RunLottery()
         {
             if (!WasLotteryRun())
@@ -923,7 +925,6 @@ namespace GoldenTicket.Controllers
                 }
 
                 // Make sure applicants were selected for more than one school (or waitlisted on any others if they were selected)
-                //TODO this performs a little slowly ... probably too many database roundtrips. Optimize later.
                 var reconciler = new CrossSchoolReconciler(db);
                 reconciler.Reconcile();
 

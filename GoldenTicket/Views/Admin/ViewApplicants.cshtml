@@ -32,7 +32,11 @@
                 <div class="notice">
                     <h1>Lottery applications have closed</h1>
                     <p>The pre-k lottery application can no longer be applied to. Click the button below to run the lottery for all applicants.</p>
-                    <p>@Html.ActionLink("Run lottery", "RunLottery", null, new { @class = "button" })</p>
+                    @using (Html.BeginForm(actionName: "RunLottery", controllerName: "Admin"))
+                    {
+                        @Html.AntiForgeryToken()
+                        <input value="Run lottery" type="submit" class="button" />
+                    }
                 </div>
             }
             
