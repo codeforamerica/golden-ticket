@@ -513,7 +513,7 @@ namespace GoldenTicket.Controllers
                         .OrderBy(a => a.Applicant.StudentLastName)
                         .ThenBy(a => a.Applicant.StudentFirstName)
                         .ToList();
-                var duplicates = Utils.GetDuplicateApplicants(Utils.GetApplicants(applieds));
+                var duplicates = Utils.GetPossibleDuplicateApplicants(Utils.GetApplicants(applieds));
 
                 schoolDuplicates.Add(s,duplicates);
             }

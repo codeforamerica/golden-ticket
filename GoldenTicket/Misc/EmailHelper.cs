@@ -4,8 +4,25 @@ using System.Net.Mail;
 
 namespace GoldenTicket.Misc
 {
+    /**
+     * <summary>
+     * Sends emails! Relies on the Web.config settings: 
+     * -SmtpyAddress
+     * -SmtpPort
+     * -SmtpUsername
+     * -SmtpPassword
+     * -MailFrom
+     * </summary>
+     */
     public class EmailHelper
     {
+        /**
+         * <summary>Sends an email</summary>
+         * <param name="toAddress">Address to send the email to</param>
+         * <param name="fromAddress">Reply to address for the email</param>
+         * <param name="subject">Subject line for the email</param>
+         * <param name="messageBody">Body of the email</param>
+         */
         public static void SendEmail(string toAddress, string fromAddress, string subject, string messageBody)
         {
             // Get the configuration settings
@@ -24,6 +41,12 @@ namespace GoldenTicket.Misc
             mailClient.Send(mailMessage);
         }
 
+        /**
+         * <summary>Sends an email. Uses the settings "MailFrom" address as the reply to address.</summary>
+         * <param name="toAddress">Address to send the email to</param>
+         * <param name="subject">Subject line for the email</param>
+         * <param name="messageBody">Body of the email</param>
+         */
         public static void SendEmail(string toAddress, string subject, string messageBody)
         {
             SendEmail(toAddress, ConfigurationManager.AppSettings["MailFrom"], subject, messageBody);

@@ -6,10 +6,22 @@ using GoldenTicket.Models;
 
 namespace GoldenTicket.Misc
 {
+    /**
+     * <summary>
+     * Has an assortment of helper methods used across the application. That didn't
+     * cleanly fit into other areas of the application.
+     * </summary>
+     */
     public class Utils
     {
+        // Database connection
         private static GoldenTicketDbContext db = new GoldenTicketDbContext();
 
+        /**
+         * <summary>Get Applicant objects from Selected objects</summary>
+         * <param name="selecteds">Selected objects with Applicant fields</param>
+         * <returns>List of applicants</returns>
+         */
         public static List<Applicant> GetApplicants(IEnumerable<Selected> selecteds)
         {
             var applicants = new List<Applicant>();
@@ -20,7 +32,11 @@ namespace GoldenTicket.Misc
 
             return applicants;
         }
-
+        /**
+         * <summary>Get Applicant objects from Shuffled objects</summary>
+         * <param name="shuffleds">Shuffled objects with Applicant fields</param>
+         * <returns>List of applicants</returns>
+         */
         public static List<Applicant> GetApplicants(IEnumerable<Shuffled> shuffleds)
         {
             var applicants = new List<Applicant>();
@@ -32,6 +48,11 @@ namespace GoldenTicket.Misc
             return applicants;
         }
 
+        /**
+         * <summary>Get Applicant objects from Waitlisted objects</summary>
+         * <param name="waitlisteds">Waitlisted objects with Applicant fields</param>
+         * <returns>List of applicants</returns>
+         */
         public static List<Applicant> GetApplicants(IEnumerable<Waitlisted> waitlisteds)
         {
             var applicants = new List<Applicant>();
@@ -43,6 +64,12 @@ namespace GoldenTicket.Misc
             return applicants;
         }
 
+
+        /**
+         * <summary>Get Applicant objects from Applieds objects</summary>
+         * <param name="waitlisteds">Waitlisted objects with Applicant fields</param>
+         * <returns>List of applicants</returns>
+         */
         public static List<Applicant> GetApplicants(IEnumerable<Applied> applieds)
         {
             var applicants = new List<Applicant>();
@@ -54,6 +81,11 @@ namespace GoldenTicket.Misc
             return applicants;
         }
 
+        /**
+         * <summary>Get School objects from Applied objects</summary>
+         * <param name="applieds">Applied objects with School fields</param>
+         * <returns>List of Schools</returns>
+         */
         public static List<School> GetSchools(IEnumerable<Applied> applieds)
         {
             var schools = new List<School>();
@@ -65,6 +97,11 @@ namespace GoldenTicket.Misc
             return schools;
         }
 
+        /**
+         * <summary>Get School objects from Waitlisted objects</summary>
+         * <param name="waitlisted">Waitlisted objects with School fields</param>
+         * <returns>List of Schools</returns>
+         */
         public static List<School> GetSchools(IEnumerable<Waitlisted> waitlisteds)
         {
             var schools = new List<School>();
@@ -76,15 +113,22 @@ namespace GoldenTicket.Misc
             return schools;
         }
 
-        public static string ApplicantsToCsv(IEnumerable<Applicant> applicants)
-        {
-            return ApplicantsToCsv(applicants, true);
-        }
-
-        public static string ApplicantsToCsv(IEnumerable<Applicant> applicants, bool printSchoolList)
+        /**
+         * <summary>
+         * Creates a string of applicants serialized to CSV format. Each applicant
+         * is separated by a newline character. The first line is a header row. The last column
+         * is optionally a list of schools the applicant applied for (semi-colon delimited).
+         * </summary>
+         * 
+         * <param name="applicants">List of applicants</param>
+         * <param name="printSchoolList">True if the list of schools applied to should be included</param>
+         * <returns>CSV string</returns>
+         */
+        public static string ApplicantsToCsv(IEnumerable<Applicant> applicants, bool printSchoolList = true)
         {
             var csvText = new StringBuilder();
 
+            // Header row
             csvText.Append("Confirmation Code,");
             csvText.Append("Student First Name,");
             csvText.Append("Student Middle Name,");
@@ -118,6 +162,7 @@ namespace GoldenTicket.Misc
 
             csvText.Append('\n');
                 
+            // Loop through the applicants
             foreach (var a in applicants)
             {
                 csvText.Append(a.ConfirmationCode); csvText.Append(',');
@@ -167,12 +212,23 @@ namespace GoldenTicket.Misc
             return csvText.ToString();
         }
 
-        public static bool AreApplicantsEqual(Applicant a1, Applicant a2)
+        /**
+         * <summary>Compares two applicants' to see if they're potentially duplicants</summary>
+         * <param name="a1">An applicant</param>
+         * <param name="a2">Another applicant (surprise! :-P)</param>
+         * <returns>True if the applicants might be duplicates</returns>
+         */
+        public static bool ArePossiblyDuplicates(Applicant a1, Applicant a2)
         {
             return a1.Checksum() == a2.Checksum();
         }
 
-        public static List<Applicant> GetDuplicateApplicants(IEnumerable<Applicant> applicants)
+        /**
+         * <summary>Identifies possible duplicate applicants within a list of applicants</summary>
+         * <param name="applicants">Applicants</param>
+         * <returns>A list of possible duplicate applicants</returns>
+         */
+        public static List<Applicant> GetPossibleDuplicateApplicants(IEnumerable<Applicant> applicants)
         {
             var applicantsCopy = new List<Applicant>(applicants); // needed to prevent concurrent iteration of the same list during count
             var duplicates = new List<Applicant>();
