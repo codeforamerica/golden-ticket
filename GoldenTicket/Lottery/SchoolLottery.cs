@@ -51,7 +51,7 @@ namespace GoldenTicket.Lottery
          */
         public School Run(School school)
         {
-            var applicants = Utils.GetApplicants(db.Applieds.Where(a => a.Applicant.ConfirmationCode != null));
+            var applicants = Utils.GetApplicants(db.Applieds.Where(a => a.Applicant.ConfirmationCode != null).ToList());
             return Run(school, applicants, true);
         }
 
