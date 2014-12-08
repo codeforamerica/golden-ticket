@@ -520,6 +520,24 @@ namespace GoldenTicket.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The lottery is closed.
+        /// </summary>
+        public static string LotteryClosed {
+            get {
+                return ResourceManager.GetString("LotteryClosed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The lottery closed on {0}. Notifications will be sent out on {1}..
+        /// </summary>
+        public static string LotteryClosedMessage {
+            get {
+                return ResourceManager.GetString("LotteryClosedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Male.
         /// </summary>
         public static string Male {

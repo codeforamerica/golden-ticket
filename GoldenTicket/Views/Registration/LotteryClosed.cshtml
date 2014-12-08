@@ -1,0 +1,16 @@
+﻿@using GoldenTicket.Resources
+@model GoldenTicket.Models.GlobalConfig
+
+@{
+    ViewBag.BodyId = "";
+    ViewBag.BodyClass = "no-js welcome";
+    Layout = "~/Views/Registration/_RegistrationLayout.cshtml";
+}
+
+<main>
+    <div class="site-width">
+        <h1>@GoldenTicketText.LotteryClosed</h1>
+        <p>@string.Format(GoldenTicketText.LotteryClosedMessage, Model.CloseDate.ToString("MM/dd/yyyy"), Model.NotificationDate.ToString("MM/dd/yyyy"))</p>
+    </div>
+</main>
+

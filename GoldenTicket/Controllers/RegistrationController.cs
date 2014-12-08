@@ -37,6 +37,14 @@ namespace GoldenTicket.Controllers
         }
 
         /**
+         * <summary>Shows page notifying parents that the lottery is closed</summary>
+         */
+        public ActionResult LotteryClosed()
+        {
+            return View(GetGlobalConfig());
+        }
+
+        /**
          * <summary>
          * Clears the session and presents a welcome message to applicants
          * </summary>
@@ -44,6 +52,12 @@ namespace GoldenTicket.Controllers
         public ActionResult Index()
         {
             Session.Clear();
+
+            // Is the lottery closed?
+            if (IsLotteryClosed()) // TODO implement this as an class-level annotation instead
+            {
+                return RedirectToAction(actionName: "LotteryClosed");
+            }
 
             ViewBag.GlobalConfig = GetGlobalConfig();
 
@@ -57,6 +71,12 @@ namespace GoldenTicket.Controllers
          * */
         public ActionResult StudentInformation()
         {
+            // Is the lottery closed?
+            if (IsLotteryClosed()) // TODO implement this as an class-level annotation instead
+            {
+                return RedirectToAction(actionName: "LotteryClosed");
+            }
+
             // Add display variables to the ViewBag
             viewHelper.PrepareStudentInformationView(ViewBag);
 
@@ -77,6 +97,12 @@ namespace GoldenTicket.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult StudentInformation(Applicant applicant)
         {
+            // Is the lottery closed?
+            if (IsLotteryClosed()) // TODO implement this as an class-level annotation instead
+            {
+                return RedirectToAction(actionName: "LotteryClosed");
+            }
+
             // Make sure someone isn't playing with the ID from the form
             if(!IsAuthorizedApplicant(applicant) || !IsActiveSession()) // TODO Use AOP/Annotations to do this instead
             {
@@ -106,6 +132,12 @@ namespace GoldenTicket.Controllers
          * */
         public ActionResult GuardianInformation()
         {
+            // Is the lottery closed?
+            if (IsLotteryClosed()) // TODO implement this as an class-level annotation instead
+            {
+                return RedirectToAction(actionName: "LotteryClosed");
+            }
+
             // Validate the session
             if (!IsActiveSession()) //TODO Do this with AOP/Annotations instead
             {
@@ -131,6 +163,12 @@ namespace GoldenTicket.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult GuardianInformation(Applicant applicant)
         {
+            // Is the lottery closed?
+            if (IsLotteryClosed()) // TODO implement this as an class-level annotation instead
+            {
+                return RedirectToAction(actionName: "LotteryClosed");
+            }
+
             // Make sure someone isn't playing with the ID from the form
             if (!IsAuthorizedApplicant(applicant) || !IsActiveSession()) // TODO Use AOP/Annotations to do this instead
             {
@@ -160,6 +198,12 @@ namespace GoldenTicket.Controllers
          * */
         public ActionResult SchoolSelection()
         {
+            // Is the lottery closed?
+            if (IsLotteryClosed()) // TODO implement this as an class-level annotation instead
+            {
+                return RedirectToAction(actionName: "LotteryClosed");
+            }
+
             // Validate the session
             if (!IsActiveSession()) //TODO Do this with AOP/Annotations instead
             {
@@ -186,6 +230,12 @@ namespace GoldenTicket.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult SchoolSelection(Applicant applicant, FormCollection formCollection)
         {
+            // Is the lottery closed?
+            if (IsLotteryClosed()) // TODO implement this as an class-level annotation instead
+            {
+                return RedirectToAction(actionName: "LotteryClosed");
+            }
+
             // Make sure someone isn't playing with the ID from the form
             if (!IsAuthorizedApplicant(applicant) || !IsActiveSession()) // TODO Use AOP/Annotations to do this instead
             {
@@ -238,6 +288,12 @@ namespace GoldenTicket.Controllers
          * */
         public ActionResult Review()
         {
+            // Is the lottery closed?
+            if (IsLotteryClosed()) // TODO implement this as an class-level annotation instead
+            {
+                return RedirectToAction(actionName: "LotteryClosed");
+            }
+
             // Validate the session
             if(!IsActiveSession()) //TODO Do this with AOP/Annotations instead
             {
@@ -262,6 +318,12 @@ namespace GoldenTicket.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Review(Applicant applicant)
         {
+            // Is the lottery closed?
+            if (IsLotteryClosed()) // TODO implement this as an class-level annotation instead
+            {
+                return RedirectToAction(actionName: "LotteryClosed");
+            }
+
             // Make sure someone isn't playing with the ID from the form
             if (!IsAuthorizedApplicant(applicant) || !IsActiveSession()) // TODO Use AOP/Annotations to do this instead
             {
@@ -284,6 +346,12 @@ namespace GoldenTicket.Controllers
          * */
         public ActionResult Confirmation()
         {
+            // Is the lottery closed?
+            if (IsLotteryClosed()) // TODO implement this as an class-level annotation instead
+            {
+                return RedirectToAction(actionName: "LotteryClosed");
+            }
+
             // Validate the session
             if (!IsActiveSession()) //TODO Do this with AOP/Annotations instead
             {
@@ -494,6 +562,15 @@ namespace GoldenTicket.Controllers
         private GlobalConfig GetGlobalConfig()
         {
             return database.GlobalConfigs.First();
+        }
+
+        /**
+         * <returns>True if the lottery is closed to new applicants, false otherwise</returns>
+         */
+        private bool IsLotteryClosed()
+        {
+            var globalConfig = database.GlobalConfigs.First();
+            return DateTime.Now > globalConfig.CloseDate;
         }
     }
 }
