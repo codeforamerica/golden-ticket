@@ -453,7 +453,7 @@
     <comment>{0} is student first name, {1} is the list of schools the student was waitlisted for, {2} is contact person name, {3} is contact email, {4} is contact phone</comment>
   </data>
   <data name="LotteryClosed" xml:space="preserve">
-    <value>The lottery is closed</value>
+    <value>La Lotería a Finalizado</value>
   </data>
   <data name="LotteryClosedMessage" xml:space="preserve">
     <value>The lottery closed on {0}. Notifications will be sent out on {1}.</value>
