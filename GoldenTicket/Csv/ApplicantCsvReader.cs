@@ -2,7 +2,6 @@
 using CsvHelper;
 using GoldenTicket.DAL;
 using GoldenTicket.Models;
-using GoldenTicket.Reader;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,7 +16,7 @@ namespace GoldenTicket.Csv
      * with the exact names used in the all applicants CSV file.
      * </summary>
      */
-    public class ApplicantCsvReader : ApplicantReader
+    public class ApplicantCsvReader 
     {
         // File system path to the CSV file to import
         private readonly string csvFilePath;
