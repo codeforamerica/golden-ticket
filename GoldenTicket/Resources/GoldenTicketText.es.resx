@@ -280,7 +280,7 @@
     <value>Dirección de hogar (line 2)</value>
   </data>
   <data name="StreetAddressValidationError" xml:space="preserve">
-    <value>{0}Sólo puede tener letras, números, puntos, #s, guiones y espacios.</value>
+    <value>{0}: Sólo puede tener letras, números, puntos, #s, guiones y espacios.</value>
     <comment>{0} is the property name (ex: Student street address)</comment>
   </data>
   <data name="StudentBirthday" xml:space="preserve">
