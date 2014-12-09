@@ -924,7 +924,7 @@ namespace GoldenTicket.Controllers
                     schoolLottery.Run(school);
                 }
 
-                // Make sure applicants were selected for more than one school (or waitlisted on any others if they were selected)
+                // Make sure applicants were not selected for more than one school (or waitlisted on any others if they were selected)
                 var reconciler = new CrossSchoolReconciler(db);
                 reconciler.Reconcile();
 
