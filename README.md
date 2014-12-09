@@ -18,6 +18,7 @@ All documentation can be viewed in the `docs` folder.
 
 ### User
 
+- [**Parent Screens**]: Visual tour through the screens that parents fill out
 - [**Admin User Guide**](docs/Admin User Guide.md): Instructions on how an administrator can use the application to conduct a lottery.
 - [**First Time Admin Setup**](docs/First Time Admin Setup.md): What an admin needs to do the first time they login to the system. 
 
