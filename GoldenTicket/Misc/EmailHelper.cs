@@ -1,4 +1,5 @@
-﻿using System.Configuration;
+﻿using System;
+using System.Configuration;
 using System.Net;
 using System.Net.Mail;
 
@@ -38,7 +39,17 @@ namespace GoldenTicket.Misc
             // Send the message
             var mailMessage = new MailMessage(to: toAddress, @from: fromAddress, subject: subject, body: messageBody);
             mailMessage.IsBodyHtml = true;
-            mailClient.Send(mailMessage);
+
+            try
+            {
+                mailClient.Send(mailMessage);
+            }
+            catch (Exception e)
+            {
+                // TODO log that this occurred
+                // do nothing -- in place for development
+            }
+            
         }
 
         /**
