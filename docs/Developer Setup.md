@@ -6,7 +6,7 @@ Want to work on code for Golden Ticket? Awesome! Here's how to get started based
 
 ### Requirements
 
-- Visual Studio 2013 (either Ultimate or Express for Web)
+- Visual Studio 2013 or higher (either Ultimate, Community, or Express for Web)
 - A Git client ([Visual Studio can do this](http://msdn.microsoft.com/en-us/library/hh850437.aspx), but other clients include [SourceTree](http://www.sourcetreeapp.com/), [GitHub client](https://windows.github.com/), or the [Command Prompt](http://git-scm.com/).
 
 ### Get the code
