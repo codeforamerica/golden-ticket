@@ -8,13 +8,16 @@ Golden Ticket is a web application that allows:
 
 The project was developed as a joint effort between the Rhode Island Department of Education (RIDE), Code for America, and the RI State Office of Digital Excellence (DOA). It is free to use or adapt for anyone or any organization wishing to do so.
 
-### Parent screen
+#### Parent screen ([more here](docs/Parent Screens.md))
+
 ![](docs/img/student_info_screen.png)
 
-### Admin screen
+#### Admin screen ([more here](docs/Admin User Guide.md))
+
 ![](docs/img/view_applicants_screen.png)
 
-### Parent screen (mobile view)
+#### Parent screen (mobile view)
+
 ![](docs/img/mobile_screen.png)
 
 ## Getting Started
