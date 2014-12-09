@@ -12,6 +12,8 @@ The project was developed as a joint effort between the Rhode Island Department 
 
 ![](docs/img/view_applicants_screen.png)
 
+![](docs/img/mobile_screen.png)
+
 ## Getting Started
 
 All documentation can be viewed in the `docs` folder.
