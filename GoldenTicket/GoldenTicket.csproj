@@ -200,9 +200,9 @@
     <Content Include="Content\fonts\icomoon.eot" />
     <Content Include="Content\fonts\icomoon.ttf" />
     <Content Include="Content\fonts\icomoon.woff" />
-    <None Include="Properties\PublishProfiles\gt-ride-test-2.pubxml" />
-    <None Include="Properties\PublishProfiles\gt-ride-test-3.pubxml" />
-    <None Include="Properties\PublishProfiles\gt-ride-test.pubxml" />
+    <None Include="Properties\PublishProfiles\gt-ode-demo.pubxml" />
+    <None Include="Properties\PublishProfiles\gt-ride-applicants.pubxml" />
+    <None Include="Properties\PublishProfiles\gt-ride-clean.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\golden_ticket.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
