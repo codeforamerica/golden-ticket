@@ -350,7 +350,7 @@
     <comment>{0} is notification date</comment>
   </data>
   <data name="AgreementResponsibleForTransportation" xml:space="preserve">
-    <value>I understand that if my child is chosen for the state Pre-K program, I am responsible for providing regular transportation to and from the program which ensures my child's attendance each day. If my child is absent for unexcused reasons (including family vacations) for 20 or more school days, I understand that my child will likely lose their slot in the state Pre-K program and it will be given to the next child on the state Pre-K enrollment list.</value>
+    <value>Entiendo que si mi hijo es elegido para el programa estatal de Pre-K, soy responsable de proporcionar transporte regular desde y hacia el programa que asegura la asistencia de mi niño cada día. Si mi hijo está ausente por razones injustificadas (incluyendo las vacaciones familiares) por 20 o más días de escuela, yo entiendo que mi niño probablemente perderá su puesto en el programa estatal de Pre-K y le será dada al niño siguiente en la lista de inscripción de Pre-K estatal.</value>
   </data>
   <data name="AlternateContact" xml:space="preserve">
     <value>Contacto Alterno</value>
@@ -480,7 +480,7 @@
     <value>La Lotería a Finalizado</value>
   </data>
   <data name="LotteryClosedMessage" xml:space="preserve">
-    <value>The lottery closed on {0}. Notifications will be sent out on {1}.</value>
+    <value>La lotería finalize en {0}. Las notificaciones se enviarán {1}.</value>
     <comment>{0} is lottery close date. {1} is notification date.</comment>
   </data>
   <data name="String1" xml:space="preserve">
